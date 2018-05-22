@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ApacheHttpTransaction.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.com.wolfram.alpha.net.apache</a> &gt; <span class="el_source">ApacheHttpTransaction.java</span></div><h1>ApacheHttpTransaction.java</h1><pre class="source lang-java linenums">/*
+ * Created on Aug 19, 2006
+ *
+ */
+package traveller.com.wolfram.alpha.net.apache;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+
+import org.apache.http.Header;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.params.ConnRoutePNames;
+import org.apache.http.util.EntityUtils;
+
+import com.wolfram.alpha.net.ProxySettings;
+import com.wolfram.alpha.net.WAHttpException;
+import traveller.com.wolfram.alpha.net.impl.HttpTransaction;
+
+
+public class ApacheHttpTransaction implements HttpTransaction {
+
+    private HttpClient httpClient;
+    private HttpGet httpGet;
+    private HttpResponse response;
+    private HttpEntity entity;
+    private URL url;
+    private ProxySettings proxySettings;
+    private int maxRetryCount;
+    private int socketTimeoutMillis;  // use -1 for default
+<span class="nc" id="L36">    private volatile boolean noRetry = false;</span>
+    
+    
+    ApacheHttpTransaction(HttpClient httpClient, URL url, ProxySettings proxySettings,
+<span class="nc" id="L40">                            int maxRetryCount, int socketTimeoutMillis) {</span>
+
+<span class="nc" id="L42">        this.httpClient = httpClient;</span>
+<span class="nc" id="L43">        this.url = url;</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        this.proxySettings = proxySettings != null ? proxySettings : ProxySettings.getInstance();</span>
+<span class="nc" id="L45">        this.maxRetryCount = maxRetryCount;</span>
+<span class="nc" id="L46">        this.socketTimeoutMillis = socketTimeoutMillis;</span>
+<span class="nc" id="L47">    }</span>
+
+
+    /**
+     * If this returns without throwing, then you can (and must) proceed to reading the
+     * content using getResponseAsString() or getResponseAsStream(). If it throws, then
+     * you do not have to read. You must always call release().
+     *
+     * @throws HttpHandlerException
+     */
+    public void execute() throws WAHttpException {
+
+<span class="nc" id="L59">        httpGet = new HttpGet(url.toString());</span>
+<span class="nc" id="L60">        HttpHost proxy = proxySettings.getProxyForHttpClient(url.toString());</span>
+<span class="nc" id="L61">        httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);</span>
+        
+        try {
+<span class="nc" id="L64">            response = httpClient.execute(httpGet);</span>
+<span class="nc" id="L65">            int statusCode = response.getStatusLine().getStatusCode();</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">            if (statusCode != HttpStatus.SC_OK)</span>
+<span class="nc" id="L67">                throw new WAHttpException(statusCode);</span>
+<span class="nc" id="L68">            entity = response.getEntity();</span>
+<span class="nc" id="L69">        } catch (Exception e) {</span>
+            // This also releases all resources.
+<span class="nc" id="L71">            httpGet.abort();</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">            if (e instanceof WAHttpException)</span>
+<span class="nc" id="L73">                throw (WAHttpException) e;</span>
+            else
+<span class="nc" id="L75">                throw new WAHttpException(e);</span>
+<span class="nc" id="L76">        }</span>
+<span class="nc" id="L77">    }</span>
+
+
+    public void release() {
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        if (entity != null) {</span>
+            try {
+                // Ensure the connection gets released to the manager
+<span class="nc" id="L84">                entity.consumeContent();</span>
+<span class="nc" id="L85">            } catch (IOException e) {</span>
+                // Connection keep-alive will not be possible. Nothing to do.
+<span class="nc" id="L87">            }</span>
+        }
+<span class="nc" id="L89">    }</span>
+
+
+    public String[][] getResponseHeaders() throws IOException {
+
+<span class="nc" id="L94">        Header[] hdrs = response.getAllHeaders();</span>
+<span class="nc" id="L95">        String[][] result = new String[hdrs.length][];</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">        for (int i = 0; i &lt; hdrs.length; i++) {</span>
+<span class="nc" id="L97">            result[i] = new String[] {hdrs[i].getName(), hdrs[i].getValue()};</span>
+        }
+<span class="nc" id="L99">        return result;</span>
+    }
+
+    /**
+     * Only works for simple headers (ones that do not contain mltiple elements).
+     * @param headerName
+     * @return
+     * @throws IOException
+     */
+    public String getResponseHeader(String headerName) throws IOException {
+
+<span class="nc" id="L110">        Header hdr = response.getFirstHeader(headerName);</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        return hdr == null ? null : hdr.getValue();</span>
+    }
+    
+    // Negative number if not known.
+    public long getContentLength() {
+<span class="nc bnc" id="L116" title="All 2 branches missed.">        return entity == null ? -1 : entity.getContentLength();</span>
+    }
+
+    public String getCharSet() throws IOException {
+<span class="nc" id="L120">        return EntityUtils.getContentCharSet(entity);</span>
+    }
+    
+    
+    public InputStream getResponseStream() throws IOException {
+<span class="nc" id="L125">        return entity.getContent();</span>
+    }
+
+    public String getResponseString() throws IOException {
+<span class="nc" id="L129">        return EntityUtils.toString(entity);</span>
+    }
+
+    // Typically called on another thread.
+    public void setNoRetry() {
+<span class="nc" id="L134">        noRetry = true;</span>
+<span class="nc" id="L135">    }</span>
+
+    // Called on another thread. Only aborts downloading, not attempts to connect.
+    // Not currently used (cancel() method of FileDownloader is called instead).
+    public void abort() {
+<span class="nc" id="L140">        httpGet.abort();</span>
+<span class="nc" id="L141">    }</span>
+
+    
+    /***
+
+    ///////////////////////////  HttpMethodRetryHandler Class  /////////////////////////////
+
+    class RetryHandler implements HttpMethodRetryHandler {
+
+        public boolean retryMethod(final HttpMethod method, final IOException exception, int retryCount) {
+
+            logger.info(&quot;In retryMethod(), retry count: &quot; + retryCount + &quot;, exception: &quot; + exception);
+
+            // Much of this code taken from org.apache.commons.httpclient.DefaultHttpMethodRetryHandler,
+            // but we want full control so we write our own handler.
+
+            if (retryCount &gt; maxRetryCount || noRetry)
+                return false;
+
+            // See http://jakarta.apache.org/commons/httpclient/exception-handling.html for more on these.
+            if (exception instanceof NoHttpResponseException) {
+                // Retry if the server dropped connection on us
+                return true;
+            } else if (exception instanceof ConnectionPoolTimeoutException) {
+                // Retry if the problem is only that there isn't a thread available (not likely).
+                return true;
+            } else if (exception instanceof ConnectTimeoutException) {
+                // Retry if we couldn't connect.
+                return true;
+            } else if (exception instanceof UnknownHostException) {
+                // Unknown host
+                return false;
+            } else if (exception instanceof NoRouteToHostException) {
+                // Host unreachable
+                return false;
+            } else if (exception instanceof SocketException) {
+                // SocketException includes the &quot;malformed reply form SOCKS server&quot; error that
+                // seems to induce an unavoidable 5 min timeout. Don't want to retry on that
+                // error, and probably on any other SocketException.
+                return false;
+            } else if (exception instanceof SSLHandshakeException) {
+                // We refused to accept the site's certificate, and perhaps other authentication errors.
+                return false;
+            }
+
+            if (!method.isRequestSent()) {
+                // Retry if the request has not been sent fully or
+                // if it's OK to retry methods that have been sent
+                return true;
+            }
+            // otherwise do not retry
+            return false;
+        }
+    }
+    ***/
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,0 +1,796 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>VentanaLogin.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.interfaz.ventana</a> &gt; <span class="el_source">VentanaLogin.java</span></div><h1>VentanaLogin.java</h1><pre class="source lang-java linenums">package traveller.interfaz.ventana;
+
+import traveller.excepciones.usuario.UsuarioException;
+import traveller.excepciones.usuario.EmailInvalidoException;
+import traveller.excepciones.usuario.NombreVacioException;
+import traveller.excepciones.usuario.NombreUsuarioVacioException;
+import traveller.excepciones.usuario.LargoApellidoInvalidoException;
+import traveller.excepciones.usuario.LargoClaveInvalidoException;
+import traveller.excepciones.usuario.ApellidoVacioException;
+import traveller.excepciones.usuario.LargoNombreInvalidoException;
+import traveller.excepciones.usuario.LargoNombreUsuarioInvalidoException;
+import traveller.excepciones.usuario.ClaveInseguraException;
+import traveller.dominio.Email;
+import traveller.dominio.ISistema;
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import javax.imageio.ImageIO;
+import javax.swing.border.LineBorder;
+
+/**
+ */
+public class VentanaLogin extends javax.swing.JFrame {
+
+<span class="nc" id="L25">    public VentanaLogin(ISistema sistema) {</span>
+<span class="nc" id="L26">        this.sistema = sistema;</span>
+
+        /*
+         * Icono de la ventana.
+         */
+        BufferedImage image;
+        try {
+<span class="nc" id="L33">            image = ImageIO.read(getClass().getResource(&quot;/traveller/interfaz/img/icono.png&quot;));</span>
+<span class="nc" id="L34">            setIconImage(image);</span>
+<span class="nc" id="L35">        } catch (IOException e) {</span>
+<span class="nc" id="L36">        }</span>
+
+<span class="nc" id="L38">        initComponents();</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if (this.sistema.esModoDesarrollador()) {</span>
+<span class="nc" id="L40">            txtUsuario.requestFocusInWindow();</span>
+<span class="nc" id="L41">            txtUsuario.setText(&quot;Angus&quot;);</span>
+<span class="nc" id="L42">            this.pwdContraseñaLogin.setText(&quot;angus2012&quot;);</span>
+            
+<span class="nc" id="L44">            txtNombreRegistro.setText(&quot;John Henry&quot;);</span>
+<span class="nc" id="L45">            txtApellidoRegistro.setText(&quot;Bonham&quot;);</span>
+<span class="nc" id="L46">            txtUsuarioRegistro.setText(&quot;Bonzo&quot;);</span>
+<span class="nc" id="L47">            this.pwdContraseñaRegistro.setText(&quot;zosozepp73&quot;);</span>
+<span class="nc" id="L48">            this.txtEmailRegistro.setText(&quot;bonzo.zepp@gmail.com&quot;);</span>
+        } else {
+<span class="nc" id="L50">            txtUsuario.requestFocusInWindow();</span>
+<span class="nc" id="L51">            txtNombreRegistro.setText(&quot;Nombre&quot;);</span>
+<span class="nc" id="L52">            txtNombreRegistro.setForeground(Color.GRAY);</span>
+<span class="nc" id="L53">            txtApellidoRegistro.setText(&quot;Apellido&quot;);</span>
+<span class="nc" id="L54">            txtApellidoRegistro.setForeground(Color.GRAY);</span>
+        }
+<span class="nc" id="L56">    }</span>
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+<span class="nc" id="L62">        panelPrincipal = new javax.swing.JPanel();</span>
+<span class="nc" id="L63">        panelTitulo = new javax.swing.JPanel();</span>
+<span class="nc" id="L64">        etqTitulo = new javax.swing.JLabel();</span>
+<span class="nc" id="L65">        jPanel1 = new javax.swing.JPanel();</span>
+<span class="nc" id="L66">        etqUsuario = new javax.swing.JLabel();</span>
+<span class="nc" id="L67">        txtUsuario = new javax.swing.JTextField();</span>
+<span class="nc" id="L68">        etqContraseña = new javax.swing.JLabel();</span>
+<span class="nc" id="L69">        btnAceptar = new javax.swing.JButton();</span>
+<span class="nc" id="L70">        etqErrorLogin = new javax.swing.JLabel();</span>
+<span class="nc" id="L71">        pwdContraseñaLogin = new javax.swing.JPasswordField();</span>
+<span class="nc" id="L72">        panelTitulo1 = new javax.swing.JPanel();</span>
+<span class="nc" id="L73">        etqTitulo1 = new javax.swing.JLabel();</span>
+<span class="nc" id="L74">        jPanel2 = new javax.swing.JPanel();</span>
+<span class="nc" id="L75">        etqNormbreRegistro = new javax.swing.JLabel();</span>
+<span class="nc" id="L76">        txtEmailRegistro = new javax.swing.JTextField();</span>
+<span class="nc" id="L77">        etqEmailRegistro = new javax.swing.JLabel();</span>
+<span class="nc" id="L78">        txtApellidoRegistro = new javax.swing.JTextField();</span>
+<span class="nc" id="L79">        btnAceptarRegistro = new javax.swing.JButton();</span>
+<span class="nc" id="L80">        etqErrorRegistro = new javax.swing.JLabel();</span>
+<span class="nc" id="L81">        txtNombreRegistro = new javax.swing.JTextField();</span>
+<span class="nc" id="L82">        etqUsuarioRegistro = new javax.swing.JLabel();</span>
+<span class="nc" id="L83">        txtUsuarioRegistro = new javax.swing.JTextField();</span>
+<span class="nc" id="L84">        etqContraseñaRegistro = new javax.swing.JLabel();</span>
+<span class="nc" id="L85">        pwdContraseñaRegistro = new javax.swing.JPasswordField();</span>
+<span class="nc" id="L86">        etqCorrecto = new javax.swing.JLabel();</span>
+<span class="nc" id="L87">        imgLogo = new javax.swing.JLabel();</span>
+
+<span class="nc" id="L89">        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L90">        setTitle(&quot;Viajenda&quot;);</span>
+<span class="nc" id="L91">        setLocationByPlatform(true);</span>
+<span class="nc" id="L92">        setResizable(false);</span>
+<span class="nc" id="L93">        addWindowListener(new java.awt.event.WindowAdapter() {</span>
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+<span class="nc" id="L95">                formWindowClosing(evt);</span>
+<span class="nc" id="L96">            }</span>
+        });
+
+<span class="nc" id="L99">        panelPrincipal.setBackground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L100">        panelPrincipal.setVerifyInputWhenFocusTarget(false);</span>
+
+<span class="nc" id="L102">        panelTitulo.setBackground(new java.awt.Color(39, 39, 39));</span>
+<span class="nc" id="L103">        panelTitulo.setForeground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L104">        panelTitulo.setMaximumSize(new java.awt.Dimension(390, 46));</span>
+
+<span class="nc" id="L106">        etqTitulo.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L107">        etqTitulo.setForeground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L108">        etqTitulo.setText(&quot;Login&quot;);</span>
+
+<span class="nc" id="L110">        javax.swing.GroupLayout panelTituloLayout = new javax.swing.GroupLayout(panelTitulo);</span>
+<span class="nc" id="L111">        panelTitulo.setLayout(panelTituloLayout);</span>
+<span class="nc" id="L112">        panelTituloLayout.setHorizontalGroup(</span>
+<span class="nc" id="L113">            panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L114">            .addGroup(panelTituloLayout.createSequentialGroup()</span>
+<span class="nc" id="L115">                .addContainerGap()</span>
+<span class="nc" id="L116">                .addComponent(etqTitulo)</span>
+<span class="nc" id="L117">                .addContainerGap(206, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L119">        panelTituloLayout.setVerticalGroup(</span>
+<span class="nc" id="L120">            panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L121">            .addGroup(panelTituloLayout.createSequentialGroup()</span>
+<span class="nc" id="L122">                .addContainerGap()</span>
+<span class="nc" id="L123">                .addComponent(etqTitulo)</span>
+<span class="nc" id="L124">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L127">        jPanel1.setBackground(new java.awt.Color(245, 245, 245));</span>
+<span class="nc" id="L128">        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(39, 39, 39), 1, true));</span>
+
+<span class="nc" id="L130">        etqUsuario.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L131">        etqUsuario.setText(&quot;Usuario:&quot;);</span>
+
+<span class="nc" id="L133">        txtUsuario.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 14)); // NOI18N</span>
+<span class="nc" id="L134">        txtUsuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));</span>
+<span class="nc" id="L135">        txtUsuario.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L137">                txtUsuarioActionPerformed(evt);</span>
+<span class="nc" id="L138">            }</span>
+        });
+<span class="nc" id="L140">        txtUsuario.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L142">                txtUsuario.setBorder(new LineBorder(new Color(77,144,254)));</span>
+<span class="nc" id="L143">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L145">                txtUsuario.setBorder(new LineBorder(new Color(217,217,217)));</span>
+<span class="nc" id="L146">            }</span>
+        });
+<span class="nc" id="L148">        txtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L151" title="All 2 branches missed.">                if (!txtUsuario.isFocusOwner()) {</span>
+<span class="nc" id="L152">                    txtUsuario.setBorder(new LineBorder(new Color(185, 185, 185)));</span>
+                }
+<span class="nc" id="L154">            }</span>
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L157" title="All 2 branches missed.">                if (!txtUsuario.isFocusOwner()) {</span>
+<span class="nc" id="L158">                    txtUsuario.setBorder(new LineBorder(new Color(217, 217, 217)));</span>
+                }
+<span class="nc" id="L160">            }</span>
+        });
+
+<span class="nc" id="L163">        etqContraseña.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L164">        etqContraseña.setText(&quot;Contraseña:&quot;);</span>
+
+<span class="nc" id="L166">        btnAceptar.setBackground(new java.awt.Color(255, 102, 51));</span>
+<span class="nc" id="L167">        btnAceptar.setFont(new java.awt.Font(&quot;SansSerif&quot;, 1, 12)); // NOI18N</span>
+<span class="nc" id="L168">        btnAceptar.setForeground(new java.awt.Color(255, 255, 51));</span>
+<span class="nc" id="L169">        btnAceptar.setText(&quot;Acceder&quot;);</span>
+<span class="nc" id="L170">        btnAceptar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(221, 221, 221), 1, true));</span>
+<span class="nc" id="L171">        btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</span>
+<span class="nc" id="L172">        btnAceptar.setFocusPainted(false);</span>
+<span class="nc" id="L173">        btnAceptar.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L175">                btnAceptarActionPerformed(evt);</span>
+<span class="nc" id="L176">            }</span>
+        });
+
+<span class="nc" id="L179">        etqErrorLogin.setFont(new java.awt.Font(&quot;Tahoma&quot;, 1, 13)); // NOI18N</span>
+<span class="nc" id="L180">        etqErrorLogin.setForeground(new java.awt.Color(204, 0, 0));</span>
+<span class="nc" id="L181">        etqErrorLogin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);</span>
+
+<span class="nc" id="L183">        pwdContraseñaLogin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));</span>
+<span class="nc" id="L184">        pwdContraseñaLogin.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L186">                pwdContraseñaLogin.setBorder(new LineBorder(new Color(77,144,254)));</span>
+<span class="nc" id="L187">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L189">                pwdContraseñaLogin.setBorder(new LineBorder(new Color(217,217,217)));</span>
+<span class="nc" id="L190">            }</span>
+        });
+<span class="nc" id="L192">        pwdContraseñaLogin.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L195" title="All 2 branches missed.">                if (!pwdContraseñaLogin.isFocusOwner()) {</span>
+<span class="nc" id="L196">                    pwdContraseñaLogin.setBorder(new LineBorder(new Color(185, 185, 185)));</span>
+                }
+<span class="nc" id="L198">            }</span>
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L201" title="All 2 branches missed.">                if (!pwdContraseñaLogin.isFocusOwner()) {</span>
+<span class="nc" id="L202">                    pwdContraseñaLogin.setBorder(new LineBorder(new Color(217, 217, 217)));</span>
+                }
+<span class="nc" id="L204">            }</span>
+        });
+<span class="nc" id="L206">        pwdContraseñaLogin.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L208">                pwdContraseñaLoginActionPerformed(evt);</span>
+<span class="nc" id="L209">            }</span>
+        });
+
+<span class="nc" id="L212">        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);</span>
+<span class="nc" id="L213">        jPanel1.setLayout(jPanel1Layout);</span>
+<span class="nc" id="L214">        jPanel1Layout.setHorizontalGroup(</span>
+<span class="nc" id="L215">            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L216">            .addGroup(jPanel1Layout.createSequentialGroup()</span>
+<span class="nc" id="L217">                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L218">                    .addGroup(jPanel1Layout.createSequentialGroup()</span>
+<span class="nc" id="L219">                        .addContainerGap()</span>
+<span class="nc" id="L220">                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L221">                            .addComponent(etqContraseña)</span>
+<span class="nc" id="L222">                            .addComponent(etqUsuario))</span>
+<span class="nc" id="L223">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L224">                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L225">                            .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)</span>
+<span class="nc" id="L226">                            .addComponent(pwdContraseñaLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)))</span>
+<span class="nc" id="L227">                    .addGroup(jPanel1Layout.createSequentialGroup()</span>
+<span class="nc" id="L228">                        .addGap(67, 67, 67)</span>
+<span class="nc" id="L229">                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L230">                    .addGroup(jPanel1Layout.createSequentialGroup()</span>
+<span class="nc" id="L231">                        .addContainerGap()</span>
+<span class="nc" id="L232">                        .addComponent(etqErrorLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)))</span>
+<span class="nc" id="L233">                .addContainerGap())</span>
+        );
+<span class="nc" id="L235">        jPanel1Layout.setVerticalGroup(</span>
+<span class="nc" id="L236">            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L237">            .addGroup(jPanel1Layout.createSequentialGroup()</span>
+<span class="nc" id="L238">                .addContainerGap()</span>
+<span class="nc" id="L239">                .addComponent(etqErrorLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)</span>
+<span class="nc" id="L240">                .addGap(16, 16, 16)</span>
+<span class="nc" id="L241">                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L242">                    .addComponent(etqUsuario)</span>
+<span class="nc" id="L243">                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L244">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L245">                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)</span>
+<span class="nc" id="L246">                    .addComponent(etqContraseña)</span>
+<span class="nc" id="L247">                    .addComponent(pwdContraseñaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L248">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L249">                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L250">                .addContainerGap(40, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L253">        panelTitulo1.setBackground(new java.awt.Color(39, 39, 39));</span>
+<span class="nc" id="L254">        panelTitulo1.setForeground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L255">        panelTitulo1.setMaximumSize(new java.awt.Dimension(390, 46));</span>
+
+<span class="nc" id="L257">        etqTitulo1.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L258">        etqTitulo1.setForeground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L259">        etqTitulo1.setText(&quot;Registro&quot;);</span>
+
+<span class="nc" id="L261">        javax.swing.GroupLayout panelTitulo1Layout = new javax.swing.GroupLayout(panelTitulo1);</span>
+<span class="nc" id="L262">        panelTitulo1.setLayout(panelTitulo1Layout);</span>
+<span class="nc" id="L263">        panelTitulo1Layout.setHorizontalGroup(</span>
+<span class="nc" id="L264">            panelTitulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L265">            .addGroup(panelTitulo1Layout.createSequentialGroup()</span>
+<span class="nc" id="L266">                .addContainerGap()</span>
+<span class="nc" id="L267">                .addComponent(etqTitulo1)</span>
+<span class="nc" id="L268">                .addContainerGap(304, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L270">        panelTitulo1Layout.setVerticalGroup(</span>
+<span class="nc" id="L271">            panelTitulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L272">            .addGroup(panelTitulo1Layout.createSequentialGroup()</span>
+<span class="nc" id="L273">                .addContainerGap()</span>
+<span class="nc" id="L274">                .addComponent(etqTitulo1)</span>
+<span class="nc" id="L275">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L278">        jPanel2.setBackground(new java.awt.Color(245, 245, 245));</span>
+<span class="nc" id="L279">        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(39, 39, 39), 1, true));</span>
+
+<span class="nc" id="L281">        etqNormbreRegistro.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L282">        etqNormbreRegistro.setText(&quot;Nombre:&quot;);</span>
+
+<span class="nc" id="L284">        txtEmailRegistro.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 14)); // NOI18N</span>
+<span class="nc" id="L285">        txtEmailRegistro.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));</span>
+<span class="nc" id="L286">        txtEmailRegistro.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L288">                txtEmailRegistroActionPerformed(evt);</span>
+<span class="nc" id="L289">            }</span>
+        });
+<span class="nc" id="L291">        txtEmailRegistro.addKeyListener(new java.awt.event.KeyAdapter() {</span>
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+<span class="nc" id="L293">                txtEmailRegistroKeyReleased(evt);</span>
+<span class="nc" id="L294">            }</span>
+        });
+<span class="nc" id="L296">        txtEmailRegistro.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L298">                txtEmailRegistro.setBorder(new LineBorder(new Color(77,144,254)));</span>
+<span class="nc" id="L299">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L301">                txtEmailRegistro.setBorder(new LineBorder(new Color(217,217,217)));</span>
+<span class="nc" id="L302">            }</span>
+        });
+<span class="nc" id="L304">        txtEmailRegistro.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L307" title="All 2 branches missed.">                if (!txtEmailRegistro.isFocusOwner()) {</span>
+<span class="nc" id="L308">                    txtEmailRegistro.setBorder(new LineBorder(new Color(185, 185, 185)));</span>
+                }
+<span class="nc" id="L310">            }</span>
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L313" title="All 2 branches missed.">                if (!txtEmailRegistro.isFocusOwner()) {</span>
+<span class="nc" id="L314">                    txtEmailRegistro.setBorder(new LineBorder(new Color(217, 217, 217)));</span>
+                }
+<span class="nc" id="L316">            }</span>
+        });
+
+<span class="nc" id="L319">        etqEmailRegistro.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L320">        etqEmailRegistro.setText(&quot;E-mail:&quot;);</span>
+
+<span class="nc" id="L322">        txtApellidoRegistro.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 14)); // NOI18N</span>
+<span class="nc" id="L323">        txtApellidoRegistro.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));</span>
+<span class="nc" id="L324">        txtApellidoRegistro.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L326">                txtApellidoRegistroActionPerformed(evt);</span>
+<span class="nc" id="L327">            }</span>
+        });
+<span class="nc" id="L329">        txtApellidoRegistro.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L331">                txtApellidoRegistroFocusGained(evt);</span>
+<span class="nc" id="L332">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L334">                txtApellidoRegistroFocusLost(evt);</span>
+<span class="nc" id="L335">            }</span>
+        });
+<span class="nc" id="L337">        txtApellidoRegistro.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L339">                txtApellidoRegistro.setBorder(new LineBorder(new Color(77,144,254)));</span>
+<span class="nc" id="L340">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L342">                txtApellidoRegistro.setBorder(new LineBorder(new Color(217,217,217)));</span>
+<span class="nc" id="L343">            }</span>
+        });
+<span class="nc" id="L345">        txtApellidoRegistro.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L348" title="All 2 branches missed.">                if (!txtApellidoRegistro.isFocusOwner()) {</span>
+<span class="nc" id="L349">                    txtApellidoRegistro.setBorder(new LineBorder(new Color(185, 185, 185)));</span>
+                }
+<span class="nc" id="L351">            }</span>
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L354" title="All 2 branches missed.">                if (!txtApellidoRegistro.isFocusOwner()) {</span>
+<span class="nc" id="L355">                    txtApellidoRegistro.setBorder(new LineBorder(new Color(217, 217, 217)));</span>
+                }
+<span class="nc" id="L357">            }</span>
+        });
+
+<span class="nc" id="L360">        btnAceptarRegistro.setBackground(new java.awt.Color(242, 242, 242));</span>
+<span class="nc" id="L361">        btnAceptarRegistro.setFont(new java.awt.Font(&quot;SansSerif&quot;, 1, 12)); // NOI18N</span>
+<span class="nc" id="L362">        btnAceptarRegistro.setForeground(new java.awt.Color(102, 102, 102));</span>
+<span class="nc" id="L363">        btnAceptarRegistro.setText(&quot;Registro&quot;);</span>
+<span class="nc" id="L364">        btnAceptarRegistro.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(221, 221, 221), 1, true));</span>
+<span class="nc" id="L365">        btnAceptarRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</span>
+<span class="nc" id="L366">        btnAceptarRegistro.setFocusPainted(false);</span>
+<span class="nc" id="L367">        btnAceptarRegistro.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L369">                btnAceptarRegistroActionPerformed(evt);</span>
+<span class="nc" id="L370">            }</span>
+        });
+
+<span class="nc" id="L373">        etqErrorRegistro.setFont(new java.awt.Font(&quot;Tahoma&quot;, 1, 13)); // NOI18N</span>
+<span class="nc" id="L374">        etqErrorRegistro.setForeground(new java.awt.Color(204, 0, 0));</span>
+<span class="nc" id="L375">        etqErrorRegistro.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);</span>
+
+<span class="nc" id="L377">        txtNombreRegistro.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 14)); // NOI18N</span>
+<span class="nc" id="L378">        txtNombreRegistro.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));</span>
+<span class="nc" id="L379">        txtNombreRegistro.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L381">                txtNombreRegistroActionPerformed(evt);</span>
+<span class="nc" id="L382">            }</span>
+        });
+<span class="nc" id="L384">        txtNombreRegistro.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L386">                txtNombreRegistroFocusGained(evt);</span>
+<span class="nc" id="L387">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L389">                txtNombreRegistroFocusLost(evt);</span>
+<span class="nc" id="L390">            }</span>
+        });
+<span class="nc" id="L392">        txtNombreRegistro.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L394">                txtNombreRegistro.setBorder(new LineBorder(new Color(77,144,254)));</span>
+<span class="nc" id="L395">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L397">                txtNombreRegistro.setBorder(new LineBorder(new Color(217,217,217)));</span>
+<span class="nc" id="L398">            }</span>
+        });
+<span class="nc" id="L400">        txtNombreRegistro.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L403" title="All 2 branches missed.">                if (!txtUsuarioRegistro.isFocusOwner()) {</span>
+<span class="nc" id="L404">                    txtNombreRegistro.setBorder(new LineBorder(new Color(185, 185, 185)));</span>
+                }
+<span class="nc" id="L406">            }</span>
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L409" title="All 2 branches missed.">                if (!txtUsuarioRegistro.isFocusOwner()) {</span>
+<span class="nc" id="L410">                    txtNombreRegistro.setBorder(new LineBorder(new Color(217, 217, 217)));</span>
+                }
+<span class="nc" id="L412">            }</span>
+        });
+
+<span class="nc" id="L415">        etqUsuarioRegistro.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L416">        etqUsuarioRegistro.setText(&quot;Usuario:&quot;);</span>
+
+<span class="nc" id="L418">        txtUsuarioRegistro.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 14)); // NOI18N</span>
+<span class="nc" id="L419">        txtUsuarioRegistro.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));</span>
+<span class="nc" id="L420">        txtUsuarioRegistro.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L422">                txtUsuarioRegistroActionPerformed(evt);</span>
+<span class="nc" id="L423">            }</span>
+        });
+<span class="nc" id="L425">        txtUsuarioRegistro.addKeyListener(new java.awt.event.KeyAdapter() {</span>
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+<span class="nc" id="L427">                txtUsuarioRegistroKeyReleased(evt);</span>
+<span class="nc" id="L428">            }</span>
+        });
+<span class="nc" id="L430">        txtUsuarioRegistro.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L432">                txtUsuarioRegistro.setBorder(new LineBorder(new Color(77,144,254)));</span>
+<span class="nc" id="L433">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L435">                txtUsuarioRegistro.setBorder(new LineBorder(new Color(217,217,217)));</span>
+<span class="nc" id="L436">            }</span>
+        });
+<span class="nc" id="L438">        txtUsuarioRegistro.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L441" title="All 2 branches missed.">                if (!txtUsuarioRegistro.isFocusOwner()) {</span>
+<span class="nc" id="L442">                    txtUsuarioRegistro.setBorder(new LineBorder(new Color(185, 185, 185)));</span>
+                }
+<span class="nc" id="L444">            }</span>
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L447" title="All 2 branches missed.">                if (!txtUsuarioRegistro.isFocusOwner()) {</span>
+<span class="nc" id="L448">                    txtUsuarioRegistro.setBorder(new LineBorder(new Color(217, 217, 217)));</span>
+                }
+<span class="nc" id="L450">            }</span>
+        });
+
+<span class="nc" id="L453">        etqContraseñaRegistro.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L454">        etqContraseñaRegistro.setText(&quot;Contraseña:&quot;);</span>
+
+<span class="nc" id="L456">        pwdContraseñaRegistro.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));</span>
+<span class="nc" id="L457">        pwdContraseñaRegistro.setMinimumSize(new java.awt.Dimension(2, 21));</span>
+<span class="nc" id="L458">        pwdContraseñaRegistro.setPreferredSize(new java.awt.Dimension(2, 21));</span>
+<span class="nc" id="L459">        pwdContraseñaRegistro.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L461">                pwdContraseñaRegistroActionPerformed(evt);</span>
+<span class="nc" id="L462">            }</span>
+        });
+<span class="nc" id="L464">        pwdContraseñaRegistro.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L466">                pwdContraseñaRegistro.setBorder(new LineBorder(new Color(77,144,254)));</span>
+<span class="nc" id="L467">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L469">                pwdContraseñaRegistro.setBorder(new LineBorder(new Color(217,217,217)));</span>
+<span class="nc" id="L470">            }</span>
+        });
+<span class="nc" id="L472">        pwdContraseñaRegistro.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L475" title="All 2 branches missed.">                if (!pwdContraseñaRegistro.isFocusOwner()) {</span>
+<span class="nc" id="L476">                    pwdContraseñaRegistro.setBorder(new LineBorder(new Color(185, 185, 185)));</span>
+                }
+<span class="nc" id="L478">            }</span>
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L481" title="All 2 branches missed.">                if (!pwdContraseñaRegistro.isFocusOwner()) {</span>
+<span class="nc" id="L482">                    pwdContraseñaRegistro.setBorder(new LineBorder(new Color(217, 217, 217)));</span>
+                }
+<span class="nc" id="L484">            }</span>
+        });
+
+<span class="nc" id="L487">        etqCorrecto.setFont(new java.awt.Font(&quot;Tahoma&quot;, 1, 12)); // NOI18N</span>
+<span class="nc" id="L488">        etqCorrecto.setForeground(new java.awt.Color(0, 153, 0));</span>
+
+<span class="nc" id="L490">        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);</span>
+<span class="nc" id="L491">        jPanel2.setLayout(jPanel2Layout);</span>
+<span class="nc" id="L492">        jPanel2Layout.setHorizontalGroup(</span>
+<span class="nc" id="L493">            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L494">            .addGroup(jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L495">                .addContainerGap()</span>
+<span class="nc" id="L496">                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L497">                    .addGroup(jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L498">                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L499">                            .addGroup(jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L500">                                .addComponent(txtNombreRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L501">                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L502">                                .addComponent(txtApellidoRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))</span>
+<span class="nc" id="L503">                            .addComponent(etqNormbreRegistro)</span>
+<span class="nc" id="L504">                            .addComponent(etqEmailRegistro)</span>
+<span class="nc" id="L505">                            .addComponent(etqUsuarioRegistro)</span>
+<span class="nc" id="L506">                            .addComponent(etqContraseñaRegistro)</span>
+<span class="nc" id="L507">                            .addComponent(etqCorrecto, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)</span>
+<span class="nc" id="L508">                            .addComponent(etqErrorRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L509">                        .addContainerGap())</span>
+<span class="nc" id="L510">                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L511">                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)</span>
+<span class="nc" id="L512">                            .addComponent(txtEmailRegistro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)</span>
+<span class="nc" id="L513">                            .addComponent(pwdContraseñaRegistro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)</span>
+<span class="nc" id="L514">                            .addComponent(txtUsuarioRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE))</span>
+<span class="nc" id="L515">                        .addContainerGap())</span>
+<span class="nc" id="L516">                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L517">                        .addGap(0, 105, Short.MAX_VALUE)</span>
+<span class="nc" id="L518">                        .addComponent(btnAceptarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L519">                        .addGap(63, 63, 63))))</span>
+        );
+<span class="nc" id="L521">        jPanel2Layout.setVerticalGroup(</span>
+<span class="nc" id="L522">            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L523">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L524">                .addGap(16, 16, 16)</span>
+<span class="nc" id="L525">                .addComponent(etqErrorRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)</span>
+<span class="nc" id="L526">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L527">                .addComponent(etqNormbreRegistro)</span>
+<span class="nc" id="L528">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L529">                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L530">                    .addComponent(txtApellidoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L531">                    .addComponent(txtNombreRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L532">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L533">                .addComponent(etqUsuarioRegistro)</span>
+<span class="nc" id="L534">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L535">                .addComponent(txtUsuarioRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L536">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L537">                .addComponent(etqContraseñaRegistro)</span>
+<span class="nc" id="L538">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L539">                .addComponent(pwdContraseñaRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L540">                .addGap(27, 27, 27)</span>
+<span class="nc" id="L541">                .addComponent(etqEmailRegistro)</span>
+<span class="nc" id="L542">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L543">                .addComponent(txtEmailRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L544">                .addGap(42, 42, 42)</span>
+<span class="nc" id="L545">                .addComponent(etqCorrecto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L546">                .addGap(59, 59, 59)</span>
+<span class="nc" id="L547">                .addComponent(btnAceptarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L548">                .addGap(39, 39, 39))</span>
+        );
+
+<span class="nc" id="L551">        imgLogo.setFont(new java.awt.Font(&quot;Tahoma&quot;, 1, 13)); // NOI18N</span>
+<span class="nc" id="L552">        imgLogo.setForeground(new java.awt.Color(204, 204, 204));</span>
+<span class="nc" id="L553">        imgLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/AvionInicio.png&quot;))); // NOI18N</span>
+<span class="nc" id="L554">        imgLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</span>
+
+<span class="nc" id="L556">        javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);</span>
+<span class="nc" id="L557">        panelPrincipal.setLayout(panelPrincipalLayout);</span>
+<span class="nc" id="L558">        panelPrincipalLayout.setHorizontalGroup(</span>
+<span class="nc" id="L559">            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L560">            .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L561">                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L562">                    .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L563">                        .addGap(28, 28, 28)</span>
+<span class="nc" id="L564">                        .addComponent(imgLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L565">                    .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L566">                        .addGap(12, 12, 12)</span>
+<span class="nc" id="L567">                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L568">                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L569">                            .addComponent(panelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))</span>
+<span class="nc" id="L570">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L571">                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)</span>
+<span class="nc" id="L572">                    .addComponent(panelTitulo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L573">                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+<span class="nc" id="L574">                .addContainerGap())</span>
+        );
+<span class="nc" id="L576">        panelPrincipalLayout.setVerticalGroup(</span>
+<span class="nc" id="L577">            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L578">            .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L579">                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)</span>
+<span class="nc" id="L580">                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L581">                        .addContainerGap()</span>
+<span class="nc" id="L582">                        .addComponent(panelTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L583">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L584">                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L585">                    .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L586">                        .addGap(19, 19, 19)</span>
+<span class="nc" id="L587">                        .addComponent(imgLogo)</span>
+<span class="nc" id="L588">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L589">                        .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L590">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L591">                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L592">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L595">        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());</span>
+<span class="nc" id="L596">        getContentPane().setLayout(layout);</span>
+<span class="nc" id="L597">        layout.setHorizontalGroup(</span>
+<span class="nc" id="L598">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L599">            .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+        );
+<span class="nc" id="L601">        layout.setVerticalGroup(</span>
+<span class="nc" id="L602">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L603">            .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+        );
+
+<span class="nc" id="L606">        pack();</span>
+<span class="nc" id="L607">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+<span class="nc" id="L610">        guardarSistema();</span>
+<span class="nc" id="L611">    }//GEN-LAST:event_formWindowClosing</span>
+
+    private void txtEmailRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailRegistroActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L615">    }//GEN-LAST:event_txtEmailRegistroActionPerformed</span>
+
+    private void txtEmailRegistroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailRegistroKeyReleased
+        // TODO add your handling code here:
+<span class="nc" id="L619">    }//GEN-LAST:event_txtEmailRegistroKeyReleased</span>
+
+    private void btnAceptarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarRegistroActionPerformed
+<span class="nc bnc" id="L622" title="All 2 branches missed.">        if (txtNombreRegistro.getText().equals(&quot;Nombre&quot;)) {</span>
+<span class="nc" id="L623">            txtNombreRegistro.setText(&quot;&quot;);</span>
+        }
+<span class="nc bnc" id="L625" title="All 2 branches missed.">        if (txtApellidoRegistro.getText().equals(&quot;Apellido&quot;)) {</span>
+<span class="nc" id="L626">            txtApellidoRegistro.setText(&quot;&quot;);</span>
+        }
+<span class="nc" id="L628">        String nombre = txtNombreRegistro.getText();</span>
+<span class="nc" id="L629">        String apellido = txtApellidoRegistro.getText();</span>
+<span class="nc" id="L630">        String usuario = txtUsuarioRegistro.getText();</span>
+<span class="nc" id="L631">        String contraseña = pwdContraseñaRegistro.getText();</span>
+<span class="nc" id="L632">        Email email = new Email(txtEmailRegistro.getText());</span>
+
+        try {
+<span class="nc" id="L635">            sistema.altaUsuario(usuario, contraseña, email, nombre, apellido);</span>
+
+<span class="nc" id="L637">            sistema.identificacionUsuario(usuario, contraseña);</span>
+
+<span class="nc" id="L639">            VentanaMenu ventanaMenu = new VentanaMenu(sistema, txtUsuarioRegistro.getText());</span>
+<span class="nc" id="L640">            ventanaMenu.setLocationRelativeTo(null); // Centrar ventana.</span>
+<span class="nc" id="L641">            ventanaMenu.setVisible(true);</span>
+<span class="nc" id="L642">            this.setVisible(false);</span>
+
+<span class="nc" id="L644">        } catch (UsuarioException e) {</span>
+<span class="nc bnc" id="L645" title="All 2 branches missed.">            if (txtNombreRegistro.getText().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L646">                txtNombreRegistro.setText(&quot;Nombre&quot;);</span>
+            }
+<span class="nc bnc" id="L648" title="All 2 branches missed.">            if (txtApellidoRegistro.getText().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L649">                txtApellidoRegistro.setText(&quot;Apellido&quot;);</span>
+            }
+<span class="nc" id="L651">            etqErrorRegistro.setText(e.toString());</span>
+
+            //Focus en el campo generador de error.
+<span class="nc bnc" id="L654" title="All 4 branches missed.">            if (e.getClass() == ClaveInseguraException.class || e.getClass() == LargoClaveInvalidoException.class) {</span>
+<span class="nc" id="L655">                pwdContraseñaRegistro.requestFocusInWindow();</span>
+<span class="nc bnc" id="L656" title="All 2 branches missed.">            } else if (e.getClass() == EmailInvalidoException.class) {</span>
+<span class="nc" id="L657">                txtEmailRegistro.requestFocusInWindow();</span>
+<span class="nc bnc" id="L658" title="All 4 branches missed.">            } else if (e.getClass() == LargoApellidoInvalidoException.class || e.getClass() == ApellidoVacioException.class) {</span>
+<span class="nc" id="L659">                txtApellidoRegistro.requestFocusInWindow();</span>
+<span class="nc bnc" id="L660" title="All 4 branches missed.">            } else if (e.getClass() == LargoNombreInvalidoException.class || e.getClass() == NombreVacioException.class) {</span>
+<span class="nc" id="L661">                txtNombreRegistro.requestFocusInWindow();</span>
+<span class="nc bnc" id="L662" title="All 4 branches missed.">            } else if (e.getClass() == LargoNombreUsuarioInvalidoException.class || e.getClass() == NombreUsuarioVacioException.class) {</span>
+<span class="nc" id="L663">                txtUsuarioRegistro.requestFocusInWindow();</span>
+            }
+<span class="nc" id="L665">        }</span>
+<span class="nc" id="L666">    }//GEN-LAST:event_btnAceptarRegistroActionPerformed</span>
+
+    private void txtUsuarioRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioRegistroActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L670">    }//GEN-LAST:event_txtUsuarioRegistroActionPerformed</span>
+
+    private void txtUsuarioRegistroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioRegistroKeyReleased
+        // TODO add your handling code here:
+<span class="nc" id="L674">    }//GEN-LAST:event_txtUsuarioRegistroKeyReleased</span>
+
+    private void pwdContraseñaRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdContraseñaRegistroActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L678">    }//GEN-LAST:event_pwdContraseñaRegistroActionPerformed</span>
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+<span class="nc" id="L681">        String usuario = txtUsuario.getText();</span>
+<span class="nc" id="L682">        String contraseña = pwdContraseñaLogin.getText();</span>
+
+        try {
+<span class="nc" id="L685">            sistema.identificacionUsuario(usuario, contraseña);</span>
+
+<span class="nc" id="L687">            VentanaMenu ventanaMenu = new VentanaMenu(sistema, txtUsuario.getText());</span>
+<span class="nc" id="L688">            ventanaMenu.setLocationRelativeTo(null); // Centrar ventana.</span>
+<span class="nc" id="L689">            ventanaMenu.setVisible(true);</span>
+<span class="nc" id="L690">            this.setVisible(false);</span>
+<span class="nc" id="L691">        } catch (UsuarioException e) {</span>
+<span class="nc" id="L692">            etqErrorLogin.setText(e.toString());</span>
+<span class="nc" id="L693">            txtUsuario.requestFocusInWindow();</span>
+<span class="nc" id="L694">        }</span>
+<span class="nc" id="L695">    }//GEN-LAST:event_btnAceptarActionPerformed</span>
+
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L699">    }//GEN-LAST:event_txtUsuarioActionPerformed</span>
+
+    private void txtApellidoRegistroFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtApellidoRegistroFocusGained
+<span class="nc bnc" id="L702" title="All 2 branches missed.">        if (txtApellidoRegistro.getText().equals(&quot;Apellido&quot;)) {</span>
+<span class="nc" id="L703">            txtApellidoRegistro.setText(null);</span>
+        }
+<span class="nc" id="L705">        txtApellidoRegistro.setForeground(Color.black);</span>
+<span class="nc" id="L706">    }//GEN-LAST:event_txtApellidoRegistroFocusGained</span>
+
+    private void txtNombreRegistroFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreRegistroFocusGained
+<span class="nc bnc" id="L709" title="All 2 branches missed.">        if (txtNombreRegistro.getText().equals(&quot;Nombre&quot;)) {</span>
+<span class="nc" id="L710">            txtNombreRegistro.setText(null);</span>
+        }
+<span class="nc" id="L712">        txtNombreRegistro.setForeground(Color.black);</span>
+<span class="nc" id="L713">    }//GEN-LAST:event_txtNombreRegistroFocusGained</span>
+
+    private void txtNombreRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreRegistroActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L717">    }//GEN-LAST:event_txtNombreRegistroActionPerformed</span>
+
+    private void txtApellidoRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoRegistroActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L721">    }//GEN-LAST:event_txtApellidoRegistroActionPerformed</span>
+
+    private void txtNombreRegistroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreRegistroFocusLost
+<span class="nc bnc" id="L724" title="All 2 branches missed.">        if (txtNombreRegistro.getText().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L725">            txtNombreRegistro.setText(&quot;Nombre&quot;);</span>
+<span class="nc" id="L726">            txtNombreRegistro.setForeground(Color.GRAY);</span>
+        }
+<span class="nc" id="L728">    }//GEN-LAST:event_txtNombreRegistroFocusLost</span>
+
+    private void txtApellidoRegistroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtApellidoRegistroFocusLost
+<span class="nc bnc" id="L731" title="All 2 branches missed.">        if (txtApellidoRegistro.getText().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L732">            txtApellidoRegistro.setText(&quot;Apellido&quot;);</span>
+<span class="nc" id="L733">            txtApellidoRegistro.setForeground(Color.GRAY);</span>
+        }
+<span class="nc" id="L735">    }//GEN-LAST:event_txtApellidoRegistroFocusLost</span>
+
+    private void pwdContraseñaLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdContraseñaLoginActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L739">    }//GEN-LAST:event_pwdContraseñaLoginActionPerformed</span>
+
+    /*
+     * Eventos menú barra superior.
+     */
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnAceptarRegistro;
+    private javax.swing.JLabel etqContraseña;
+    private javax.swing.JLabel etqContraseñaRegistro;
+    private javax.swing.JLabel etqCorrecto;
+    private javax.swing.JLabel etqEmailRegistro;
+    private javax.swing.JLabel etqErrorLogin;
+    private javax.swing.JLabel etqErrorRegistro;
+    private javax.swing.JLabel etqNormbreRegistro;
+    private javax.swing.JLabel etqTitulo;
+    private javax.swing.JLabel etqTitulo1;
+    private javax.swing.JLabel etqUsuario;
+    private javax.swing.JLabel etqUsuarioRegistro;
+    private javax.swing.JLabel imgLogo;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JPanel panelTitulo;
+    private javax.swing.JPanel panelTitulo1;
+    private javax.swing.JPasswordField pwdContraseñaLogin;
+    private javax.swing.JPasswordField pwdContraseñaRegistro;
+    private javax.swing.JTextField txtApellidoRegistro;
+    private javax.swing.JTextField txtEmailRegistro;
+    private javax.swing.JTextField txtNombreRegistro;
+    private javax.swing.JTextField txtUsuario;
+    private javax.swing.JTextField txtUsuarioRegistro;
+    // End of variables declaration//GEN-END:variables
+    private ISistema sistema;
+
+    private void inhabilitarCampos() {
+<span class="nc" id="L775">        this.txtApellidoRegistro.setEditable(false);</span>
+<span class="nc" id="L776">        this.txtEmailRegistro.setEditable(false);</span>
+<span class="nc" id="L777">        this.txtNombreRegistro.setEditable(false);</span>
+<span class="nc" id="L778">        this.txtUsuarioRegistro.setEditable(false);</span>
+<span class="nc" id="L779">        this.pwdContraseñaRegistro.setEditable(false);</span>
+<span class="nc" id="L780">        this.btnAceptarRegistro.setEnabled(false);</span>
+<span class="nc" id="L781">    }</span>
+
+    private void guardarSistema() {
+        ObjectOutputStream grabacionSistema;
+        try {
+            //Se serializa el objeto sistema.
+<span class="nc" id="L787">            grabacionSistema = new ObjectOutputStream(</span>
+                    new BufferedOutputStream(new FileOutputStream(&quot;sistema.txt&quot;)));
+<span class="nc" id="L789">            grabacionSistema.writeObject(sistema);</span>
+<span class="nc" id="L790">            grabacionSistema.close();</span>
+<span class="nc" id="L791">        } catch (IOException ex) {</span>
+<span class="nc" id="L792">            ex.printStackTrace();</span>
+<span class="nc" id="L793">        }</span>
+<span class="nc" id="L794">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ProxySettings.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">com.wolfram.alpha.net</a> &gt; <span class="el_source">ProxySettings.java</span></div><h1>ProxySettings.java</h1><pre class="source lang-java linenums">/*
+ * Created on Nov 5, 2006
+ *
+ */
+package com.wolfram.alpha.net;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.ProxySelector;
+import java.net.SocketAddress;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpHost;
+
+
+/**
+ * Responsible for all things related to proxies. This includes storing the manually-set proxy
+ * host and port (if any), deciding what proxy, if any, to use for a given request
+ * (determined by manual or system settings), and serving up username/password credentials if required
+ * for an authenticating proxy.
+ *
+ * The one thing this class does not do is handle prompting the user for username and password
+ * if necessary. That is handled in Mathematica code triggered by a 407 HTTP status.
+ *
+ * The HttpHandler instance holds one instance of this class and uses it when necessary or passes
+ * it to other classes that need to use it.
+ *
+ * @author tgayley
+ *
+ */
+public class ProxySettings {
+
+<span class="nc" id="L36">    private static ProxySettings instance = null;  // Singleton</span>
+
+<span class="nc" id="L38">    public static int useProxy = 0;  // 0 = false, 1 = automatic, 2 = true</span>
+<span class="nc" id="L39">    private String httpProxyHost = &quot;192.168.57.2&quot;;   // For these values, null or 0 means ignore.</span>
+<span class="nc" id="L40">    private int httpProxyPort = 80;</span>
+
+    private String proxyUsername;
+    private String proxyPassword;
+
+    public static final int PROXY_NONE = 0;
+    public static final int PROXY_AUTOMATIC = 1;
+    public static final int PROXY_MANUAL = 2;
+
+
+<span class="nc" id="L50">    private ProxySettings() {</span>
+        // Try to grab system-specific proxy settings (e.g., from Internet Explorer on Windows).
+        // Actual acquisition of these values is done in setupProxy().
+<span class="nc" id="L53">        System.setProperty(&quot;java.net.useSystemProxies&quot;, &quot;true&quot;);</span>
+<span class="nc" id="L54">        ProxySelector.setDefault(MyProxySelector.getInstance());</span>
+<span class="nc" id="L55">    }</span>
+
+
+    public static synchronized ProxySettings getInstance() {
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if (instance == null)</span>
+<span class="nc" id="L60">            instance = new ProxySettings();</span>
+<span class="nc" id="L61">        return instance;</span>
+    }
+
+
+    public synchronized void setProxyInfo(int useProxy, String httpProxyHost, int httpProxyPort) {
+
+<span class="nc" id="L67">        this.useProxy = useProxy;</span>
+<span class="nc" id="L68">        this.httpProxyHost = httpProxyHost;</span>
+<span class="nc" id="L69">        this.httpProxyPort = httpProxyPort;</span>
+<span class="nc" id="L70">    }</span>
+
+
+    synchronized int getUseProxy() {
+<span class="nc" id="L74">        return useProxy;</span>
+    }
+
+
+    //////////////////////////////  Authentication  /////////////////////////////////
+
+    synchronized String getProxyUsername() {
+<span class="nc" id="L81">        return proxyUsername;</span>
+    }
+
+    public synchronized void setProxyUsername(String username) {
+<span class="nc" id="L85">        proxyUsername = username;</span>
+<span class="nc" id="L86">    }</span>
+
+    synchronized String getProxyPassword() {
+<span class="nc" id="L89">        return proxyPassword;</span>
+    }
+
+    public synchronized void setProxyPassword(String password) {
+<span class="nc" id="L93">        proxyPassword = password;</span>
+<span class="nc" id="L94">    }</span>
+
+
+
+    ///////////////////////////////  Proxy config  ////////////////////////////////////
+
+    // Decide what proxy, if any, to use for a request. Manual settings take precedence,
+    // then we fall back to using system settings (e.g., Internet Explorer settings on Windows)
+    // as handled by the ProxySelector class introduced in Java 1.5.
+    //
+    // Public so that it can be called from Mathematica.
+    //
+    public synchronized String[] getProxyHostAndPort(String url) {
+
+<span class="nc" id="L108">        int port = 0;</span>
+<span class="nc" id="L109">        String host = null;</span>
+
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        if (useProxy == PROXY_AUTOMATIC) {</span>
+<span class="nc" id="L112">            ProxySelector ps = ProxySelector.getDefault(); // Will get MyProxySelector.</span>
+            try {
+<span class="nc" id="L114">                URI uri = new URI(url);</span>
+<span class="nc" id="L115">                List&lt;Proxy&gt; proxyList = ps.select(uri);</span>
+<span class="nc" id="L116">                int len = proxyList.size();</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">                for (int i = 0; i &lt; len; i++) {</span>
+<span class="nc" id="L118">                    Proxy p = (Proxy) proxyList.get (i);</span>
+<span class="nc" id="L119">                    InetSocketAddress addr = (InetSocketAddress) p.address();</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">                    if (addr != null) {</span>
+<span class="nc" id="L121">                        host = addr.getHostName();</span>
+<span class="nc" id="L122">                        port = addr.getPort();</span>
+<span class="nc" id="L123">                        break;</span>
+                    }
+                }
+<span class="nc" id="L126">            } catch (Exception e) {</span>
+                // TODO: Handle?
+<span class="nc" id="L128">            }</span>
+<span class="nc bnc" id="L129" title="All 2 branches missed.">        } else if (useProxy == PROXY_MANUAL) {</span>
+            String protocol;
+<span class="nc" id="L131">            int colonPos = url.indexOf(':');</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">            if (colonPos != -1) {</span>
+<span class="nc" id="L133">                protocol = url.substring(0, colonPos).toLowerCase();</span>
+            } else {
+                // Shouldn't happen, but might as well do something and let it fail later.
+<span class="nc" id="L136">                protocol = &quot;http&quot;;</span>
+            }
+<span class="nc bnc" id="L138" title="All 2 branches missed.">            if (protocol.equals(&quot;http&quot;)) {</span>
+<span class="nc" id="L139">                host = httpProxyHost;</span>
+<span class="nc" id="L140">                port = httpProxyPort;</span>
+            }
+            // Don't handle directly Socks calls.
+        }
+
+<span class="nc" id="L145">        return new String[]{host, String.valueOf(port)};</span>
+    }
+
+
+    public synchronized HttpHost getProxyForHttpClient(String url) {
+
+<span class="nc" id="L151">        String[] hostAndPort = getProxyHostAndPort(url);</span>
+<span class="nc" id="L152">        String host = hostAndPort[0];</span>
+<span class="nc" id="L153">        int port = Integer.parseInt(hostAndPort[1]);</span>
+
+<span class="nc bnc" id="L155" title="All 4 branches missed.">        if (port != 0 &amp;&amp; host != null) {</span>
+<span class="nc" id="L156">            return new HttpHost(host, port, &quot;http&quot;);</span>
+        } else {
+<span class="nc" id="L158">            return null;</span>
+        }
+    }
+
+
+    public synchronized Proxy getProxyForJavaNet(String url) {
+
+<span class="nc" id="L165">        String[] hostAndPort = getProxyHostAndPort(url);</span>
+<span class="nc" id="L166">        String host = hostAndPort[0];</span>
+<span class="nc" id="L167">        int port = Integer.parseInt(hostAndPort[1]);</span>
+
+        // If we got settings for both host and port, use them; otherwise no proxy.
+<span class="nc bnc" id="L170" title="All 4 branches missed.">        if (port != 0 &amp;&amp; host != null)</span>
+<span class="nc" id="L171">            return new Proxy(Proxy.Type.HTTP, new InetSocketAddress(host, port));</span>
+        else
+<span class="nc" id="L173">            return null; // Don't return Proxy.NO_PROXY, as that seems not to be a usable value--just a sentinel.</span>
+    }
+
+
+    // This class is plugged in as the default system-wide ProxySelector.
+    // It's a slightly weird setup, since ProxySettings calls this class for Automatic
+    // proxy configuration, and this class calls back to ProxySettings for Manual and
+    // Direct proxy settings. Things would be a little cleaner if we didn't have to worry
+    // about Java 1.4 compatibility (this class inherits from a 1.5-only class).
+
+    static class MyProxySelector extends ProxySelector {
+
+<span class="nc" id="L185">        static MyProxySelector instance = null;</span>
+<span class="nc" id="L186">        ProxySelector origSelector = null;</span>
+
+        // The list we return when we want to indicate to the caller that no proxy should be used.
+        // In older versions of Java you could return an empty list, but in newer ones there is a bug
+        // where the java.net code will throw a NullPointerException if you return an empty list.
+<span class="nc" id="L191">        private final List&lt;Proxy&gt; NO_PROXY_LIST = new ArrayList&lt;Proxy&gt;(1);</span>
+
+<span class="nc" id="L193">        private MyProxySelector() {</span>
+<span class="nc" id="L194">            origSelector = ProxySelector.getDefault();</span>
+<span class="nc" id="L195">            NO_PROXY_LIST.add(Proxy.NO_PROXY);</span>
+<span class="nc" id="L196">        }</span>
+
+        static synchronized ProxySelector getInstance() {
+<span class="nc bnc" id="L199" title="All 2 branches missed.">            if (instance == null)</span>
+<span class="nc" id="L200">                instance = new MyProxySelector();</span>
+<span class="nc" id="L201">            return instance;</span>
+        }
+
+        public List&lt;Proxy&gt; select(URI uri) {
+
+<span class="nc" id="L206">            int useProxy = ProxySettings.getInstance().getUseProxy();</span>
+<span class="nc bnc" id="L207" title="All 2 branches missed.">            if (useProxy == PROXY_AUTOMATIC)</span>
+<span class="nc" id="L208">                return origSelector.select(uri);</span>
+<span class="nc bnc" id="L209" title="All 2 branches missed.">            else if (useProxy == PROXY_MANUAL) {</span>
+<span class="nc" id="L210">                Proxy p = (Proxy) ProxySettings.getInstance().getProxyForJavaNet(uri.toString());</span>
+<span class="nc bnc" id="L211" title="All 2 branches missed.">                if (p != null) {</span>
+<span class="nc" id="L212">                    List&lt;Proxy&gt; proxies = new ArrayList&lt;Proxy&gt;(1);</span>
+<span class="nc" id="L213">                    proxies.add(p);</span>
+<span class="nc" id="L214">                    return proxies;</span>
+                } else {
+<span class="nc" id="L216">                    return NO_PROXY_LIST;</span>
+                }
+            } else {
+<span class="nc" id="L219">                return NO_PROXY_LIST;</span>
+            }
+        }
+
+        public void connectFailed(URI uri, SocketAddress sa, IOException ioe) {
+<span class="nc" id="L224">            origSelector.connectFailed(uri, sa, ioe);</span>
+<span class="nc" id="L225">        }</span>
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>EnvioMail.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.noticiaciones.email</a> &gt; <span class="el_source">EnvioMail.java</span></div><h1>EnvioMail.java</h1><pre class="source lang-java linenums">package traveller.noticiaciones.email;
+
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+public class EnvioMail {
+
+<span class="nc" id="L14">    public EnvioMail() {</span>
+<span class="nc" id="L15">    }</span>
+
+    public static void mandarEmail(String receptor, String titulo, String mensaje) {
+
+<span class="nc" id="L19">        final String username = &quot;Traveller@gmail.com&quot;;</span>
+<span class="nc" id="L20">        final String password = &quot;Traveller2012&quot;;</span>
+
+<span class="nc" id="L22">        Properties props = new Properties();</span>
+<span class="nc" id="L23">        props.put(&quot;mail.smtp.auth&quot;, &quot;true&quot;);</span>
+<span class="nc" id="L24">        props.put(&quot;mail.smtp.starttls.enable&quot;, &quot;true&quot;);</span>
+<span class="nc" id="L25">        props.put(&quot;mail.smtp.host&quot;, &quot;smtp.gmail.com&quot;);</span>
+<span class="nc" id="L26">        props.put(&quot;mail.smtp.port&quot;, &quot;587&quot;);</span>
+
+<span class="nc" id="L28">        Session session = Session.getInstance(props,</span>
+<span class="nc" id="L29">                new javax.mail.Authenticator() {</span>
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+<span class="nc" id="L32">                        return new PasswordAuthentication(username, password);</span>
+                    }
+                });
+
+        try {
+
+<span class="nc" id="L38">            Message message = new MimeMessage(session);</span>
+<span class="nc" id="L39">            message.setFrom(new InternetAddress(&quot;Traveller@gmail.com&quot;));</span>
+<span class="nc" id="L40">            message.setRecipients(Message.RecipientType.TO,</span>
+<span class="nc" id="L41">                    InternetAddress.parse(receptor));</span>
+<span class="nc" id="L42">            message.setSubject(titulo);</span>
+<span class="nc" id="L43">            message.setText(mensaje);</span>
+
+<span class="nc" id="L45">            Transport.send(message);</span>
+
+<span class="nc" id="L47">        } catch (MessagingException e) {</span>
+<span class="nc" id="L48">            throw new RuntimeException(e);</span>
+<span class="nc" id="L49">        }</span>
+<span class="nc" id="L50">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

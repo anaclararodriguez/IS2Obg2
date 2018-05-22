@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SistemaImp.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.dominio</a> &gt; <span class="el_source">SistemaImp.java</span></div><h1>SistemaImp.java</h1><pre class="source lang-java linenums">package traveller.dominio;
+
+import traveller.excepciones.usuario.UsuarioException;
+import traveller.excepciones.usuario.IdentificacionInvalidaException;
+import traveller.excepciones.usuario.UsuarioExistenteException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import traveller.noticiaciones.email.EnvioMail;
+import traveller.notificaciones.movil.EnvioMensajeTexto;
+
+public class SistemaImp implements ISistema, Serializable {
+
+    private ArrayList&lt;Usuario&gt; listaUsuarios;
+    private Usuario usuarioIdentificado; //Guarda el usuario actualmente identifiacdo en el sistema.
+    private boolean modoDesarrollador;
+    private boolean mostrarCartelInicio;
+    private String proxy;
+    private int puerto;
+
+<span class="fc" id="L21">    public SistemaImp() {</span>
+<span class="fc" id="L22">	this.listaUsuarios = new ArrayList&lt;Usuario&gt;();</span>
+<span class="fc" id="L23">	this.usuarioIdentificado = null;</span>
+<span class="fc" id="L24">	this.modoDesarrollador = false;</span>
+<span class="fc" id="L25">	this.mostrarCartelInicio = true;</span>
+<span class="fc" id="L26">        this.proxy = &quot;&quot;;</span>
+<span class="fc" id="L27">        this.puerto = 0;</span>
+<span class="fc" id="L28">    }</span>
+
+    @Override
+    public void altaUsuario(String nombreUsuario, String clave, Email email, String nombre, String apellido) throws UsuarioException {
+	/* ¿Ya existe nombre usuario? */
+<span class="fc bfc" id="L33" title="All 2 branches covered.">	if (existeNombreUsuario(nombreUsuario)) {</span>
+<span class="fc" id="L34">	    throw new UsuarioExistenteException(nombreUsuario);</span>
+	}
+
+<span class="fc" id="L37">	Usuario nuevoUsuario = new Usuario(nombreUsuario, clave, nombre, apellido, email);</span>
+<span class="fc" id="L38">	this.listaUsuarios.add(nuevoUsuario);</span>
+<span class="fc" id="L39">    }</span>
+
+    @Override
+    public void identificacionUsuario(String nombreUsuario, String clave) throws UsuarioException {
+<span class="fc" id="L43">	boolean entro = false;</span>
+<span class="fc" id="L44">	Iterator&lt;Usuario&gt; it = this.listaUsuarios.iterator();</span>
+
+<span class="fc bfc" id="L46" title="All 2 branches covered.">	while (it.hasNext()) {</span>
+<span class="fc" id="L47">	    Usuario usuario = it.next();</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">	    if (usuario.getNombreUsuario().equals(nombreUsuario)) {</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">		if (usuario.igualContraseña(clave)) {</span>
+<span class="fc" id="L50">		    this.usuarioIdentificado = usuario;</span>
+<span class="fc" id="L51">		    entro = true;</span>
+		} else {
+<span class="fc" id="L53">		    throw new IdentificacionInvalidaException();</span>
+		}
+	    }
+<span class="fc" id="L56">	}</span>
+
+<span class="fc bfc" id="L58" title="All 2 branches covered.">	if (!entro) {</span>
+<span class="fc" id="L59">	    throw new IdentificacionInvalidaException();</span>
+	}
+<span class="fc" id="L61">    }</span>
+
+    @Override
+    public void logoutUsuario() {
+<span class="fc" id="L65">	this.usuarioIdentificado = null;</span>
+<span class="fc" id="L66">    }</span>
+
+    @Override
+    public boolean hayUsuarioIdentificado() {
+<span class="fc bfc" id="L70" title="All 2 branches covered.">	return this.usuarioIdentificado != null;</span>
+    }
+
+    @Override
+    public void bajaUsuario() {
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">	if (this.hayUsuarioIdentificado()) {</span>
+<span class="fc" id="L76">	    this.listaUsuarios.remove(this.usuarioIdentificado);</span>
+<span class="fc" id="L77">	    this.logoutUsuario();</span>
+	}
+<span class="fc" id="L79">    }</span>
+
+    public String getProxy() {
+<span class="nc" id="L82">        return proxy;</span>
+    }
+
+    public void setProxy(String proxy) {
+<span class="nc" id="L86">        this.proxy = proxy;</span>
+<span class="nc" id="L87">    }</span>
+
+    public int getPuerto() {
+<span class="nc" id="L90">        return puerto;</span>
+    }
+
+    public void setPuerto(int puerto) {
+<span class="nc" id="L94">        this.puerto = puerto;</span>
+<span class="nc" id="L95">    }</span>
+    
+    @Override
+    public ArrayList&lt;Usuario&gt; getListaUsuarios() {
+<span class="fc" id="L99">	return this.listaUsuarios;</span>
+    }
+
+    @Override
+    public boolean existeUsuario(String nombreUsuario) {
+<span class="fc" id="L104">	return this.listaUsuarios.contains(new Usuario(nombreUsuario));</span>
+    }
+
+    @Override
+    public Usuario getUsuarioIdentificado() {
+<span class="fc" id="L109">	return this.usuarioIdentificado;</span>
+    }
+
+    @Override
+    public ArrayList&lt;Usuario&gt; listadoBuscarUsuarios(String cadena) {
+<span class="fc" id="L114">	ArrayList&lt;Usuario&gt; retorno = new ArrayList&lt;Usuario&gt;();</span>
+<span class="fc" id="L115">	Usuario identificado = this.getUsuarioIdentificado();</span>
+<span class="fc" id="L116">	Iterator&lt;Usuario&gt; it = this.listaUsuarios.iterator();</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">	while (it.hasNext()) {</span>
+<span class="fc" id="L118">	    Usuario usuario = it.next();</span>
+<span class="pc bpc" id="L119" title="1 of 4 branches missed.">	    if (!usuario.equals(identificado) &amp;&amp; !identificado.getListaAmigos().contains(usuario)) {</span>
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">		if ((usuario.getNombre() +&quot; &quot;+ usuario.getApellido()).toLowerCase().startsWith(cadena.toLowerCase())) {</span>
+<span class="fc" id="L121">		    retorno.add(usuario);</span>
+		}
+	    }
+<span class="fc" id="L124">	}</span>
+<span class="fc" id="L125">	return retorno;</span>
+    }
+
+    @Override
+    public ArrayList&lt;Usuario&gt; obtenerGrupoDeViaje(Viaje viaje) {
+<span class="nc" id="L130">	ArrayList&lt;Usuario&gt; retorno = new ArrayList&lt;Usuario&gt;();</span>
+<span class="nc" id="L131">	retorno.add(this.getUsuarioIdentificado());</span>
+
+<span class="nc" id="L133">	Iterator&lt;Usuario&gt; it = this.getListaUsuarios().iterator();</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">	while (it.hasNext()) {</span>
+<span class="nc" id="L135">	    Usuario usuarioAux = it.next();</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">	    if (!usuarioAux.equals(this.getUsuarioIdentificado())) {</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">		if (usuarioAux.getListaViajes().contains(viaje)) {</span>
+<span class="nc" id="L138">		    retorno.add(usuarioAux);</span>
+		}
+	    }
+<span class="nc" id="L141">	}</span>
+<span class="nc" id="L142">	return retorno;</span>
+    }
+
+    @Override
+    public void setModoDesarrollador(boolean modoDesarrollador) {
+<span class="fc" id="L147">	this.modoDesarrollador = modoDesarrollador;</span>
+<span class="fc" id="L148">    }</span>
+
+    @Override
+    public boolean esModoDesarrollador() {
+<span class="fc" id="L152">	return this.modoDesarrollador;</span>
+    }
+
+    public boolean isMostrarCartelInicio() {
+<span class="nc" id="L156">	return mostrarCartelInicio;</span>
+    }
+
+    public void setMostrarCartelInicio(boolean mostrarCartelInicio) {
+<span class="nc" id="L160">	this.mostrarCartelInicio = mostrarCartelInicio;</span>
+<span class="nc" id="L161">    }</span>
+    
+    @Override
+    public void identificar(Usuario usuario) {
+<span class="nc" id="L165">	this.usuarioIdentificado = usuario;</span>
+<span class="nc" id="L166">    }</span>
+
+    @Override
+    public void notificarNovedad(String novedad, String novedadEmail, String titulo, Viaje viaje) {
+<span class="nc" id="L170">	Iterator&lt;Usuario&gt; iterador = this.getListaUsuarios().iterator();</span>
+<span class="nc bnc" id="L171" title="All 2 branches missed.">	while (iterador.hasNext()) {</span>
+<span class="nc" id="L172">	    Usuario usuario = iterador.next();</span>
+<span class="nc bnc" id="L173" title="All 4 branches missed.">	    if (usuario.existeNombreViaje(viaje.getNombre()) &amp;&amp; usuario.isNotificarCelular()) {</span>
+<span class="nc" id="L174">		EnvioMensajeTexto envio = new EnvioMensajeTexto(this.proxy, this.puerto);</span>
+<span class="nc" id="L175">		envio.mandarMensaje(novedad, usuario.getCelular());</span>
+	    }
+<span class="nc bnc" id="L177" title="All 4 branches missed.">            if (usuario.existeNombreViaje(viaje.getNombre()) &amp;&amp; usuario.isNotificarEmail()) {</span>
+<span class="nc" id="L178">		EnvioMail.mandarEmail(usuario.getEmail().toString(), titulo, novedadEmail);</span>
+	    }
+<span class="nc" id="L180">	}</span>
+<span class="nc" id="L181">    }</span>
+
+    /* MÉTODOS PRIVADOS */
+    private boolean existeNombreUsuario(String nombreUsuario) {
+<span class="fc" id="L185">	return this.listaUsuarios.contains(new Usuario(nombreUsuario));</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

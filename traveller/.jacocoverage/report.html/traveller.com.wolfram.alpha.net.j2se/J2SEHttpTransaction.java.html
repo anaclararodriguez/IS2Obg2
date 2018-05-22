@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>J2SEHttpTransaction.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.com.wolfram.alpha.net.j2se</a> &gt; <span class="el_source">J2SEHttpTransaction.java</span></div><h1>J2SEHttpTransaction.java</h1><pre class="source lang-java linenums">/*
+ * Created on Dec 7, 2009
+ *
+ */
+package traveller.com.wolfram.alpha.net.j2se;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.Proxy;
+import java.net.URL;
+
+import com.wolfram.alpha.net.ProxySettings;
+import com.wolfram.alpha.net.WAHttpException;
+import traveller.com.wolfram.alpha.net.impl.HttpTransaction;
+
+
+public class J2SEHttpTransaction implements HttpTransaction {
+    
+    private HttpURLConnection conn;
+    private URL url;
+    private String userAgent;
+    private ProxySettings proxySettings;
+    
+    
+<span class="nc" id="L28">    J2SEHttpTransaction(URL url, ProxySettings proxySettings, String userAgent) {</span>
+<span class="nc" id="L29">        this.url = url;</span>
+<span class="nc" id="L30">        this.userAgent = userAgent;</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        this.proxySettings = proxySettings != null ? proxySettings : ProxySettings.getInstance();</span>
+<span class="nc" id="L32">    }</span>
+    
+
+    public void abort() {
+
+        // TODO Auto-generated method stub
+
+<span class="nc" id="L39">    }</span>
+
+
+    public void execute() throws WAHttpException {
+
+        try {
+<span class="nc" id="L45">            Proxy proxy = proxySettings.getProxyForJavaNet(url.toString());</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">            if (proxy != null) {</span>
+<span class="nc" id="L47">                conn = (HttpURLConnection) url.openConnection(proxy);</span>
+            } else {
+<span class="nc" id="L49">                conn = (HttpURLConnection) url.openConnection();</span>
+            }
+<span class="nc" id="L51">            conn.setRequestMethod(&quot;GET&quot;);</span>
+            
+            // TODO: This value
+<span class="nc" id="L54">            conn.setReadTimeout(15*1000);</span>
+<span class="nc" id="L55">            conn.connect();</span>
+            
+<span class="nc" id="L57">            int statusCode = conn.getResponseCode();</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">            if (statusCode != HttpURLConnection.HTTP_OK) {</span>
+<span class="nc" id="L59">                String ignoredButMustRead = getResponseString();</span>
+<span class="nc" id="L60">                throw new WAHttpException(statusCode);</span>
+            }
+            
+<span class="nc" id="L63">        } catch (IOException e) {</span>
+<span class="nc" id="L64">            throw new WAHttpException(e);</span>
+<span class="nc" id="L65">        }</span>
+        // TODO: Authentication issues? socket timeouts? User agent setting?
+<span class="nc" id="L67">    }</span>
+
+
+    public long getContentLength() {
+<span class="nc" id="L71">        return conn.getContentLength();</span>
+    }
+
+    public String getCharSet() throws IOException {
+        
+<span class="nc" id="L76">        String contentType = conn.getContentType();</span>
+        // TODO: Parse contentType to get the actual value.
+<span class="nc" id="L78">        String charset = &quot;ISO-8859-1&quot;;</span>
+<span class="nc" id="L79">        return charset;</span>
+
+    }
+
+    public String[][] getResponseHeaders() throws IOException {
+
+        // TODO Auto-generated method stub
+<span class="nc" id="L86">        return null;</span>
+    }
+
+
+    public InputStream getResponseStream() throws IOException {
+<span class="nc" id="L91">        return conn.getInputStream();</span>
+    }
+
+
+    public String getResponseString() throws IOException {
+        
+<span class="nc" id="L97">        InputStream strm = conn.getInputStream();</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        if (strm == null)</span>
+<span class="nc" id="L99">            return null;</span>
+        
+        // Because we cast to int, will fail for huge downloads (&gt;2Gb), but those wouldn't fit into
+        // memory anyway (will double in size as a string).
+<span class="nc" id="L103">        int contentLength = (int) getContentLength();</span>
+<span class="nc" id="L104">        ByteArrayOutputStream outStrm = new ByteArrayOutputStream(contentLength);</span>
+<span class="nc" id="L105">        byte[] buf = new byte[8192];</span>
+        int len;
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        while ((len = strm.read(buf)) &gt; 0) {</span>
+<span class="nc" id="L108">            outStrm.write(buf, 0, len);</span>
+        }
+<span class="nc" id="L110">        outStrm.close();</span>
+        try {
+            // For general-purpose use, would want to replace hard-coded ISO-8859-1 with value determined from response.
+<span class="nc" id="L113">            return new String(outStrm.toByteArray(), &quot;ISO-8859-1&quot;);</span>
+<span class="nc" id="L114">        } catch (UnsupportedEncodingException e) {</span>
+<span class="nc" id="L115">            return null; // Will never happen</span>
+        }
+    }
+
+
+    public void release() {
+        try {
+<span class="nc bnc" id="L122" title="All 2 branches missed.">            if (conn != null) {</span>
+<span class="nc" id="L123">                InputStream strm = conn.getInputStream();</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">                if (strm != null)</span>
+<span class="nc" id="L125">                    strm.close();</span>
+            }
+<span class="nc" id="L127">        } catch (IOException e) {}</span>
+<span class="nc" id="L128">    }</span>
+
+
+    public void setNoRetry() {
+
+        // TODO Auto-generated method stub
+
+<span class="nc" id="L135">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

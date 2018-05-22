@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PanelInicio.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.interfaz.panel</a> &gt; <span class="el_source">PanelInicio.java</span></div><h1>PanelInicio.java</h1><pre class="source lang-java linenums">package traveller.interfaz.panel;
+
+import traveller.dominio.SistemaImp;
+
+/**
+ * La clase PanelInicio se encarga de lo referente a la interfaz de incio.
+ *
+ */
+public class PanelInicio extends javax.swing.JPanel {
+
+<span class="nc" id="L11">    public PanelInicio() {</span>
+<span class="nc" id="L12">        initComponents();</span>
+<span class="nc" id="L13">        etqTitulo.setText(&quot;Bienvenido &quot;);</span>
+<span class="nc" id="L14">    }</span>
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+<span class="nc" id="L20">        panelPrincipal = new javax.swing.JPanel();</span>
+<span class="nc" id="L21">        panelTitulo = new javax.swing.JPanel();</span>
+<span class="nc" id="L22">        etqTitulo = new javax.swing.JLabel();</span>
+<span class="nc" id="L23">        jPanel1 = new javax.swing.JPanel();</span>
+<span class="nc" id="L24">        jLabel1 = new javax.swing.JLabel();</span>
+<span class="nc" id="L25">        jLabel2 = new javax.swing.JLabel();</span>
+
+<span class="nc" id="L27">        setMaximumSize(new java.awt.Dimension(400, 687));</span>
+<span class="nc" id="L28">        setMinimumSize(new java.awt.Dimension(400, 687));</span>
+<span class="nc" id="L29">        setPreferredSize(new java.awt.Dimension(400, 687));</span>
+
+<span class="nc" id="L31">        panelPrincipal.setBackground(new java.awt.Color(245, 245, 245));</span>
+<span class="nc" id="L32">        panelPrincipal.setMaximumSize(new java.awt.Dimension(400, 400));</span>
+<span class="nc" id="L33">        panelPrincipal.setPreferredSize(new java.awt.Dimension(400, 400));</span>
+
+<span class="nc" id="L35">        panelTitulo.setBackground(new java.awt.Color(39, 39, 39));</span>
+<span class="nc" id="L36">        panelTitulo.setForeground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L37">        panelTitulo.setMaximumSize(new java.awt.Dimension(390, 46));</span>
+
+<span class="nc" id="L39">        etqTitulo.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L40">        etqTitulo.setForeground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L41">        etqTitulo.setText(&quot; &quot;);</span>
+
+<span class="nc" id="L43">        javax.swing.GroupLayout panelTituloLayout = new javax.swing.GroupLayout(panelTitulo);</span>
+<span class="nc" id="L44">        panelTitulo.setLayout(panelTituloLayout);</span>
+<span class="nc" id="L45">        panelTituloLayout.setHorizontalGroup(</span>
+<span class="nc" id="L46">            panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L47">            .addGroup(panelTituloLayout.createSequentialGroup()</span>
+<span class="nc" id="L48">                .addContainerGap()</span>
+<span class="nc" id="L49">                .addComponent(etqTitulo)</span>
+<span class="nc" id="L50">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L52">        panelTituloLayout.setVerticalGroup(</span>
+<span class="nc" id="L53">            panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L54">            .addGroup(panelTituloLayout.createSequentialGroup()</span>
+<span class="nc" id="L55">                .addContainerGap()</span>
+<span class="nc" id="L56">                .addComponent(etqTitulo)</span>
+<span class="nc" id="L57">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L60">        jPanel1.setBackground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L61">        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(39, 39, 39), 1, true));</span>
+
+<span class="nc" id="L63">        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/nuevoLogo.png&quot;))); // NOI18N</span>
+
+<span class="nc" id="L65">        jLabel2.setFont(new java.awt.Font(&quot;SansSerif&quot;, 1, 12)); // NOI18N</span>
+<span class="nc" id="L66">        jLabel2.setForeground(new java.awt.Color(104, 104, 104));</span>
+<span class="nc" id="L67">        jLabel2.setText(&quot;Bienvenido a traveller. Su agenda interactica de viajes.&quot;);</span>
+
+<span class="nc" id="L69">        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);</span>
+<span class="nc" id="L70">        jPanel1.setLayout(jPanel1Layout);</span>
+<span class="nc" id="L71">        jPanel1Layout.setHorizontalGroup(</span>
+<span class="nc" id="L72">            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L73">            .addGroup(jPanel1Layout.createSequentialGroup()</span>
+<span class="nc" id="L74">                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L75">                    .addGroup(jPanel1Layout.createSequentialGroup()</span>
+<span class="nc" id="L76">                        .addGap(154, 154, 154)</span>
+<span class="nc" id="L77">                        .addComponent(jLabel1))</span>
+<span class="nc" id="L78">                    .addGroup(jPanel1Layout.createSequentialGroup()</span>
+<span class="nc" id="L79">                        .addGap(59, 59, 59)</span>
+<span class="nc" id="L80">                        .addComponent(jLabel2)))</span>
+<span class="nc" id="L81">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L83">        jPanel1Layout.setVerticalGroup(</span>
+<span class="nc" id="L84">            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L85">            .addGroup(jPanel1Layout.createSequentialGroup()</span>
+<span class="nc" id="L86">                .addContainerGap()</span>
+<span class="nc" id="L87">                .addComponent(jLabel1)</span>
+<span class="nc" id="L88">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L89">                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L90">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L93">        javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);</span>
+<span class="nc" id="L94">        panelPrincipal.setLayout(panelPrincipalLayout);</span>
+<span class="nc" id="L95">        panelPrincipalLayout.setHorizontalGroup(</span>
+<span class="nc" id="L96">            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L97">            .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L98">                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L99">                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L100">                    .addComponent(panelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+<span class="nc" id="L101">                .addContainerGap(77, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L103">        panelPrincipalLayout.setVerticalGroup(</span>
+<span class="nc" id="L104">            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L105">            .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L106">                .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L107">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L108">                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L109">                .addGap(457, 457, 457))</span>
+        );
+
+<span class="nc" id="L112">        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);</span>
+<span class="nc" id="L113">        this.setLayout(layout);</span>
+<span class="nc" id="L114">        layout.setHorizontalGroup(</span>
+<span class="nc" id="L115">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L116">            .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+        );
+<span class="nc" id="L118">        layout.setVerticalGroup(</span>
+<span class="nc" id="L119">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L120">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L121">                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L122">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L124">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel etqTitulo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JPanel panelTitulo;
+    // End of variables declaration//GEN-END:variables
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

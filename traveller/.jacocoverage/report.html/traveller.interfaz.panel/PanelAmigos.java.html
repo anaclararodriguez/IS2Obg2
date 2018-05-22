@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PanelAmigos.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.interfaz.panel</a> &gt; <span class="el_source">PanelAmigos.java</span></div><h1>PanelAmigos.java</h1><pre class="source lang-java linenums">package traveller.interfaz.panel;
+
+import traveller.dominio.Usuario;
+import traveller.dominio.ISistema;
+import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.border.LineBorder;
+
+/**
+ * La clase PanelInicio se encarga de lo referente a la interfaz de incio.
+ */
+public class PanelAmigos extends javax.swing.JPanel {
+
+<span class="nc" id="L14">    public PanelAmigos(ISistema sistema) {</span>
+<span class="nc" id="L15">	initComponents();</span>
+
+<span class="nc" id="L17">	this.sistema = sistema;</span>
+<span class="nc" id="L18">	panelListaAmigosEnComun.setVisible(false);</span>
+	//Actualizo la lista de usuarios.
+<span class="nc" id="L20">	ArrayList&lt;Usuario&gt; busquedaUsuarios = sistema.listadoBuscarUsuarios(&quot;&quot;);</span>
+<span class="nc" id="L21">	listaUsuarios.setListData(busquedaUsuarios.toArray());</span>
+	//Actializo la lista de amigos.
+<span class="nc" id="L23">	ArrayList&lt;Usuario&gt; amigos = sistema.getUsuarioIdentificado().getListaAmigos();</span>
+<span class="nc" id="L24">	listaAmigos.setListData(amigos.toArray());</span>
+<span class="nc" id="L25">    }</span>
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+<span class="nc" id="L31">        panelPrincipal = new javax.swing.JPanel();</span>
+<span class="nc" id="L32">        panelTitulo = new javax.swing.JPanel();</span>
+<span class="nc" id="L33">        etqTitulo = new javax.swing.JLabel();</span>
+<span class="nc" id="L34">        jPanel1 = new javax.swing.JPanel();</span>
+<span class="nc" id="L35">        jLabel2 = new javax.swing.JLabel();</span>
+<span class="nc" id="L36">        txtBuscarAmigos = new javax.swing.JTextField();</span>
+<span class="nc" id="L37">        etqNombreApellido = new javax.swing.JLabel();</span>
+<span class="nc" id="L38">        etqEmail = new javax.swing.JLabel();</span>
+<span class="nc" id="L39">        etqAmigosEnComun = new javax.swing.JLabel();</span>
+<span class="nc" id="L40">        scrollListaAmigos = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L41">        listaAmigos = new javax.swing.JList();</span>
+<span class="nc" id="L42">        panelListaAmigosEnComun = new javax.swing.JPanel();</span>
+<span class="nc" id="L43">        scrollListaAmigosAmigosEnComun = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L44">        listaAmigosEnComun = new javax.swing.JList();</span>
+<span class="nc" id="L45">        etqBusquedaAmigos = new javax.swing.JLabel();</span>
+<span class="nc" id="L46">        panelTitulo1 = new javax.swing.JPanel();</span>
+<span class="nc" id="L47">        etqTitulo1 = new javax.swing.JLabel();</span>
+<span class="nc" id="L48">        jPanel2 = new javax.swing.JPanel();</span>
+<span class="nc" id="L49">        jLabel1 = new javax.swing.JLabel();</span>
+<span class="nc" id="L50">        txtBuscar = new javax.swing.JTextField();</span>
+<span class="nc" id="L51">        scrollListaUsuarios = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L52">        listaUsuarios = new javax.swing.JList();</span>
+<span class="nc" id="L53">        btnAgregar = new javax.swing.JButton();</span>
+<span class="nc" id="L54">        etqBusqueda = new javax.swing.JLabel();</span>
+
+<span class="nc" id="L56">        setBackground(new java.awt.Color(245, 245, 245));</span>
+<span class="nc" id="L57">        setMinimumSize(new java.awt.Dimension(0, 0));</span>
+<span class="nc" id="L58">        setPreferredSize(new java.awt.Dimension(400, 687));</span>
+
+<span class="nc" id="L60">        panelPrincipal.setBackground(new java.awt.Color(245, 245, 245));</span>
+<span class="nc" id="L61">        panelPrincipal.setMaximumSize(new java.awt.Dimension(400, 400));</span>
+<span class="nc" id="L62">        panelPrincipal.setPreferredSize(new java.awt.Dimension(400, 400));</span>
+
+<span class="nc" id="L64">        panelTitulo.setBackground(new java.awt.Color(39, 39, 39));</span>
+<span class="nc" id="L65">        panelTitulo.setForeground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L66">        panelTitulo.setMaximumSize(new java.awt.Dimension(390, 46));</span>
+
+<span class="nc" id="L68">        etqTitulo.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L69">        etqTitulo.setForeground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L70">        etqTitulo.setText(&quot;Amigos&quot;);</span>
+
+<span class="nc" id="L72">        javax.swing.GroupLayout panelTituloLayout = new javax.swing.GroupLayout(panelTitulo);</span>
+<span class="nc" id="L73">        panelTitulo.setLayout(panelTituloLayout);</span>
+<span class="nc" id="L74">        panelTituloLayout.setHorizontalGroup(</span>
+<span class="nc" id="L75">            panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L76">            .addGroup(panelTituloLayout.createSequentialGroup()</span>
+<span class="nc" id="L77">                .addContainerGap()</span>
+<span class="nc" id="L78">                .addComponent(etqTitulo)</span>
+<span class="nc" id="L79">                .addContainerGap(360, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L81">        panelTituloLayout.setVerticalGroup(</span>
+<span class="nc" id="L82">            panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L83">            .addGroup(panelTituloLayout.createSequentialGroup()</span>
+<span class="nc" id="L84">                .addContainerGap()</span>
+<span class="nc" id="L85">                .addComponent(etqTitulo)</span>
+<span class="nc" id="L86">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L89">        jPanel1.setBackground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L90">        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(39, 39, 39), 1, true));</span>
+
+<span class="nc" id="L92">        jLabel2.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 17)); // NOI18N</span>
+<span class="nc" id="L93">        jLabel2.setText(&quot;Mis amigos:&quot;);</span>
+
+<span class="nc" id="L95">        txtBuscarAmigos.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 13)); // NOI18N</span>
+<span class="nc" id="L96">        txtBuscarAmigos.setForeground(new java.awt.Color(153, 153, 153));</span>
+<span class="nc" id="L97">        txtBuscarAmigos.setText(&quot;Buscar...&quot;);</span>
+<span class="nc" id="L98">        txtBuscarAmigos.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L99">        txtBuscarAmigos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));</span>
+<span class="nc" id="L100">        txtBuscarAmigos.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L102">                txtBuscarAmigosActionPerformed(evt);</span>
+<span class="nc" id="L103">            }</span>
+        });
+<span class="nc" id="L105">        txtBuscarAmigos.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L107">                txtBuscarAmigosFocusGained(evt);</span>
+<span class="nc" id="L108">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L110">                txtBuscarAmigosFocusLost(evt);</span>
+<span class="nc" id="L111">            }</span>
+        });
+<span class="nc" id="L113">        txtBuscarAmigos.addKeyListener(new java.awt.event.KeyAdapter() {</span>
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+<span class="nc" id="L115">                txtBuscarAmigosKeyReleased(evt);</span>
+<span class="nc" id="L116">            }</span>
+        });
+
+<span class="nc" id="L119">        listaAmigos.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L120">        listaAmigos.setFocusable(false);</span>
+<span class="nc" id="L121">        listaAmigos.setSelectionBackground(new java.awt.Color(39, 39, 39));</span>
+<span class="nc" id="L122">        listaAmigos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {</span>
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+<span class="nc" id="L124">                listaAmigosValueChanged(evt);</span>
+<span class="nc" id="L125">            }</span>
+        });
+<span class="nc" id="L127">        scrollListaAmigos.setViewportView(listaAmigos);</span>
+
+<span class="nc" id="L129">        panelListaAmigosEnComun.setBackground(new java.awt.Color(255, 255, 255));</span>
+
+<span class="nc" id="L131">        listaAmigosEnComun.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L132">        listaAmigosEnComun.setFocusable(false);</span>
+<span class="nc" id="L133">        listaAmigosEnComun.setSelectionBackground(new java.awt.Color(39, 39, 39));</span>
+<span class="nc" id="L134">        listaAmigosEnComun.addListSelectionListener(new javax.swing.event.ListSelectionListener() {</span>
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+<span class="nc" id="L136">                listaAmigosEnComunValueChanged(evt);</span>
+<span class="nc" id="L137">            }</span>
+        });
+<span class="nc" id="L139">        scrollListaAmigosAmigosEnComun.setViewportView(listaAmigosEnComun);</span>
+
+<span class="nc" id="L141">        javax.swing.GroupLayout panelListaAmigosEnComunLayout = new javax.swing.GroupLayout(panelListaAmigosEnComun);</span>
+<span class="nc" id="L142">        panelListaAmigosEnComun.setLayout(panelListaAmigosEnComunLayout);</span>
+<span class="nc" id="L143">        panelListaAmigosEnComunLayout.setHorizontalGroup(</span>
+<span class="nc" id="L144">            panelListaAmigosEnComunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L145">            .addComponent(scrollListaAmigosAmigosEnComun, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)</span>
+        );
+<span class="nc" id="L147">        panelListaAmigosEnComunLayout.setVerticalGroup(</span>
+<span class="nc" id="L148">            panelListaAmigosEnComunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L149">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelListaAmigosEnComunLayout.createSequentialGroup()</span>
+<span class="nc" id="L150">                .addGap(0, 11, Short.MAX_VALUE)</span>
+<span class="nc" id="L151">                .addComponent(scrollListaAmigosAmigosEnComun, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+        );
+
+<span class="nc" id="L154">        etqBusquedaAmigos.setFont(new java.awt.Font(&quot;Tahoma&quot;, 0, 12)); // NOI18N</span>
+<span class="nc" id="L155">        etqBusquedaAmigos.setForeground(new java.awt.Color(51, 51, 51));</span>
+
+<span class="nc" id="L157">        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);</span>
+<span class="nc" id="L158">        jPanel1.setLayout(jPanel1Layout);</span>
+<span class="nc" id="L159">        jPanel1Layout.setHorizontalGroup(</span>
+<span class="nc" id="L160">            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L161">            .addGroup(jPanel1Layout.createSequentialGroup()</span>
+<span class="nc" id="L162">                .addGap(19, 19, 19)</span>
+<span class="nc" id="L163">                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L164">                    .addComponent(jLabel2)</span>
+<span class="nc" id="L165">                    .addGroup(jPanel1Layout.createSequentialGroup()</span>
+<span class="nc" id="L166">                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L167">                            .addComponent(scrollListaAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)</span>
+<span class="nc" id="L168">                            .addComponent(etqBusquedaAmigos, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)</span>
+<span class="nc" id="L169">                            .addComponent(txtBuscarAmigos))</span>
+<span class="nc" id="L170">                        .addGap(18, 18, 18)</span>
+<span class="nc" id="L171">                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L172">                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L173">                                .addComponent(etqNombreApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)</span>
+<span class="nc" id="L174">                                .addComponent(etqEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L175">                                .addComponent(etqAmigosEnComun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+<span class="nc" id="L176">                            .addComponent(panelListaAmigosEnComun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))</span>
+<span class="nc" id="L177">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L179">        jPanel1Layout.setVerticalGroup(</span>
+<span class="nc" id="L180">            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L181">            .addGroup(jPanel1Layout.createSequentialGroup()</span>
+<span class="nc" id="L182">                .addGap(28, 28, 28)</span>
+<span class="nc" id="L183">                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L184">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L185">                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)</span>
+<span class="nc" id="L186">                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()</span>
+<span class="nc" id="L187">                        .addComponent(etqNombreApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L188">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L189">                        .addComponent(etqEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L190">                        .addGap(18, 18, 18)</span>
+<span class="nc" id="L191">                        .addComponent(etqAmigosEnComun, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L192">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L193">                        .addComponent(panelListaAmigosEnComun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L194">                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()</span>
+<span class="nc" id="L195">                        .addComponent(scrollListaAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L196">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L197">                        .addComponent(txtBuscarAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L198">                        .addGap(7, 7, 7)</span>
+<span class="nc" id="L199">                        .addComponent(etqBusquedaAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L200">                .addContainerGap(12, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L203">        txtBuscarAmigos.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L205">                txtBuscarAmigos.setBorder(new LineBorder(new Color(77,144,254)));</span>
+<span class="nc" id="L206">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L208">                txtBuscarAmigos.setBorder(new LineBorder(new Color(217,217,217)));</span>
+<span class="nc" id="L209">            }</span>
+        });
+<span class="nc" id="L211">        txtBuscarAmigos.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L214" title="All 2 branches missed.">                if (!txtBuscarAmigos.isFocusOwner()) {</span>
+<span class="nc" id="L215">                    txtBuscarAmigos.setBorder(new LineBorder(new Color(185, 185, 185)));</span>
+                }
+<span class="nc" id="L217">            }</span>
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L220" title="All 2 branches missed.">                if (!txtBuscarAmigos.isFocusOwner()) {</span>
+<span class="nc" id="L221">                    txtBuscarAmigos.setBorder(new LineBorder(new Color(217, 217, 217)));</span>
+                }
+<span class="nc" id="L223">            }</span>
+        });
+
+<span class="nc" id="L226">        panelTitulo1.setBackground(new java.awt.Color(39, 39, 39));</span>
+<span class="nc" id="L227">        panelTitulo1.setForeground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L228">        panelTitulo1.setMaximumSize(new java.awt.Dimension(390, 46));</span>
+
+<span class="nc" id="L230">        etqTitulo1.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L231">        etqTitulo1.setForeground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L232">        etqTitulo1.setText(&quot;Buscar amigos&quot;);</span>
+
+<span class="nc" id="L234">        javax.swing.GroupLayout panelTitulo1Layout = new javax.swing.GroupLayout(panelTitulo1);</span>
+<span class="nc" id="L235">        panelTitulo1.setLayout(panelTitulo1Layout);</span>
+<span class="nc" id="L236">        panelTitulo1Layout.setHorizontalGroup(</span>
+<span class="nc" id="L237">            panelTitulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L238">            .addGroup(panelTitulo1Layout.createSequentialGroup()</span>
+<span class="nc" id="L239">                .addContainerGap()</span>
+<span class="nc" id="L240">                .addComponent(etqTitulo1)</span>
+<span class="nc" id="L241">                .addContainerGap(300, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L243">        panelTitulo1Layout.setVerticalGroup(</span>
+<span class="nc" id="L244">            panelTitulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L245">            .addGroup(panelTitulo1Layout.createSequentialGroup()</span>
+<span class="nc" id="L246">                .addContainerGap()</span>
+<span class="nc" id="L247">                .addComponent(etqTitulo1)</span>
+<span class="nc" id="L248">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L251">        jPanel2.setBackground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L252">        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(39, 39, 39), 1, true));</span>
+
+<span class="nc" id="L254">        jLabel1.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 17)); // NOI18N</span>
+<span class="nc" id="L255">        jLabel1.setText(&quot;Nombre:&quot;);</span>
+
+<span class="nc" id="L257">        txtBuscar.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 13)); // NOI18N</span>
+<span class="nc" id="L258">        txtBuscar.setForeground(new java.awt.Color(153, 153, 153));</span>
+<span class="nc" id="L259">        txtBuscar.setText(&quot;Buscar nombre...&quot;);</span>
+<span class="nc" id="L260">        txtBuscar.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L261">        txtBuscar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));</span>
+<span class="nc" id="L262">        txtBuscar.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L264">                txtBuscarActionPerformed(evt);</span>
+<span class="nc" id="L265">            }</span>
+        });
+<span class="nc" id="L267">        txtBuscar.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L269">                txtBuscarFocusGained(evt);</span>
+<span class="nc" id="L270">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L272">                txtBuscarFocusLost(evt);</span>
+<span class="nc" id="L273">            }</span>
+        });
+<span class="nc" id="L275">        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {</span>
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+<span class="nc" id="L277">                txtBuscarKeyReleased(evt);</span>
+<span class="nc" id="L278">            }</span>
+        });
+
+<span class="nc" id="L281">        listaUsuarios.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L282">        listaUsuarios.setFocusable(false);</span>
+<span class="nc" id="L283">        listaUsuarios.setSelectionBackground(new java.awt.Color(39, 39, 39));</span>
+<span class="nc" id="L284">        listaUsuarios.addListSelectionListener(new javax.swing.event.ListSelectionListener() {</span>
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+<span class="nc" id="L286">                listaUsuariosValueChanged(evt);</span>
+<span class="nc" id="L287">            }</span>
+        });
+<span class="nc" id="L289">        scrollListaUsuarios.setViewportView(listaUsuarios);</span>
+
+<span class="nc" id="L291">        btnAgregar.setBackground(new java.awt.Color(242, 242, 242));</span>
+<span class="nc" id="L292">        btnAgregar.setFont(new java.awt.Font(&quot;SansSerif&quot;, 1, 13)); // NOI18N</span>
+<span class="nc" id="L293">        btnAgregar.setText(&quot;Agregar a mis amigos&quot;);</span>
+<span class="nc" id="L294">        btnAgregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(221, 221, 221), 1, true));</span>
+<span class="nc" id="L295">        btnAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</span>
+<span class="nc" id="L296">        btnAgregar.setFocusPainted(false);</span>
+<span class="nc" id="L297">        btnAgregar.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L299">                btnAgregarActionPerformed(evt);</span>
+<span class="nc" id="L300">            }</span>
+        });
+
+<span class="nc" id="L303">        etqBusqueda.setFont(new java.awt.Font(&quot;Tahoma&quot;, 0, 12)); // NOI18N</span>
+<span class="nc" id="L304">        etqBusqueda.setForeground(new java.awt.Color(51, 51, 51));</span>
+
+<span class="nc" id="L306">        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);</span>
+<span class="nc" id="L307">        jPanel2.setLayout(jPanel2Layout);</span>
+<span class="nc" id="L308">        jPanel2Layout.setHorizontalGroup(</span>
+<span class="nc" id="L309">            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L310">            .addGroup(jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L311">                .addContainerGap()</span>
+<span class="nc" id="L312">                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L313">                    .addGroup(jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L314">                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L315">                        .addContainerGap(300, Short.MAX_VALUE))</span>
+<span class="nc" id="L316">                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L317">                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)</span>
+<span class="nc" id="L318">                            .addComponent(etqBusqueda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)</span>
+<span class="nc" id="L319">                            .addComponent(txtBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))</span>
+<span class="nc" id="L320">                        .addGap(220, 220, 220))))</span>
+<span class="nc" id="L321">            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L322">                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L323">                    .addContainerGap(257, Short.MAX_VALUE)</span>
+<span class="nc" id="L324">                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L325">                        .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)</span>
+<span class="nc" id="L326">                        .addComponent(scrollListaUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))</span>
+<span class="nc" id="L327">                    .addContainerGap()))</span>
+        );
+<span class="nc" id="L329">        jPanel2Layout.setVerticalGroup(</span>
+<span class="nc" id="L330">            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L331">            .addGroup(jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L332">                .addGap(23, 23, 23)</span>
+<span class="nc" id="L333">                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L334">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L335">                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L336">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L337">                .addComponent(etqBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L338">                .addContainerGap(18, Short.MAX_VALUE))</span>
+<span class="nc" id="L339">            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L340">                .addGroup(jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L341">                    .addContainerGap()</span>
+<span class="nc" id="L342">                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)</span>
+<span class="nc" id="L343">                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L344">                        .addGroup(jPanel2Layout.createSequentialGroup()</span>
+<span class="nc" id="L345">                            .addComponent(scrollListaUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L346">                            .addGap(41, 41, 41)))</span>
+<span class="nc" id="L347">                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))</span>
+        );
+
+        // Code adding the component to the parent container - not shown here
+<span class="nc" id="L351">        txtBuscar.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L353">                txtBuscar.setBorder(new LineBorder(new Color(77,144,254)));</span>
+<span class="nc" id="L354">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L356">                txtBuscar.setBorder(new LineBorder(new Color(217,217,217)));</span>
+<span class="nc" id="L357">            }</span>
+        });
+<span class="nc" id="L359">        txtBuscar.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L362" title="All 2 branches missed.">                if (!txtBuscar.isFocusOwner()) {</span>
+<span class="nc" id="L363">                    txtBuscar.setBorder(new LineBorder(new Color(185, 185, 185)));</span>
+                }
+<span class="nc" id="L365">            }</span>
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L368" title="All 2 branches missed.">                if (!txtBuscar.isFocusOwner()) {</span>
+<span class="nc" id="L369">                    txtBuscar.setBorder(new LineBorder(new Color(217, 217, 217)));</span>
+                }
+<span class="nc" id="L371">            }</span>
+        });
+
+<span class="nc" id="L374">        javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);</span>
+<span class="nc" id="L375">        panelPrincipal.setLayout(panelPrincipalLayout);</span>
+<span class="nc" id="L376">        panelPrincipalLayout.setHorizontalGroup(</span>
+<span class="nc" id="L377">            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L378">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L379">                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)</span>
+<span class="nc" id="L380">                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L381">                    .addComponent(panelTitulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L382">                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L383">                    .addComponent(panelTitulo1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+<span class="nc" id="L384">                .addContainerGap(29, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L386">        panelPrincipalLayout.setVerticalGroup(</span>
+<span class="nc" id="L387">            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L388">            .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L389">                .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L390">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L391">                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L392">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L393">                .addComponent(panelTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L394">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L395">                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+        );
+
+<span class="nc" id="L398">        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);</span>
+<span class="nc" id="L399">        this.setLayout(layout);</span>
+<span class="nc" id="L400">        layout.setHorizontalGroup(</span>
+<span class="nc" id="L401">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L402">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L403">                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L404">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L406">        layout.setVerticalGroup(</span>
+<span class="nc" id="L407">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L408">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L409">                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L410">                .addContainerGap(188, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L412">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
+
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+	// TODO add your handling code here:
+<span class="nc" id="L416">    }//GEN-LAST:event_txtBuscarActionPerformed</span>
+
+    private void txtBuscarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBuscarFocusGained
+<span class="nc" id="L419">	txtBuscar.setText(&quot;&quot;);</span>
+<span class="nc" id="L420">	txtBuscar.setForeground(Color.BLACK);</span>
+<span class="nc" id="L421">    }//GEN-LAST:event_txtBuscarFocusGained</span>
+
+    private void txtBuscarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBuscarFocusLost
+<span class="nc bnc" id="L424" title="All 2 branches missed.">	if (txtBuscar.getText().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L425">	    txtBuscar.setText(&quot;Buscar nombre...&quot;);</span>
+<span class="nc" id="L426">	    txtBuscar.setForeground(Color.GRAY);</span>
+	}
+<span class="nc" id="L428">    }//GEN-LAST:event_txtBuscarFocusLost</span>
+
+    private void listaUsuariosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaUsuariosValueChanged
+	// TODO add your handling code here:
+<span class="nc" id="L432">    }//GEN-LAST:event_listaUsuariosValueChanged</span>
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+<span class="nc bnc" id="L435" title="All 2 branches missed.">	if (!listaUsuarios.isSelectionEmpty()) {</span>
+<span class="nc" id="L436">	    Usuario usuario = (Usuario) listaUsuarios.getSelectedValue();</span>
+<span class="nc" id="L437">	    sistema.getUsuarioIdentificado().agregarAmigo(usuario);</span>
+<span class="nc" id="L438">            usuario.agregarAmigo(sistema.getUsuarioIdentificado());</span>
+	    //Actualizo la lista de usuarios.
+<span class="nc" id="L440">	    ArrayList&lt;Usuario&gt; busquedaUsuarios = sistema.listadoBuscarUsuarios(&quot;&quot;);</span>
+<span class="nc" id="L441">	    listaUsuarios.setListData(busquedaUsuarios.toArray());</span>
+	    //Actializo la lista de amigos.
+<span class="nc" id="L443">	    ArrayList&lt;Usuario&gt; listaDeAmigos = sistema.getUsuarioIdentificado().getListaAmigos();</span>
+<span class="nc" id="L444">	    listaAmigos.setListData(listaDeAmigos.toArray());</span>
+	}
+<span class="nc" id="L446">    }//GEN-LAST:event_btnAgregarActionPerformed</span>
+
+    private void listaAmigosEnComunValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaAmigosEnComunValueChanged
+<span class="nc" id="L449">    }//GEN-LAST:event_listaAmigosEnComunValueChanged</span>
+
+    private void txtBuscarAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarAmigosActionPerformed
+	// TODO add your handling code here:
+<span class="nc" id="L453">    }//GEN-LAST:event_txtBuscarAmigosActionPerformed</span>
+
+    private void txtBuscarAmigosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBuscarAmigosFocusGained
+<span class="nc" id="L456">	txtBuscarAmigos.setText(&quot;&quot;);</span>
+<span class="nc" id="L457">	txtBuscarAmigos.setForeground(Color.BLACK);</span>
+<span class="nc" id="L458">    }//GEN-LAST:event_txtBuscarAmigosFocusGained</span>
+
+    private void txtBuscarAmigosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBuscarAmigosFocusLost
+<span class="nc bnc" id="L461" title="All 2 branches missed.">	if (txtBuscarAmigos.getText().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L462">	    txtBuscarAmigos.setText(&quot;Buscar...&quot;);</span>
+<span class="nc" id="L463">	    txtBuscarAmigos.setForeground(Color.GRAY);</span>
+	}
+<span class="nc" id="L465">    }//GEN-LAST:event_txtBuscarAmigosFocusLost</span>
+
+    private void listaAmigosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaAmigosValueChanged
+<span class="nc bnc" id="L468" title="All 2 branches missed.">	if (!listaAmigos.isSelectionEmpty()) {</span>
+<span class="nc" id="L469">	    Usuario aux = (Usuario) listaAmigos.getSelectedValue();</span>
+<span class="nc" id="L470">	    String nombre = aux.getNombre();</span>
+<span class="nc" id="L471">	    String apellido = aux.getApellido();</span>
+<span class="nc" id="L472">	    String email = aux.getEmail().toString();</span>
+<span class="nc" id="L473">	    etqNombreApellido.setText(nombre + &quot;  &quot; + apellido);</span>
+<span class="nc" id="L474">	    etqEmail.setText(email);</span>
+
+<span class="nc" id="L476">	    ArrayList&lt;Usuario&gt; lista = sistema.getUsuarioIdentificado().listadoAmigosEnComun(aux);</span>
+<span class="nc bnc" id="L477" title="All 2 branches missed.">	    if (!lista.isEmpty()) {</span>
+<span class="nc" id="L478">		int cantAmigosEnComun = lista.size();</span>
+<span class="nc" id="L479">		etqAmigosEnComun.setText(cantAmigosEnComun + &quot; amigo(s) en común.&quot;);</span>
+<span class="nc" id="L480">		panelListaAmigosEnComun.setVisible(true);</span>
+<span class="nc" id="L481">		listaAmigosEnComun.setListData(lista.toArray());</span>
+<span class="nc" id="L482">	    } else {</span>
+<span class="nc" id="L483">		etqAmigosEnComun.setText(null);</span>
+<span class="nc" id="L484">		panelListaAmigosEnComun.setVisible(false);</span>
+	    }
+<span class="nc" id="L486">	} else {</span>
+<span class="nc" id="L487">	    etqNombreApellido.setText(&quot;&quot;);</span>
+<span class="nc" id="L488">	    etqEmail.setText(&quot;&quot;);</span>
+<span class="nc" id="L489">	    etqAmigosEnComun.setText(&quot;&quot;);</span>
+<span class="nc" id="L490">	    panelListaAmigosEnComun.setVisible(false);</span>
+	}
+<span class="nc" id="L492">    }//GEN-LAST:event_listaAmigosValueChanged</span>
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+<span class="nc" id="L495">	String texto = txtBuscar.getText();</span>
+<span class="nc bnc" id="L496" title="All 2 branches missed.">	if (!txtBuscar.getText().equals(&quot;Buscar nombre...&quot;)) {</span>
+<span class="nc" id="L497">	    ArrayList&lt;Usuario&gt; busquedaUsuarios = sistema.listadoBuscarUsuarios(texto);</span>
+<span class="nc bnc" id="L498" title="All 2 branches missed.">	    if (!busquedaUsuarios.isEmpty()) {</span>
+<span class="nc" id="L499">		etqBusqueda.setText(null);</span>
+	    } else {
+<span class="nc" id="L501">		etqBusqueda.setText(&quot;No se encontraron resultados.&quot;);</span>
+	    }
+<span class="nc" id="L503">	    listaUsuarios.setListData(busquedaUsuarios.toArray());</span>
+<span class="nc" id="L504">	} else {</span>
+<span class="nc" id="L505">	    etqBusqueda.setText(null);</span>
+	}
+<span class="nc" id="L507">    }//GEN-LAST:event_txtBuscarKeyReleased</span>
+
+    private void txtBuscarAmigosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarAmigosKeyReleased
+<span class="nc" id="L510">	String texto = txtBuscarAmigos.getText();</span>
+<span class="nc bnc" id="L511" title="All 2 branches missed.">	if (!txtBuscarAmigos.getText().equals(&quot;Buscar...&quot;)) {</span>
+<span class="nc" id="L512">	    ArrayList&lt;Usuario&gt; busquedaAmigos = sistema.getUsuarioIdentificado().listadoBuscarAmigos(texto);</span>
+<span class="nc bnc" id="L513" title="All 2 branches missed.">	    if (!busquedaAmigos.isEmpty()) {</span>
+<span class="nc" id="L514">		etqBusquedaAmigos.setText(null);</span>
+	    } else {
+<span class="nc" id="L516">		etqBusquedaAmigos.setText(&quot;No hubo resultados.&quot;);</span>
+	    }
+<span class="nc" id="L518">	    listaAmigos.setListData(busquedaAmigos.toArray());</span>
+<span class="nc" id="L519">	} else {</span>
+<span class="nc" id="L520">	    etqBusquedaAmigos.setText(null);</span>
+<span class="nc" id="L521">	    ArrayList&lt;Usuario&gt; listaDeAmigos = sistema.getUsuarioIdentificado().getListaAmigos();</span>
+<span class="nc" id="L522">	    listaAmigos.setListData(listaDeAmigos.toArray());</span>
+	}
+<span class="nc" id="L524">    }//GEN-LAST:event_txtBuscarAmigosKeyReleased</span>
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JLabel etqAmigosEnComun;
+    private javax.swing.JLabel etqBusqueda;
+    private javax.swing.JLabel etqBusquedaAmigos;
+    private javax.swing.JLabel etqEmail;
+    private javax.swing.JLabel etqNombreApellido;
+    private javax.swing.JLabel etqTitulo;
+    private javax.swing.JLabel etqTitulo1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JList listaAmigos;
+    private javax.swing.JList listaAmigosEnComun;
+    private javax.swing.JList listaUsuarios;
+    private javax.swing.JPanel panelListaAmigosEnComun;
+    private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JPanel panelTitulo;
+    private javax.swing.JPanel panelTitulo1;
+    private javax.swing.JScrollPane scrollListaAmigos;
+    private javax.swing.JScrollPane scrollListaAmigosAmigosEnComun;
+    private javax.swing.JScrollPane scrollListaUsuarios;
+    private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtBuscarAmigos;
+    // End of variables declaration//GEN-END:variables
+    private ISistema sistema;
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

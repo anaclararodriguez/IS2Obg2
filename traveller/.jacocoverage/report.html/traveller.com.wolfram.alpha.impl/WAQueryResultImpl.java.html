@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>WAQueryResultImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.com.wolfram.alpha.impl</a> &gt; <span class="el_source">WAQueryResultImpl.java</span></div><h1>WAQueryResultImpl.java</h1><pre class="source lang-java linenums">/*
+ * Created on Nov 8, 2009
+ *
+ */
+package traveller.com.wolfram.alpha.impl;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.FactoryConfigurationError;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import traveller.com.wolfram.alpha.WAAssumption;
+import traveller.com.wolfram.alpha.WAExamplePage;
+import traveller.com.wolfram.alpha.WAException;
+import traveller.com.wolfram.alpha.WAFutureTopic;
+import traveller.com.wolfram.alpha.WAPod;
+import traveller.com.wolfram.alpha.WAQuery;
+import traveller.com.wolfram.alpha.WAQueryResult;
+import traveller.com.wolfram.alpha.WARelatedExample;
+import traveller.com.wolfram.alpha.WARelatedLink;
+import traveller.com.wolfram.alpha.WASourceInfo;
+import traveller.com.wolfram.alpha.WAWarning;
+import com.wolfram.alpha.net.HttpProvider;
+import traveller.com.wolfram.alpha.visitor.Visitable;
+import traveller.com.wolfram.alpha.visitor.Visitor;
+
+
+public class WAQueryResultImpl implements WAQueryResult, Visitable, Serializable {
+    
+    private transient WAQuery query;
+    private byte[] bytes;
+    private transient File tempDir;
+    private transient HttpProvider http;
+    
+    private transient Object userData;
+    
+    //States
+<span class="nc" id="L52">    private boolean imagesAcquired = false;</span>
+    
+    // Attributes
+    private boolean success;
+    private boolean error;
+<span class="nc" id="L57">    private int errorCode = 0;</span>
+    private String errorMessage;
+<span class="nc" id="L59">    private String[] dataTypes = EMPTY_STRING_ARRAY;</span>
+<span class="nc" id="L60">    private String[] timedoutScanners = EMPTY_STRING_ARRAY;</span>
+    private double timing;
+    private double parseTiming;
+    private String version;
+<span class="nc" id="L64">    private String recalcURL = &quot;&quot;;</span>
+    
+    // Subelements
+<span class="nc" id="L67">    private WAPodImpl[] pods = WAPodImpl.EMPTY_ARRAY;</span>
+<span class="nc" id="L68">    private WAAssumptionImpl[] assumptions = WAAssumptionImpl.EMPTY_ARRAY;</span>
+<span class="nc" id="L69">    private WAWarningImpl[] warnings = WAWarningImpl.EMPTY_ARRAY;</span>
+<span class="nc" id="L70">    private WARelatedLinkImpl[] relatedLinks = WARelatedLinkImpl.EMPTY_ARRAY;</span>
+<span class="nc" id="L71">    private WASourceInfoImpl[] sources = WASourceInfoImpl.EMPTY_ARRAY;</span>
+<span class="nc" id="L72">    private String[] didYouMeans = EMPTY_STRING_ARRAY;</span>
+<span class="nc" id="L73">    private WARelatedExampleImpl[] relatedExamples = WARelatedExampleImpl.EMPTY_ARRAY;</span>
+<span class="nc" id="L74">    private String[] languageMessage = EMPTY_STRING_ARRAY;</span>
+<span class="nc" id="L75">    private String[] splatTips = EMPTY_STRING_ARRAY;</span>
+    private WAFutureTopic futureTopic;
+    private WAExamplePage examplePage;
+    
+    
+<span class="nc" id="L80">    private static final String[] EMPTY_STRING_ARRAY = new String[]{};</span>
+
+    private static final long serialVersionUID = 6045494030310944812L;
+
+    
+    // TODO: Provide soem way to release the bytes array. The only reason to keep it around is for
+    // the getXML() method, but many users will never want to call that. Perhaps the ctor can take an
+    // arg that says whether to store the byte array or not.
+    
+   
+    // I _could_ lazily parse the bytes, but I think it's better to force parsing errors to
+    // occur in a well-defined place, not potentially from every accessor.
+<span class="nc" id="L92">    public WAQueryResultImpl(WAQuery query, byte[] bytes, HttpProvider http, File tempDir) throws WAException {</span>
+        
+<span class="nc" id="L94">        this.query = query;</span>
+<span class="nc" id="L95">        this.http = http;</span>
+<span class="nc" id="L96">        this.bytes = bytes;</span>
+<span class="nc" id="L97">        this.tempDir = tempDir;</span>
+        try {
+            /*** OLD SAX style, abandoned
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            SAXParser parser = factory.newSAXParser();
+            AlphaSAXHandler handler = new AlphaSAXHandler(this);
+            parser.parse(new ByteArrayInputStream(bytes), handler);
+            ***/
+<span class="nc" id="L105">            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();</span>
+<span class="nc" id="L106">            DocumentBuilder builder = factory.newDocumentBuilder();</span>
+<span class="nc" id="L107">            Document doc = builder.parse(new ByteArrayInputStream(bytes));</span>
+            
+            // Now build my object tree.
+            //NodeList queryResultNode = doc.getElementsByTagName(&quot;queryresult&quot;);
+<span class="nc" id="L111">            createFromDOM(doc.getDocumentElement());</span>
+            
+<span class="nc" id="L113">        } catch (ParserConfigurationException e) {</span>
+            // Probably impossible in any realistic circumstance.
+<span class="nc" id="L115">            throw new WAException(e);</span>
+<span class="nc" id="L116">        } catch (FactoryConfigurationError e) {</span>
+            // Probably impossible in any realistic circumstance.
+<span class="nc" id="L118">            throw new WAException(e);</span>
+<span class="nc" id="L119">        } catch (IOException e) {</span>
+            // Don't think there can be an IOException on a ByteArrayInputStream.
+<span class="nc" id="L121">            throw new WAException(e);</span>
+<span class="nc" id="L122">        } catch (SAXException e) {</span>
+<span class="nc" id="L123">            throw new WAException(e);</span>
+<span class="nc" id="L124">        }</span>
+<span class="nc" id="L125">    }</span>
+    
+
+    public boolean isSuccess() {
+<span class="nc" id="L129">        return success;</span>
+    }
+    
+    public boolean isError() {
+<span class="nc" id="L133">        return error;</span>
+    }
+    
+    public int getErrorCode() {
+<span class="nc" id="L137">        return errorCode;</span>
+    }
+    
+    public String getErrorMessage() {
+<span class="nc" id="L141">        return errorMessage;</span>
+    }
+
+    
+    // Can be null (if this is a recalc query, performed by WAEngine.performReclaculate(), or a deserialized instance).
+    public WAQuery getQuery() {
+<span class="nc" id="L147">        return query;</span>
+    }
+    
+    public int getNumPods() {
+<span class="nc" id="L151">        return pods.length;</span>
+    }
+    
+    public String[] getDataTypes() {
+<span class="nc" id="L155">        return dataTypes;</span>
+    }
+    
+    public String[] getTimedoutScanners() {
+<span class="nc" id="L159">        return timedoutScanners;</span>
+    }
+    
+    public double getTiming() {
+<span class="nc" id="L163">        return timing;</span>
+    }
+    
+    public double getParseTiming() {
+<span class="nc" id="L167">        return parseTiming;</span>
+    }
+    
+    public String getAPIVersion() {
+<span class="nc" id="L171">        return version;</span>
+    }
+    
+    public String getRecalculateURL() {
+<span class="nc" id="L175">        return recalcURL;</span>
+    }
+    
+    // Because the pods array is modified in the merge methods, which are called on threads, we must ensure
+    // that access to the array is synchronized.
+    public synchronized WAPod[] getPods() {
+<span class="nc" id="L181">        return pods;</span>
+    }
+    
+    public WAAssumption[] getAssumptions() {
+<span class="nc" id="L185">        return assumptions;</span>
+    }
+    
+    public WAWarning[] getWarnings() {
+<span class="nc" id="L189">        return warnings;</span>
+    }
+    
+    public String[] getTips() {
+<span class="nc" id="L193">        return splatTips;</span>
+    }
+    
+    public WARelatedLink[] getRelatedLinks() {
+<span class="nc" id="L197">        return relatedLinks;</span>
+    }
+    
+    public WASourceInfo[] getSources() {
+<span class="nc" id="L201">        return sources;</span>
+    }
+
+    public String[] getDidYouMeans() {
+<span class="nc" id="L205">        return didYouMeans;</span>
+    }
+
+    public WARelatedExample[] getRelatedExamples() {
+<span class="nc" id="L209">        return relatedExamples;</span>
+    }
+    
+    public String[] getLanguageMessage() {
+<span class="nc" id="L213">        return languageMessage;</span>
+    }
+
+    public WAFutureTopic getFutureTopic() {
+<span class="nc" id="L217">        return futureTopic;</span>
+    }
+    
+    public  WAExamplePage getExamplePage() {
+<span class="nc" id="L221">        return examplePage;</span>
+    }
+    
+    // This only gets pod images, not &lt;info&gt; or &lt;sidebarlinks&gt; or others.
+    public synchronized void acquireImages() {
+        
+<span class="nc bnc" id="L227" title="All 2 branches missed.">        if (!imagesAcquired) {</span>
+<span class="nc bnc" id="L228" title="All 2 branches missed.">            for (WAPodImpl pod : pods) {</span>
+                try {
+<span class="nc" id="L230">                    pod.acquireImages();</span>
+<span class="nc" id="L231">                } catch (WAException e) {</span>
+                    // What to do here? Need to finish getting all even if there is an exception.
+<span class="nc" id="L233">                }</span>
+            }
+<span class="nc" id="L235">            imagesAcquired = true;</span>
+        }
+<span class="nc" id="L237">    }</span>
+    
+    
+    public void finishAsync() {
+        
+<span class="nc" id="L242">        acquireImages();</span>
+<span class="nc" id="L243">        List&lt;Thread&gt; runningThreads = new ArrayList&lt;Thread&gt;(pods.length);</span>
+<span class="nc" id="L244">        WAPod[] pods = getPods();</span>
+<span class="nc bnc" id="L245" title="All 2 branches missed.">        for (int i = 0; i &lt; pods.length; i++) {</span>
+<span class="nc" id="L246">            final WAPod pod = pods[i];</span>
+<span class="nc bnc" id="L247" title="All 2 branches missed.">            if (pod.getAsyncURL() != null) {</span>
+<span class="nc" id="L248">                Thread t = new Thread(new Runnable() {</span>
+                    public void run() {
+                        try {
+<span class="nc" id="L251">                            pod.finishAsync();</span>
+<span class="nc" id="L252">                        } catch (WAException e) {</span>
+                            // TODO: What here?
+<span class="nc" id="L254">                        }</span>
+<span class="nc" id="L255">                    }                     </span>
+                });
+<span class="nc" id="L257">                t.start();</span>
+<span class="nc" id="L258">                runningThreads.add(t);</span>
+            }
+        }
+<span class="nc bnc" id="L261" title="All 2 branches missed.">        for (Thread t : runningThreads) {</span>
+            try {
+<span class="nc" id="L263">                t.join();</span>
+<span class="nc" id="L264">            } catch (InterruptedException e) {</span>
+                // TODO: What here?
+<span class="nc" id="L266">            }</span>
+<span class="nc" id="L267">        }</span>
+<span class="nc" id="L268">    }</span>
+    
+    
+    // These are used for updating a WAQueryResult with info from another result, either a podstate chnage or a recalculate.
+    // They don't keep the object in a totally consistent state. For example, calling getXML() after a merge will not
+    // give you updated XML. These are just convenience functions for clients who don't want to know the correct way
+    // to merge in these new types of results. The &quot;important&quot; getters, like getPods(), work as desired after a merge.
+    
+    public synchronized void mergeRecalculateResult(WAQueryResult recalcQueryResult) {
+        
+        // TODO: Merge in new &lt;sources&gt; or other elements that are relevant in a recalc.
+<span class="nc" id="L279">        WAPod[] recalcPods = recalcQueryResult.getPods();</span>
+<span class="nc" id="L280">        WAPod[] oldPods = getPods();</span>
+<span class="nc bnc" id="L281" title="All 2 branches missed.">        if (recalcPods.length &gt; 0) {</span>
+<span class="nc" id="L282">            WAPodImpl[] allPods = new WAPodImpl[oldPods.length + recalcPods.length];</span>
+<span class="nc" id="L283">            System.arraycopy(oldPods, 0, allPods, 0, oldPods.length);</span>
+<span class="nc" id="L284">            System.arraycopy(recalcPods, 0, allPods, oldPods.length, recalcPods.length);</span>
+<span class="nc" id="L285">            pods = allPods;</span>
+        }
+<span class="nc" id="L287">    }</span>
+
+    public synchronized void mergePodstateResult(WAQueryResult podstateQueryResult) {
+        
+<span class="nc" id="L291">        WAPod[] newPods = podstateQueryResult.getPods();</span>
+        // Should always be 1. If not, just skip the merge.
+<span class="nc bnc" id="L293" title="All 2 branches missed.">        if (newPods.length == 1) {</span>
+<span class="nc" id="L294">            WAPod newPod = newPods[0];</span>
+<span class="nc" id="L295">            String podTitle = newPod.getTitle();</span>
+<span class="nc" id="L296">            WAPod[] oldPods = getPods();</span>
+<span class="nc bnc" id="L297" title="All 2 branches missed.">            for (int i = 0; i &lt; oldPods.length; i++) {</span>
+<span class="nc bnc" id="L298" title="All 2 branches missed.">                if (podTitle.equals(oldPods[i].getTitle())) {</span>
+<span class="nc" id="L299">                    oldPods[i] = newPod;</span>
+<span class="nc" id="L300">                    break;</span>
+                }
+            }
+        }
+<span class="nc" id="L304">    }</span>
+
+
+    public String getXML() {
+        try {
+<span class="nc" id="L309">            return new String(bytes, &quot;ISO-8859-1&quot;);</span>
+<span class="nc" id="L310">        } catch (UnsupportedEncodingException e) {</span>
+            // Not possible.
+<span class="nc" id="L312">            return null;</span>
+        }
+    }
+
+
+    public void release() {
+        // Could do this like acquireImages, via explicit interface methods, or by a visitor.
+        // Probably via visitor, since it doesnt seem likely that a user would want to release
+        // a specific pod. Probably just want to throw away everything when done with a query.
+<span class="nc" id="L321">    }</span>
+    
+    
+    public void setUserData(Object obj) {
+<span class="nc" id="L325">        userData = obj;</span>
+<span class="nc" id="L326">    }</span>
+    
+    public Object getUserData() {
+<span class="nc" id="L329">        return userData;</span>
+    }
+
+    
+    ///////////////////////////  createFromDOM  ///////////////////////////////
+    
+    private void createFromDOM(Element thisElement) throws WAException {
+                
+        // Get attribute values of &lt;queryresult&gt; element
+<span class="nc" id="L338">        success = thisElement.getAttribute(&quot;success&quot;).equals(&quot;true&quot;);</span>
+<span class="nc" id="L339">        error = thisElement.getAttribute(&quot;error&quot;).equals(&quot;true&quot;);</span>
+        
+<span class="nc bnc" id="L341" title="All 2 branches missed.">        if (error) {</span>
+            // Error case is missing many attributes and has different subelement content.
+            // Format of error element:  &lt;error&gt;&lt;code&gt;42&lt;/code&gt;&lt;msg&gt;blah blah&lt;/msg&gt;&lt;/code&gt;.
+<span class="nc" id="L344">            NodeList children = thisElement.getElementsByTagName(&quot;error&quot;);</span>
+            // Should have length 1.
+<span class="nc bnc" id="L346" title="All 2 branches missed.">            if (children.getLength() &gt; 0) {</span>
+<span class="nc" id="L347">                Element errorElement = (Element) children.item(0);</span>
+<span class="nc" id="L348">                children = errorElement.getElementsByTagName(&quot;code&quot;);</span>
+<span class="nc bnc" id="L349" title="All 2 branches missed.">                if (children.getLength() &gt; 0) {</span>
+                    try {
+<span class="nc" id="L351">                        errorCode = Integer.parseInt(children.item(0).getFirstChild().getNodeValue());</span>
+<span class="nc" id="L352">                        children.item(0).getFirstChild();</span>
+<span class="nc" id="L353">                    } catch (NumberFormatException e) {</span>
+                        // Do nothing in this unlikely event. errorCode remains its default value of 0 (&quot;no error&quot;).
+<span class="nc" id="L355">                    }</span>
+                }
+<span class="nc" id="L357">                children = errorElement.getElementsByTagName(&quot;msg&quot;);</span>
+<span class="nc bnc" id="L358" title="All 2 branches missed.">                if (children.getLength() &gt; 0) {</span>
+<span class="nc" id="L359">                    errorMessage = children.item(0).getFirstChild().getNodeValue();</span>
+                }
+            }
+<span class="nc" id="L362">        } else {</span>
+            try {
+<span class="nc" id="L364">                timing = Double.parseDouble(thisElement.getAttribute(&quot;timing&quot;));</span>
+<span class="nc" id="L365">            } catch (NumberFormatException e) {}</span>
+            try {
+<span class="nc" id="L367">                parseTiming = Double.parseDouble(thisElement.getAttribute(&quot;timing&quot;));</span>
+<span class="nc" id="L368">            } catch (NumberFormatException e) {}</span>
+<span class="nc" id="L369">            version = thisElement.getAttribute(&quot;version&quot;);</span>
+<span class="nc" id="L370">            dataTypes = thisElement.getAttribute(&quot;datatypes&quot;).split(&quot;,&quot;);</span>
+<span class="nc" id="L371">            timedoutScanners = thisElement.getAttribute(&quot;timedout&quot;).split(&quot;,&quot;);</span>
+<span class="nc" id="L372">            recalcURL = thisElement.getAttribute(&quot;recalculate&quot;);</span>
+            
+<span class="nc" id="L374">            NodeList podElements = thisElement.getElementsByTagName(&quot;pod&quot;);</span>
+<span class="nc" id="L375">            int numPods = podElements.getLength();</span>
+<span class="nc" id="L376">            pods = new WAPodImpl[numPods];</span>
+<span class="nc bnc" id="L377" title="All 2 branches missed.">            for (int i = 0; i &lt; numPods; i++)</span>
+<span class="nc" id="L378">                pods[i] = new WAPodImpl((Element) podElements.item(i), http, tempDir);</span>
+            
+<span class="nc" id="L380">            NodeList assumptionElements = thisElement.getElementsByTagName(&quot;assumption&quot;);</span>
+<span class="nc" id="L381">            int numAssums = assumptionElements.getLength();</span>
+<span class="nc" id="L382">            assumptions = new WAAssumptionImpl[numAssums];</span>
+<span class="nc bnc" id="L383" title="All 2 branches missed.">            for (int i = 0; i &lt; numAssums; i++)</span>
+<span class="nc" id="L384">                assumptions[i] = new WAAssumptionImpl((Element) assumptionElements.item(i));</span>
+            
+<span class="nc" id="L386">            NodeList warningsElements = thisElement.getElementsByTagName(&quot;warnings&quot;);</span>
+            // There should be 0 or 1. This is the &lt;warnings&gt; element, not the elements for each
+            // individual warning type (&lt;spellcheck&gt;, &lt;delimiters&gt; etc.)
+<span class="nc bnc" id="L389" title="All 2 branches missed.">            if (warningsElements.getLength() &gt; 0) {</span>
+<span class="nc" id="L390">                Element warningsElement = (Element) warningsElements.item(0);</span>
+<span class="nc" id="L391">                NodeList children = warningsElement.getChildNodes();</span>
+<span class="nc" id="L392">                int numNodes = children.getLength();</span>
+<span class="nc" id="L393">                ArrayList&lt;Element&gt; warningElements = new ArrayList&lt;Element&gt;();</span>
+<span class="nc bnc" id="L394" title="All 2 branches missed.">                for (int i = 0; i &lt; numNodes; i++) {</span>
+<span class="nc" id="L395">                    Node child = children.item(i);</span>
+<span class="nc bnc" id="L396" title="All 2 branches missed.">                    if (child instanceof Element)</span>
+<span class="nc" id="L397">                        warningElements.add((Element) child);</span>
+                }
+<span class="nc" id="L399">                int numWarnings = warningElements.size();</span>
+<span class="nc" id="L400">                warnings = new WAWarningImpl[numWarnings];</span>
+<span class="nc bnc" id="L401" title="All 2 branches missed.">                for (int i = 0; i &lt; numWarnings; i++) {</span>
+<span class="nc" id="L402">                    Element warningElement = warningElements.get(i);</span>
+<span class="nc bnc" id="L403" title="All 2 branches missed.">                    if (&quot;reinterpret&quot;.equals(warningElement.getNodeName()))</span>
+<span class="nc" id="L404">                        warnings[i] = new WAReinterpretWarningImpl(warningElement);</span>
+                    else
+<span class="nc" id="L406">                        warnings[i] = new WAWarningImpl(warningElement);</span>
+                }
+            }
+            
+<span class="nc" id="L410">            NodeList tipsElements = thisElement.getElementsByTagName(&quot;tips&quot;);</span>
+            // There should be 0 or 1. This is the &lt;tips&gt; element, not the elements for each
+            // individual &lt;tip&gt;.
+<span class="nc bnc" id="L413" title="All 2 branches missed.">            if (tipsElements.getLength() &gt; 0) {</span>
+<span class="nc" id="L414">                Element tipsElement = (Element) tipsElements.item(0);</span>
+<span class="nc" id="L415">                NodeList children = tipsElement.getChildNodes();</span>
+<span class="nc" id="L416">                int numNodes = children.getLength();</span>
+<span class="nc" id="L417">                ArrayList&lt;Element&gt; tipElements = new ArrayList&lt;Element&gt;();</span>
+<span class="nc bnc" id="L418" title="All 2 branches missed.">                for (int i = 0; i &lt; numNodes; i++) {</span>
+<span class="nc" id="L419">                    Node child = children.item(i);</span>
+<span class="nc bnc" id="L420" title="All 2 branches missed.">                    if (child instanceof Element)</span>
+<span class="nc" id="L421">                        tipElements.add((Element) child);</span>
+                }
+<span class="nc" id="L423">                int numTips = tipElements.size();</span>
+<span class="nc" id="L424">                splatTips = new String[numTips];</span>
+<span class="nc bnc" id="L425" title="All 2 branches missed.">                for (int i = 0; i &lt; numTips; i++)</span>
+<span class="nc" id="L426">                    splatTips[i] = new String(tipElements.get(i).getAttribute(&quot;text&quot;));</span>
+            }
+            
+<span class="nc" id="L429">            NodeList relatedLinkElements = thisElement.getElementsByTagName(&quot;sidebarlink&quot;);</span>
+<span class="nc" id="L430">            int numRelateds = relatedLinkElements.getLength();</span>
+<span class="nc" id="L431">            relatedLinks = new WARelatedLinkImpl[numRelateds];</span>
+<span class="nc bnc" id="L432" title="All 2 branches missed.">            for (int i = 0; i &lt; numRelateds; i++)</span>
+<span class="nc" id="L433">                relatedLinks[i] = new WARelatedLinkImpl((Element) relatedLinkElements.item(i), http, tempDir);            </span>
+
+<span class="nc" id="L435">            NodeList didYouMeanElements = thisElement.getElementsByTagName(&quot;didyoumean&quot;);</span>
+<span class="nc" id="L436">            int numDidYouMeans = didYouMeanElements.getLength();</span>
+<span class="nc bnc" id="L437" title="All 2 branches missed.">            if (numDidYouMeans &gt; 0) {</span>
+<span class="nc" id="L438">                didYouMeans = new String[numDidYouMeans];</span>
+<span class="nc bnc" id="L439" title="All 2 branches missed.">                for (int i = 0; i &lt; numDidYouMeans; i++) {</span>
+<span class="nc" id="L440">                    Node textNode = didYouMeanElements.item(i).getFirstChild();</span>
+<span class="nc" id="L441">                    didYouMeans[i] = textNode.getNodeValue(); </span>
+                }
+            }
+            
+<span class="nc" id="L445">            NodeList relatedExampleElements = thisElement.getElementsByTagName(&quot;relatedexample&quot;);</span>
+<span class="nc" id="L446">            int numRelatedExamples = relatedExampleElements.getLength();</span>
+<span class="nc bnc" id="L447" title="All 2 branches missed.">            if (numRelatedExamples &gt; 0) {</span>
+<span class="nc" id="L448">                relatedExamples = new WARelatedExampleImpl[numRelatedExamples];</span>
+<span class="nc bnc" id="L449" title="All 2 branches missed.">                for (int i = 0; i &lt; numRelatedExamples; i++)</span>
+<span class="nc" id="L450">                    relatedExamples[i] = new WARelatedExampleImpl((Element) relatedExampleElements.item(i), http, tempDir);             </span>
+            }
+
+<span class="nc" id="L453">            NodeList languageMsgElements = thisElement.getElementsByTagName(&quot;languagemsg&quot;);</span>
+<span class="nc" id="L454">            int numLanugageMsgs = languageMsgElements.getLength();</span>
+            // Should be 0 or 1.
+<span class="nc bnc" id="L456" title="All 2 branches missed.">            if (numLanugageMsgs &gt; 0) {</span>
+<span class="nc" id="L457">                Element languageMsgElement = (Element) languageMsgElements.item(0);</span>
+<span class="nc" id="L458">                String english = languageMsgElement.getAttribute(&quot;english&quot;);</span>
+<span class="nc" id="L459">                String foreign = languageMsgElement.getAttribute(&quot;other&quot;);</span>
+<span class="nc" id="L460">                languageMessage = new String[]{english, foreign};</span>
+            }
+
+<span class="nc" id="L463">            NodeList sourcesElements = thisElement.getElementsByTagName(&quot;sources&quot;);</span>
+            // There should be 0 or 1. This is the &lt;sources&gt; element, not the elements for each
+            // individual &lt;source&gt;.)
+<span class="nc bnc" id="L466" title="All 2 branches missed.">            if (sourcesElements.getLength() &gt; 0) {</span>
+<span class="nc" id="L467">                Element sourcesElement = (Element) sourcesElements.item(0);</span>
+<span class="nc" id="L468">                NodeList children = sourcesElement.getChildNodes();</span>
+<span class="nc" id="L469">                int numNodes = children.getLength();</span>
+<span class="nc" id="L470">                ArrayList&lt;Element&gt; sourceElements = new ArrayList&lt;Element&gt;();</span>
+<span class="nc bnc" id="L471" title="All 2 branches missed.">                for (int i = 0; i &lt; numNodes; i++) {</span>
+<span class="nc" id="L472">                    Node child = children.item(i);</span>
+<span class="nc bnc" id="L473" title="All 2 branches missed.">                    if (child instanceof Element)</span>
+<span class="nc" id="L474">                        sourceElements.add((Element) child);</span>
+                }
+<span class="nc" id="L476">                int numSources = sourceElements.size();</span>
+<span class="nc" id="L477">                sources = new WASourceInfoImpl[numSources];</span>
+<span class="nc bnc" id="L478" title="All 2 branches missed.">                for (int i = 0; i &lt; numSources; i++)</span>
+<span class="nc" id="L479">                    sources[i] = new WASourceInfoImpl((Element) sourceElements.get(i));            </span>
+            }
+            
+<span class="nc" id="L482">            NodeList futureTopicElements = thisElement.getElementsByTagName(&quot;futuretopic&quot;);</span>
+            // There should be 0 or 1.
+<span class="nc bnc" id="L484" title="All 2 branches missed.">            if (futureTopicElements.getLength() &gt; 0)</span>
+<span class="nc" id="L485">                futureTopic = new WAFutureTopicImpl((Element) futureTopicElements.item(0));            </span>
+            
+<span class="nc" id="L487">            NodeList examplePageElements = thisElement.getElementsByTagName(&quot;examplepage&quot;);</span>
+            // There should be 0 or 1.
+<span class="nc bnc" id="L489" title="All 2 branches missed.">            if (examplePageElements.getLength() &gt; 0)</span>
+<span class="nc" id="L490">                examplePage = new WAExamplePageImpl((Element) examplePageElements.item(0));            </span>
+        }
+<span class="nc" id="L492">    }</span>
+    
+    
+    ///////////////////////////  Visitor interface  ////////////////////////////
+    
+    public void accept(Visitor v) {
+        
+<span class="nc" id="L499">        v.visit(this);</span>
+<span class="nc bnc" id="L500" title="All 2 branches missed.">        for (WAPod pod : pods) {</span>
+<span class="nc" id="L501">            pod.accept(v);</span>
+        }
+<span class="nc" id="L503">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

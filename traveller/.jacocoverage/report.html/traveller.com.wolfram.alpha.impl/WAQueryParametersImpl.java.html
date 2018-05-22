@@ -1,0 +1,789 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>WAQueryParametersImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.com.wolfram.alpha.impl</a> &gt; <span class="el_source">WAQueryParametersImpl.java</span></div><h1>WAQueryParametersImpl.java</h1><pre class="source lang-java linenums">/*
+ * Created on Dec 4, 2009
+ *
+ */
+package traveller.com.wolfram.alpha.impl;
+
+import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ListIterator;
+
+import traveller.com.wolfram.alpha.WAPodState;
+import traveller.com.wolfram.alpha.WAQueryParameters;
+
+
+public class WAQueryParametersImpl implements WAQueryParameters, Serializable {
+
+    protected String input;
+    protected String appid;
+        
+<span class="nc" id="L25">    protected List&lt;String&gt; formats = new ArrayList&lt;String&gt;(5);</span>
+    
+<span class="nc" id="L27">    protected double async = -1;</span>
+<span class="nc" id="L28">    protected double scanTimeout = -1;</span>
+<span class="nc" id="L29">    protected double podTimeout = -1;</span>
+<span class="nc" id="L30">    protected double formatTimeout = -1;</span>
+
+<span class="nc" id="L32">    protected int width = -1;</span>
+<span class="nc" id="L33">    protected int maxWidth = -1;</span>
+<span class="nc" id="L34">    protected int plotWidth = -1;</span>
+<span class="nc" id="L35">    protected double magnification = 1.0;</span>
+    
+    protected String ip;
+    protected String location;
+    // Objects, not double, so that they can have null == unassigned
+    protected Double latitude;
+    protected Double longitude;
+    
+    protected Boolean metric;
+    protected String currency;
+    protected String countryCode;
+    
+    protected Boolean allowTranslation;
+    
+    protected boolean includeRelatedLinks;
+<span class="nc" id="L50">    protected boolean allowReinterpret = true;</span>
+    protected String signature;
+    
+<span class="nc" id="L53">    protected List&lt;String[]&gt; extraParams = new ArrayList&lt;String[]&gt;(1);</span>
+    
+<span class="nc" id="L55">    protected List&lt;String&gt; podTitles = new ArrayList&lt;String&gt;(5);</span>
+<span class="nc" id="L56">    protected List&lt;String&gt; podScanners = new ArrayList&lt;String&gt;(5); </span>
+<span class="nc" id="L57">    protected List&lt;Integer&gt; podIndices = new ArrayList&lt;Integer&gt;(5);</span>
+<span class="nc" id="L58">    protected List&lt;String&gt; includePodIDs = new ArrayList&lt;String&gt;(5);</span>
+<span class="nc" id="L59">    protected List&lt;String&gt; excludePodIDs = new ArrayList&lt;String&gt;(5);</span>
+    
+<span class="nc" id="L61">    protected List&lt;WAPodState&gt; podStates = new ArrayList&lt;WAPodState&gt;(5);</span>
+<span class="nc" id="L62">    protected List&lt;String&gt; assumptions = new ArrayList&lt;String&gt;(5);</span>
+   
+    private static final long serialVersionUID = 2222070970297271641L;
+
+    
+    /********************************  Constructor  ********************************/
+    
+<span class="nc" id="L69">    public WAQueryParametersImpl() {}</span>
+    
+    // Copy constructor.
+    // When a WAEngine creates a query, it wants to pass in its WAQueryParameters. But it can't pass a
+    // reference to its own object because the two versions need to be isolated from changes in the other.
+    // Thus we provide a copy constructor that clones the necessary parts.
+<span class="nc" id="L75">    public WAQueryParametersImpl(WAQueryParameters orig) {</span>
+        
+<span class="nc" id="L77">        this.input = orig.getInput();</span>
+<span class="nc" id="L78">        this.async = orig.getAsync();</span>
+<span class="nc" id="L79">        this.formats.addAll(Arrays.asList(orig.getFormats()));</span>
+<span class="nc" id="L80">        this.scanTimeout = orig.getScanTimeout();</span>
+<span class="nc" id="L81">        this.podTimeout = orig.getPodTimeout();</span>
+<span class="nc" id="L82">        this.formatTimeout = orig.getFormatTimeout();</span>
+<span class="nc" id="L83">        this.width = orig.getWidth();</span>
+<span class="nc" id="L84">        this.maxWidth = orig.getMaxWidth();</span>
+<span class="nc" id="L85">        this.plotWidth = orig.getPlotWidth();</span>
+<span class="nc" id="L86">        this.magnification = orig.getMagnification();</span>
+<span class="nc" id="L87">        this.ip = orig.getIP();</span>
+<span class="nc" id="L88">        this.location = orig.getLocation();</span>
+<span class="nc" id="L89">        double[] latlong = orig.getLatLong();</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        this.latitude = latlong != null ? latlong[0] : null;</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">        this.longitude = latlong != null ? latlong[1] : null;</span>
+<span class="nc" id="L92">        this.metric = orig.isMetric();</span>
+<span class="nc" id="L93">        this.currency = orig.getCurrency();</span>
+<span class="nc" id="L94">        this.countryCode = orig.getCountryCode();</span>
+<span class="nc" id="L95">        this.allowTranslation = orig.isAllowTranslation();</span>
+<span class="nc" id="L96">        this.podTitles.addAll(Arrays.asList(orig.getPodTitles()));</span>
+<span class="nc" id="L97">        this.podScanners.addAll(Arrays.asList(orig.getPodScanners()));</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        for (int index : orig.getPodIndexes())</span>
+<span class="nc" id="L99">            this.podIndices.add(new Integer(index));</span>
+<span class="nc" id="L100">        this.includePodIDs.addAll(Arrays.asList(orig.getIncludePodIDs()));</span>
+<span class="nc" id="L101">        this.excludePodIDs.addAll(Arrays.asList(orig.getExcludePodIDs()));</span>
+<span class="nc" id="L102">        this.podStates.addAll(Arrays.asList(orig.getPodStates()));</span>
+<span class="nc" id="L103">        this.assumptions.addAll(Arrays.asList(orig.getAssumptions()));</span>
+<span class="nc" id="L104">        this.includeRelatedLinks = orig.isRelatedLinks();</span>
+<span class="nc" id="L105">        this.allowReinterpret = orig.isReinterpret();</span>
+        // NOTE that we do no copying of the String[2] arrays. That means if you modify the contents
+        // of one of the arrays, the change can be seen by other WAQueryParameters objects that were
+        // created by copying the original. Therefore, users of the (obscure) extraParams() feature
+        // should take care never to alter one of these pairs in place; rather, create a new one and
+        // replace the old one.
+<span class="nc" id="L111">        this.extraParams.addAll(orig.getExtraParams());</span>
+        
+        // Don't copy signature. It cannot be set in advance.
+<span class="nc" id="L114">    }</span>
+    
+        
+    /**********************************  Methods  **********************************/    
+        
+    public String getInput() {
+<span class="nc" id="L120">        return input;</span>
+    }
+    
+    public void setInput(String input) {
+<span class="nc" id="L124">        this.input = input;</span>
+<span class="nc" id="L125">    }</span>
+    
+
+    public String[] getFormats() {
+<span class="nc" id="L129">        return formats.toArray(new String[formats.size()]);</span>
+    }
+    
+    public void addFormat(String format) {
+<span class="nc" id="L133">        format = format.toLowerCase();</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        if (!formats.contains(format))</span>
+<span class="nc" id="L135">            formats.add(format);</span>
+<span class="nc" id="L136">    }</span>
+    
+    
+    ////////////////  Timeouts and async  //////////////////
+    
+    public double getScanTimeout() {
+<span class="nc" id="L142">        return scanTimeout;</span>
+    }
+    
+    public void setScanTimeout(double timeout) {
+<span class="nc" id="L146">        this.scanTimeout = timeout;</span>
+<span class="nc" id="L147">    }</span>
+    
+    
+    public double getPodTimeout() {
+<span class="nc" id="L151">        return podTimeout;</span>
+    }
+    
+    public void setPodTimeout(double timeout) {
+<span class="nc" id="L155">        this.podTimeout = timeout;</span>
+<span class="nc" id="L156">    }</span>
+    
+    
+    public double getFormatTimeout() {
+<span class="nc" id="L160">        return formatTimeout;</span>
+    }
+    
+    public void setFormatTimeout(double timeout) {
+<span class="nc" id="L164">        this.formatTimeout = timeout;</span>
+<span class="nc" id="L165">    }</span>
+    
+    
+    public double getAsync() {
+<span class="nc" id="L169">        return async;</span>
+    }
+    
+    public void setAsync(double async) {
+<span class="nc" id="L173">        this.async = async;</span>
+<span class="nc" id="L174">    }</span>
+    
+    
+    /////////////  Location-related properties  ///////////////
+    
+    public String getIP() {
+<span class="nc" id="L180">        return ip;</span>
+    }
+    
+    public void setIP(String ip) {
+<span class="nc" id="L184">        this.ip = ip;</span>
+<span class="nc" id="L185">    }</span>
+    
+    
+    public double[] getLatLong() {
+<span class="nc bnc" id="L189" title="All 4 branches missed.">        if (latitude == null || longitude == null)</span>
+<span class="nc" id="L190">            return null;</span>
+        else
+<span class="nc" id="L192">            return new double[] {latitude.doubleValue(), longitude.doubleValue()};</span>
+    }
+    
+    public void setLatLong(String latlong) throws IllegalArgumentException {
+        
+        // TODO: Better support for other type of spec, with minutes, etc.
+<span class="nc" id="L198">        String[] parts = latlong.split(&quot;,&quot;);</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">        if (parts.length != 2)</span>
+<span class="nc" id="L200">            throw new IllegalArgumentException(&quot;latlong specification must be two numbers separated by a comma&quot;);</span>
+<span class="nc" id="L201">        latitude = new Double(parts[0].trim());</span>
+<span class="nc" id="L202">        longitude = new Double(parts[1].trim());</span>
+<span class="nc" id="L203">    }</span>
+    
+    public void setLatitude(double latitude) {
+<span class="nc" id="L206">        this.latitude = new Double(latitude);</span>
+<span class="nc" id="L207">    }</span>
+    
+    public void setLongitude(double longitude) {
+<span class="nc" id="L210">        this.longitude = new Double(longitude);</span>
+<span class="nc" id="L211">    }</span>
+    
+    public String getLocation() {
+<span class="nc" id="L214">        return location;</span>
+    }
+    
+    public void setLocation(String loc) {
+<span class="nc" id="L218">        this.location = loc;</span>
+<span class="nc" id="L219">    }</span>
+    
+    public Boolean isMetric() {
+<span class="nc" id="L222">        return metric;</span>
+    }
+    
+    public void setMetric(Boolean metric) {
+<span class="nc" id="L226">        this.metric = metric;</span>
+<span class="nc" id="L227">    }</span>
+    
+    public String getCurrency() {
+<span class="nc" id="L230">        return currency;</span>
+    }
+    
+    public void setCurrency(String currency) {
+<span class="nc" id="L234">        this.currency = currency;</span>
+<span class="nc" id="L235">    }</span>
+    
+    
+    public String getCountryCode() {
+<span class="nc" id="L239">        return countryCode;</span>
+    }
+    
+    public void setCountryCode(String code) {
+<span class="nc" id="L243">        this.countryCode = code;</span>
+<span class="nc" id="L244">    }</span>
+    
+    public Boolean isAllowTranslation() {
+<span class="nc" id="L247">        return allowTranslation;</span>
+    }
+    
+    public void setAllowTranslation(Boolean allow) {
+<span class="nc" id="L251">        this.allowTranslation = allow;</span>
+<span class="nc" id="L252">    }</span>
+    
+    
+    ///////////////////  Widths  /////////////////////
+    
+    public int getWidth() {
+<span class="nc" id="L258">        return width;</span>
+    }
+    
+    public void setWidth(int width) {
+<span class="nc" id="L262">        this.width = width;</span>
+<span class="nc" id="L263">    }</span>
+    
+    
+    public int getMaxWidth() {
+<span class="nc" id="L267">        return maxWidth;</span>
+    }
+    
+    public void setMaxWidth(int width) {
+<span class="nc" id="L271">        this.maxWidth = width;</span>
+<span class="nc" id="L272">    }</span>
+    
+    
+    public int getPlotWidth() {
+<span class="nc" id="L276">        return plotWidth;</span>
+    }
+    
+    public void setPlotWidth(int width) {
+<span class="nc" id="L280">        this.plotWidth = width;</span>
+<span class="nc" id="L281">    }</span>
+    
+    public double getMagnification() {
+<span class="nc" id="L284">        return magnification;</span>
+    }
+    
+    public void setMagnification(double mag) {
+<span class="nc" id="L288">        this.magnification = mag;</span>
+<span class="nc" id="L289">    }</span>
+
+    
+    ////////////////  Pod selection  //////////////////
+    
+    public String[] getPodTitles() {
+<span class="nc" id="L295">        return podTitles.toArray(new String[podTitles.size()]);</span>
+    }
+    
+    public void addPodTitle(String podtitle) {
+<span class="nc bnc" id="L299" title="All 2 branches missed.">        if (!podTitles.contains(podtitle))</span>
+<span class="nc" id="L300">            podTitles.add(podtitle);</span>
+<span class="nc" id="L301">    }</span>
+    
+    public void clearPodTitles() {
+<span class="nc" id="L304">        podTitles.clear();</span>
+<span class="nc" id="L305">    }</span>
+    
+    
+    public int[] getPodIndexes() {
+<span class="nc" id="L309">        int[] result = new int[podIndices.size()];</span>
+<span class="nc" id="L310">        int i = 0;</span>
+<span class="nc bnc" id="L311" title="All 2 branches missed.">        for (Integer index : podIndices) {</span>
+<span class="nc" id="L312">            result[i++] = index.intValue();</span>
+<span class="nc" id="L313">        }</span>
+<span class="nc" id="L314">        return result;</span>
+    }
+    
+    public void addPodIndex(int podindex) {
+<span class="nc" id="L318">        Integer index = new Integer(podindex);</span>
+<span class="nc bnc" id="L319" title="All 2 branches missed.">        if (!podIndices.contains(index))</span>
+<span class="nc" id="L320">            podIndices.add(index);</span>
+<span class="nc" id="L321">    }</span>
+    
+    public void clearPodIndexes() {
+<span class="nc" id="L324">        podIndices.clear();</span>
+<span class="nc" id="L325">    }</span>
+
+    
+    public String[] getPodScanners() {
+<span class="nc" id="L329">        return podScanners.toArray(new String[podScanners.size()]);</span>
+    }
+    
+    public void addPodScanner(String podscanner) {
+<span class="nc bnc" id="L333" title="All 2 branches missed.">        if (!podScanners.contains(podscanner))</span>
+<span class="nc" id="L334">            podScanners.add(podscanner);</span>
+<span class="nc" id="L335">    }</span>
+       
+    public void clearPodScanners() {
+<span class="nc" id="L338">        podScanners.clear();</span>
+<span class="nc" id="L339">    }</span>
+
+    
+    public String[] getIncludePodIDs() {
+<span class="nc" id="L343">        return includePodIDs.toArray(new String[includePodIDs.size()]);</span>
+    }
+    
+    public void addIncludePodID(String podid) {
+<span class="nc bnc" id="L347" title="All 2 branches missed.">        if (!includePodIDs.contains(podid))</span>
+<span class="nc" id="L348">            includePodIDs.add(podid);</span>
+<span class="nc" id="L349">    }</span>
+    
+    public void clearIncludePodIDs() {
+<span class="nc" id="L352">        includePodIDs.clear();</span>
+<span class="nc" id="L353">    }</span>
+
+    
+    public String[] getExcludePodIDs() {
+<span class="nc" id="L357">        return excludePodIDs.toArray(new String[excludePodIDs.size()]);</span>
+    }
+    
+    public void addExcludePodID(String podid) {
+<span class="nc bnc" id="L361" title="All 2 branches missed.">        if (!excludePodIDs.contains(podid))</span>
+<span class="nc" id="L362">            excludePodIDs.add(podid);</span>
+<span class="nc" id="L363">    }</span>
+    
+    public void clearExcludePodIDs() {
+<span class="nc" id="L366">        excludePodIDs.clear();        </span>
+<span class="nc" id="L367">    }</span>
+
+    
+    //////////////  Assumptions and podstates  /////////////////
+    
+    public WAPodState[] getPodStates() {
+<span class="nc" id="L373">        return podStates.toArray(new WAPodState[podStates.size()]);</span>
+    }
+
+    public void addPodState(String podstate) {
+<span class="nc" id="L377">        addPodState(new WAPodStateImpl(podstate));</span>
+<span class="nc" id="L378">    }</span>
+      
+    public void addPodState(String podstate, long id) {
+<span class="nc" id="L381">        addPodState(new WAPodStateImpl(podstate, id));</span>
+<span class="nc" id="L382">    }</span>
+      
+    public void addPodState(WAPodState podstate) {
+        // When adding a podstate, we treat single-value and &lt;statelist&gt; podstates differently. Single-state ones
+        // just accumulate (eg. More,More,More), whereas statelist ones do not (no point in doing earthquakes &quot;last 24 hours&quot;
+        // and then &quot;this month&quot;; we only want the most-recently chosen value).
+<span class="nc" id="L388">        boolean isReplacingExistingState = false;</span>
+<span class="nc bnc" id="L389" title="All 2 branches missed.">        if (podstate.getInputs().length &gt; 1) {</span>
+<span class="nc" id="L390">            long newID = podstate.getID();</span>
+<span class="nc" id="L391">            ListIterator&lt;WAPodState&gt; iter = podStates.listIterator();</span>
+<span class="nc bnc" id="L392" title="All 2 branches missed.">            while (iter.hasNext()) {</span>
+<span class="nc" id="L393">                WAPodState state = iter.next();</span>
+<span class="nc" id="L394">                long id = state.getID();</span>
+<span class="nc bnc" id="L395" title="All 2 branches missed.">                if (id == newID) {</span>
+                    // If we get here, we have found an old podstate that is the same one as the one we are adding (except
+                    // of course possibly a differently currently-selected index). Replace with the new one and exit.
+<span class="nc" id="L398">                    iter.set(podstate);</span>
+<span class="nc" id="L399">                    isReplacingExistingState = true;</span>
+<span class="nc" id="L400">                    break;</span>
+                }
+<span class="nc" id="L402">            }</span>
+        }
+<span class="nc bnc" id="L404" title="All 2 branches missed.">        if (!isReplacingExistingState)</span>
+<span class="nc" id="L405">            podStates.add(podstate);</span>
+<span class="nc" id="L406">    }</span>
+    
+    public void clearPodStates() {
+<span class="nc" id="L409">        podStates.clear();</span>
+<span class="nc" id="L410">    }</span>
+
+    
+    public String[] getAssumptions() {
+<span class="nc" id="L414">        return assumptions.toArray(new String[assumptions.size()]);</span>
+    }
+    
+    public void addAssumption(String assumption) {
+        
+<span class="nc" id="L419">        String newLhs = assumption.split(&quot;_&quot;)[0];</span>
+        // This is &quot;add if new, modify existing one if a different RHS&quot;.
+<span class="nc" id="L421">        boolean wasFound = false;</span>
+<span class="nc" id="L422">        ListIterator&lt;String&gt; iter = assumptions.listIterator();</span>
+<span class="nc bnc" id="L423" title="All 2 branches missed.">        while (iter.hasNext()) {</span>
+<span class="nc" id="L424">            String oldAssumption = iter.next();</span>
+<span class="nc" id="L425">            String oldLhs = oldAssumption.split(&quot;_&quot;)[0];</span>
+<span class="nc bnc" id="L426" title="All 2 branches missed.">            if (newLhs.equals(oldLhs)) {</span>
+<span class="nc" id="L427">                iter.set(assumption);</span>
+<span class="nc" id="L428">                wasFound = true;</span>
+<span class="nc" id="L429">                break;</span>
+            }
+<span class="nc" id="L431">        }</span>
+<span class="nc bnc" id="L432" title="All 2 branches missed.">        if (!wasFound)</span>
+<span class="nc" id="L433">            assumptions.add(assumption);</span>
+<span class="nc" id="L434">    }</span>
+
+    public void clearAssumptions() {
+<span class="nc" id="L437">        assumptions.clear();</span>
+<span class="nc" id="L438">    }</span>
+
+    
+    //////////////////////////////  Misc  ////////////////////////////////
+    
+    public void setRelatedLinks(boolean include) {
+<span class="nc" id="L444">        includeRelatedLinks = include;</span>
+<span class="nc" id="L445">    }</span>
+    
+    public boolean isRelatedLinks() {
+<span class="nc" id="L448">        return includeRelatedLinks;</span>
+    }
+    
+    public void setReinterpret(boolean allowReinterpret) {
+<span class="nc" id="L452">        this.allowReinterpret = allowReinterpret;</span>
+<span class="nc" id="L453">    }</span>
+    
+    public boolean isReinterpret() {
+<span class="nc" id="L456">        return allowReinterpret;</span>
+    }
+    
+    public void setSignature(String sig) {
+<span class="nc" id="L460">        this.signature = sig;</span>
+<span class="nc" id="L461">    }</span>
+    
+    // Returns a ref to the original, not a copy. Clients use carefully!
+    public List&lt;String[]&gt; getExtraParams() {
+<span class="nc" id="L465">        return extraParams;</span>
+    }
+    
+    
+    // Leave out appid and sig.
+    public List&lt;String[]&gt; getParameters() {
+        
+<span class="nc" id="L472">        List&lt;String[]&gt; params = new ArrayList&lt;String[]&gt;(15);</span>
+<span class="nc" id="L473">        StringBuilder s = new StringBuilder();</span>
+        String[] param;
+        
+<span class="nc bnc" id="L476" title="All 2 branches missed.">        if (input != null) {</span>
+<span class="nc" id="L477">            param = new String[2];</span>
+<span class="nc" id="L478">            param[0] = &quot;input&quot;;</span>
+<span class="nc" id="L479">            param[1] = encode(input);</span>
+<span class="nc" id="L480">            params.add(param);</span>
+        }
+        
+<span class="nc" id="L483">        int numFormats = formats.size();</span>
+<span class="nc bnc" id="L484" title="All 2 branches missed.">        if (numFormats &gt; 0) {</span>
+<span class="nc" id="L485">            param = new String[2];</span>
+<span class="nc" id="L486">            param[0] = &quot;format&quot;;</span>
+<span class="nc" id="L487">            s.setLength(0);</span>
+<span class="nc bnc" id="L488" title="All 2 branches missed.">            for (int i = 0; i &lt; numFormats; i++) {</span>
+<span class="nc" id="L489">                s.append(formats.get(i));</span>
+<span class="nc bnc" id="L490" title="All 2 branches missed.">                if (i &lt; numFormats - 1)</span>
+<span class="nc" id="L491">                    s.append(&quot;,&quot;);</span>
+            }
+<span class="nc" id="L493">            param[1] = s.toString();</span>
+<span class="nc" id="L494">            params.add(param);</span>
+        }
+
+<span class="nc" id="L497">        param = new String[2];</span>
+<span class="nc" id="L498">        param[0] = &quot;async&quot;;</span>
+<span class="nc bnc" id="L499" title="All 2 branches missed.">        if (async == 0)</span>
+<span class="nc" id="L500">            param[1] = &quot;true&quot;;</span>
+<span class="nc bnc" id="L501" title="All 2 branches missed.">        else if (async &gt; 0)</span>
+<span class="nc" id="L502">            param[1] = Double.toString(async);</span>
+        else
+<span class="nc" id="L504">            param[1] = &quot;false&quot;;</span>
+<span class="nc" id="L505">        params.add(param);</span>
+
+<span class="nc bnc" id="L507" title="All 2 branches missed.">        if (scanTimeout &gt; 0) {</span>
+<span class="nc" id="L508">            param = new String[2];</span>
+<span class="nc" id="L509">            param[0] = &quot;scantimeout&quot;;</span>
+<span class="nc" id="L510">            param[1] = Double.toString(scanTimeout);</span>
+<span class="nc" id="L511">            params.add(param);</span>
+        }
+<span class="nc bnc" id="L513" title="All 2 branches missed.">        if (podTimeout &gt; 0) {</span>
+<span class="nc" id="L514">            param = new String[2];</span>
+<span class="nc" id="L515">            param[0] = &quot;podtimeout&quot;;</span>
+<span class="nc" id="L516">            param[1] = Double.toString(podTimeout);</span>
+<span class="nc" id="L517">            params.add(param);</span>
+        }
+<span class="nc bnc" id="L519" title="All 2 branches missed.">        if (formatTimeout &gt; 0) {</span>
+<span class="nc" id="L520">            param = new String[2];</span>
+<span class="nc" id="L521">            param[0] = &quot;formattimeout&quot;;</span>
+<span class="nc" id="L522">            param[1] = Double.toString(formatTimeout);</span>
+<span class="nc" id="L523">            params.add(param);</span>
+        }
+        
+<span class="nc bnc" id="L526" title="All 2 branches missed.">        if (ip != null) {</span>
+<span class="nc" id="L527">            param = new String[2];</span>
+<span class="nc" id="L528">            param[0] = &quot;ip&quot;;</span>
+<span class="nc" id="L529">            param[1] = ip;</span>
+<span class="nc" id="L530">            params.add(param);</span>
+        }
+<span class="nc bnc" id="L532" title="All 4 branches missed.">        if (latitude != null &amp;&amp; longitude != null) {</span>
+<span class="nc" id="L533">            param = new String[2];</span>
+<span class="nc" id="L534">            param[0] = &quot;latlong&quot;;</span>
+<span class="nc" id="L535">            param[1] = Double.toString(latitude) + &quot;,&quot; + Double.toString(longitude);</span>
+<span class="nc" id="L536">            params.add(param);</span>
+        }
+<span class="nc bnc" id="L538" title="All 2 branches missed.">        if (location != null) {</span>
+<span class="nc" id="L539">            param = new String[2];</span>
+<span class="nc" id="L540">            param[0] = &quot;location&quot;;</span>
+<span class="nc" id="L541">            param[1] = encode(location);</span>
+<span class="nc" id="L542">            params.add(param);</span>
+        }
+<span class="nc bnc" id="L544" title="All 2 branches missed.">        if (metric != null) {</span>
+<span class="nc" id="L545">            param = new String[2];</span>
+<span class="nc" id="L546">            param[0] = &quot;units&quot;;</span>
+<span class="nc bnc" id="L547" title="All 2 branches missed.">            param[1] = metric.booleanValue() ? &quot;metric&quot; : &quot;nonmetric&quot;;</span>
+<span class="nc" id="L548">            params.add(param);</span>
+        }
+<span class="nc bnc" id="L550" title="All 2 branches missed.">        if (currency != null) {</span>
+<span class="nc" id="L551">            param = new String[2];</span>
+<span class="nc" id="L552">            param[0] = &quot;currency&quot;;</span>
+<span class="nc" id="L553">            param[1] = currency;</span>
+<span class="nc" id="L554">            params.add(param);</span>
+        }
+<span class="nc bnc" id="L556" title="All 2 branches missed.">        if (countryCode != null) {</span>
+<span class="nc" id="L557">            param = new String[2];</span>
+<span class="nc" id="L558">            param[0] = &quot;countrycode&quot;;</span>
+<span class="nc" id="L559">            param[1] = countryCode;</span>
+<span class="nc" id="L560">            params.add(param);</span>
+        }
+<span class="nc bnc" id="L562" title="All 2 branches missed.">        if (allowTranslation != null) {</span>
+<span class="nc" id="L563">            param = new String[2];</span>
+<span class="nc" id="L564">            param[0] = &quot;translation&quot;;</span>
+<span class="nc bnc" id="L565" title="All 2 branches missed.">            param[1] = allowTranslation.booleanValue() ? &quot;true&quot; : &quot;false&quot;;</span>
+<span class="nc" id="L566">            params.add(param);</span>
+        }
+<span class="nc bnc" id="L568" title="All 2 branches missed.">        if (includeRelatedLinks) {</span>
+<span class="nc" id="L569">            param = new String[2];</span>
+<span class="nc" id="L570">            param[0] = &quot;sidebarlinks&quot;;</span>
+<span class="nc" id="L571">            param[1] = &quot;true&quot;;</span>
+<span class="nc" id="L572">            params.add(param);</span>
+        }
+<span class="nc bnc" id="L574" title="All 2 branches missed.">        if (allowReinterpret) {</span>
+<span class="nc" id="L575">            param = new String[2];</span>
+<span class="nc" id="L576">            param[0] = &quot;reinterpret&quot;;</span>
+<span class="nc" id="L577">            param[1] = &quot;true&quot;;</span>
+<span class="nc" id="L578">            params.add(param);</span>
+        }
+        
+<span class="nc bnc" id="L581" title="All 2 branches missed.">        for (String t : podTitles) {</span>
+<span class="nc" id="L582">            param = new String[2];</span>
+<span class="nc" id="L583">            param[0] = &quot;podtitle&quot;;</span>
+<span class="nc" id="L584">            param[1] = encode(t);</span>
+<span class="nc" id="L585">            params.add(param);</span>
+<span class="nc" id="L586">        }</span>
+<span class="nc bnc" id="L587" title="All 2 branches missed.">        for (String sc : podScanners) {</span>
+<span class="nc" id="L588">            param = new String[2];</span>
+<span class="nc" id="L589">            param[0] = &quot;scanner&quot;;</span>
+<span class="nc" id="L590">            param[1] = sc;</span>
+<span class="nc" id="L591">            params.add(param);</span>
+<span class="nc" id="L592">        }</span>
+<span class="nc bnc" id="L593" title="All 2 branches missed.">        for (Integer i : podIndices) {</span>
+<span class="nc" id="L594">            param = new String[2];</span>
+<span class="nc" id="L595">            param[0] = &quot;podindex&quot;;</span>
+<span class="nc" id="L596">            param[1] = Integer.toString(i);</span>
+<span class="nc" id="L597">            params.add(param);</span>
+<span class="nc" id="L598">        }</span>
+<span class="nc bnc" id="L599" title="All 2 branches missed.">        for (String id : includePodIDs) {</span>
+<span class="nc" id="L600">            param = new String[2];</span>
+<span class="nc" id="L601">            param[0] = &quot;includepodid&quot;;</span>
+<span class="nc" id="L602">            param[1] = encode(id);</span>
+<span class="nc" id="L603">            params.add(param);</span>
+<span class="nc" id="L604">        }</span>
+<span class="nc bnc" id="L605" title="All 2 branches missed.">        for (String id : excludePodIDs) {</span>
+<span class="nc" id="L606">            param = new String[2];</span>
+<span class="nc" id="L607">            param[0] = &quot;excludepodid&quot;;</span>
+<span class="nc" id="L608">            param[1] = encode(id);</span>
+<span class="nc" id="L609">            params.add(param);</span>
+<span class="nc" id="L610">        }</span>
+        
+<span class="nc bnc" id="L612" title="All 2 branches missed.">        for (String a : assumptions) {</span>
+<span class="nc" id="L613">            param = new String[2];</span>
+<span class="nc" id="L614">            param[0] = &quot;assumption&quot;;</span>
+            // Assumption strings are already encoded in the output, so not encoded here.
+<span class="nc" id="L616">            param[1] = a;</span>
+<span class="nc" id="L617">            params.add(param);</span>
+<span class="nc" id="L618">        }</span>
+<span class="nc bnc" id="L619" title="All 2 branches missed.">        for (WAPodState p : podStates) {</span>
+<span class="nc" id="L620">            param = new String[2];</span>
+<span class="nc" id="L621">            param[0] = &quot;podstate&quot;;</span>
+<span class="nc" id="L622">            param[1] = encode(p.getInputs()[p.getCurrentIndex()]);</span>
+<span class="nc" id="L623">            params.add(param);</span>
+<span class="nc" id="L624">        }</span>
+        
+<span class="nc bnc" id="L626" title="All 2 branches missed.">        if (width &gt; 0) {</span>
+<span class="nc" id="L627">            param = new String[2];</span>
+<span class="nc" id="L628">            param[0] = &quot;width&quot;;</span>
+<span class="nc" id="L629">            param[1] = Integer.toString(width);</span>
+<span class="nc" id="L630">            params.add(param);</span>
+        }
+<span class="nc bnc" id="L632" title="All 2 branches missed.">        if (maxWidth &gt; 0) {</span>
+<span class="nc" id="L633">            param = new String[2];</span>
+<span class="nc" id="L634">            param[0] = &quot;maxwidth&quot;;</span>
+<span class="nc" id="L635">            param[1] = Integer.toString(maxWidth);</span>
+<span class="nc" id="L636">            params.add(param);</span>
+        }
+<span class="nc bnc" id="L638" title="All 2 branches missed.">        if (plotWidth &gt; 0) {</span>
+<span class="nc" id="L639">            param = new String[2];</span>
+<span class="nc" id="L640">            param[0] = &quot;plotwidth&quot;;</span>
+<span class="nc" id="L641">            param[1] = Integer.toString(plotWidth);</span>
+<span class="nc" id="L642">            params.add(param);</span>
+        }
+<span class="nc bnc" id="L644" title="All 2 branches missed.">        if (magnification != 1.0) {</span>
+<span class="nc" id="L645">            param = new String[2];</span>
+<span class="nc" id="L646">            param[0] = &quot;mag&quot;;</span>
+<span class="nc" id="L647">            param[1] = Double.toString(magnification);</span>
+<span class="nc" id="L648">            params.add(param);</span>
+        }
+<span class="nc bnc" id="L650" title="All 2 branches missed.">        for (String[] paramPair : extraParams) {</span>
+<span class="nc" id="L651">            param = new String[2];</span>
+<span class="nc" id="L652">            param[0] = paramPair[0];</span>
+<span class="nc" id="L653">            param[1] = paramPair[1];</span>
+<span class="nc" id="L654">            params.add(param);</span>
+<span class="nc" id="L655">        }</span>
+        
+<span class="nc" id="L657">        return params;</span>
+    }
+    
+    
+    private static String encode(String s) {
+        try {
+<span class="nc" id="L663">            return java.net.URLEncoder.encode(s, &quot;UTF-8&quot;);</span>
+<span class="nc" id="L664">        } catch (UnsupportedEncodingException e) {</span>
+<span class="nc" id="L665">            return null; // Will never happen, because UTF-8 is always supported. Doesn't matter what we return.</span>
+        }
+    }
+
+    
+    //////////////////  From URL  ////////////////
+    
+    // Parse from a URL, either http://api.wolframalpha.com/....?input=foo&amp;appid=bar...  or just input=foo&amp;appid=bar...
+    public void fillFromURL(String url) {
+        
+<span class="nc" id="L675">        int questionMarkPos = url.indexOf(&quot;?&quot;);</span>
+        // Works for ? not present (questionMarkPos == -1, then)
+<span class="nc" id="L677">        String queryString = url.substring(questionMarkPos + 1);</span>
+<span class="nc" id="L678">        HashMap&lt;String,List&lt;String&gt;&gt; parmsMap = new HashMap&lt;String,List&lt;String&gt;&gt;();</span>
+<span class="nc" id="L679">        String params[] = queryString.split(&quot;&amp;&quot;);</span>
+<span class="nc bnc" id="L680" title="All 2 branches missed.">        for (String param : params) {</span>
+<span class="nc" id="L681">           String temp[] = param.split(&quot;=&quot;);</span>
+<span class="nc bnc" id="L682" title="All 2 branches missed.">           if (temp.length == 2) {</span>
+               try {
+<span class="nc" id="L684">                   String value = java.net.URLDecoder.decode(temp[1], &quot;UTF-8&quot;);</span>
+<span class="nc" id="L685">                   List&lt;String&gt; values = parmsMap.get(temp[0]);</span>
+<span class="nc bnc" id="L686" title="All 2 branches missed.">                   if (values == null)</span>
+<span class="nc" id="L687">                       values = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L688">                   values.add(value);</span>
+<span class="nc" id="L689">                   parmsMap.put(temp[0], values);</span>
+<span class="nc" id="L690">               } catch (UnsupportedEncodingException e) {</span>
+                    // Do nothing; param will be lost. But exception is impossible.
+<span class="nc" id="L692">               }</span>
+           }
+        }
+<span class="nc" id="L695">        List&lt;String&gt; input = parmsMap.get(&quot;input&quot;);</span>
+<span class="nc bnc" id="L696" title="All 2 branches missed.">        if (input != null) setInput(input.get(0));</span>
+<span class="nc" id="L697">        List&lt;String&gt; formats = parmsMap.get(&quot;format&quot;);</span>
+<span class="nc bnc" id="L698" title="All 2 branches missed.">        if (formats != null) {</span>
+<span class="nc" id="L699">            String[] fmts = formats.get(0).split(&quot;,&quot;);</span>
+<span class="nc bnc" id="L700" title="All 2 branches missed.">            for (String fmt : fmts) addFormat(fmt);</span>
+        }
+<span class="nc" id="L702">        List&lt;String&gt; ip = parmsMap.get(&quot;ip&quot;);</span>
+<span class="nc bnc" id="L703" title="All 2 branches missed.">        if (ip != null) setIP(ip.get(0));</span>
+<span class="nc" id="L704">        List&lt;String&gt; latlong = parmsMap.get(&quot;latlong&quot;);</span>
+<span class="nc bnc" id="L705" title="All 2 branches missed.">        if (latlong != null) setLatLong(latlong.get(0));</span>
+<span class="nc" id="L706">        List&lt;String&gt; location = parmsMap.get(&quot;location&quot;);</span>
+<span class="nc bnc" id="L707" title="All 2 branches missed.">        if (location != null) setLocation(location.get(0));</span>
+<span class="nc" id="L708">        List&lt;String&gt; units = parmsMap.get(&quot;units&quot;);</span>
+<span class="nc bnc" id="L709" title="All 2 branches missed.">        if (units != null) setMetric(units.equals(&quot;metric&quot;));</span>
+<span class="nc" id="L710">        List&lt;String&gt; currency = parmsMap.get(&quot;currency&quot;);</span>
+<span class="nc bnc" id="L711" title="All 2 branches missed.">        if (currency != null) setCurrency(currency.get(0));</span>
+<span class="nc" id="L712">        List&lt;String&gt; countryCode = parmsMap.get(&quot;countrycode&quot;);</span>
+<span class="nc bnc" id="L713" title="All 2 branches missed.">        if ( countryCode != null) setCountryCode(countryCode.get(0));</span>
+<span class="nc" id="L714">        List&lt;String&gt; allowTranslation = parmsMap.get(&quot;translation&quot;);</span>
+<span class="nc bnc" id="L715" title="All 2 branches missed.">        if (allowTranslation != null) setAllowTranslation(allowTranslation.equals(&quot;true&quot;));</span>
+<span class="nc" id="L716">        List&lt;String&gt; podTitles = parmsMap.get(&quot;podtitle&quot;);</span>
+<span class="nc bnc" id="L717" title="All 2 branches missed.">        if (podTitles != null)</span>
+<span class="nc bnc" id="L718" title="All 2 branches missed.">            for (String title : podTitles) addPodTitle(title);</span>
+<span class="nc" id="L719">        List&lt;String&gt; podScanners = parmsMap.get(&quot;podscanner&quot;);</span>
+<span class="nc bnc" id="L720" title="All 2 branches missed.">        if (podScanners != null)</span>
+<span class="nc bnc" id="L721" title="All 2 branches missed.">            for (String scanner : podScanners) addPodScanner(scanner);</span>
+<span class="nc" id="L722">        List&lt;String&gt; podIndexes = parmsMap.get(&quot;podindex&quot;);</span>
+<span class="nc bnc" id="L723" title="All 2 branches missed.">        if (podIndexes != null)</span>
+<span class="nc bnc" id="L724" title="All 2 branches missed.">            for (String index : podIndexes) addPodIndex(Integer.parseInt(index));</span>
+<span class="nc" id="L725">        List&lt;String&gt; includePods = parmsMap.get(&quot;includepodid&quot;);</span>
+<span class="nc bnc" id="L726" title="All 2 branches missed.">        if (includePods != null)</span>
+<span class="nc bnc" id="L727" title="All 2 branches missed.">            for (String include : includePods) addIncludePodID(include);</span>
+<span class="nc" id="L728">        List&lt;String&gt; excludePods = parmsMap.get(&quot;excludepodid&quot;);</span>
+<span class="nc bnc" id="L729" title="All 2 branches missed.">        if (excludePods != null)</span>
+<span class="nc bnc" id="L730" title="All 2 branches missed.">            for (String exclude : excludePods) addExcludePodID(exclude);</span>
+<span class="nc" id="L731">        List&lt;String&gt; assumptions = parmsMap.get(&quot;assumption&quot;);</span>
+<span class="nc bnc" id="L732" title="All 2 branches missed.">        if (assumptions != null)</span>
+<span class="nc bnc" id="L733" title="All 2 branches missed.">            for (String a : assumptions) addAssumption(a);</span>
+<span class="nc" id="L734">        List&lt;String&gt; podStates = parmsMap.get(&quot;podstate&quot;);</span>
+<span class="nc bnc" id="L735" title="All 2 branches missed.">        if (podStates != null)</span>
+<span class="nc bnc" id="L736" title="All 2 branches missed.">            for (String state : podStates) addPodState(state);</span>
+<span class="nc" id="L737">        List&lt;String&gt; relatedLinks = parmsMap.get(&quot;sidebarlinks&quot;);</span>
+<span class="nc bnc" id="L738" title="All 2 branches missed.">        if (relatedLinks != null) setRelatedLinks(relatedLinks.get(0).equals(&quot;true&quot;));</span>
+<span class="nc" id="L739">        List&lt;String&gt; reinterpret = parmsMap.get(&quot;reinterpret&quot;);</span>
+<span class="nc bnc" id="L740" title="All 2 branches missed.">        if (reinterpret != null) setReinterpret(reinterpret.get(0).equals(&quot;true&quot;));</span>
+        
+        // Lump together all the calls that interpret numbers. If any of these throws, we will just lose
+        // setting for that param and the others that follow.
+        try {
+<span class="nc" id="L745">            List&lt;String&gt; width = parmsMap.get(&quot;width&quot;);</span>
+<span class="nc bnc" id="L746" title="All 2 branches missed.">            if (width != null) setWidth(Integer.parseInt(width.get(0)));</span>
+<span class="nc" id="L747">            List&lt;String&gt; maxWidth = parmsMap.get(&quot;maxwidth&quot;);</span>
+<span class="nc bnc" id="L748" title="All 2 branches missed.">            if (maxWidth != null) setMaxWidth(Integer.parseInt(maxWidth.get(0)));</span>
+<span class="nc" id="L749">            List&lt;String&gt; plotWidth = parmsMap.get(&quot;plotwidth&quot;);</span>
+<span class="nc bnc" id="L750" title="All 2 branches missed.">            if (plotWidth != null) setPlotWidth(Integer.parseInt(plotWidth.get(0)));</span>
+<span class="nc" id="L751">            List&lt;String&gt; magnification = parmsMap.get(&quot;mag&quot;);</span>
+<span class="nc bnc" id="L752" title="All 2 branches missed.">            if (magnification != null) setMagnification(Double.parseDouble(magnification.get(0)));</span>
+<span class="nc" id="L753">            List&lt;String&gt; async = parmsMap.get(&quot;async&quot;);</span>
+<span class="nc bnc" id="L754" title="All 2 branches missed.">            if (async != null) {</span>
+<span class="nc" id="L755">                String asyncValue = async.get(0);</span>
+<span class="nc bnc" id="L756" title="All 2 branches missed.">                if (asyncValue.equals(&quot;true&quot;))</span>
+<span class="nc" id="L757">                    setAsync(0);</span>
+<span class="nc bnc" id="L758" title="All 2 branches missed.">                else if (asyncValue.equals(&quot;false&quot;))</span>
+<span class="nc" id="L759">                    setAsync(-1);</span>
+                else
+<span class="nc" id="L761">                    setAsync(Double.parseDouble(asyncValue));</span>
+            }
+<span class="nc" id="L763">            List&lt;String&gt; scantimeout = parmsMap.get(&quot;scantimeout&quot;);</span>
+<span class="nc bnc" id="L764" title="All 2 branches missed.">            if (scantimeout != null) setScanTimeout(Double.parseDouble(scantimeout.get(0)));</span>
+<span class="nc" id="L765">            List&lt;String&gt; podtimeout = parmsMap.get(&quot;podtimeout&quot;);</span>
+<span class="nc bnc" id="L766" title="All 2 branches missed.">            if (podtimeout != null) setPodTimeout(Double.parseDouble(podtimeout.get(0)));</span>
+<span class="nc" id="L767">            List&lt;String&gt; formattimeout = parmsMap.get(&quot;formattimeout&quot;);</span>
+<span class="nc bnc" id="L768" title="All 2 branches missed.">            if (formattimeout != null) setFormatTimeout(Double.parseDouble(formattimeout.get(0)));</span>
+<span class="nc" id="L769">        } catch (NumberFormatException e) {</span>
+            // Do nothing.
+<span class="nc" id="L771">        }</span>
+<span class="nc" id="L772">    }</span>
+    
+    
+    public String toWebsiteURL() {
+        
+<span class="nc" id="L777">        StringBuffer url = new StringBuffer(&quot;http://www.wolframalpha.com/input/?i=&quot;);</span>
+        try {
+<span class="nc" id="L779">            url.append(URLEncoder.encode(input, &quot;UTF-8&quot;));</span>
+<span class="nc" id="L780">        } catch (UnsupportedEncodingException e) {}</span>
+<span class="nc bnc" id="L781" title="All 2 branches missed.">        for (String a : getAssumptions()) {</span>
+<span class="nc" id="L782">            url.append(&quot;&amp;a=&quot;);</span>
+<span class="nc" id="L783">            url.append(a);</span>
+        }
+<span class="nc" id="L785">        return url.toString();        </span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

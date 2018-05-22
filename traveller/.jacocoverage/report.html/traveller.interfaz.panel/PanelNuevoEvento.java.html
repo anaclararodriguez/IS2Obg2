@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PanelNuevoEvento.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.interfaz.panel</a> &gt; <span class="el_source">PanelNuevoEvento.java</span></div><h1>PanelNuevoEvento.java</h1><pre class="source lang-java linenums">package traveller.interfaz.panel;
+
+import traveller.dominio.Viaje;
+import traveller.dominio.ISistema;
+import traveller.dominio.TipoEvento;
+import traveller.excepciones.evento.EventoException;
+import traveller.excepciones.fecha.FechaException;
+import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import javax.swing.border.LineBorder;
+
+/**
+ * La clase PanelJugadores se encarga de pedir y validar los datos para la
+ * creación de nuevos jugadores y de mostrar los datos de jugadores existentes.
+ */
+public class PanelNuevoEvento extends javax.swing.JPanel {
+
+    /**
+     * Crea un nuevo objeto PanelJugadores
+     */
+<span class="nc" id="L24">    public PanelNuevoEvento(ISistema sistema) {</span>
+<span class="nc" id="L25">        initComponents();</span>
+
+<span class="nc" id="L27">        this.sistema = sistema;</span>
+
+<span class="nc" id="L29">        ArrayList&lt;Viaje&gt; lista = new ArrayList&lt;Viaje&gt;();</span>
+<span class="nc" id="L30">        Iterator&lt;Viaje&gt; it = sistema.getUsuarioIdentificado().getListaViajes().iterator();</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        while (it.hasNext()) {</span>
+<span class="nc" id="L32">            lista.add(it.next());</span>
+        }
+<span class="nc" id="L34">        listaViajes.setListData(lista.toArray());</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">         if (this.sistema.esModoDesarrollador()) {</span>
+<span class="nc" id="L36">            this.txtNombre.requestFocusInWindow();</span>
+<span class="nc" id="L37">            this.txtNombre.setText(&quot;Paseo al museo&quot;);</span>
+<span class="nc" id="L38">            this.txtDescripcion.setText(&quot;Visita al Museo Thyssen-Bornemisza.&quot;);</span>
+<span class="nc" id="L39">            this.txtDia.setText(&quot;28&quot;);</span>
+<span class="nc" id="L40">            this.txtMes.setText(&quot;12&quot;);</span>
+<span class="nc" id="L41">            this.txtAño.setText(&quot;2012&quot;);</span>
+<span class="nc" id="L42">            this.txtLugar.setText(&quot;Museo Thyssen-Bornemisza&quot;);</span>
+<span class="nc" id="L43">            this.listaViajes.setSelectedIndex(0);</span>
+        } else {
+<span class="nc" id="L45">            this.txtNombre.requestFocusInWindow();</span>
+        }
+<span class="nc" id="L47">    }</span>
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+<span class="nc" id="L53">        jScrollPane1 = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L54">        jEditorPane1 = new javax.swing.JEditorPane();</span>
+<span class="nc" id="L55">        panelPrincipal = new javax.swing.JPanel();</span>
+<span class="nc" id="L56">        panelTitulo = new javax.swing.JPanel();</span>
+<span class="nc" id="L57">        etqTitulo = new javax.swing.JLabel();</span>
+<span class="nc" id="L58">        panelCrearJugador = new javax.swing.JPanel();</span>
+<span class="nc" id="L59">        txtMes = new javax.swing.JTextField();</span>
+<span class="nc" id="L60">        etqTipo = new javax.swing.JLabel();</span>
+<span class="nc" id="L61">        etqFecha = new javax.swing.JLabel();</span>
+<span class="nc" id="L62">        btnAceptar = new javax.swing.JButton();</span>
+<span class="nc" id="L63">        etqError = new javax.swing.JLabel();</span>
+<span class="nc" id="L64">        etqCorrecto = new javax.swing.JLabel();</span>
+<span class="nc" id="L65">        comboTipo = new javax.swing.JComboBox();</span>
+<span class="nc" id="L66">        jLabel1 = new javax.swing.JLabel();</span>
+<span class="nc" id="L67">        txtDia = new javax.swing.JTextField();</span>
+<span class="nc" id="L68">        txtAño = new javax.swing.JTextField();</span>
+<span class="nc" id="L69">        jLabel2 = new javax.swing.JLabel();</span>
+<span class="nc" id="L70">        etqDescripcion = new javax.swing.JLabel();</span>
+<span class="nc" id="L71">        jScrollPane2 = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L72">        txtDescripcion = new javax.swing.JTextPane();</span>
+<span class="nc" id="L73">        etqNombre = new javax.swing.JLabel();</span>
+<span class="nc" id="L74">        txtNombre = new javax.swing.JTextField();</span>
+<span class="nc" id="L75">        scrollListaViajes = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L76">        listaViajes = new javax.swing.JList();</span>
+<span class="nc" id="L77">        etqViaje = new javax.swing.JLabel();</span>
+<span class="nc" id="L78">        etqLugar = new javax.swing.JLabel();</span>
+<span class="nc" id="L79">        txtLugar = new javax.swing.JTextField();</span>
+<span class="nc" id="L80">        etqFechas = new javax.swing.JLabel();</span>
+<span class="nc" id="L81">        etqAclaracion = new javax.swing.JLabel();</span>
+
+<span class="nc" id="L83">        jScrollPane1.setViewportView(jEditorPane1);</span>
+
+<span class="nc" id="L85">        setBackground(new java.awt.Color(245, 245, 245));</span>
+<span class="nc" id="L86">        setPreferredSize(new java.awt.Dimension(460, 679));</span>
+
+<span class="nc" id="L88">        panelPrincipal.setBackground(new java.awt.Color(245, 245, 245));</span>
+
+<span class="nc" id="L90">        panelTitulo.setBackground(new java.awt.Color(39, 39, 39));</span>
+<span class="nc" id="L91">        panelTitulo.setForeground(new java.awt.Color(255, 255, 255));</span>
+
+<span class="nc" id="L93">        etqTitulo.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L94">        etqTitulo.setForeground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L95">        etqTitulo.setText(&quot;Nuevo evento&quot;);</span>
+
+<span class="nc" id="L97">        javax.swing.GroupLayout panelTituloLayout = new javax.swing.GroupLayout(panelTitulo);</span>
+<span class="nc" id="L98">        panelTitulo.setLayout(panelTituloLayout);</span>
+<span class="nc" id="L99">        panelTituloLayout.setHorizontalGroup(</span>
+<span class="nc" id="L100">            panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L101">            .addGroup(panelTituloLayout.createSequentialGroup()</span>
+<span class="nc" id="L102">                .addContainerGap()</span>
+<span class="nc" id="L103">                .addComponent(etqTitulo)</span>
+<span class="nc" id="L104">                .addContainerGap(311, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L106">        panelTituloLayout.setVerticalGroup(</span>
+<span class="nc" id="L107">            panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L108">            .addGroup(panelTituloLayout.createSequentialGroup()</span>
+<span class="nc" id="L109">                .addContainerGap()</span>
+<span class="nc" id="L110">                .addComponent(etqTitulo)</span>
+<span class="nc" id="L111">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L114">        panelCrearJugador.setBackground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L115">        panelCrearJugador.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(39, 39, 39), 1, true));</span>
+<span class="nc" id="L116">        panelCrearJugador.setMaximumSize(new java.awt.Dimension(380, 290));</span>
+<span class="nc" id="L117">        panelCrearJugador.setPreferredSize(new java.awt.Dimension(380, 290));</span>
+
+<span class="nc" id="L119">        txtMes.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 14)); // NOI18N</span>
+<span class="nc" id="L120">        txtMes.setText(&quot;MM&quot;);</span>
+<span class="nc" id="L121">        txtMes.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));</span>
+<span class="nc" id="L122">        txtMes.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L124">                txtMesActionPerformed(evt);</span>
+<span class="nc" id="L125">            }</span>
+        });
+<span class="nc" id="L127">        txtMes.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L129">                txtMesFocusGained(evt);</span>
+<span class="nc" id="L130">            }</span>
+        });
+<span class="nc" id="L132">        txtMes.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L134">                txtMes.setBorder(new LineBorder(new Color(77,144,254)));</span>
+<span class="nc" id="L135">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L137">                txtMes.setBorder(new LineBorder(new Color(217,217,217)));</span>
+<span class="nc" id="L138">            }</span>
+        });
+<span class="nc" id="L140">        txtMes.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L143" title="All 2 branches missed.">                if (!txtMes.isFocusOwner()) {</span>
+<span class="nc" id="L144">                    txtMes.setBorder(new LineBorder(new Color(185, 185, 185)));</span>
+                }
+<span class="nc" id="L146">            }</span>
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L149" title="All 2 branches missed.">                if (!txtMes.isFocusOwner()) {</span>
+<span class="nc" id="L150">                    txtMes.setBorder(new LineBorder(new Color(217, 217, 217)));</span>
+                }
+<span class="nc" id="L152">            }</span>
+        });
+
+<span class="nc" id="L155">        etqTipo.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 17)); // NOI18N</span>
+<span class="nc" id="L156">        etqTipo.setText(&quot;Tipo:&quot;);</span>
+
+<span class="nc" id="L158">        etqFecha.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 17)); // NOI18N</span>
+<span class="nc" id="L159">        etqFecha.setText(&quot;Fecha:&quot;);</span>
+
+<span class="nc" id="L161">        btnAceptar.setBackground(new java.awt.Color(242, 242, 242));</span>
+<span class="nc" id="L162">        btnAceptar.setFont(new java.awt.Font(&quot;SansSerif&quot;, 1, 14)); // NOI18N</span>
+<span class="nc" id="L163">        btnAceptar.setText(&quot;Crear evento&quot;);</span>
+<span class="nc" id="L164">        btnAceptar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(221, 221, 221), 1, true));</span>
+<span class="nc" id="L165">        btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</span>
+<span class="nc" id="L166">        btnAceptar.setFocusPainted(false);</span>
+<span class="nc" id="L167">        btnAceptar.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L169">                btnAceptarActionPerformed(evt);</span>
+<span class="nc" id="L170">            }</span>
+        });
+
+<span class="nc" id="L173">        etqError.setFont(new java.awt.Font(&quot;Tahoma&quot;, 1, 13)); // NOI18N</span>
+<span class="nc" id="L174">        etqError.setForeground(new java.awt.Color(204, 0, 0));</span>
+<span class="nc" id="L175">        etqError.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);</span>
+
+<span class="nc" id="L177">        etqCorrecto.setFont(new java.awt.Font(&quot;Tahoma&quot;, 1, 12)); // NOI18N</span>
+<span class="nc" id="L178">        etqCorrecto.setForeground(new java.awt.Color(0, 153, 0));</span>
+
+<span class="nc" id="L180">        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { &quot;Cultural&quot;, &quot;Comercial&quot;, &quot;Deportivo&quot;, &quot;Familiar&quot;, &quot;Laboral&quot;, &quot;Otro&quot; }));</span>
+<span class="nc" id="L181">        comboTipo.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L183">                comboTipoActionPerformed(evt);</span>
+<span class="nc" id="L184">            }</span>
+        });
+
+<span class="nc" id="L187">        jLabel1.setText(&quot;/&quot;);</span>
+
+<span class="nc" id="L189">        txtDia.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 14)); // NOI18N</span>
+<span class="nc" id="L190">        txtDia.setText(&quot;DD&quot;);</span>
+<span class="nc" id="L191">        txtDia.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));</span>
+<span class="nc" id="L192">        txtDia.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L194">                txtDiaFocusGained(evt);</span>
+<span class="nc" id="L195">            }</span>
+        });
+<span class="nc" id="L197">        txtDia.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L199">                txtDia.setBorder(new LineBorder(new Color(77,144,254)));</span>
+<span class="nc" id="L200">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L202">                txtDia.setBorder(new LineBorder(new Color(217,217,217)));</span>
+<span class="nc" id="L203">            }</span>
+        });
+<span class="nc" id="L205">        txtDia.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L208" title="All 2 branches missed.">                if (!txtDia.isFocusOwner()) {</span>
+<span class="nc" id="L209">                    txtDia.setBorder(new LineBorder(new Color(185, 185, 185)));</span>
+                }
+<span class="nc" id="L211">            }</span>
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L214" title="All 2 branches missed.">                if (!txtDia.isFocusOwner()) {</span>
+<span class="nc" id="L215">                    txtDia.setBorder(new LineBorder(new Color(217, 217, 217)));</span>
+                }
+<span class="nc" id="L217">            }</span>
+        });
+
+<span class="nc" id="L220">        txtAño.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 14)); // NOI18N</span>
+<span class="nc" id="L221">        txtAño.setText(&quot;AAAA&quot;);</span>
+<span class="nc" id="L222">        txtAño.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));</span>
+<span class="nc" id="L223">        txtAño.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L225">                txtAñoFocusGained(evt);</span>
+<span class="nc" id="L226">            }</span>
+        });
+<span class="nc" id="L228">        txtAño.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L230">                txtAño.setBorder(new LineBorder(new Color(77,144,254)));</span>
+<span class="nc" id="L231">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L233">                txtAño.setBorder(new LineBorder(new Color(217,217,217)));</span>
+<span class="nc" id="L234">            }</span>
+        });
+<span class="nc" id="L236">        txtAño.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L239" title="All 2 branches missed.">                if (!txtAño.isFocusOwner()) {</span>
+<span class="nc" id="L240">                    txtAño.setBorder(new LineBorder(new Color(185, 185, 185)));</span>
+                }
+<span class="nc" id="L242">            }</span>
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L245" title="All 2 branches missed.">                if (!txtAño.isFocusOwner()) {</span>
+<span class="nc" id="L246">                    txtAño.setBorder(new LineBorder(new Color(217, 217, 217)));</span>
+                }
+<span class="nc" id="L248">            }</span>
+        });
+
+<span class="nc" id="L251">        jLabel2.setText(&quot;/&quot;);</span>
+
+<span class="nc" id="L253">        etqDescripcion.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 17)); // NOI18N</span>
+<span class="nc" id="L254">        etqDescripcion.setText(&quot;Descripción:&quot;);</span>
+
+<span class="nc" id="L256">        jScrollPane2.setViewportView(txtDescripcion);</span>
+<span class="nc" id="L257">        txtDescripcion.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L259">                txtDescripcion.setBorder(new LineBorder(new Color(77,144,254)));</span>
+<span class="nc" id="L260">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L262">                txtDescripcion.setBorder(new LineBorder(new Color(217,217,217)));</span>
+<span class="nc" id="L263">            }</span>
+        });
+<span class="nc" id="L265">        txtDescripcion.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L268" title="All 2 branches missed.">                if (!txtDescripcion.isFocusOwner()) {</span>
+<span class="nc" id="L269">                    txtDescripcion.setBorder(new LineBorder(new Color(185, 185, 185)));</span>
+                }
+<span class="nc" id="L271">            }</span>
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L274" title="All 2 branches missed.">                if (!txtDescripcion.isFocusOwner()) {</span>
+<span class="nc" id="L275">                    txtDescripcion.setBorder(new LineBorder(new Color(217, 217, 217)));</span>
+                }
+<span class="nc" id="L277">            }</span>
+        });
+
+<span class="nc" id="L280">        etqNombre.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 17)); // NOI18N</span>
+<span class="nc" id="L281">        etqNombre.setText(&quot;Nombre:&quot;);</span>
+
+<span class="nc" id="L283">        txtNombre.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 14)); // NOI18N</span>
+<span class="nc" id="L284">        txtNombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));</span>
+<span class="nc" id="L285">        txtNombre.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L287">                txtNombreActionPerformed(evt);</span>
+<span class="nc" id="L288">            }</span>
+        });
+<span class="nc" id="L290">        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {</span>
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+<span class="nc" id="L292">                txtNombreKeyReleased(evt);</span>
+<span class="nc" id="L293">            }</span>
+        });
+<span class="nc" id="L295">        txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L297">                txtNombre.setBorder(new LineBorder(new Color(77,144,254)));</span>
+<span class="nc" id="L298">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L300">                txtNombre.setBorder(new LineBorder(new Color(217,217,217)));</span>
+<span class="nc" id="L301">            }</span>
+        });
+<span class="nc" id="L303">        txtNombre.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L306" title="All 2 branches missed.">                if (!txtNombre.isFocusOwner()) {</span>
+<span class="nc" id="L307">                    txtNombre.setBorder(new LineBorder(new Color(185, 185, 185)));</span>
+                }
+<span class="nc" id="L309">            }</span>
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L312" title="All 2 branches missed.">                if (!txtNombre.isFocusOwner()) {</span>
+<span class="nc" id="L313">                    txtNombre.setBorder(new LineBorder(new Color(217, 217, 217)));</span>
+                }
+<span class="nc" id="L315">            }</span>
+        });
+
+<span class="nc" id="L318">        listaViajes.setFocusable(false);</span>
+<span class="nc" id="L319">        listaViajes.setSelectionBackground(new java.awt.Color(39, 39, 39));</span>
+<span class="nc" id="L320">        listaViajes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {</span>
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+<span class="nc" id="L322">                listaViajesValueChanged(evt);</span>
+<span class="nc" id="L323">            }</span>
+        });
+<span class="nc" id="L325">        scrollListaViajes.setViewportView(listaViajes);</span>
+
+<span class="nc" id="L327">        etqViaje.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 17)); // NOI18N</span>
+<span class="nc" id="L328">        etqViaje.setText(&quot;Viaje:&quot;);</span>
+
+<span class="nc" id="L330">        etqLugar.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 17)); // NOI18N</span>
+<span class="nc" id="L331">        etqLugar.setText(&quot;Lugar:&quot;);</span>
+
+<span class="nc" id="L333">        txtLugar.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 14)); // NOI18N</span>
+<span class="nc" id="L334">        txtLugar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));</span>
+<span class="nc" id="L335">        txtLugar.addKeyListener(new java.awt.event.KeyAdapter() {</span>
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+<span class="nc" id="L337">                txtLugarKeyReleased(evt);</span>
+<span class="nc" id="L338">            }</span>
+        });
+<span class="nc" id="L340">        txtLugar.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L342">                txtLugar.setBorder(new LineBorder(new Color(77,144,254)));</span>
+<span class="nc" id="L343">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L345">                txtLugar.setBorder(new LineBorder(new Color(217,217,217)));</span>
+<span class="nc" id="L346">            }</span>
+        });
+<span class="nc" id="L348">        txtLugar.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L351" title="All 2 branches missed.">                if (!txtLugar.isFocusOwner()) {</span>
+<span class="nc" id="L352">                    txtLugar.setBorder(new LineBorder(new Color(185, 185, 185)));</span>
+                }
+<span class="nc" id="L354">            }</span>
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L357" title="All 2 branches missed.">                if (!txtLugar.isFocusOwner()) {</span>
+<span class="nc" id="L358">                    txtLugar.setBorder(new LineBorder(new Color(217, 217, 217)));</span>
+                }
+<span class="nc" id="L360">            }</span>
+        });
+
+<span class="nc" id="L363">        etqFechas.setFont(new java.awt.Font(&quot;Tahoma&quot;, 0, 12)); // NOI18N</span>
+
+<span class="nc" id="L365">        etqAclaracion.setText(&quot;* El proceso de creación del evento prodría demorar unos segundos.&quot;);</span>
+
+<span class="nc" id="L367">        javax.swing.GroupLayout panelCrearJugadorLayout = new javax.swing.GroupLayout(panelCrearJugador);</span>
+<span class="nc" id="L368">        panelCrearJugador.setLayout(panelCrearJugadorLayout);</span>
+<span class="nc" id="L369">        panelCrearJugadorLayout.setHorizontalGroup(</span>
+<span class="nc" id="L370">            panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L371">            .addGroup(panelCrearJugadorLayout.createSequentialGroup()</span>
+<span class="nc" id="L372">                .addContainerGap()</span>
+<span class="nc" id="L373">                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L374">                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearJugadorLayout.createSequentialGroup()</span>
+<span class="nc" id="L375">                        .addGap(0, 14, Short.MAX_VALUE)</span>
+<span class="nc" id="L376">                        .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L377">                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearJugadorLayout.createSequentialGroup()</span>
+<span class="nc" id="L378">                                .addComponent(etqNombre)</span>
+<span class="nc" id="L379">                                .addGap(344, 344, 344))</span>
+<span class="nc" id="L380">                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearJugadorLayout.createSequentialGroup()</span>
+<span class="nc" id="L381">                                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L382">                                    .addComponent(etqTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L383">                                    .addComponent(etqFecha)</span>
+<span class="nc" id="L384">                                    .addComponent(etqDescripcion)</span>
+<span class="nc" id="L385">                                    .addComponent(etqLugar))</span>
+<span class="nc" id="L386">                                .addGap(312, 312, 312))))</span>
+<span class="nc" id="L387">                    .addGroup(panelCrearJugadorLayout.createSequentialGroup()</span>
+<span class="nc" id="L388">                        .addComponent(etqCorrecto, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L389">                        .addGap(0, 78, Short.MAX_VALUE))))</span>
+<span class="nc" id="L390">            .addGroup(panelCrearJugadorLayout.createSequentialGroup()</span>
+<span class="nc" id="L391">                .addGap(86, 86, 86)</span>
+<span class="nc" id="L392">                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L393">                .addGap(0, 137, Short.MAX_VALUE))</span>
+<span class="nc" id="L394">            .addGroup(panelCrearJugadorLayout.createSequentialGroup()</span>
+<span class="nc" id="L395">                .addContainerGap()</span>
+<span class="nc" id="L396">                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L397">                    .addGroup(panelCrearJugadorLayout.createSequentialGroup()</span>
+<span class="nc" id="L398">                        .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L399">                            .addGroup(panelCrearJugadorLayout.createSequentialGroup()</span>
+<span class="nc" id="L400">                                .addGap(8, 8, 8)</span>
+<span class="nc" id="L401">                                .addComponent(etqFechas, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L402">                            .addGroup(panelCrearJugadorLayout.createSequentialGroup()</span>
+<span class="nc" id="L403">                                .addGap(10, 10, 10)</span>
+<span class="nc" id="L404">                                .addComponent(etqViaje)))</span>
+<span class="nc" id="L405">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L406">                        .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L407">                            .addGroup(panelCrearJugadorLayout.createSequentialGroup()</span>
+<span class="nc" id="L408">                                .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L409">                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L410">                                .addComponent(jLabel1)</span>
+<span class="nc" id="L411">                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L412">                                .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L413">                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L414">                                .addComponent(jLabel2)</span>
+<span class="nc" id="L415">                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L416">                                .addComponent(txtAño, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L417">                            .addComponent(txtNombre)</span>
+<span class="nc" id="L418">                            .addComponent(txtLugar)</span>
+<span class="nc" id="L419">                            .addComponent(comboTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L420">                            .addComponent(jScrollPane2)</span>
+<span class="nc" id="L421">                            .addComponent(scrollListaViajes, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)))</span>
+<span class="nc" id="L422">                    .addComponent(etqError, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L423">                .addContainerGap(33, Short.MAX_VALUE))</span>
+<span class="nc" id="L424">            .addGroup(panelCrearJugadorLayout.createSequentialGroup()</span>
+<span class="nc" id="L425">                .addContainerGap()</span>
+<span class="nc" id="L426">                .addComponent(etqAclaracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L427">                .addContainerGap())</span>
+        );
+<span class="nc" id="L429">        panelCrearJugadorLayout.setVerticalGroup(</span>
+<span class="nc" id="L430">            panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L431">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearJugadorLayout.createSequentialGroup()</span>
+<span class="nc" id="L432">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L433">                .addComponent(etqError, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L434">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L435">                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L436">                    .addGroup(panelCrearJugadorLayout.createSequentialGroup()</span>
+<span class="nc" id="L437">                        .addComponent(etqViaje)</span>
+<span class="nc" id="L438">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L439">                        .addComponent(etqFechas, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L440">                    .addComponent(scrollListaViajes, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L441">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L442">                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L443">                    .addComponent(etqNombre)</span>
+<span class="nc" id="L444">                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L445">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L446">                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L447">                    .addComponent(etqLugar)</span>
+<span class="nc" id="L448">                    .addComponent(txtLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L449">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)</span>
+<span class="nc" id="L450">                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L451">                    .addComponent(etqTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L452">                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L453">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L454">                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L455">                    .addComponent(etqFecha)</span>
+<span class="nc" id="L456">                    .addComponent(jLabel1)</span>
+<span class="nc" id="L457">                    .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L458">                    .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L459">                    .addComponent(txtAño, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L460">                    .addComponent(jLabel2))</span>
+<span class="nc" id="L461">                .addGap(25, 25, 25)</span>
+<span class="nc" id="L462">                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L463">                    .addComponent(etqDescripcion)</span>
+<span class="nc" id="L464">                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L465">                .addGap(37, 37, 37)</span>
+<span class="nc" id="L466">                .addComponent(etqCorrecto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L467">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L468">                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L469">                .addGap(11, 11, 11)</span>
+<span class="nc" id="L470">                .addComponent(etqAclaracion, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+        );
+
+<span class="nc" id="L473">        javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);</span>
+<span class="nc" id="L474">        panelPrincipal.setLayout(panelPrincipalLayout);</span>
+<span class="nc" id="L475">        panelPrincipalLayout.setHorizontalGroup(</span>
+<span class="nc" id="L476">            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L477">            .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L478">                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)</span>
+<span class="nc" id="L479">                    .addComponent(panelTitulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L480">                    .addComponent(panelCrearJugador, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE))</span>
+<span class="nc" id="L481">                .addContainerGap(18, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L483">        panelPrincipalLayout.setVerticalGroup(</span>
+<span class="nc" id="L484">            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L485">            .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L486">                .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L487">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L488">                .addComponent(panelCrearJugador, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)</span>
+<span class="nc" id="L489">                .addContainerGap())</span>
+        );
+
+<span class="nc" id="L492">        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);</span>
+<span class="nc" id="L493">        this.setLayout(layout);</span>
+<span class="nc" id="L494">        layout.setHorizontalGroup(</span>
+<span class="nc" id="L495">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L496">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L497">                .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L498">                .addContainerGap())</span>
+        );
+<span class="nc" id="L500">        layout.setVerticalGroup(</span>
+<span class="nc" id="L501">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L502">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L503">                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L504">                .addContainerGap(70, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L506">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
+
+    private void txtMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMesActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L510">    }//GEN-LAST:event_txtMesActionPerformed</span>
+
+    private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
+        // TODO add your handling code here:
+<span class="nc" id="L514">    }//GEN-LAST:event_txtNombreKeyReleased</span>
+
+    private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L518">    }//GEN-LAST:event_comboTipoActionPerformed</span>
+
+    private void txtLugarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLugarKeyReleased
+        // TODO add your handling code here:
+<span class="nc" id="L522">    }//GEN-LAST:event_txtLugarKeyReleased</span>
+
+    private void txtDiaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiaFocusGained
+<span class="nc bnc" id="L525" title="All 2 branches missed.">        if (txtDia.getText().equals(&quot;DD&quot;)) {</span>
+<span class="nc" id="L526">            txtDia.setText(&quot;&quot;);</span>
+        }
+<span class="nc" id="L528">    }//GEN-LAST:event_txtDiaFocusGained</span>
+
+    private void txtMesFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMesFocusGained
+<span class="nc bnc" id="L531" title="All 2 branches missed.">        if (txtMes.getText().equals(&quot;MM&quot;)) {</span>
+<span class="nc" id="L532">            txtMes.setText(&quot;&quot;);</span>
+        }
+<span class="nc" id="L534">    }//GEN-LAST:event_txtMesFocusGained</span>
+
+    private void txtAñoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAñoFocusGained
+<span class="nc bnc" id="L537" title="All 2 branches missed.">        if (txtAño.getText().equals(&quot;AAAA&quot;)) {</span>
+<span class="nc" id="L538">            txtAño.setText(&quot;&quot;);</span>
+        }
+<span class="nc" id="L540">    }//GEN-LAST:event_txtAñoFocusGained</span>
+
+    private void listaViajesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaViajesValueChanged
+<span class="nc bnc" id="L543" title="All 2 branches missed.">        if (!listaViajes.isSelectionEmpty()) {</span>
+<span class="nc" id="L544">            SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);</span>
+<span class="nc" id="L545">            String fechaIni = dateFormat.format(((Viaje) listaViajes.getSelectedValue()).getFechaInicio());</span>
+<span class="nc" id="L546">            String fechaFin = dateFormat.format(((Viaje) listaViajes.getSelectedValue()).getFechaFin());</span>
+<span class="nc" id="L547">            etqFechas.setText(fechaIni + &quot; - &quot; + fechaFin);</span>
+<span class="nc" id="L548">        } else {</span>
+<span class="nc" id="L549">            etqFechas.setText(&quot;&quot;);</span>
+        }
+<span class="nc" id="L551">    }//GEN-LAST:event_listaViajesValueChanged</span>
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+<span class="nc" id="L554">        String tipo = (String) comboTipo.getSelectedItem();</span>
+
+<span class="nc" id="L556">        TipoEvento tipoEvento = null;</span>
+<span class="nc bnc" id="L557" title="All 2 branches missed.">        if (tipo.equals(&quot;Cultural&quot;)) {</span>
+<span class="nc" id="L558">            tipoEvento = TipoEvento.CULTURAL;</span>
+<span class="nc bnc" id="L559" title="All 2 branches missed.">        } else if (tipo.equals(&quot;Deportivo&quot;)) {</span>
+<span class="nc" id="L560">            tipoEvento = TipoEvento.DEPORTIVO;</span>
+<span class="nc bnc" id="L561" title="All 2 branches missed.">        } else if (tipo.equals(&quot;Comercial&quot;)) {</span>
+<span class="nc" id="L562">            tipoEvento = TipoEvento.COMERCIAL;</span>
+<span class="nc bnc" id="L563" title="All 2 branches missed.">        } else if (tipo.equals(&quot;Familiar&quot;)) {</span>
+<span class="nc" id="L564">            tipoEvento = TipoEvento.FAMILIAR;</span>
+<span class="nc bnc" id="L565" title="All 2 branches missed.">        } else if (tipo.equals(&quot;Laboral&quot;)) {</span>
+<span class="nc" id="L566">            tipoEvento = TipoEvento.LABORAL;</span>
+<span class="nc bnc" id="L567" title="All 2 branches missed.">        } else if (tipo.equals(&quot;Otro&quot;)) {</span>
+<span class="nc" id="L568">            tipoEvento = TipoEvento.OTRO;</span>
+        }
+
+<span class="nc" id="L571">        String nombre = txtNombre.getText();</span>
+<span class="nc" id="L572">        String dia = txtDia.getText();</span>
+<span class="nc" id="L573">        String mes = txtMes.getText();</span>
+<span class="nc" id="L574">        String año = txtAño.getText();</span>
+<span class="nc" id="L575">        String lugar = txtLugar.getText();</span>
+<span class="nc bnc" id="L576" title="All 2 branches missed.">        if (!listaViajes.isSelectionEmpty()) {</span>
+<span class="nc" id="L577">            String descripcion = txtDescripcion.getText();</span>
+
+            try {
+<span class="nc" id="L580">                ((Viaje) listaViajes.getSelectedValue()).altaEvento(nombre, dia, mes, año, lugar, descripcion, tipoEvento);</span>
+<span class="nc" id="L581">                String accion = &quot;&lt;html&gt;&lt;b&gt;&quot; + this.sistema.getUsuarioIdentificado().getNombre() + &quot; &quot;</span>
+<span class="nc" id="L582">                        + this.sistema.getUsuarioIdentificado().getApellido() + &quot;&lt;/b&gt; agregó el evento &lt;i&gt;&quot; + nombre + &quot;&lt;/i&gt; al viaje.&quot;;</span>
+<span class="nc" id="L583">                SimpleDateFormat sdfDate = new SimpleDateFormat(&quot;dd/MM/yyyy - HH:mm&quot;);</span>
+<span class="nc" id="L584">                Date hoy = new Date();</span>
+<span class="nc" id="L585">                String strDia = sdfDate.format(hoy);</span>
+<span class="nc" id="L586">                ((Viaje) listaViajes.getSelectedValue()).agregarLogAViaje(accion,strDia);</span>
+<span class="nc" id="L587">                etqCorrecto.setText(&quot;Registro exitoso.&quot;);</span>
+<span class="nc" id="L588">                etqError.setText(null);</span>
+<span class="nc" id="L589">                inhabilitarCampos();</span>
+		
+<span class="nc" id="L591">		String mensaje = this.sistema.getUsuarioIdentificado().getNombre() + &quot; &quot; + this.sistema.getUsuarioIdentificado().getApellido() + &quot; agrego el evento &quot; + nombre + &quot; al viaje &quot; + </span>
+<span class="nc" id="L592">			((Viaje) listaViajes.getSelectedValue()).getNombre();</span>
+                
+<span class="nc" id="L594">                String mensajeEmail = &quot;Le notificamos que el usuario &quot;+this.sistema.getUsuarioIdentificado().getNombre() + &quot; &quot; + this.sistema.getUsuarioIdentificado().getApellido() + &quot; agrego el evento &quot; + nombre + &quot; al viaje &quot; + </span>
+<span class="nc" id="L595">			((Viaje) listaViajes.getSelectedValue()).getNombre() + &quot;\n\n Le recordamos que si no desea ser notificado mediante este medio puede darse&quot;</span>
+                        + &quot;de baja seleccionando la opción en 'Mi Cuenta' \n\nGracias,\n\nTraveller.&quot;;
+<span class="nc" id="L597">                String titulo = this.sistema.getUsuarioIdentificado().getNombre() + &quot; &quot;+this.sistema.getUsuarioIdentificado().getApellido() + &quot; ha modificado un viaje.&quot;;</span>
+<span class="nc" id="L598">		this.sistema.notificarNovedad(mensaje, mensajeEmail, titulo, (Viaje) listaViajes.getSelectedValue());</span>
+                
+<span class="nc" id="L600">            } catch (EventoException e) {</span>
+<span class="nc" id="L601">                etqError.setText(e.toString());</span>
+<span class="nc" id="L602">            } catch (FechaException e) {</span>
+<span class="nc" id="L603">                etqError.setText(e.toString());</span>
+<span class="nc" id="L604">            }</span>
+<span class="nc" id="L605">        } else {</span>
+<span class="nc" id="L606">            etqError.setText(&quot;Debe seleccionar un viaje.&quot;);</span>
+        }
+<span class="nc" id="L608">    }//GEN-LAST:event_btnAceptarActionPerformed</span>
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L612">    }//GEN-LAST:event_txtNombreActionPerformed</span>
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAceptar;
+    private javax.swing.JComboBox comboTipo;
+    private javax.swing.JLabel etqAclaracion;
+    private javax.swing.JLabel etqCorrecto;
+    private javax.swing.JLabel etqDescripcion;
+    private javax.swing.JLabel etqError;
+    private javax.swing.JLabel etqFecha;
+    private javax.swing.JLabel etqFechas;
+    private javax.swing.JLabel etqLugar;
+    private javax.swing.JLabel etqNombre;
+    private javax.swing.JLabel etqTipo;
+    private javax.swing.JLabel etqTitulo;
+    private javax.swing.JLabel etqViaje;
+    private javax.swing.JEditorPane jEditorPane1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList listaViajes;
+    private javax.swing.JPanel panelCrearJugador;
+    private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JPanel panelTitulo;
+    private javax.swing.JScrollPane scrollListaViajes;
+    private javax.swing.JTextField txtAño;
+    private javax.swing.JTextPane txtDescripcion;
+    private javax.swing.JTextField txtDia;
+    private javax.swing.JTextField txtLugar;
+    private javax.swing.JTextField txtMes;
+    private javax.swing.JTextField txtNombre;
+    // End of variables declaration//GEN-END:variables
+    private ISistema sistema;
+
+    /**
+     * Inhabilita los campos de ingeso de datos.
+     */
+    private void inhabilitarCampos() {
+<span class="nc" id="L650">        txtDia.setEditable(false);</span>
+<span class="nc" id="L651">        txtMes.setEditable(false);</span>
+<span class="nc" id="L652">        txtAño.setEditable(false);</span>
+<span class="nc" id="L653">        txtDia.setEditable(false);</span>
+<span class="nc" id="L654">        txtMes.setEditable(false);</span>
+<span class="nc" id="L655">        txtAño.setEditable(false);</span>
+<span class="nc" id="L656">        txtNombre.setEditable(false);</span>
+<span class="nc" id="L657">        txtLugar.setEditable(false);</span>
+<span class="nc" id="L658">        txtDescripcion.setEditable(false);</span>
+<span class="nc" id="L659">        btnAceptar.setEnabled(false);</span>
+<span class="nc" id="L660">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

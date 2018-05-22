@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SubPanelMuro.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.interfaz.panel</a> &gt; <span class="el_source">SubPanelMuro.java</span></div><h1>SubPanelMuro.java</h1><pre class="source lang-java linenums">/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package traveller.interfaz.panel;
+
+import traveller.dominio.Viaje;
+import traveller.dominio.ISistema;
+import traveller.dominio.Comentario;
+import traveller.excepciones.comentario.ComentarioException;
+import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
+
+public final class SubPanelMuro extends javax.swing.JPanel {
+
+<span class="nc" id="L18">    public SubPanelMuro(ISistema sistema, Viaje viaje) {</span>
+<span class="nc" id="L19">        initComponents();</span>
+<span class="nc" id="L20">        this.sistema = sistema;</span>
+<span class="nc" id="L21">        this.viaje = viaje;</span>
+
+<span class="nc" id="L23">        actualizarComentarios();</span>
+<span class="nc" id="L24">    }</span>
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+<span class="nc" id="L30">        panelMuro = new javax.swing.JPanel();</span>
+<span class="nc" id="L31">        lblRedactar = new javax.swing.JLabel();</span>
+<span class="nc" id="L32">        txtPublicacion = new javax.swing.JTextArea();</span>
+<span class="nc" id="L33">        btnPublicar = new javax.swing.JButton();</span>
+<span class="nc" id="L34">        panelComentario1 = new javax.swing.JPanel();</span>
+<span class="nc" id="L35">        etqAutor1 = new javax.swing.JLabel();</span>
+<span class="nc" id="L36">        etqContenido1 = new javax.swing.JLabel();</span>
+<span class="nc" id="L37">        etqFecha1 = new javax.swing.JLabel();</span>
+<span class="nc" id="L38">        panelComentario2 = new javax.swing.JPanel();</span>
+<span class="nc" id="L39">        etqAutor2 = new javax.swing.JLabel();</span>
+<span class="nc" id="L40">        etqContenido2 = new javax.swing.JLabel();</span>
+<span class="nc" id="L41">        etqFecha2 = new javax.swing.JLabel();</span>
+<span class="nc" id="L42">        panelComentario3 = new javax.swing.JPanel();</span>
+<span class="nc" id="L43">        etqAutor3 = new javax.swing.JLabel();</span>
+<span class="nc" id="L44">        etqContenido3 = new javax.swing.JLabel();</span>
+<span class="nc" id="L45">        etqFecha3 = new javax.swing.JLabel();</span>
+<span class="nc" id="L46">        panelComentario4 = new javax.swing.JPanel();</span>
+<span class="nc" id="L47">        etqAutor4 = new javax.swing.JLabel();</span>
+<span class="nc" id="L48">        etqContenido4 = new javax.swing.JLabel();</span>
+<span class="nc" id="L49">        etqFecha4 = new javax.swing.JLabel();</span>
+<span class="nc" id="L50">        etqError = new javax.swing.JLabel();</span>
+
+<span class="nc" id="L52">        setLayout(null);</span>
+
+<span class="nc" id="L54">        panelMuro.setBackground(new java.awt.Color(255, 255, 255));</span>
+
+<span class="nc" id="L56">        lblRedactar.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 13)); // NOI18N</span>
+<span class="nc" id="L57">        lblRedactar.setText(&quot;Redactar publicación&quot;);</span>
+
+<span class="nc" id="L59">        txtPublicacion.setColumns(20);</span>
+<span class="nc" id="L60">        txtPublicacion.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 13)); // NOI18N</span>
+<span class="nc" id="L61">        txtPublicacion.setForeground(new java.awt.Color(153, 153, 153));</span>
+<span class="nc" id="L62">        txtPublicacion.setRows(5);</span>
+<span class="nc" id="L63">        txtPublicacion.setText(&quot;Escribe algo...&quot;);</span>
+<span class="nc" id="L64">        txtPublicacion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));</span>
+<span class="nc" id="L65">        txtPublicacion.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L67">                txtPublicacionFocusGained(evt);</span>
+<span class="nc" id="L68">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L70">                txtPublicacionFocusLost(evt);</span>
+<span class="nc" id="L71">            }</span>
+        });
+
+<span class="nc" id="L74">        btnPublicar.setFont(new java.awt.Font(&quot;SansSerif&quot;, 1, 14)); // NOI18N</span>
+<span class="nc" id="L75">        btnPublicar.setText(&quot;Publicar&quot;);</span>
+<span class="nc" id="L76">        btnPublicar.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L78">                btnPublicarActionPerformed(evt);</span>
+<span class="nc" id="L79">            }</span>
+        });
+
+<span class="nc" id="L82">        panelComentario1.setBackground(new java.awt.Color(255, 255, 255));</span>
+
+<span class="nc" id="L84">        etqAutor1.setFont(new java.awt.Font(&quot;Tahoma&quot;, 1, 13)); // NOI18N</span>
+<span class="nc" id="L85">        etqAutor1.setText(&quot;Juan Alvarez&quot;);</span>
+
+<span class="nc" id="L87">        etqContenido1.setText(&quot;&lt;html&gt; Este es un comentario con salto de linea. Me gusta el grupo. &lt;br&gt; probando salto de linea . Jaja&lt;br&gt;Saludos &lt;/html&gt;&quot;);</span>
+<span class="nc" id="L88">        etqContenido1.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L89">        etqContenido1.setVerticalAlignment(javax.swing.SwingConstants.TOP);</span>
+
+<span class="nc" id="L91">        etqFecha1.setForeground(new java.awt.Color(153, 153, 153));</span>
+<span class="nc" id="L92">        etqFecha1.setText(&quot;21/12/2012 17:15&quot;);</span>
+
+<span class="nc" id="L94">        javax.swing.GroupLayout panelComentario1Layout = new javax.swing.GroupLayout(panelComentario1);</span>
+<span class="nc" id="L95">        panelComentario1.setLayout(panelComentario1Layout);</span>
+<span class="nc" id="L96">        panelComentario1Layout.setHorizontalGroup(</span>
+<span class="nc" id="L97">            panelComentario1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L98">            .addGroup(panelComentario1Layout.createSequentialGroup()</span>
+<span class="nc" id="L99">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L100">                .addGroup(panelComentario1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L101">                    .addComponent(etqContenido1, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)</span>
+<span class="nc" id="L102">                    .addGroup(panelComentario1Layout.createSequentialGroup()</span>
+<span class="nc" id="L103">                        .addComponent(etqAutor1)</span>
+<span class="nc" id="L104">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L105">                        .addComponent(etqFecha1)))</span>
+<span class="nc" id="L106">                .addContainerGap())</span>
+        );
+<span class="nc" id="L108">        panelComentario1Layout.setVerticalGroup(</span>
+<span class="nc" id="L109">            panelComentario1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L110">            .addGroup(panelComentario1Layout.createSequentialGroup()</span>
+<span class="nc" id="L111">                .addGroup(panelComentario1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L112">                    .addComponent(etqAutor1)</span>
+<span class="nc" id="L113">                    .addComponent(etqFecha1))</span>
+<span class="nc" id="L114">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L115">                .addComponent(etqContenido1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+        );
+
+<span class="nc" id="L118">        panelComentario2.setBackground(new java.awt.Color(255, 255, 255));</span>
+
+<span class="nc" id="L120">        etqAutor2.setFont(new java.awt.Font(&quot;Tahoma&quot;, 1, 13)); // NOI18N</span>
+<span class="nc" id="L121">        etqAutor2.setText(&quot;Juan Alvarez&quot;);</span>
+
+<span class="nc" id="L123">        etqContenido2.setText(&quot;&lt;html&gt; Este es un comentario con salto de linea. Me gusta el grupo. &lt;br&gt; probando salto de linea . Jaja&lt;br&gt;Saludos &lt;/html&gt;&quot;);</span>
+<span class="nc" id="L124">        etqContenido2.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L125">        etqContenido2.setVerticalAlignment(javax.swing.SwingConstants.TOP);</span>
+
+<span class="nc" id="L127">        etqFecha2.setForeground(new java.awt.Color(153, 153, 153));</span>
+<span class="nc" id="L128">        etqFecha2.setText(&quot;21/12/2012 17:15&quot;);</span>
+
+<span class="nc" id="L130">        javax.swing.GroupLayout panelComentario2Layout = new javax.swing.GroupLayout(panelComentario2);</span>
+<span class="nc" id="L131">        panelComentario2.setLayout(panelComentario2Layout);</span>
+<span class="nc" id="L132">        panelComentario2Layout.setHorizontalGroup(</span>
+<span class="nc" id="L133">            panelComentario2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L134">            .addGroup(panelComentario2Layout.createSequentialGroup()</span>
+<span class="nc" id="L135">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L136">                .addGroup(panelComentario2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L137">                    .addComponent(etqContenido2)</span>
+<span class="nc" id="L138">                    .addGroup(panelComentario2Layout.createSequentialGroup()</span>
+<span class="nc" id="L139">                        .addComponent(etqAutor2)</span>
+<span class="nc" id="L140">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L141">                        .addComponent(etqFecha2)))</span>
+<span class="nc" id="L142">                .addContainerGap())</span>
+        );
+<span class="nc" id="L144">        panelComentario2Layout.setVerticalGroup(</span>
+<span class="nc" id="L145">            panelComentario2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L146">            .addGroup(panelComentario2Layout.createSequentialGroup()</span>
+<span class="nc" id="L147">                .addGroup(panelComentario2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L148">                    .addComponent(etqAutor2)</span>
+<span class="nc" id="L149">                    .addComponent(etqFecha2))</span>
+<span class="nc" id="L150">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L151">                .addComponent(etqContenido2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+        );
+
+<span class="nc" id="L154">        panelComentario3.setBackground(new java.awt.Color(255, 255, 255));</span>
+
+<span class="nc" id="L156">        etqAutor3.setFont(new java.awt.Font(&quot;Tahoma&quot;, 1, 13)); // NOI18N</span>
+<span class="nc" id="L157">        etqAutor3.setText(&quot;Juan Alvarez&quot;);</span>
+
+<span class="nc" id="L159">        etqContenido3.setText(&quot;&lt;html&gt; Este es un comentario con salto de linea. Me gusta el grupo. &lt;br&gt; probando salto de linea . Jaja&lt;br&gt;Saludos &lt;/html&gt;&quot;);</span>
+<span class="nc" id="L160">        etqContenido3.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L161">        etqContenido3.setVerticalAlignment(javax.swing.SwingConstants.TOP);</span>
+
+<span class="nc" id="L163">        etqFecha3.setForeground(new java.awt.Color(153, 153, 153));</span>
+<span class="nc" id="L164">        etqFecha3.setText(&quot;21/12/2012 17:15&quot;);</span>
+
+<span class="nc" id="L166">        javax.swing.GroupLayout panelComentario3Layout = new javax.swing.GroupLayout(panelComentario3);</span>
+<span class="nc" id="L167">        panelComentario3.setLayout(panelComentario3Layout);</span>
+<span class="nc" id="L168">        panelComentario3Layout.setHorizontalGroup(</span>
+<span class="nc" id="L169">            panelComentario3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L170">            .addGroup(panelComentario3Layout.createSequentialGroup()</span>
+<span class="nc" id="L171">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L172">                .addGroup(panelComentario3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L173">                    .addComponent(etqContenido3)</span>
+<span class="nc" id="L174">                    .addGroup(panelComentario3Layout.createSequentialGroup()</span>
+<span class="nc" id="L175">                        .addComponent(etqAutor3)</span>
+<span class="nc" id="L176">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L177">                        .addComponent(etqFecha3)))</span>
+<span class="nc" id="L178">                .addContainerGap())</span>
+        );
+<span class="nc" id="L180">        panelComentario3Layout.setVerticalGroup(</span>
+<span class="nc" id="L181">            panelComentario3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L182">            .addGroup(panelComentario3Layout.createSequentialGroup()</span>
+<span class="nc" id="L183">                .addGroup(panelComentario3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L184">                    .addComponent(etqAutor3)</span>
+<span class="nc" id="L185">                    .addComponent(etqFecha3))</span>
+<span class="nc" id="L186">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L187">                .addComponent(etqContenido3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+        );
+
+<span class="nc" id="L190">        panelComentario4.setBackground(new java.awt.Color(255, 255, 255));</span>
+
+<span class="nc" id="L192">        etqAutor4.setFont(new java.awt.Font(&quot;Tahoma&quot;, 1, 13)); // NOI18N</span>
+<span class="nc" id="L193">        etqAutor4.setText(&quot;Juan Alvarez&quot;);</span>
+
+<span class="nc" id="L195">        etqContenido4.setText(&quot;&lt;html&gt; Este es un comentario con salto de linea. Me gusta el grupo. &lt;br&gt; probando salto de linea . Jaja&lt;br&gt;Saludos &lt;/html&gt;&quot;);</span>
+<span class="nc" id="L196">        etqContenido4.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L197">        etqContenido4.setVerticalAlignment(javax.swing.SwingConstants.TOP);</span>
+
+<span class="nc" id="L199">        etqFecha4.setForeground(new java.awt.Color(153, 153, 153));</span>
+<span class="nc" id="L200">        etqFecha4.setText(&quot;21/12/2012 17:15&quot;);</span>
+
+<span class="nc" id="L202">        javax.swing.GroupLayout panelComentario4Layout = new javax.swing.GroupLayout(panelComentario4);</span>
+<span class="nc" id="L203">        panelComentario4.setLayout(panelComentario4Layout);</span>
+<span class="nc" id="L204">        panelComentario4Layout.setHorizontalGroup(</span>
+<span class="nc" id="L205">            panelComentario4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L206">            .addGroup(panelComentario4Layout.createSequentialGroup()</span>
+<span class="nc" id="L207">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L208">                .addGroup(panelComentario4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L209">                    .addComponent(etqContenido4)</span>
+<span class="nc" id="L210">                    .addGroup(panelComentario4Layout.createSequentialGroup()</span>
+<span class="nc" id="L211">                        .addComponent(etqAutor4)</span>
+<span class="nc" id="L212">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L213">                        .addComponent(etqFecha4)))</span>
+<span class="nc" id="L214">                .addContainerGap())</span>
+        );
+<span class="nc" id="L216">        panelComentario4Layout.setVerticalGroup(</span>
+<span class="nc" id="L217">            panelComentario4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L218">            .addGroup(panelComentario4Layout.createSequentialGroup()</span>
+<span class="nc" id="L219">                .addGroup(panelComentario4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L220">                    .addComponent(etqAutor4)</span>
+<span class="nc" id="L221">                    .addComponent(etqFecha4))</span>
+<span class="nc" id="L222">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L223">                .addComponent(etqContenido4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+        );
+
+<span class="nc" id="L226">        etqError.setFont(new java.awt.Font(&quot;Tahoma&quot;, 1, 11)); // NOI18N</span>
+<span class="nc" id="L227">        etqError.setForeground(new java.awt.Color(204, 0, 0));</span>
+
+<span class="nc" id="L229">        javax.swing.GroupLayout panelMuroLayout = new javax.swing.GroupLayout(panelMuro);</span>
+<span class="nc" id="L230">        panelMuro.setLayout(panelMuroLayout);</span>
+<span class="nc" id="L231">        panelMuroLayout.setHorizontalGroup(</span>
+<span class="nc" id="L232">            panelMuroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L233">            .addComponent(panelComentario1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L234">            .addComponent(panelComentario2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L235">            .addComponent(panelComentario3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L236">            .addComponent(panelComentario4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L237">            .addGroup(panelMuroLayout.createSequentialGroup()</span>
+<span class="nc" id="L238">                .addContainerGap()</span>
+<span class="nc" id="L239">                .addGroup(panelMuroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L240">                    .addComponent(txtPublicacion)</span>
+<span class="nc" id="L241">                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMuroLayout.createSequentialGroup()</span>
+<span class="nc" id="L242">                        .addComponent(etqError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L243">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L244">                        .addComponent(btnPublicar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L245">                    .addGroup(panelMuroLayout.createSequentialGroup()</span>
+<span class="nc" id="L246">                        .addComponent(lblRedactar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L247">                        .addGap(0, 0, Short.MAX_VALUE)))</span>
+<span class="nc" id="L248">                .addContainerGap())</span>
+        );
+<span class="nc" id="L250">        panelMuroLayout.setVerticalGroup(</span>
+<span class="nc" id="L251">            panelMuroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L252">            .addGroup(panelMuroLayout.createSequentialGroup()</span>
+<span class="nc" id="L253">                .addGap(13, 13, 13)</span>
+<span class="nc" id="L254">                .addComponent(lblRedactar)</span>
+<span class="nc" id="L255">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L256">                .addComponent(txtPublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L257">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L258">                .addGroup(panelMuroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L259">                    .addComponent(btnPublicar)</span>
+<span class="nc" id="L260">                    .addComponent(etqError, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L261">                .addGap(34, 34, 34)</span>
+<span class="nc" id="L262">                .addComponent(panelComentario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L263">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L264">                .addComponent(panelComentario2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L265">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L266">                .addComponent(panelComentario3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L267">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L268">                .addComponent(panelComentario4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L269">                .addContainerGap(18, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L272">        add(panelMuro);</span>
+<span class="nc" id="L273">        panelMuro.setBounds(0, 0, 0, 0);</span>
+<span class="nc" id="L274">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
+
+    public void actualizarComentarios() {
+<span class="nc" id="L277">        this.panelComentario1.setVisible(false);</span>
+<span class="nc" id="L278">        this.panelComentario2.setVisible(false);</span>
+<span class="nc" id="L279">        this.panelComentario3.setVisible(false);</span>
+<span class="nc" id="L280">        this.panelComentario4.setVisible(false);</span>
+
+<span class="nc" id="L282">        int cantComentarios = 1;</span>
+<span class="nc" id="L283">        Iterator&lt;Comentario&gt; iteradorComentarios = viaje.getListaComentarios().iterator();</span>
+<span class="nc bnc" id="L284" title="All 4 branches missed.">        while (iteradorComentarios.hasNext() &amp;&amp; cantComentarios &lt;= 4) {</span>
+<span class="nc" id="L285">            Comentario comentario = iteradorComentarios.next();</span>
+<span class="nc bnc" id="L286" title="All 5 branches missed.">            switch (cantComentarios) {</span>
+                case 1:
+<span class="nc" id="L288">                    this.panelComentario1.setVisible(true);</span>
+<span class="nc" id="L289">                    this.etqAutor1.setText(comentario.getAutor());</span>
+<span class="nc" id="L290">                    this.etqContenido1.setText(comentario.getContenido());</span>
+<span class="nc" id="L291">                    this.etqFecha1.setText(comentario.getFecha());</span>
+<span class="nc" id="L292">                    break;</span>
+                case 2:
+<span class="nc" id="L294">                    this.panelComentario2.setVisible(true);</span>
+<span class="nc" id="L295">                    this.etqAutor2.setText(comentario.getAutor());</span>
+<span class="nc" id="L296">                    this.etqContenido2.setText(comentario.getContenido());</span>
+<span class="nc" id="L297">                    this.etqFecha2.setText(comentario.getFecha());</span>
+<span class="nc" id="L298">                    break;</span>
+                case 3:
+<span class="nc" id="L300">                    this.panelComentario3.setVisible(true);</span>
+<span class="nc" id="L301">                    this.etqAutor3.setText(comentario.getAutor());</span>
+<span class="nc" id="L302">                    this.etqContenido3.setText(comentario.getContenido());</span>
+<span class="nc" id="L303">                    this.etqFecha3.setText(comentario.getFecha());</span>
+<span class="nc" id="L304">                    break;</span>
+                case 4:
+<span class="nc" id="L306">                    this.panelComentario4.setVisible(true);</span>
+<span class="nc" id="L307">                    this.etqAutor4.setText(comentario.getAutor());</span>
+<span class="nc" id="L308">                    this.etqContenido4.setText(comentario.getContenido());</span>
+<span class="nc" id="L309">                    this.etqFecha4.setText(comentario.getFecha());</span>
+                    break;
+            }
+<span class="nc" id="L312">            cantComentarios++;</span>
+<span class="nc" id="L313">        }</span>
+<span class="nc" id="L314">    }</span>
+
+    private void btnPublicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPublicarActionPerformed
+<span class="nc" id="L317">        String texto = txtPublicacion.getText();</span>
+
+<span class="nc bnc" id="L319" title="All 2 branches missed.">        if (texto.equals(&quot;Escribe algo...&quot;)) {</span>
+<span class="nc" id="L320">            texto = &quot;&quot;;</span>
+        }
+
+        try {
+<span class="nc" id="L324">            String autor = this.sistema.getUsuarioIdentificado().getNombre() + &quot; &quot; + this.sistema.getUsuarioIdentificado().getApellido();</span>
+<span class="nc" id="L325">            SimpleDateFormat sdfDate = new SimpleDateFormat(&quot;dd/MM/yyyy - HH:mm&quot;);</span>
+<span class="nc" id="L326">            Date hoy = new Date();</span>
+<span class="nc" id="L327">            String strDia = sdfDate.format(hoy);</span>
+
+<span class="nc" id="L329">            this.viaje.agregarComentario(autor, strDia, texto);</span>
+<span class="nc" id="L330">            this.actualizarComentarios();</span>
+<span class="nc" id="L331">            etqError.setText(null);</span>
+<span class="nc" id="L332">            txtPublicacion.setText(&quot;Escribe algo...&quot;);</span>
+<span class="nc" id="L333">            txtPublicacion.setForeground(Color.GRAY);</span>
+<span class="nc" id="L334">        }catch(ComentarioException e){</span>
+<span class="nc" id="L335">            this.etqError.setText(e.toString());</span>
+<span class="nc" id="L336">        }</span>
+<span class="nc" id="L337">    }//GEN-LAST:event_btnPublicarActionPerformed</span>
+
+    private void txtPublicacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPublicacionFocusLost
+<span class="nc bnc" id="L340" title="All 2 branches missed.">        if (txtPublicacion.getText().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L341">            txtPublicacion.setText(&quot;Escribe algo...&quot;);</span>
+<span class="nc" id="L342">            txtPublicacion.setForeground(Color.GRAY);</span>
+        }
+<span class="nc" id="L344">    }//GEN-LAST:event_txtPublicacionFocusLost</span>
+
+    private void txtPublicacionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPublicacionFocusGained
+<span class="nc" id="L347">        txtPublicacion.setText(&quot;&quot;);</span>
+<span class="nc" id="L348">        txtPublicacion.setForeground(Color.BLACK);</span>
+<span class="nc" id="L349">    }//GEN-LAST:event_txtPublicacionFocusGained</span>
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPublicar;
+    private javax.swing.JLabel etqAutor1;
+    private javax.swing.JLabel etqAutor2;
+    private javax.swing.JLabel etqAutor3;
+    private javax.swing.JLabel etqAutor4;
+    private javax.swing.JLabel etqContenido1;
+    private javax.swing.JLabel etqContenido2;
+    private javax.swing.JLabel etqContenido3;
+    private javax.swing.JLabel etqContenido4;
+    private javax.swing.JLabel etqError;
+    private javax.swing.JLabel etqFecha1;
+    private javax.swing.JLabel etqFecha2;
+    private javax.swing.JLabel etqFecha3;
+    private javax.swing.JLabel etqFecha4;
+    private javax.swing.JLabel lblRedactar;
+    private javax.swing.JPanel panelComentario1;
+    private javax.swing.JPanel panelComentario2;
+    private javax.swing.JPanel panelComentario3;
+    private javax.swing.JPanel panelComentario4;
+    private javax.swing.JPanel panelMuro;
+    private javax.swing.JTextArea txtPublicacion;
+    // End of variables declaration//GEN-END:variables
+    private ISistema sistema;
+    private Viaje viaje;
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

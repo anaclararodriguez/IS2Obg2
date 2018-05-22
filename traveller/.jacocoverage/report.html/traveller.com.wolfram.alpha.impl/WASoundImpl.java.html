@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>WASoundImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.com.wolfram.alpha.impl</a> &gt; <span class="el_source">WASoundImpl.java</span></div><h1>WASoundImpl.java</h1><pre class="source lang-java linenums">/*
+ * Created on Dec 9, 2009
+ *
+ */
+package traveller.com.wolfram.alpha.impl;
+
+
+import java.io.File;
+import java.io.Serializable;
+import java.net.URL;
+
+import org.w3c.dom.Element;
+
+import traveller.com.wolfram.alpha.WAException;
+import traveller.com.wolfram.alpha.WASound;
+import com.wolfram.alpha.net.HttpProvider;
+import com.wolfram.alpha.net.URLFetcher;
+import traveller.com.wolfram.alpha.visitor.Visitable;
+import traveller.com.wolfram.alpha.visitor.Visitor;
+
+// This class is written exactly like WAImageImpl, as if sound downloads will be done in advance and stored
+// as files to be passed to the media player. The player also supports streaming, though, and that would be
+// a better choice. At the moment, there appear to be problems with streaming. I have encountered failures in MEdiaPlayer.prepare(),
+// and although these might be problems with our servers not being set up to deliver progressive downloads,
+// the internet is filled with people claiming problems with streaming on various devices and Android versions.
+// Even if we switch to a streaming mode, it makes sense for this class to support download-to-file mode. We can
+// avoid using the feature if we decide streaming is working.
+
+public class WASoundImpl implements WASound, Visitable, Serializable {
+
+    private String url;
+    private String format;
+    
+    private volatile File file;
+<span class="nc" id="L35">    private volatile int cachedHashCode = 0;</span>
+<span class="nc" id="L36">    private volatile boolean soundAcquired = false;</span>
+    
+    private transient HttpProvider http;
+    private transient File tempDir;
+   
+<span class="nc" id="L41">    static final WASoundImpl[] EMPTY_ARRAY = new WASoundImpl[0];</span>
+
+    private static final long serialVersionUID = 3863860206159745210L;
+
+    
+<span class="nc" id="L46">    WASoundImpl(Element thisElement, HttpProvider http, File tempDir) throws WAException {</span>
+        
+<span class="nc" id="L48">        url = thisElement.getAttribute(&quot;url&quot;);</span>
+<span class="nc" id="L49">        format = thisElement.getAttribute(&quot;type&quot;);</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        if (format.equals(&quot;audio/x-wav&quot;))</span>
+<span class="nc" id="L51">            format = &quot;WAV&quot;;</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        else if (format.equals(&quot;audio/midi&quot;))</span>
+<span class="nc" id="L53">            format = &quot;MIDI&quot;;</span>
+<span class="nc" id="L54">        this.http = http;</span>
+<span class="nc" id="L55">        this.tempDir = tempDir;</span>
+<span class="nc" id="L56">    }</span>
+
+    
+    ////////////////////  WASound interface  //////////////////////////////
+    
+    public String getURL() {
+<span class="nc" id="L62">        return url;</span>
+    }
+    
+    public String getFormat() {
+<span class="nc" id="L66">        return format;</span>
+    }
+    
+    public synchronized File getFile() {
+<span class="nc" id="L70">        return file;</span>
+    }
+    
+    public void acquireSound() {
+        
+        // If this is a deserialized instance, http will  be null. Such instances are &quot;dead&quot;; they can
+        // never retrieve new content from the web.
+        // The only synchronization needed here is that soundAcquired is volatile.
+<span class="nc bnc" id="L78" title="All 4 branches missed.">        if (!soundAcquired &amp;&amp; http != null) {</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">            if (!url.equals(&quot;&quot;)) {</span>
+                try {
+                    String suffix;
+<span class="nc bnc" id="L82" title="All 2 branches missed.">                    if (format == &quot;WAV&quot;)</span>
+<span class="nc" id="L83">                        suffix = &quot;.wav&quot;;</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">                    else if (format == &quot;MIDI&quot;)</span>
+<span class="nc" id="L85">                        suffix = &quot;.mid&quot;;</span>
+                    else 
+<span class="nc" id="L87">                        suffix = &quot;.tmp&quot;;</span>
+<span class="nc" id="L88">                    String outFile = File.createTempFile(&quot;WASound&quot;, suffix, tempDir).getAbsolutePath();</span>
+<span class="nc" id="L89">                    URLFetcher fetcher = new URLFetcher(new URL(url), outFile, http, null);</span>
+<span class="nc" id="L90">                    fetcher.fetch();</span>
+<span class="nc" id="L91">                    setFile(fetcher.getFile());</span>
+<span class="nc" id="L92">                } catch (Exception e) {</span>
+                    // TODO: report?
+<span class="nc" id="L94">                }</span>
+                
+            }
+<span class="nc" id="L97">            soundAcquired = true;</span>
+        }
+<span class="nc" id="L99">    }</span>
+
+    
+    ////////////////////////  hashCode()  /////////////////////////
+    
+    // We use hashCode() as a &quot;content code&quot; to tell us quickly whether the object's content
+    // has changed since some point in the past. Note that we do not override equals() as well, 
+    // but it is not necessary to override equals() when overriding hashCode() (although it _is_
+    // necessary to override hashCode() when overriding equals()). Every field on which the
+    // hashcode depends must be either immutable or volatile (or otherwise controlled by synchronized
+    // blocks), as these values are changed on a background thread.
+    // This is not a particularly good hash function, but it doesn't need to be. The only property
+    // that really matters is that its value changes when the content of this object changes.
+    
+    public synchronized int hashCode() {
+        
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        if (cachedHashCode != 0)</span>
+<span class="nc" id="L116">            return cachedHashCode;</span>
+        
+<span class="nc" id="L118">        int result = 17;</span>
+<span class="nc" id="L119">        result = 37*result + url.hashCode();</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        if (file != null)</span>
+<span class="nc" id="L121">            result = 37*result + file.hashCode();</span>
+<span class="nc" id="L122">        cachedHashCode = result;</span>
+<span class="nc" id="L123">        return result;</span>
+    }
+    
+    
+    ////////////////////////////////////////////
+    
+    private synchronized void setFile(File file) {
+<span class="nc" id="L130">        this.file = file;</span>
+<span class="nc" id="L131">        cachedHashCode = 0;  // Force recompute of hash now that content has changed.</span>
+<span class="nc" id="L132">    }</span>
+    
+    ///////////////////////////  Visitor interface  ////////////////////////////
+    
+    public void accept(Visitor v) {
+<span class="nc" id="L137">        v.visit(this);</span>
+<span class="nc" id="L138">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

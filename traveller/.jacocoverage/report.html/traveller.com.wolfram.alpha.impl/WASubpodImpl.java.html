@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>WASubpodImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.com.wolfram.alpha.impl</a> &gt; <span class="el_source">WASubpodImpl.java</span></div><h1>WASubpodImpl.java</h1><pre class="source lang-java linenums">/*
+ * Created on Dec 9, 2009
+ *
+ */
+package traveller.com.wolfram.alpha.impl;
+
+import java.io.File;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import traveller.com.wolfram.alpha.WAException;
+import traveller.com.wolfram.alpha.WASubpod;
+import com.wolfram.alpha.net.HttpProvider;
+import traveller.com.wolfram.alpha.visitor.Visitable;
+import traveller.com.wolfram.alpha.visitor.Visitor;
+
+
+public class WASubpodImpl implements WASubpod, Visitable, Serializable {
+
+    private String title;
+    
+<span class="nc" id="L27">    private volatile boolean imageAcquired = false;</span>
+    private Object userData;
+    
+    private transient HttpProvider http;
+
+       
+<span class="nc" id="L33">    private Visitable[] contentElements = EMPTY_VISITABLE_ARRAY;</span>
+    
+<span class="nc" id="L35">    static final WASubpodImpl[] EMPTY_ARRAY = new WASubpodImpl[0];</span>
+    
+    private static final long serialVersionUID = 7545052461156130238L;
+
+    
+<span class="nc" id="L40">    WASubpodImpl(Element thisElement, HttpProvider http, File tempDir) throws WAException {</span>
+        
+<span class="nc" id="L42">        this.http = http;</span>
+
+<span class="nc" id="L44">        title = thisElement.getAttribute(&quot;title&quot;);</span>
+        
+<span class="nc" id="L46">        NodeList subElements = thisElement.getChildNodes();</span>
+<span class="nc" id="L47">        int numSubElements = subElements.getLength();</span>
+<span class="nc" id="L48">        List&lt;Visitable&gt; contentList = new ArrayList&lt;Visitable&gt;(numSubElements);</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        for (int i = 0; i &lt; numSubElements; i++) {</span>
+<span class="nc" id="L50">            Node child = subElements.item(i);</span>
+<span class="nc" id="L51">            String name = child.getNodeName();</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">            if (&quot;plaintext&quot;.equals(name)) {</span>
+<span class="nc" id="L53">                contentList.add(new WAPlainTextImpl((Element) child));</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">            } else if (&quot;img&quot;.equals(name)) {</span>
+<span class="nc" id="L55">                contentList.add(new WAImageImpl((Element) child, http, tempDir));</span>
+            }
+        }
+<span class="nc" id="L58">        contentElements = contentList.toArray(new Visitable[contentList.size()]);</span>
+<span class="nc" id="L59">    }</span>
+    
+    
+    ////////////////////  WASubpod interface  //////////////////////////////
+    
+    public String getTitle() {
+<span class="nc" id="L65">        return title;</span>
+    }
+    
+    public Visitable[] getContents() {
+<span class="nc" id="L69">        return contentElements;</span>
+    }
+    
+    public synchronized void setUserData(Object obj) {
+<span class="nc" id="L73">        userData = obj;</span>
+<span class="nc" id="L74">    }</span>
+    
+    public synchronized Object getUserData() {
+<span class="nc" id="L77">        return userData;</span>
+    }
+
+    ////////////////////////  hashCode()  /////////////////////////
+    
+    // We use hashCode() as a &quot;content code&quot; to tell us quickly whether the object's content
+    // has changed since some point in the past. Note that we do not override equals() as well, 
+    // but it is not necessary to override equals() when overriding hashCode() (although it _is_
+    // necessary to override hashCode() when overriding equals()). Every field on which the
+    // hashcode depends must be either immutable or volatile (or otherwise controlled by synchronized
+    // blocks), as these values are changed on a background thread.
+    // This is not a particularly good hash function, but it doesn't need to be. The only property
+    // that really matters is that its value changes when the content of this object changes.
+    
+    public synchronized int hashCode() {
+        
+<span class="nc" id="L93">        int result = 17;</span>
+<span class="nc" id="L94">        result = 37*result + title.hashCode();</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        for (Object obj : contentElements) {</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">            if (obj instanceof WAImageImpl) {</span>
+<span class="nc" id="L97">                result = 37*result + obj.hashCode();</span>
+<span class="nc" id="L98">                break;</span>
+            }
+        }
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        if (userData != null)</span>
+<span class="nc" id="L102">            result = 37*result + userData.hashCode();</span>
+<span class="nc" id="L103">        return result;</span>
+    }
+    
+    
+    /////////////////////////////////////////////
+    
+    public void acquireImage() {
+        
+        // If this is a deserialized instance, http will be null. Such instances are &quot;dead&quot;; they can
+        // never retrieve new content from the web.
+        // The only synchronization needed here is that imageAcquired is volatile.
+<span class="nc bnc" id="L114" title="All 4 branches missed.">        if (!imageAcquired &amp;&amp; http != null) {</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">            for (Object elem : contentElements) {</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">                if (elem instanceof WAImageImpl) {</span>
+<span class="nc" id="L117">                    WAImageImpl image = (WAImageImpl) elem;</span>
+<span class="nc" id="L118">                    image.acquireImage();</span>
+<span class="nc" id="L119">                    break;</span>
+                }
+            }
+<span class="nc" id="L122">            imageAcquired = true;</span>
+        }
+<span class="nc" id="L124">    }</span>
+    
+
+    ///////////////////////////  Visitable interface  ////////////////////////////
+    
+    public void accept(Visitor v) {
+<span class="nc" id="L130">        v.visit(this);</span>
+<span class="nc" id="L131">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

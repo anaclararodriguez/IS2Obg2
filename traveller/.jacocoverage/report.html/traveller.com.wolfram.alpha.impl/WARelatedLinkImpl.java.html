@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>WARelatedLinkImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.com.wolfram.alpha.impl</a> &gt; <span class="el_source">WARelatedLinkImpl.java</span></div><h1>WARelatedLinkImpl.java</h1><pre class="source lang-java linenums">/*
+ * Created on Feb 24, 2010
+ *
+ */
+package traveller.com.wolfram.alpha.impl;
+
+import java.io.File;
+import java.io.Serializable;
+
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import traveller.com.wolfram.alpha.WAException;
+import traveller.com.wolfram.alpha.WAImage;
+import traveller.com.wolfram.alpha.WARelatedLink;
+import com.wolfram.alpha.net.HttpProvider;
+import traveller.com.wolfram.alpha.visitor.Visitor;
+
+// This is called sidebarlinks in the XML.
+
+public class WARelatedLinkImpl implements WARelatedLink, Serializable {
+
+    private String url;
+    private String text;
+    private String source;
+    private String excerpt;
+    private WAImage image;
+        
+<span class="nc" id="L29">    static final WARelatedLinkImpl[] EMPTY_ARRAY = new WARelatedLinkImpl[0];</span>
+
+    private static final long serialVersionUID = -4694106442074004620L;
+
+    
+<span class="nc" id="L34">    WARelatedLinkImpl(Element thisElement, HttpProvider http, File tempDir) throws WAException {</span>
+        
+<span class="nc" id="L36">        text = thisElement.getAttribute(&quot;text&quot;);</span>
+<span class="nc" id="L37">        url = thisElement.getAttribute(&quot;url&quot;);</span>
+<span class="nc" id="L38">        source = thisElement.getAttribute(&quot;source&quot;);</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if (text.equals(&quot;&quot;)) text = null;</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        if (url.equals(&quot;&quot;)) url = null;</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (source.equals(&quot;&quot;)) source = null;</span>
+        // Get the &lt;excerpt&gt; text.
+<span class="nc" id="L43">        NodeList excerptElements = thisElement.getElementsByTagName(&quot;excerpt&quot;);</span>
+        // Should just be one or zero.
+<span class="nc" id="L45">        int numExcerptElements = excerptElements.getLength();</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        if (numExcerptElements &gt; 0) {</span>
+<span class="nc" id="L47">            Element excerptElement = (Element) excerptElements.item(0);</span>
+<span class="nc" id="L48">            excerpt = excerptElement.getFirstChild().getNodeValue();</span>
+        }
+        // Get the &lt;img&gt;.
+<span class="nc" id="L51">        NodeList imgElements = thisElement.getElementsByTagName(&quot;img&quot;);</span>
+        // Should just be one.
+<span class="nc" id="L53">        int numImgElements = imgElements.getLength();</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        if (numImgElements &gt; 0) {</span>
+<span class="nc" id="L55">            Element imgElement = (Element) imgElements.item(0);</span>
+<span class="nc" id="L56">            image = new WAImageImpl(imgElement, http, tempDir);</span>
+        }
+<span class="nc" id="L58">    }</span>
+
+
+    public String getSource() {
+<span class="nc" id="L62">        return source;</span>
+    }
+
+
+    public String getText() {
+<span class="nc" id="L67">        return text;</span>
+    }
+
+
+    public String getURL() {
+<span class="nc" id="L72">        return url;</span>
+    }
+
+
+    public String getExcerpt() {
+<span class="nc" id="L77">        return excerpt;</span>
+    }
+
+
+    public WAImage getImage() {
+<span class="nc" id="L82">        return image;</span>
+    }
+
+
+    public void accept(Visitor v) {
+<span class="nc" id="L87">        v.visit(this);</span>
+<span class="nc" id="L88">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

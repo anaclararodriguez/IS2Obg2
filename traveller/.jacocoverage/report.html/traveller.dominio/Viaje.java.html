@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Viaje.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.dominio</a> &gt; <span class="el_source">Viaje.java</span></div><h1>Viaje.java</h1><pre class="source lang-java linenums">package traveller.dominio;
+
+import traveller.excepciones.viaje.ViajeException;
+import traveller.excepciones.viaje.LargoNombreViajeInvalidoException;
+import traveller.excepciones.viaje.NombreViajeVacioException;
+import traveller.excepciones.fecha.FechaVaciaException;
+import traveller.excepciones.fecha.FechaEventoFueraViajeException;
+import traveller.excepciones.fecha.FechaException;
+import traveller.excepciones.fecha.FormatoFechaInicioException;
+import traveller.excepciones.evento.EventoException;
+import traveller.excepciones.evento.EventoExistenteException;
+import traveller.excepciones.comentario.ComentarioException;
+import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import traveller.utill.Utilidades;
+
+public final class Viaje implements Serializable {
+
+    private String nombre;
+    private Ciudad destino;
+    private Date fechaInicio;
+    private Date fechaFin;
+    private String descripcion;
+    private ArrayList&lt;Evento&gt; listaEventos;
+    private ArrayList&lt;Comentario&gt; listaComentarios;
+    private ArrayList&lt;ReporteLog&gt; log;
+
+<span class="fc" id="L32">    public Viaje(String nombre) {</span>
+<span class="fc" id="L33">        this.nombre = nombre;</span>
+<span class="fc" id="L34">    }</span>
+
+<span class="fc" id="L36">    public Viaje(String nombre, Ciudad destino, Date fechaInicio, Date fechaFin, String descripcion) throws ViajeException {</span>
+<span class="fc" id="L37">        this.setNombre(nombre);</span>
+<span class="fc" id="L38">        this.setDestino(destino);</span>
+<span class="fc" id="L39">        this.setFechaInicio(fechaInicio);</span>
+<span class="fc" id="L40">        this.setFechaFin(fechaFin);</span>
+<span class="fc" id="L41">        this.setDescripcion(descripcion);</span>
+<span class="fc" id="L42">        this.listaEventos = new ArrayList&lt;Evento&gt;();</span>
+<span class="fc" id="L43">        this.listaComentarios = new ArrayList&lt;Comentario&gt;();</span>
+<span class="fc" id="L44">        this.log = new ArrayList&lt;ReporteLog&gt;();</span>
+<span class="fc" id="L45">    }</span>
+
+    public void agregarComentario(String autor, String fecha, String contenido) throws ComentarioException {
+<span class="nc" id="L48">        Comentario nuevoComentario = new Comentario(fecha, contenido, autor);</span>
+<span class="nc" id="L49">        this.listaComentarios.add(0,nuevoComentario);</span>
+<span class="nc" id="L50">    }</span>
+
+    public ArrayList&lt;Comentario&gt; getListaComentarios() {
+<span class="nc" id="L53">        return this.listaComentarios;</span>
+    }
+
+    public void agregarLogAViaje(String accion, String fecha) {
+<span class="nc" id="L57">        ReporteLog nuevoReporte = new ReporteLog(accion, fecha);</span>
+<span class="nc" id="L58">        this.log.add(0,nuevoReporte);</span>
+<span class="nc" id="L59">    }</span>
+
+    public ArrayList&lt;ReporteLog&gt; obtenerLog() {
+<span class="nc" id="L62">        return this.getLog();</span>
+    }
+
+    public boolean existeEvento(Evento evento) {
+<span class="fc" id="L66">        return this.getListaEventos().contains(evento);</span>
+    }
+
+    public void altaEvento(String nombreEvento, String dia, String mes, String año, String lugar,
+            String descripcion, TipoEvento tipoEvento) throws EventoException, FechaException {
+
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if (this.existeNombreEvento(nombreEvento)) {</span>
+<span class="nc" id="L73">            throw new EventoExistenteException();</span>
+        }
+       /* Validaciones fecha */
+<span class="fc bfc" id="L76" title="All 6 branches covered.">        if (dia.isEmpty() || mes.isEmpty() || año.isEmpty()) {</span>
+<span class="fc" id="L77">            throw new FechaVaciaException();</span>
+        }
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        if (!Utilidades.formatoFechaValido(dia, mes, año)) {</span>
+<span class="fc" id="L80">            throw new FormatoFechaInicioException();</span>
+        }
+<span class="fc" id="L82">        DateFormat formatter = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);</span>
+<span class="fc" id="L83">        Date fecha = null;</span>
+        try {
+<span class="fc" id="L85">            fecha = formatter.parse(Integer.parseInt(dia) + &quot;/&quot; + Integer.parseInt(mes) + &quot;/&quot; + Integer.parseInt(año));</span>
+<span class="nc" id="L86">        } catch (ParseException ex) {</span>
+<span class="fc" id="L87">        }</span>
+        
+<span class="pc bpc" id="L89" title="1 of 4 branches missed.">        if (fecha.after(this.getFechaFin()) || fecha.before(this.getFechaInicio())) {</span>
+<span class="fc" id="L90">            throw new FechaEventoFueraViajeException();</span>
+        } 
+
+<span class="nc" id="L93">        Evento nuevoEvento = new Evento(nombreEvento, tipoEvento, fecha, lugar, descripcion);</span>
+<span class="nc" id="L94">        this.agregarEventos(nuevoEvento);</span>
+<span class="nc" id="L95">    }</span>
+
+    public boolean existeNombreEvento(String nombreEvento) {
+<span class="fc" id="L98">        return this.getListaEventos().contains(new Evento(nombreEvento));</span>
+    }
+
+    public void bajaEvento(Evento evento) {
+<span class="fc" id="L102">        this.getListaEventos().remove(evento);</span>
+<span class="fc" id="L103">    }</span>
+
+    public ArrayList&lt;ReporteLog&gt; getLog() {
+<span class="nc" id="L106">        return this.log;</span>
+    }
+
+    public ArrayList&lt;Comentario&gt; getComentarios() {
+<span class="nc" id="L110">        return this.listaComentarios;</span>
+    }
+
+    public ArrayList&lt;Evento&gt; getListaEventos() {
+<span class="fc" id="L114">        return this.listaEventos;</span>
+    }
+
+    public void agregarEventos(Evento evento) {
+<span class="fc" id="L118">        this.listaEventos.add(evento);</span>
+<span class="fc" id="L119">    }</span>
+
+    public String getDescripcion() {
+<span class="fc" id="L122">        return descripcion;</span>
+    }
+
+    public void setDescripcion(String descripcion) {
+<span class="fc" id="L126">        this.descripcion = descripcion;</span>
+<span class="fc" id="L127">    }</span>
+
+    public Ciudad getDestino() {
+<span class="fc" id="L130">        return destino;</span>
+    }
+
+    public void setDestino(Ciudad destino) {
+<span class="fc" id="L134">        this.destino = destino;</span>
+<span class="fc" id="L135">    }</span>
+
+    public Date getFechaFin() {
+<span class="fc" id="L138">        return fechaFin;</span>
+    }
+
+    public void setFechaFin(Date fechaFin) {
+<span class="fc" id="L142">        this.fechaFin = fechaFin;</span>
+<span class="fc" id="L143">    }</span>
+
+    public Date getFechaInicio() {
+<span class="fc" id="L146">        return fechaInicio;</span>
+    }
+
+    public void setFechaInicio(Date fechaInicio) {
+<span class="fc" id="L150">        this.fechaInicio = fechaInicio;</span>
+<span class="fc" id="L151">    }</span>
+
+    public String getNombre() {
+<span class="fc" id="L154">        return nombre;</span>
+    }
+
+    public void setNombre(String nombre) throws ViajeException {
+<span class="fc bfc" id="L158" title="All 2 branches covered.">        if (nombre.isEmpty()) {</span>
+<span class="fc" id="L159">            throw new NombreViajeVacioException();</span>
+        }
+<span class="fc bfc" id="L161" title="All 2 branches covered.">        if (!Utilidades.largoValido(nombre, 4, 20)) {</span>
+<span class="fc" id="L162">            throw new LargoNombreViajeInvalidoException(4, 20);</span>
+        }
+
+<span class="fc" id="L165">        this.nombre = nombre;</span>
+<span class="fc" id="L166">    }</span>
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="fc" id="L170">        return this.getNombre().equals(((Viaje) obj).getNombre());</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L175">        return nombre;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

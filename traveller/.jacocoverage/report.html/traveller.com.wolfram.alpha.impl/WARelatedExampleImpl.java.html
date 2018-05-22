@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>WARelatedExampleImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.com.wolfram.alpha.impl</a> &gt; <span class="el_source">WARelatedExampleImpl.java</span></div><h1>WARelatedExampleImpl.java</h1><pre class="source lang-java linenums">/*
+ * Created on Mar 1, 2010
+ *
+ */
+package traveller.com.wolfram.alpha.impl;
+
+import java.io.File;
+import java.io.Serializable;
+
+import org.w3c.dom.Element;
+
+import traveller.com.wolfram.alpha.WAException;
+import traveller.com.wolfram.alpha.WAImage;
+import traveller.com.wolfram.alpha.WARelatedExample;
+import com.wolfram.alpha.net.HttpProvider;
+import traveller.com.wolfram.alpha.visitor.Visitor;
+
+
+public class WARelatedExampleImpl implements WARelatedExample, Serializable {
+
+    private String input;
+    private String desc;
+    private String category;
+    private WAImage categoryThumb;
+    private String categoryPage;   
+    
+<span class="nc" id="L27">    static final WARelatedExampleImpl[] EMPTY_ARRAY = new WARelatedExampleImpl[0];</span>
+
+    private static final long serialVersionUID = -1235014424251757805L;
+
+    
+<span class="nc" id="L32">    WARelatedExampleImpl(Element thisElement, HttpProvider http, File tempDir) throws WAException {</span>
+        
+<span class="nc" id="L34">        input = thisElement.getAttribute(&quot;input&quot;);</span>
+<span class="nc" id="L35">        desc = thisElement.getAttribute(&quot;desc&quot;);</span>
+<span class="nc" id="L36">        category = thisElement.getAttribute(&quot;category&quot;);</span>
+<span class="nc" id="L37">        categoryThumb = new WAImageImpl(thisElement.getAttribute(&quot;categorythumb&quot;), http, tempDir);</span>
+<span class="nc" id="L38">        categoryPage = thisElement.getAttribute(&quot;categorypage&quot;);</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if (input.equals(&quot;&quot;)) input = null;</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        if (desc.equals(&quot;&quot;)) desc = null;</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (category.equals(&quot;&quot;)) category = null;</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (categoryPage.equals(&quot;&quot;)) categoryPage = null;</span>
+<span class="nc" id="L43">    }</span>
+
+    
+    public String getInput() {
+<span class="nc" id="L47">        return input;</span>
+    }
+
+    public String getDescription() {
+<span class="nc" id="L51">        return desc;</span>
+    }
+
+    public String getCategory() {
+<span class="nc" id="L55">        return category;</span>
+    }
+
+    public String getCategoryPage() {
+<span class="nc" id="L59">        return categoryPage;</span>
+    }
+
+    public WAImage getCategoryThumb() {
+<span class="nc" id="L63">        return categoryThumb;</span>
+    }
+
+    
+    ///////////////////////////  Visitable interface  ////////////////////////////
+
+    public void accept(Visitor v) {
+<span class="nc" id="L70">        v.visit(this);</span>
+<span class="nc" id="L71">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

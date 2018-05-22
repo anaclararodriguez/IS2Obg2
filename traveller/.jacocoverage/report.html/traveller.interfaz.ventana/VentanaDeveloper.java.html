@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>VentanaDeveloper.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.interfaz.ventana</a> &gt; <span class="el_source">VentanaDeveloper.java</span></div><h1>VentanaDeveloper.java</h1><pre class="source lang-java linenums">package traveller.interfaz.ventana;
+
+import traveller.dominio.ISistema;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
+/**
+ * La clase VentanaDeveloper maneja la interfaz de la ventana de introducción al
+ * juego.
+ *
+ */
+public class VentanaDeveloper extends javax.swing.JFrame {
+
+<span class="nc" id="L15">    public VentanaDeveloper(ISistema sistema) {</span>
+<span class="nc" id="L16">        initComponents();</span>
+<span class="nc" id="L17">        this.sistema = sistema;</span>
+
+        /*
+         * Icono de la ventana
+         */
+        BufferedImage image;
+        try {
+<span class="nc" id="L24">            image = ImageIO.read(getClass().getResource(&quot;/traveller/interfaz/img/icono.png&quot;));</span>
+<span class="nc" id="L25">            setIconImage(image);</span>
+<span class="nc" id="L26">        } catch (IOException e) {</span>
+<span class="nc" id="L27">        }</span>
+<span class="nc" id="L28">        this.txtProxy.setVisible(false);</span>
+<span class="nc" id="L29">        this.etqPuntos.setVisible(false);</span>
+<span class="nc" id="L30">        this.txtPuerto.setVisible(false);</span>
+<span class="nc" id="L31">    }</span>
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+<span class="nc" id="L37">        jInternalFrame1 = new javax.swing.JInternalFrame();</span>
+<span class="nc" id="L38">        panelPrincipal = new javax.swing.JPanel();</span>
+<span class="nc" id="L39">        jLabel1 = new javax.swing.JLabel();</span>
+<span class="nc" id="L40">        btnModoDesarrollador = new javax.swing.JButton();</span>
+<span class="nc" id="L41">        btnModoNormal = new javax.swing.JButton();</span>
+<span class="nc" id="L42">        jLabel2 = new javax.swing.JLabel();</span>
+<span class="nc" id="L43">        checkNoMostrar = new javax.swing.JCheckBox();</span>
+<span class="nc" id="L44">        jCheckBox1 = new javax.swing.JCheckBox();</span>
+<span class="nc" id="L45">        txtProxy = new javax.swing.JTextField();</span>
+<span class="nc" id="L46">        etqPuntos = new javax.swing.JLabel();</span>
+<span class="nc" id="L47">        txtPuerto = new javax.swing.JTextField();</span>
+
+<span class="nc" id="L49">        jInternalFrame1.setVisible(true);</span>
+
+<span class="nc" id="L51">        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());</span>
+<span class="nc" id="L52">        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);</span>
+<span class="nc" id="L53">        jInternalFrame1Layout.setHorizontalGroup(</span>
+<span class="nc" id="L54">            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L55">            .addGap(0, 0, Short.MAX_VALUE)</span>
+        );
+<span class="nc" id="L57">        jInternalFrame1Layout.setVerticalGroup(</span>
+<span class="nc" id="L58">            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L59">            .addGap(0, 0, Short.MAX_VALUE)</span>
+        );
+
+<span class="nc" id="L62">        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L63">        setTitle(&quot;Rey del Tablero&quot;);</span>
+<span class="nc" id="L64">        setAlwaysOnTop(true);</span>
+<span class="nc" id="L65">        setBackground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L66">        setUndecorated(true);</span>
+
+<span class="nc" id="L68">        panelPrincipal.setBackground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L69">        panelPrincipal.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));</span>
+
+<span class="nc" id="L71">        jLabel1.setText(&quot;¿Desea iniciar en modo de desarrollador?&quot;);</span>
+
+<span class="nc" id="L73">        btnModoDesarrollador.setText(&quot;Modo Desarrollador&quot;);</span>
+<span class="nc" id="L74">        btnModoDesarrollador.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L76">                btnModoDesarrolladorActionPerformed(evt);</span>
+<span class="nc" id="L77">            }</span>
+        });
+
+<span class="nc" id="L80">        btnModoNormal.setText(&quot;Modo Normal&quot;);</span>
+<span class="nc" id="L81">        btnModoNormal.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L83">                btnModoNormalActionPerformed(evt);</span>
+<span class="nc" id="L84">            }</span>
+        });
+
+<span class="nc" id="L87">        jLabel2.setText(&quot;En modo desarrollador se ofrecen facilidades para probar el programa.&quot;);</span>
+
+<span class="nc" id="L89">        checkNoMostrar.setBackground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L90">        checkNoMostrar.setText(&quot;No volver a mostrar este diálogo.&quot;);</span>
+<span class="nc" id="L91">        checkNoMostrar.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L93">                checkNoMostrarActionPerformed(evt);</span>
+<span class="nc" id="L94">            }</span>
+        });
+
+<span class="nc" id="L97">        jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L98">        jCheckBox1.setText(&quot;Utilizar proxy&quot;);</span>
+<span class="nc" id="L99">        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L101">                jCheckBox1ActionPerformed(evt);</span>
+<span class="nc" id="L102">            }</span>
+        });
+
+<span class="nc" id="L105">        txtProxy.setText(&quot;192.168.57.2&quot;);</span>
+<span class="nc" id="L106">        txtProxy.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L108">                txtProxyActionPerformed(evt);</span>
+<span class="nc" id="L109">            }</span>
+        });
+
+<span class="nc" id="L112">        etqPuntos.setText(&quot;:&quot;);</span>
+
+<span class="nc" id="L114">        txtPuerto.setText(&quot;80&quot;);</span>
+<span class="nc" id="L115">        txtPuerto.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L117">                txtPuertoActionPerformed(evt);</span>
+<span class="nc" id="L118">            }</span>
+        });
+
+<span class="nc" id="L121">        javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);</span>
+<span class="nc" id="L122">        panelPrincipal.setLayout(panelPrincipalLayout);</span>
+<span class="nc" id="L123">        panelPrincipalLayout.setHorizontalGroup(</span>
+<span class="nc" id="L124">            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L125">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L126">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L127">                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L128">                .addGap(144, 144, 144))</span>
+<span class="nc" id="L129">            .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L130">                .addGap(95, 95, 95)</span>
+<span class="nc" id="L131">                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L132">                    .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L133">                        .addComponent(jCheckBox1)</span>
+<span class="nc" id="L134">                        .addGap(18, 18, 18)</span>
+<span class="nc" id="L135">                        .addComponent(txtProxy, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L136">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L137">                        .addComponent(etqPuntos)</span>
+<span class="nc" id="L138">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L139">                        .addComponent(txtPuerto, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L140">                    .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)</span>
+<span class="nc" id="L141">                        .addComponent(checkNoMostrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L142">                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L143">                            .addComponent(btnModoDesarrollador)</span>
+<span class="nc" id="L144">                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L145">                            .addComponent(btnModoNormal, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L146">                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))</span>
+<span class="nc" id="L147">                .addContainerGap(62, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L149">        panelPrincipalLayout.setVerticalGroup(</span>
+<span class="nc" id="L150">            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L151">            .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L152">                .addGap(63, 63, 63)</span>
+<span class="nc" id="L153">                .addComponent(jLabel1)</span>
+<span class="nc" id="L154">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L155">                .addComponent(jLabel2)</span>
+<span class="nc" id="L156">                .addGap(37, 37, 37)</span>
+<span class="nc" id="L157">                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L158">                    .addComponent(btnModoDesarrollador)</span>
+<span class="nc" id="L159">                    .addComponent(btnModoNormal))</span>
+<span class="nc" id="L160">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)</span>
+<span class="nc" id="L161">                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L162">                    .addComponent(jCheckBox1)</span>
+<span class="nc" id="L163">                    .addComponent(txtProxy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L164">                    .addComponent(etqPuntos)</span>
+<span class="nc" id="L165">                    .addComponent(txtPuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L166">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L167">                .addComponent(checkNoMostrar)</span>
+<span class="nc" id="L168">                .addContainerGap())</span>
+        );
+
+<span class="nc" id="L171">        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());</span>
+<span class="nc" id="L172">        getContentPane().setLayout(layout);</span>
+<span class="nc" id="L173">        layout.setHorizontalGroup(</span>
+<span class="nc" id="L174">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L175">            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+        );
+<span class="nc" id="L177">        layout.setVerticalGroup(</span>
+<span class="nc" id="L178">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L179">            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+        );
+
+<span class="nc" id="L182">        pack();</span>
+<span class="nc" id="L183">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
+
+    private void btnModoDesarrolladorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModoDesarrolladorActionPerformed
+<span class="nc" id="L186">        this.sistema.setModoDesarrollador(true);</span>
+<span class="nc bnc" id="L187" title="All 2 branches missed.">        if (this.jCheckBox1.isSelected()) {</span>
+<span class="nc" id="L188">            this.sistema.setProxy(this.txtProxy.getText());</span>
+<span class="nc" id="L189">            this.sistema.setPuerto(Integer.parseInt(this.txtPuerto.getText()));</span>
+        } else {
+<span class="nc" id="L191">            this.sistema.setProxy(&quot;&quot;);</span>
+        }
+<span class="nc" id="L193">        this.setVisible(false);</span>
+<span class="nc" id="L194">        VentanaLogin ventana = new VentanaLogin(sistema);</span>
+<span class="nc" id="L195">        ventana.setLocationRelativeTo(null); // Centrar ventana.</span>
+<span class="nc" id="L196">        ventana.setVisible(true);</span>
+<span class="nc" id="L197">    }//GEN-LAST:event_btnModoDesarrolladorActionPerformed</span>
+
+    private void btnModoNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModoNormalActionPerformed
+<span class="nc" id="L200">        this.sistema.setModoDesarrollador(false);</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">        if (this.jCheckBox1.isSelected()) {</span>
+<span class="nc" id="L202">            this.sistema.setProxy(this.txtProxy.getText());</span>
+<span class="nc" id="L203">            this.sistema.setPuerto(Integer.parseInt(this.txtPuerto.getText()));</span>
+        } else {
+<span class="nc" id="L205">            this.sistema.setProxy(&quot;&quot;);</span>
+        }
+<span class="nc" id="L207">        this.setVisible(false);</span>
+<span class="nc" id="L208">        VentanaLogin ventana = new VentanaLogin(sistema);</span>
+<span class="nc" id="L209">        ventana.setLocationRelativeTo(null); // Centrar ventana.</span>
+<span class="nc" id="L210">        ventana.setVisible(true);</span>
+<span class="nc" id="L211">    }//GEN-LAST:event_btnModoNormalActionPerformed</span>
+
+    private void checkNoMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkNoMostrarActionPerformed
+<span class="nc bnc" id="L214" title="All 2 branches missed.">        this.sistema.setMostrarCartelInicio(!checkNoMostrar.isSelected());</span>
+<span class="nc" id="L215">    }//GEN-LAST:event_checkNoMostrarActionPerformed</span>
+
+    private void txtProxyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProxyActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L219">    }//GEN-LAST:event_txtProxyActionPerformed</span>
+
+    private void txtPuertoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPuertoActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L223">    }//GEN-LAST:event_txtPuertoActionPerformed</span>
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+<span class="nc bnc" id="L226" title="All 2 branches missed.">        if (this.jCheckBox1.isSelected()) {</span>
+<span class="nc" id="L227">            this.txtProxy.setVisible(true);</span>
+<span class="nc" id="L228">            this.etqPuntos.setVisible(true);</span>
+<span class="nc" id="L229">            this.txtPuerto.setVisible(true);</span>
+        } else {
+<span class="nc" id="L231">            this.txtProxy.setVisible(false);</span>
+<span class="nc" id="L232">            this.etqPuntos.setVisible(false);</span>
+<span class="nc" id="L233">            this.txtPuerto.setVisible(false);</span>
+        }
+<span class="nc" id="L235">    }//GEN-LAST:event_jCheckBox1ActionPerformed</span>
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnModoDesarrollador;
+    private javax.swing.JButton btnModoNormal;
+    private javax.swing.JCheckBox checkNoMostrar;
+    private javax.swing.JLabel etqPuntos;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JTextField txtProxy;
+    private javax.swing.JTextField txtPuerto;
+    // End of variables declaration//GEN-END:variables
+    ISistema sistema;
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

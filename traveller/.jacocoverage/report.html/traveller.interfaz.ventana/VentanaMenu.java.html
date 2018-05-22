@@ -1,0 +1,993 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>VentanaMenu.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.interfaz.ventana</a> &gt; <span class="el_source">VentanaMenu.java</span></div><h1>VentanaMenu.java</h1><pre class="source lang-java linenums">package traveller.interfaz.ventana;
+
+import traveller.interfaz.panel.PanelAgendarViaje;
+import traveller.interfaz.panel.PanelMiCuenta;
+import traveller.interfaz.panel.PanelResultadoBusqueda;
+import traveller.interfaz.panel.PanelInicio;
+import traveller.interfaz.panel.PanelVerViaje;
+import traveller.interfaz.panel.PanelMisViajes;
+import traveller.interfaz.panel.PanelNuevoEvento;
+import traveller.interfaz.panel.PanelAmigos;
+import com.wolfram.alpha.net.ProxySettings;
+import traveller.dominio.ISistema;
+import traveller.dominio.Usuario;
+import traveller.dominio.Viaje;
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.border.LineBorder;
+import traveller.extras.WolframAlpha;
+
+/**
+ * La clase VentanaMenu se encarga de manejar la interfaz del menú principal y
+ * opciones previas a jugar.
+ */
+public class VentanaMenu extends javax.swing.JFrame {
+
+<span class="nc" id="L30">    public VentanaMenu(ISistema sistema, String nombreUsuario) {</span>
+<span class="nc" id="L31">        this.sistema = sistema;</span>
+
+        /*
+         * Icono de la ventana.
+         */
+        BufferedImage image;
+        try {
+<span class="nc" id="L38">            image = ImageIO.read(getClass().getResource(&quot;/traveller/interfaz/img/icono.png&quot;));</span>
+<span class="nc" id="L39">            setIconImage(image);</span>
+<span class="nc" id="L40">        } catch (IOException e) {</span>
+<span class="nc" id="L41">        }</span>
+
+<span class="nc" id="L43">        initComponents();</span>
+<span class="nc" id="L44">        mostrarInicio();</span>
+<span class="nc" id="L45">        this.etqNombreUsuario.setText(&quot; &quot; + nombreUsuario);</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        if (!this.sistema.esModoDesarrollador()) {</span>
+<span class="nc" id="L47">            this.comboCambio.setVisible(false);</span>
+<span class="nc" id="L48">            this.etqCambio.setText(&quot; &quot;);</span>
+<span class="nc" id="L49">            this.etqModo.setText(&quot; &quot;);</span>
+        } else {
+<span class="nc" id="L51">            comboCambio.setModel(new javax.swing.DefaultComboBoxModel(this.sistema.getListaUsuarios().toArray()));</span>
+        }
+<span class="nc" id="L53">    }</span>
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+<span class="nc" id="L59">        panelPrincipal = new javax.swing.JPanel();</span>
+<span class="nc" id="L60">        panelMenu = new javax.swing.JPanel();</span>
+<span class="nc" id="L61">        panelSuperior = new javax.swing.JPanel();</span>
+<span class="nc" id="L62">        btnAgendarViaje = new javax.swing.JButton();</span>
+<span class="nc" id="L63">        btnMisViajes = new javax.swing.JButton();</span>
+<span class="nc" id="L64">        btnNuevoEvento = new javax.swing.JButton();</span>
+<span class="nc" id="L65">        btnAmigos = new javax.swing.JButton();</span>
+<span class="nc" id="L66">        btnMiCuenta = new javax.swing.JButton();</span>
+<span class="nc" id="L67">        btnSalir = new javax.swing.JButton();</span>
+<span class="nc" id="L68">        btnAgendarViaje1 = new javax.swing.JButton();</span>
+<span class="nc" id="L69">        comboCambio = new javax.swing.JComboBox();</span>
+<span class="nc" id="L70">        etqCambio = new javax.swing.JLabel();</span>
+<span class="nc" id="L71">        etqModo = new javax.swing.JLabel();</span>
+<span class="nc" id="L72">        panelContenido = new javax.swing.JPanel();</span>
+<span class="nc" id="L73">        txtBusqueda = new javax.swing.JTextField();</span>
+<span class="nc" id="L74">        imgLogo = new javax.swing.JLabel();</span>
+<span class="nc" id="L75">        etqNombreUsuario = new javax.swing.JLabel();</span>
+<span class="nc" id="L76">        btnAgendarViaje2 = new javax.swing.JButton();</span>
+<span class="nc" id="L77">        barraMenu = new javax.swing.JMenuBar();</span>
+<span class="nc" id="L78">        opcionArchivo = new javax.swing.JMenu();</span>
+<span class="nc" id="L79">        subOpcionAñadir = new javax.swing.JMenuItem();</span>
+<span class="nc" id="L80">        subMisViajes = new javax.swing.JMenuItem();</span>
+<span class="nc" id="L81">        subMiCuenta = new javax.swing.JMenuItem();</span>
+<span class="nc" id="L82">        subAmigos = new javax.swing.JMenuItem();</span>
+<span class="nc" id="L83">        separadorBarraMenu = new javax.swing.JPopupMenu.Separator();</span>
+<span class="nc" id="L84">        subOpcionSalir = new javax.swing.JMenuItem();</span>
+<span class="nc" id="L85">        opcionAyuda = new javax.swing.JMenu();</span>
+<span class="nc" id="L86">        subOpcionAcerca = new javax.swing.JMenuItem();</span>
+
+<span class="nc" id="L88">        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L89">        setTitle(&quot;Traveller&quot;);</span>
+<span class="nc" id="L90">        setBackground(new java.awt.Color(245, 245, 245));</span>
+<span class="nc" id="L91">        setLocationByPlatform(true);</span>
+<span class="nc" id="L92">        setResizable(false);</span>
+<span class="nc" id="L93">        addWindowListener(new java.awt.event.WindowAdapter() {</span>
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+<span class="nc" id="L95">                formWindowClosing(evt);</span>
+<span class="nc" id="L96">            }</span>
+        });
+
+<span class="nc" id="L99">        panelPrincipal.setBackground(new java.awt.Color(245, 245, 245));</span>
+
+<span class="nc" id="L101">        panelMenu.setBackground(new java.awt.Color(39, 39, 39));</span>
+
+<span class="nc" id="L103">        panelSuperior.setBackground(new java.awt.Color(128, 128, 128));</span>
+
+<span class="nc" id="L105">        btnAgendarViaje.setFont(new java.awt.Font(&quot;SansSerif&quot;, 1, 13)); // NOI18N</span>
+<span class="nc" id="L106">        btnAgendarViaje.setForeground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L107">        btnAgendarViaje.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/botonAzul.png&quot;))); // NOI18N</span>
+<span class="nc" id="L108">        btnAgendarViaje.setText(&quot;  Agendar viaje&quot;);</span>
+<span class="nc" id="L109">        btnAgendarViaje.setFocusable(false);</span>
+<span class="nc" id="L110">        btnAgendarViaje.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);</span>
+<span class="nc" id="L111">        btnAgendarViaje.setMargin(new java.awt.Insets(4, 4, 4, 4));</span>
+<span class="nc" id="L112">        btnAgendarViaje.setMaximumSize(new java.awt.Dimension(180, 32));</span>
+<span class="nc" id="L113">        btnAgendarViaje.setMinimumSize(new java.awt.Dimension(180, 32));</span>
+<span class="nc" id="L114">        btnAgendarViaje.setPreferredSize(new java.awt.Dimension(180, 32));</span>
+<span class="nc" id="L115">        btnAgendarViaje.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+            public void mouseEntered(java.awt.event.MouseEvent evt){
+<span class="nc" id="L117">                btnAgendarViaje.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/botonAzulHover.png&quot;)));</span>
+<span class="nc" id="L118">            }</span>
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc" id="L120">                btnAgendarViaje.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/botonAzul.png&quot;)));</span>
+<span class="nc" id="L121">            }</span>
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+<span class="nc" id="L123">                btnAgendarViaje.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/botonAzulPresionado.png&quot;)));</span>
+<span class="nc" id="L124">            }</span>
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+<span class="nc" id="L126">                btnAgendarViaje.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/botonAzul.png&quot;)));</span>
+<span class="nc" id="L127">            }</span>
+        });
+<span class="nc" id="L129">        btnAgendarViaje.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L131">                btnAgendarViajeActionPerformed(evt);</span>
+<span class="nc" id="L132">            }</span>
+        });
+
+<span class="nc" id="L135">        javax.swing.GroupLayout panelSuperiorLayout = new javax.swing.GroupLayout(panelSuperior);</span>
+<span class="nc" id="L136">        panelSuperior.setLayout(panelSuperiorLayout);</span>
+<span class="nc" id="L137">        panelSuperiorLayout.setHorizontalGroup(</span>
+<span class="nc" id="L138">            panelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L139">            .addGroup(panelSuperiorLayout.createSequentialGroup()</span>
+<span class="nc" id="L140">                .addContainerGap()</span>
+<span class="nc" id="L141">                .addComponent(btnAgendarViaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L142">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L144">        panelSuperiorLayout.setVerticalGroup(</span>
+<span class="nc" id="L145">            panelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L146">            .addGroup(panelSuperiorLayout.createSequentialGroup()</span>
+<span class="nc" id="L147">                .addContainerGap()</span>
+<span class="nc" id="L148">                .addComponent(btnAgendarViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L149">                .addContainerGap(19, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L152">        btnMisViajes.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 15)); // NOI18N</span>
+<span class="nc" id="L153">        btnMisViajes.setForeground(new java.awt.Color(255, 255, 51));</span>
+<span class="nc" id="L154">        btnMisViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;))); // NOI18N</span>
+<span class="nc" id="L155">        btnMisViajes.setText(&quot;Mis viajes&quot;);</span>
+<span class="nc" id="L156">        btnMisViajes.setAlignmentY(0.0F);</span>
+<span class="nc" id="L157">        btnMisViajes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</span>
+<span class="nc" id="L158">        btnMisViajes.setFocusable(false);</span>
+<span class="nc" id="L159">        btnMisViajes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);</span>
+<span class="nc" id="L160">        btnMisViajes.setMargin(new java.awt.Insets(0, 0, 0, 0));</span>
+<span class="nc" id="L161">        btnMisViajes.setMaximumSize(new java.awt.Dimension(200, 36));</span>
+<span class="nc" id="L162">        btnMisViajes.setMinimumSize(new java.awt.Dimension(200, 36));</span>
+<span class="nc" id="L163">        btnMisViajes.setPreferredSize(new java.awt.Dimension(200, 36));</span>
+<span class="nc" id="L164">        btnMisViajes.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L166" title="All 2 branches missed.">                if(opcionMenu != 1){</span>
+<span class="nc" id="L167">                    btnMisViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenuHover.png&quot;)));</span>
+                }
+<span class="nc" id="L169">            }</span>
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L171" title="All 2 branches missed.">                if(opcionMenu !=1){</span>
+<span class="nc" id="L172">                    btnMisViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+                }
+<span class="nc" id="L174">            }</span>
+        });
+<span class="nc" id="L176">        btnMisViajes.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L178">                btnMisViajesActionPerformed(evt);</span>
+<span class="nc" id="L179">            }</span>
+        });
+
+<span class="nc" id="L182">        btnNuevoEvento.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 15)); // NOI18N</span>
+<span class="nc" id="L183">        btnNuevoEvento.setForeground(new java.awt.Color(0, 51, 255));</span>
+<span class="nc" id="L184">        btnNuevoEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;))); // NOI18N</span>
+<span class="nc" id="L185">        btnNuevoEvento.setText(&quot;Nuevo evento&quot;);</span>
+<span class="nc" id="L186">        btnNuevoEvento.setAlignmentY(0.0F);</span>
+<span class="nc" id="L187">        btnNuevoEvento.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</span>
+<span class="nc" id="L188">        btnNuevoEvento.setFocusable(false);</span>
+<span class="nc" id="L189">        btnNuevoEvento.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);</span>
+<span class="nc" id="L190">        btnNuevoEvento.setMargin(new java.awt.Insets(0, 0, 0, 0));</span>
+<span class="nc" id="L191">        btnNuevoEvento.setMaximumSize(new java.awt.Dimension(200, 36));</span>
+<span class="nc" id="L192">        btnNuevoEvento.setMinimumSize(new java.awt.Dimension(200, 36));</span>
+<span class="nc" id="L193">        btnNuevoEvento.setPreferredSize(new java.awt.Dimension(200, 36));</span>
+<span class="nc" id="L194">        btnNuevoEvento.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L196" title="All 2 branches missed.">                if (opcionMenu != 2) {</span>
+<span class="nc" id="L197">                    btnNuevoEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenuHover.png&quot;)));</span>
+                }
+<span class="nc" id="L199">            }</span>
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L201" title="All 2 branches missed.">                if (opcionMenu != 2) {</span>
+<span class="nc" id="L202">                    btnNuevoEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+                }
+<span class="nc" id="L204">            }</span>
+        });
+<span class="nc" id="L206">        btnNuevoEvento.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L208">                btnNuevoEventoActionPerformed(evt);</span>
+<span class="nc" id="L209">            }</span>
+        });
+
+<span class="nc" id="L212">        btnAmigos.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 15)); // NOI18N</span>
+<span class="nc" id="L213">        btnAmigos.setForeground(new java.awt.Color(104, 104, 104));</span>
+<span class="nc" id="L214">        btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;))); // NOI18N</span>
+<span class="nc" id="L215">        btnAmigos.setText(&quot;Amigos&quot;);</span>
+<span class="nc" id="L216">        btnAmigos.setAlignmentY(0.0F);</span>
+<span class="nc" id="L217">        btnAmigos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</span>
+<span class="nc" id="L218">        btnAmigos.setFocusable(false);</span>
+<span class="nc" id="L219">        btnAmigos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);</span>
+<span class="nc" id="L220">        btnAmigos.setMargin(new java.awt.Insets(0, 0, 0, 0));</span>
+<span class="nc" id="L221">        btnAmigos.setMaximumSize(new java.awt.Dimension(200, 36));</span>
+<span class="nc" id="L222">        btnAmigos.setMinimumSize(new java.awt.Dimension(200, 36));</span>
+<span class="nc" id="L223">        btnAmigos.setPreferredSize(new java.awt.Dimension(200, 36));</span>
+<span class="nc" id="L224">        btnAmigos.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L226" title="All 2 branches missed.">                if(opcionMenu != 3){</span>
+<span class="nc" id="L227">                    btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenuHover.png&quot;)));</span>
+                }
+<span class="nc" id="L229">            }</span>
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L231" title="All 2 branches missed.">                if(opcionMenu != 3){</span>
+<span class="nc" id="L232">                    btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+                }
+<span class="nc" id="L234">            }</span>
+        });
+<span class="nc" id="L236">        btnAmigos.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L238">                btnAmigosActionPerformed(evt);</span>
+<span class="nc" id="L239">            }</span>
+        });
+
+<span class="nc" id="L242">        btnMiCuenta.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 15)); // NOI18N</span>
+<span class="nc" id="L243">        btnMiCuenta.setForeground(new java.awt.Color(104, 104, 104));</span>
+<span class="nc" id="L244">        btnMiCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;))); // NOI18N</span>
+<span class="nc" id="L245">        btnMiCuenta.setText(&quot;Mi cuenta&quot;);</span>
+<span class="nc" id="L246">        btnMiCuenta.setAlignmentY(0.0F);</span>
+<span class="nc" id="L247">        btnMiCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</span>
+<span class="nc" id="L248">        btnMiCuenta.setFocusable(false);</span>
+<span class="nc" id="L249">        btnMiCuenta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);</span>
+<span class="nc" id="L250">        btnMiCuenta.setMargin(new java.awt.Insets(0, 0, 0, 0));</span>
+<span class="nc" id="L251">        btnMiCuenta.setMaximumSize(new java.awt.Dimension(200, 36));</span>
+<span class="nc" id="L252">        btnMiCuenta.setMinimumSize(new java.awt.Dimension(200, 36));</span>
+<span class="nc" id="L253">        btnMiCuenta.setPreferredSize(new java.awt.Dimension(200, 36));</span>
+<span class="nc" id="L254">        btnMiCuenta.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L256" title="All 2 branches missed.">                if (opcionMenu != 6) {</span>
+<span class="nc" id="L257">                    btnMiCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenuHover.png&quot;)));</span>
+                }
+<span class="nc" id="L259">            }</span>
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L261" title="All 2 branches missed.">                if (opcionMenu != 6) {</span>
+<span class="nc" id="L262">                    btnMiCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+                }
+<span class="nc" id="L264">            }</span>
+        });
+<span class="nc" id="L266">        btnMiCuenta.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L268">                btnMiCuentaActionPerformed(evt);</span>
+<span class="nc" id="L269">            }</span>
+        });
+
+<span class="nc" id="L272">        btnSalir.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 15)); // NOI18N</span>
+<span class="nc" id="L273">        btnSalir.setForeground(new java.awt.Color(255, 0, 0));</span>
+<span class="nc" id="L274">        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;))); // NOI18N</span>
+<span class="nc" id="L275">        btnSalir.setText(&quot;Salir&quot;);</span>
+<span class="nc" id="L276">        btnSalir.setAlignmentY(0.0F);</span>
+<span class="nc" id="L277">        btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</span>
+<span class="nc" id="L278">        btnSalir.setFocusable(false);</span>
+<span class="nc" id="L279">        btnSalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);</span>
+<span class="nc" id="L280">        btnSalir.setMargin(new java.awt.Insets(0, 0, 0, 0));</span>
+<span class="nc" id="L281">        btnSalir.setMaximumSize(new java.awt.Dimension(200, 36));</span>
+<span class="nc" id="L282">        btnSalir.setMinimumSize(new java.awt.Dimension(200, 36));</span>
+<span class="nc" id="L283">        btnSalir.setPreferredSize(new java.awt.Dimension(200, 36));</span>
+<span class="nc" id="L284">        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L286" title="All 2 branches missed.">                if(opcionMenu != 7){</span>
+<span class="nc" id="L287">                    btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenuHover.png&quot;)));</span>
+                }
+<span class="nc" id="L289">            }</span>
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L291" title="All 2 branches missed.">                if(opcionMenu != 7){</span>
+<span class="nc" id="L292">                    btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+                }
+<span class="nc" id="L294">            }</span>
+        });
+<span class="nc" id="L296">        btnSalir.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L298">                btnSalirActionPerformed(evt);</span>
+<span class="nc" id="L299">            }</span>
+        });
+
+<span class="nc" id="L302">        btnAgendarViaje1.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 15)); // NOI18N</span>
+<span class="nc" id="L303">        btnAgendarViaje1.setForeground(new java.awt.Color(104, 104, 104));</span>
+<span class="nc" id="L304">        btnAgendarViaje1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;))); // NOI18N</span>
+<span class="nc" id="L305">        btnAgendarViaje1.setText(&quot;Agendar Viaje&quot;);</span>
+<span class="nc" id="L306">        btnAgendarViaje1.setAlignmentY(0.0F);</span>
+<span class="nc" id="L307">        btnAgendarViaje1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</span>
+<span class="nc" id="L308">        btnAgendarViaje1.setFocusable(false);</span>
+<span class="nc" id="L309">        btnAgendarViaje1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);</span>
+<span class="nc" id="L310">        btnAgendarViaje1.setMargin(new java.awt.Insets(0, 0, 0, 0));</span>
+<span class="nc" id="L311">        btnAgendarViaje1.setMaximumSize(new java.awt.Dimension(200, 36));</span>
+<span class="nc" id="L312">        btnAgendarViaje1.setMinimumSize(new java.awt.Dimension(200, 36));</span>
+<span class="nc" id="L313">        btnAgendarViaje1.setPreferredSize(new java.awt.Dimension(200, 36));</span>
+<span class="nc" id="L314">        btnAgendarViaje1.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L316" title="All 2 branches missed.">                if(opcionMenu != 8){</span>
+<span class="nc" id="L317">                    btnAgendarViaje1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenuHover.png&quot;)));</span>
+                }
+<span class="nc" id="L319">            }</span>
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L321" title="All 2 branches missed.">                if(opcionMenu != 8){</span>
+<span class="nc" id="L322">                    btnAgendarViaje1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+                }
+<span class="nc" id="L324">            }</span>
+        });
+<span class="nc" id="L326">        btnAgendarViaje1.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L328">                btnAgendarViaje1ActionPerformed(evt);</span>
+<span class="nc" id="L329">            }</span>
+        });
+
+<span class="nc" id="L332">        comboCambio.setFocusable(false);</span>
+<span class="nc" id="L333">        comboCambio.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L335">                comboCambioActionPerformed(evt);</span>
+<span class="nc" id="L336">            }</span>
+        });
+
+<span class="nc" id="L339">        etqCambio.setBackground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L340">        etqCambio.setForeground(new java.awt.Color(204, 204, 204));</span>
+<span class="nc" id="L341">        etqCambio.setText(&quot;Cambiar de cuenta:&quot;);</span>
+
+<span class="nc" id="L343">        etqModo.setBackground(new java.awt.Color(204, 204, 204));</span>
+<span class="nc" id="L344">        etqModo.setFont(new java.awt.Font(&quot;Tahoma&quot;, 1, 11)); // NOI18N</span>
+<span class="nc" id="L345">        etqModo.setForeground(new java.awt.Color(204, 204, 204));</span>
+<span class="nc" id="L346">        etqModo.setText(&quot;MODO DESARROLLADOR&quot;);</span>
+
+<span class="nc" id="L348">        javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);</span>
+<span class="nc" id="L349">        panelMenu.setLayout(panelMenuLayout);</span>
+<span class="nc" id="L350">        panelMenuLayout.setHorizontalGroup(</span>
+<span class="nc" id="L351">            panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L352">            .addGroup(panelMenuLayout.createSequentialGroup()</span>
+<span class="nc" id="L353">                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L354">                    .addComponent(panelSuperior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L355">                    .addComponent(btnNuevoEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L356">                    .addComponent(btnAmigos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L357">                    .addComponent(btnMisViajes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L358">                    .addComponent(btnAgendarViaje1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L359">                    .addComponent(btnMiCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L360">                    .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+<span class="nc" id="L361">                .addContainerGap())</span>
+<span class="nc" id="L362">            .addGroup(panelMenuLayout.createSequentialGroup()</span>
+<span class="nc" id="L363">                .addContainerGap()</span>
+<span class="nc" id="L364">                .addComponent(etqCambio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L365">                .addGap(20, 20, 20))</span>
+<span class="nc" id="L366">            .addGroup(panelMenuLayout.createSequentialGroup()</span>
+<span class="nc" id="L367">                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L368">                    .addGroup(panelMenuLayout.createSequentialGroup()</span>
+<span class="nc" id="L369">                        .addContainerGap()</span>
+<span class="nc" id="L370">                        .addComponent(comboCambio, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L371">                    .addGroup(panelMenuLayout.createSequentialGroup()</span>
+<span class="nc" id="L372">                        .addGap(33, 33, 33)</span>
+<span class="nc" id="L373">                        .addComponent(etqModo)))</span>
+<span class="nc" id="L374">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L376">        panelMenuLayout.setVerticalGroup(</span>
+<span class="nc" id="L377">            panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L378">            .addGroup(panelMenuLayout.createSequentialGroup()</span>
+<span class="nc" id="L379">                .addComponent(panelSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L380">                .addGap(100, 100, 100)</span>
+<span class="nc" id="L381">                .addComponent(btnMisViajes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L382">                .addGap(0, 0, 0)</span>
+<span class="nc" id="L383">                .addComponent(btnNuevoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L384">                .addGap(0, 0, 0)</span>
+<span class="nc" id="L385">                .addComponent(btnAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L386">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L387">                .addComponent(btnAgendarViaje1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L388">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L389">                .addComponent(btnMiCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L390">                .addGap(0, 0, 0)</span>
+<span class="nc" id="L391">                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L392">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L393">                .addComponent(etqCambio)</span>
+<span class="nc" id="L394">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L395">                .addComponent(comboCambio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L396">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)</span>
+<span class="nc" id="L397">                .addComponent(etqModo))</span>
+        );
+
+<span class="nc" id="L400">        panelContenido.setBackground(new java.awt.Color(245, 245, 245));</span>
+<span class="nc" id="L401">        panelContenido.setMaximumSize(new java.awt.Dimension(400, 651));</span>
+<span class="nc" id="L402">        panelContenido.setMinimumSize(new java.awt.Dimension(400, 651));</span>
+<span class="nc" id="L403">        panelContenido.setPreferredSize(new java.awt.Dimension(430, 651));</span>
+
+<span class="nc" id="L405">        javax.swing.GroupLayout panelContenidoLayout = new javax.swing.GroupLayout(panelContenido);</span>
+<span class="nc" id="L406">        panelContenido.setLayout(panelContenidoLayout);</span>
+<span class="nc" id="L407">        panelContenidoLayout.setHorizontalGroup(</span>
+<span class="nc" id="L408">            panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L409">            .addGap(0, 443, Short.MAX_VALUE)</span>
+        );
+<span class="nc" id="L411">        panelContenidoLayout.setVerticalGroup(</span>
+<span class="nc" id="L412">            panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L413">            .addGap(0, 0, Short.MAX_VALUE)</span>
+        );
+
+<span class="nc" id="L416">        txtBusqueda.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 14)); // NOI18N</span>
+<span class="nc" id="L417">        txtBusqueda.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));</span>
+<span class="nc" id="L418">        txtBusqueda.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L420">                txtBusquedaActionPerformed(evt);</span>
+<span class="nc" id="L421">            }</span>
+        });
+<span class="nc" id="L423">        txtBusqueda.addFocusListener(new java.awt.event.FocusAdapter() {</span>
+            public void focusGained(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L425">                txtBusqueda.setBorder(new LineBorder(new Color(77,144,254)));</span>
+<span class="nc" id="L426">            }</span>
+            public void focusLost(java.awt.event.FocusEvent evt) {
+<span class="nc" id="L428">                txtBusqueda.setBorder(new LineBorder(new Color(217,217,217)));</span>
+<span class="nc" id="L429">            }</span>
+        });
+<span class="nc" id="L431">        txtBusqueda.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L434" title="All 2 branches missed.">                if (!txtBusqueda.isFocusOwner()) {</span>
+<span class="nc" id="L435">                    txtBusqueda.setBorder(new LineBorder(new Color(185, 185, 185)));</span>
+                }
+<span class="nc" id="L437">            }</span>
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc bnc" id="L440" title="All 2 branches missed.">                if (!txtBusqueda.isFocusOwner()) {</span>
+<span class="nc" id="L441">                    txtBusqueda.setBorder(new LineBorder(new Color(217, 217, 217)));</span>
+                }
+<span class="nc" id="L443">            }</span>
+        });
+
+<span class="nc" id="L446">        imgLogo.setFont(new java.awt.Font(&quot;Tahoma&quot;, 1, 13)); // NOI18N</span>
+<span class="nc" id="L447">        imgLogo.setForeground(new java.awt.Color(204, 204, 204));</span>
+<span class="nc" id="L448">        imgLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/icono.png&quot;))); // NOI18N</span>
+<span class="nc" id="L449">        imgLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</span>
+<span class="nc" id="L450">        imgLogo.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+<span class="nc" id="L452">                imgLogoMouseReleased(evt);</span>
+<span class="nc" id="L453">            }</span>
+        });
+
+<span class="nc" id="L456">        etqNombreUsuario.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 17)); // NOI18N</span>
+<span class="nc" id="L457">        etqNombreUsuario.setForeground(new java.awt.Color(104, 104, 104));</span>
+<span class="nc" id="L458">        etqNombreUsuario.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);</span>
+<span class="nc" id="L459">        etqNombreUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);</span>
+
+<span class="nc" id="L461">        btnAgendarViaje2.setFont(new java.awt.Font(&quot;SansSerif&quot;, 1, 13)); // NOI18N</span>
+<span class="nc" id="L462">        btnAgendarViaje2.setForeground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L463">        btnAgendarViaje2.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/btnBusqueda.png&quot;))); // NOI18N</span>
+<span class="nc" id="L464">        btnAgendarViaje2.setAlignmentX(0.5F);</span>
+<span class="nc" id="L465">        btnAgendarViaje2.setFocusable(false);</span>
+<span class="nc" id="L466">        btnAgendarViaje2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);</span>
+<span class="nc" id="L467">        btnAgendarViaje2.setMargin(new java.awt.Insets(4, 4, 4, 4));</span>
+<span class="nc" id="L468">        btnAgendarViaje2.setMaximumSize(new java.awt.Dimension(180, 32));</span>
+<span class="nc" id="L469">        btnAgendarViaje2.setMinimumSize(new java.awt.Dimension(180, 32));</span>
+<span class="nc" id="L470">        btnAgendarViaje2.setPreferredSize(new java.awt.Dimension(180, 32));</span>
+<span class="nc" id="L471">        btnAgendarViaje2.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+            public void mouseEntered(java.awt.event.MouseEvent evt){
+<span class="nc" id="L473">                btnAgendarViaje2.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/btnBusquedaHover.png&quot;)));</span>
+<span class="nc" id="L474">            }</span>
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+<span class="nc" id="L476">                btnAgendarViaje2.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/btnBusqueda.png&quot;)));</span>
+<span class="nc" id="L477">            }</span>
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+<span class="nc" id="L479">                btnAgendarViaje2.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/btnBusquedaPresionado.png&quot;)));</span>
+<span class="nc" id="L480">            }</span>
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+<span class="nc" id="L482">                btnAgendarViaje2.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/btnBusqueda.png&quot;)));</span>
+<span class="nc" id="L483">            }</span>
+        });
+<span class="nc" id="L485">        btnAgendarViaje2.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+<span class="nc" id="L487">                btnAgendarViaje2MouseReleased(evt);</span>
+<span class="nc" id="L488">            }</span>
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+<span class="nc" id="L490">                btnAgendarViaje2MouseClicked(evt);</span>
+<span class="nc" id="L491">            }</span>
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+<span class="nc" id="L493">                btnAgendarViaje2MouseEntered(evt);</span>
+<span class="nc" id="L494">            }</span>
+        });
+<span class="nc" id="L496">        btnAgendarViaje2.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L498">                btnAgendarViaje2ActionPerformed(evt);</span>
+<span class="nc" id="L499">            }</span>
+        });
+
+<span class="nc" id="L502">        javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);</span>
+<span class="nc" id="L503">        panelPrincipal.setLayout(panelPrincipalLayout);</span>
+<span class="nc" id="L504">        panelPrincipalLayout.setHorizontalGroup(</span>
+<span class="nc" id="L505">            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L506">            .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L507">                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L508">                    .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L509">                        .addComponent(panelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L510">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L511">                        .addComponent(panelContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L512">                    .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L513">                        .addContainerGap()</span>
+<span class="nc" id="L514">                        .addComponent(imgLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L515">                        .addGap(18, 18, 18)</span>
+<span class="nc" id="L516">                        .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L517">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L518">                        .addComponent(btnAgendarViaje2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L519">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L520">                        .addComponent(etqNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L521">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L523">        panelPrincipalLayout.setVerticalGroup(</span>
+<span class="nc" id="L524">            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L525">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L526">                .addContainerGap()</span>
+<span class="nc" id="L527">                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L528">                    .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L529">                        .addComponent(imgLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L530">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+<span class="nc" id="L531">                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L532">                        .addGap(0, 0, Short.MAX_VALUE)</span>
+<span class="nc" id="L533">                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L534">                            .addComponent(etqNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L535">                            .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)</span>
+<span class="nc" id="L536">                                .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L537">                                .addComponent(btnAgendarViaje2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L538">                        .addGap(19, 19, 19)))</span>
+<span class="nc" id="L539">                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L540">                    .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L541">                        .addComponent(panelContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 603, Short.MAX_VALUE)</span>
+<span class="nc" id="L542">                        .addContainerGap())</span>
+<span class="nc" id="L543">                    .addComponent(panelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+        );
+
+<span class="nc" id="L546">        opcionArchivo.setText(&quot;Archivo&quot;);</span>
+
+<span class="nc" id="L548">        subOpcionAñadir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_MASK));</span>
+<span class="nc" id="L549">        subOpcionAñadir.setText(&quot;Agendar viaje&quot;);</span>
+<span class="nc" id="L550">        subOpcionAñadir.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L552">                subOpcionAñadirActionPerformed(evt);</span>
+<span class="nc" id="L553">            }</span>
+        });
+<span class="nc" id="L555">        opcionArchivo.add(subOpcionAñadir);</span>
+
+<span class="nc" id="L557">        subMisViajes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_MASK));</span>
+<span class="nc" id="L558">        subMisViajes.setText(&quot;Mis viajes&quot;);</span>
+<span class="nc" id="L559">        subMisViajes.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L561">                subMisViajesActionPerformed(evt);</span>
+<span class="nc" id="L562">            }</span>
+        });
+<span class="nc" id="L564">        opcionArchivo.add(subMisViajes);</span>
+
+<span class="nc" id="L566">        subMiCuenta.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_MASK));</span>
+<span class="nc" id="L567">        subMiCuenta.setText(&quot;Mi Cuenta&quot;);</span>
+<span class="nc" id="L568">        subMiCuenta.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L570">                subMiCuentaActionPerformed(evt);</span>
+<span class="nc" id="L571">            }</span>
+        });
+<span class="nc" id="L573">        opcionArchivo.add(subMiCuenta);</span>
+
+<span class="nc" id="L575">        subAmigos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_MASK));</span>
+<span class="nc" id="L576">        subAmigos.setText(&quot;Amigos&quot;);</span>
+<span class="nc" id="L577">        subAmigos.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L579">                subAmigosActionPerformed(evt);</span>
+<span class="nc" id="L580">            }</span>
+        });
+<span class="nc" id="L582">        opcionArchivo.add(subAmigos);</span>
+<span class="nc" id="L583">        opcionArchivo.add(separadorBarraMenu);</span>
+
+<span class="nc" id="L585">        subOpcionSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, java.awt.event.InputEvent.SHIFT_MASK));</span>
+<span class="nc" id="L586">        subOpcionSalir.setText(&quot;Salir&quot;);</span>
+<span class="nc" id="L587">        subOpcionSalir.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L589">                subOpcionSalirActionPerformed(evt);</span>
+<span class="nc" id="L590">            }</span>
+        });
+<span class="nc" id="L592">        opcionArchivo.add(subOpcionSalir);</span>
+
+<span class="nc" id="L594">        barraMenu.add(opcionArchivo);</span>
+
+<span class="nc" id="L596">        opcionAyuda.setText(&quot;Ayuda&quot;);</span>
+
+<span class="nc" id="L598">        subOpcionAcerca.setText(&quot;Acerca de Traveller&quot;);</span>
+<span class="nc" id="L599">        subOpcionAcerca.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L601">                subOpcionAcercaActionPerformed(evt);</span>
+<span class="nc" id="L602">            }</span>
+        });
+<span class="nc" id="L604">        opcionAyuda.add(subOpcionAcerca);</span>
+
+<span class="nc" id="L606">        barraMenu.add(opcionAyuda);</span>
+
+<span class="nc" id="L608">        setJMenuBar(barraMenu);</span>
+
+<span class="nc" id="L610">        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());</span>
+<span class="nc" id="L611">        getContentPane().setLayout(layout);</span>
+<span class="nc" id="L612">        layout.setHorizontalGroup(</span>
+<span class="nc" id="L613">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L614">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L615">                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L616">                .addGap(0, 10, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L618">        layout.setVerticalGroup(</span>
+<span class="nc" id="L619">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L620">            .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 679, Short.MAX_VALUE)</span>
+        );
+
+<span class="nc" id="L623">        pack();</span>
+<span class="nc" id="L624">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+<span class="nc" id="L627">        guardarSistema();</span>
+<span class="nc" id="L628">    }//GEN-LAST:event_formWindowClosing</span>
+
+    private void btnAgendarViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarViajeActionPerformed
+<span class="nc" id="L631">        PanelAgendarViaje agendarViaje = new PanelAgendarViaje(sistema);</span>
+
+<span class="nc" id="L633">        opcionMenu = 8;</span>
+<span class="nc" id="L634">        btnNuevoEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L635">        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L636">        btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L637">        btnMisViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L638">        btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L639">        btnMiCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L640">        btnAgendarViaje1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenuSeleccionada.png&quot;)));</span>
+
+        /*
+         * Limpiar el panel actual y agregar el nuevo.
+         */
+<span class="nc" id="L645">        panelContenido.removeAll();</span>
+<span class="nc" id="L646">        panelContenido.add(agendarViaje);</span>
+<span class="nc" id="L647">        agendarViaje.setBounds(0, 0, 439, 660);</span>
+<span class="nc" id="L648">        this.pack();</span>
+<span class="nc" id="L649">    }//GEN-LAST:event_btnAgendarViajeActionPerformed</span>
+
+    private void btnMisViajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMisViajesActionPerformed
+<span class="nc" id="L652">        PanelMisViajes misViajes = new PanelMisViajes(sistema, this);</span>
+
+        /*
+         * Actualizar el menú de opciones para que marque la opción en que nos
+         * encontramos.
+         */
+<span class="nc" id="L658">        opcionMenu = 1;</span>
+<span class="nc" id="L659">        btnNuevoEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L660">        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L661">        btnMisViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenuSeleccionada.png&quot;)));</span>
+<span class="nc" id="L662">        btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L663">        btnMiCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L664">        btnAgendarViaje1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+        /*
+         * Limpiar el panel actual y agregar el nuevo.
+         */
+<span class="nc" id="L668">        panelContenido.removeAll();</span>
+<span class="nc" id="L669">        panelContenido.add(misViajes);</span>
+<span class="nc" id="L670">        misViajes.setBounds(0, 0, 439, 660);</span>
+<span class="nc" id="L671">        this.pack();</span>
+<span class="nc" id="L672">    }//GEN-LAST:event_btnMisViajesActionPerformed</span>
+
+    private void btnNuevoEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoEventoActionPerformed
+<span class="nc" id="L675">        PanelNuevoEvento nuevoEvento = new PanelNuevoEvento(sistema);</span>
+
+        /*
+         * Actualizar el menú de opciones para que marque la opción en que nos
+         * encontramos.
+         */
+<span class="nc" id="L681">        opcionMenu = 2;</span>
+<span class="nc" id="L682">        btnNuevoEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenuSeleccionada.png&quot;)));</span>
+<span class="nc" id="L683">        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L684">        btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L685">        btnMisViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L686">        btnMiCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L687">        btnAgendarViaje1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+        /*
+         * Limpiar el panel actual y agregar el nuevo.
+         */
+<span class="nc" id="L691">        panelContenido.removeAll();</span>
+<span class="nc" id="L692">        panelContenido.add(nuevoEvento);</span>
+<span class="nc" id="L693">        nuevoEvento.setBounds(0, 0, 439, 660);</span>
+<span class="nc" id="L694">        this.pack();</span>
+<span class="nc" id="L695">    }//GEN-LAST:event_btnNuevoEventoActionPerformed</span>
+
+    private void btnAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmigosActionPerformed
+<span class="nc" id="L698">        PanelAmigos amigos = new PanelAmigos(this.sistema);</span>
+
+<span class="nc" id="L700">        opcionMenu = 3;</span>
+<span class="nc" id="L701">        btnNuevoEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L702">        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L703">        btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenuSeleccionada.png&quot;)));</span>
+<span class="nc" id="L704">        btnMisViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L705">        btnMiCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L706">        btnAgendarViaje1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+        /*
+         * Limpiar el panel actual y agregar el nuevo.
+         */
+<span class="nc" id="L710">        panelContenido.removeAll();</span>
+<span class="nc" id="L711">        panelContenido.add(amigos);</span>
+<span class="nc" id="L712">        amigos.setBounds(0, 0, 439, 660);</span>
+<span class="nc" id="L713">        this.pack();</span>
+<span class="nc" id="L714">    }//GEN-LAST:event_btnAmigosActionPerformed</span>
+
+    private void subOpcionAcercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subOpcionAcercaActionPerformed
+<span class="nc" id="L717">        VentanaAcerca ventanaAcerca = new VentanaAcerca();</span>
+<span class="nc" id="L718">        ventanaAcerca.setVisible(true);</span>
+<span class="nc" id="L719">        setLocationRelativeTo(null); // Centrar ventana.</span>
+<span class="nc" id="L720">    }//GEN-LAST:event_subOpcionAcercaActionPerformed</span>
+
+    private void subOpcionSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subOpcionSalirActionPerformed
+<span class="nc" id="L723">        sistema.logoutUsuario();</span>
+<span class="nc" id="L724">        this.setVisible(false);</span>
+<span class="nc" id="L725">        VentanaLogin ventanaLogin = new VentanaLogin(sistema);</span>
+<span class="nc" id="L726">        ventanaLogin.setLocationRelativeTo(null); // Centrar ventana.</span>
+<span class="nc" id="L727">        ventanaLogin.setVisible(true);</span>
+<span class="nc" id="L728">    }//GEN-LAST:event_subOpcionSalirActionPerformed</span>
+
+    private void imgLogoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgLogoMouseReleased
+<span class="nc" id="L731">        mostrarInicio();</span>
+<span class="nc" id="L732">    }//GEN-LAST:event_imgLogoMouseReleased</span>
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+<span class="nc" id="L735">        sistema.logoutUsuario();</span>
+<span class="nc" id="L736">        this.setVisible(false);</span>
+<span class="nc" id="L737">        VentanaLogin ventanaLogin = new VentanaLogin(sistema);</span>
+<span class="nc" id="L738">        ventanaLogin.setLocationRelativeTo(null); // Centrar ventana.</span>
+<span class="nc" id="L739">        ventanaLogin.setVisible(true);</span>
+<span class="nc" id="L740">    }//GEN-LAST:event_btnSalirActionPerformed</span>
+
+    private void btnMiCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMiCuentaActionPerformed
+<span class="nc" id="L743">        PanelMiCuenta miCuenta = new PanelMiCuenta(sistema);</span>
+
+<span class="nc" id="L745">        opcionMenu = 6;</span>
+<span class="nc" id="L746">        btnNuevoEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L747">        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L748">        btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L749">        btnMisViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L750">        btnMiCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenuSeleccionada.png&quot;)));</span>
+<span class="nc" id="L751">        btnAgendarViaje1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+        /*
+         * Limpiar el panel actual y agregar el nuevo.
+         */
+<span class="nc" id="L755">        panelContenido.removeAll();</span>
+<span class="nc" id="L756">        panelContenido.add(miCuenta);</span>
+<span class="nc" id="L757">        miCuenta.setBounds(0, 0, 439, 660);</span>
+<span class="nc" id="L758">        this.pack();</span>
+<span class="nc" id="L759">    }//GEN-LAST:event_btnMiCuentaActionPerformed</span>
+
+    private void btnAgendarViaje1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarViaje1ActionPerformed
+<span class="nc" id="L762">        PanelAgendarViaje agendar = new PanelAgendarViaje(sistema);</span>
+
+<span class="nc" id="L764">        opcionMenu = 8;</span>
+<span class="nc" id="L765">        btnNuevoEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L766">        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L767">        btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L768">        btnMisViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L769">        btnMiCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L770">        btnAgendarViaje1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenuSeleccionada.png&quot;)));</span>
+
+        /*
+         * Limpiar el panel actual y agregar el nuevo.
+         */
+<span class="nc" id="L775">        panelContenido.removeAll();</span>
+<span class="nc" id="L776">        panelContenido.add(agendar);</span>
+<span class="nc" id="L777">        agendar.setBounds(0, 0, 439, 660);</span>
+<span class="nc" id="L778">        this.pack();</span>
+<span class="nc" id="L779">    }//GEN-LAST:event_btnAgendarViaje1ActionPerformed</span>
+
+    private void subOpcionAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subOpcionAñadirActionPerformed
+<span class="nc" id="L782">        PanelAgendarViaje agendar = new PanelAgendarViaje(sistema);</span>
+
+<span class="nc" id="L784">        opcionMenu = 8;</span>
+<span class="nc" id="L785">        btnNuevoEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L786">        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L787">        btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L788">        btnMisViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L789">        btnMiCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L790">        btnAgendarViaje1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenuSeleccionada.png&quot;)));</span>
+
+        /*
+         * Limpiar el panel actual y agregar el nuevo.
+         */
+<span class="nc" id="L795">        panelContenido.removeAll();</span>
+<span class="nc" id="L796">        panelContenido.add(agendar);</span>
+<span class="nc" id="L797">        agendar.setBounds(0, 0, 439, 660);</span>
+<span class="nc" id="L798">        this.pack();</span>
+<span class="nc" id="L799">    }//GEN-LAST:event_subOpcionAñadirActionPerformed</span>
+
+    private void subMisViajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMisViajesActionPerformed
+<span class="nc" id="L802">        PanelMisViajes misViajes = new PanelMisViajes(sistema, this);</span>
+
+        /*
+         * Actualizar el menú de opciones para que marque la opción en que nos
+         * encontramos.
+         */
+<span class="nc" id="L808">        opcionMenu = 1;</span>
+<span class="nc" id="L809">        btnNuevoEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L810">        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L811">        btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L812">        btnMisViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenuSeleccionada.png&quot;)));</span>
+<span class="nc" id="L813">        btnMiCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L814">        btnAgendarViaje1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+        /*
+         * Limpiar el panel actual y agregar el nuevo.
+         */
+<span class="nc" id="L818">        panelContenido.removeAll();</span>
+<span class="nc" id="L819">        panelContenido.add(misViajes);</span>
+<span class="nc" id="L820">        misViajes.setBounds(0, 0, 439, 660);</span>
+<span class="nc" id="L821">        this.pack();</span>
+<span class="nc" id="L822">    }//GEN-LAST:event_subMisViajesActionPerformed</span>
+
+    public void verViaje(Viaje viaje) {
+<span class="nc" id="L825">        PanelVerViaje verViaje = new PanelVerViaje(this.sistema, viaje, this);</span>
+<span class="nc" id="L826">        panelContenido.removeAll();</span>
+<span class="nc" id="L827">        panelContenido.add(verViaje);</span>
+<span class="nc" id="L828">        verViaje.setBounds(0, 0, 439, 660);</span>
+<span class="nc" id="L829">        this.pack();</span>
+<span class="nc" id="L830">    }</span>
+
+    public void verMisViajes() {
+<span class="nc" id="L833">        PanelMisViajes misViajes = new PanelMisViajes(sistema, this);</span>
+<span class="nc" id="L834">        panelContenido.removeAll();</span>
+<span class="nc" id="L835">        panelContenido.add(misViajes);</span>
+<span class="nc" id="L836">        misViajes.setBounds(0, 0, 439, 660);</span>
+<span class="nc" id="L837">        this.pack();</span>
+<span class="nc" id="L838">    }</span>
+
+    private void btnAgendarViaje2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarViaje2ActionPerformed
+<span class="nc" id="L841">        WolframAlpha wolfram = new WolframAlpha();</span>
+<span class="nc" id="L842">        boolean traducir = true;</span>
+<span class="nc bnc" id="L843" title="All 2 branches missed.">        if (this.sistema.getProxy().length() &gt; 4) {</span>
+<span class="nc" id="L844">            ProxySettings.useProxy = 2;</span>
+<span class="nc" id="L845">            traducir = false;</span>
+        }
+        PanelResultadoBusqueda panel;
+        try {
+<span class="nc" id="L849">            panel = new PanelResultadoBusqueda(wolfram.busqueda(txtBusqueda.getText(), traducir));</span>
+
+<span class="nc" id="L851">            opcionMenu = 3;</span>
+<span class="nc" id="L852">            btnNuevoEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L853">            btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L854">            btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L855">            btnMisViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L856">            btnMiCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L857">            btnAgendarViaje1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+            /*
+             * Limpiar el panel actual y agregar el nuevo.
+             */
+<span class="nc" id="L861">            panelContenido.removeAll();</span>
+<span class="nc" id="L862">            panelContenido.add(panel);</span>
+<span class="nc" id="L863">            panel.setBounds(0, 0, 439, 660);</span>
+<span class="nc" id="L864">            this.pack();</span>
+<span class="nc" id="L865">        } catch (Exception ex) {</span>
+<span class="nc" id="L866">            Logger.getLogger(VentanaMenu.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L867">        }</span>
+<span class="nc" id="L868">    }//GEN-LAST:event_btnAgendarViaje2ActionPerformed</span>
+
+    private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L872">    }//GEN-LAST:event_txtBusquedaActionPerformed</span>
+
+    private void btnAgendarViaje2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgendarViaje2MouseReleased
+<span class="nc" id="L875">    }//GEN-LAST:event_btnAgendarViaje2MouseReleased</span>
+
+    private void btnAgendarViaje2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgendarViaje2MouseClicked
+<span class="nc" id="L878">    }//GEN-LAST:event_btnAgendarViaje2MouseClicked</span>
+
+    private void btnAgendarViaje2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgendarViaje2MouseEntered
+<span class="nc" id="L881">    }//GEN-LAST:event_btnAgendarViaje2MouseEntered</span>
+
+    private void comboCambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCambioActionPerformed
+<span class="nc" id="L884">        this.sistema.identificar((Usuario) comboCambio.getSelectedItem());</span>
+<span class="nc" id="L885">        this.etqNombreUsuario.setText(((Usuario) comboCambio.getSelectedItem()).getNombreUsuario());</span>
+<span class="nc" id="L886">        mostrarInicio();</span>
+<span class="nc" id="L887">    }//GEN-LAST:event_comboCambioActionPerformed</span>
+
+    private void subAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subAmigosActionPerformed
+<span class="nc" id="L890">        PanelAmigos amigos = new PanelAmigos(this.sistema);</span>
+
+<span class="nc" id="L892">        opcionMenu = 3;</span>
+<span class="nc" id="L893">        btnNuevoEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L894">        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L895">        btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenuSeleccionada.png&quot;)));</span>
+<span class="nc" id="L896">        btnMisViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L897">        btnMiCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L898">        btnAgendarViaje1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+        /*
+         * Limpiar el panel actual y agregar el nuevo.
+         */
+<span class="nc" id="L902">        panelContenido.removeAll();</span>
+<span class="nc" id="L903">        panelContenido.add(amigos);</span>
+<span class="nc" id="L904">        amigos.setBounds(0, 0, 439, 660);</span>
+<span class="nc" id="L905">        this.pack();</span>
+<span class="nc" id="L906">    }//GEN-LAST:event_subAmigosActionPerformed</span>
+
+    private void subMiCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMiCuentaActionPerformed
+<span class="nc" id="L909">        PanelMiCuenta miCuenta = new PanelMiCuenta(sistema);</span>
+
+<span class="nc" id="L911">        opcionMenu = 6;</span>
+<span class="nc" id="L912">        btnNuevoEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L913">        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L914">        btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L915">        btnMisViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L916">        btnMiCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/vinterfaz/img/opcionMenuSeleccionada.png&quot;)));</span>
+<span class="nc" id="L917">        btnAgendarViaje1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+        /*
+         * Limpiar el panel actual y agregar el nuevo.
+         */
+<span class="nc" id="L921">        panelContenido.removeAll();</span>
+<span class="nc" id="L922">        panelContenido.add(miCuenta);</span>
+<span class="nc" id="L923">        miCuenta.setBounds(0, 0, 439, 660);</span>
+<span class="nc" id="L924">        this.pack();</span>
+<span class="nc" id="L925">    }//GEN-LAST:event_subMiCuentaActionPerformed</span>
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuBar barraMenu;
+    private javax.swing.JButton btnAgendarViaje;
+    private javax.swing.JButton btnAgendarViaje1;
+    private javax.swing.JButton btnAgendarViaje2;
+    private javax.swing.JButton btnAmigos;
+    private javax.swing.JButton btnMiCuenta;
+    private javax.swing.JButton btnMisViajes;
+    private javax.swing.JButton btnNuevoEvento;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox comboCambio;
+    private javax.swing.JLabel etqCambio;
+    private javax.swing.JLabel etqModo;
+    private javax.swing.JLabel etqNombreUsuario;
+    private javax.swing.JLabel imgLogo;
+    private javax.swing.JMenu opcionArchivo;
+    private javax.swing.JMenu opcionAyuda;
+    private javax.swing.JPanel panelContenido;
+    private javax.swing.JPanel panelMenu;
+    private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JPanel panelSuperior;
+    private javax.swing.JPopupMenu.Separator separadorBarraMenu;
+    private javax.swing.JMenuItem subAmigos;
+    private javax.swing.JMenuItem subMiCuenta;
+    private javax.swing.JMenuItem subMisViajes;
+    private javax.swing.JMenuItem subOpcionAcerca;
+    private javax.swing.JMenuItem subOpcionAñadir;
+    private javax.swing.JMenuItem subOpcionSalir;
+    private javax.swing.JTextField txtBusqueda;
+    // End of variables declaration//GEN-END:variables
+    private ISistema sistema;
+
+    /*
+     * Guarda la opción del menu principal que estamos viendo.
+     */
+    private int opcionMenu; //inicializado como 0 en el constructor.
+
+    private void mostrarInicio() {
+<span class="nc" id="L964">        PanelInicio panelInicio = new PanelInicio();</span>
+
+<span class="nc" id="L966">        opcionMenu = 0;</span>
+<span class="nc" id="L967">        btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L968">        btnNuevoEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+<span class="nc" id="L969">        btnMisViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/traveller/interfaz/img/opcionMenu.png&quot;)));</span>
+
+        /*
+         * Limpiar el panel actual y agregar el nuevo.
+         */
+<span class="nc" id="L974">        panelContenido.removeAll();</span>
+<span class="nc" id="L975">        panelContenido.add(panelInicio);</span>
+<span class="nc" id="L976">        panelInicio.setBounds(0, 0, 439, 660);</span>
+<span class="nc" id="L977">        this.pack();</span>
+<span class="nc" id="L978">    }</span>
+
+    private void guardarSistema() {
+        ObjectOutputStream grabacionSistema;
+
+        try {
+            //Se serializa el objeto sistema.
+<span class="nc" id="L985">            grabacionSistema = new ObjectOutputStream(</span>
+                    new BufferedOutputStream(new FileOutputStream(&quot;sistema.txt&quot;)));
+<span class="nc" id="L987">            grabacionSistema.writeObject(sistema);</span>
+<span class="nc" id="L988">            grabacionSistema.close();</span>
+<span class="nc" id="L989">        } catch (IOException ex) {</span>
+<span class="nc" id="L990">        }</span>
+<span class="nc" id="L991">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

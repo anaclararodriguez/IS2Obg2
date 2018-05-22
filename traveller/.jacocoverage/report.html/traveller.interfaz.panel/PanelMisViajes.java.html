@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PanelMisViajes.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.interfaz.panel</a> &gt; <span class="el_source">PanelMisViajes.java</span></div><h1>PanelMisViajes.java</h1><pre class="source lang-java linenums">package traveller.interfaz.panel;
+
+import traveller.dominio.Evento;
+import traveller.dominio.ISistema;
+import traveller.dominio.Viaje;
+import traveller.interfaz.ventana.VentanaMenu;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+
+/**
+ * La clase PanelJugadores se encarga de pedir y validar los datos para la
+ * creación de nuevos jugadores y de mostrar los datos de jugadores existentes.
+ */
+public class PanelMisViajes extends javax.swing.JPanel {
+
+    /**
+     * Crea un nuevo objeto PanelJugadores
+     */
+<span class="nc" id="L21">    public PanelMisViajes(ISistema sistema, VentanaMenu ventana) {</span>
+<span class="nc" id="L22">        initComponents();</span>
+
+<span class="nc" id="L24">        this.sistema = sistema;</span>
+<span class="nc" id="L25">        this.ventana = ventana;</span>
+<span class="nc" id="L26">        refrescarListaViajes();</span>
+<span class="nc" id="L27">        btnEliminarViaje.setVisible(false);</span>
+<span class="nc" id="L28">        btnEliminarEvento.setVisible(false);</span>
+<span class="nc" id="L29">    }</span>
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+<span class="nc" id="L35">        jScrollPane1 = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L36">        jEditorPane1 = new javax.swing.JEditorPane();</span>
+<span class="nc" id="L37">        panelPrincipal = new javax.swing.JPanel();</span>
+<span class="nc" id="L38">        PanelConsultaJugadores = new javax.swing.JPanel();</span>
+<span class="nc" id="L39">        btnVerViaje = new javax.swing.JButton();</span>
+<span class="nc" id="L40">        scrollListaJugadores = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L41">        listaViajes = new javax.swing.JList();</span>
+<span class="nc" id="L42">        etqNombreViaje = new javax.swing.JLabel();</span>
+<span class="nc" id="L43">        etqDestinoViaje = new javax.swing.JLabel();</span>
+<span class="nc" id="L44">        etqFechas = new javax.swing.JLabel();</span>
+<span class="nc" id="L45">        etqDescripcionViaje = new javax.swing.JLabel();</span>
+<span class="nc" id="L46">        separadorJugadoresActivos = new javax.swing.JSeparator();</span>
+<span class="nc" id="L47">        scrollListaJugadores1 = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L48">        listaEventos = new javax.swing.JList();</span>
+<span class="nc" id="L49">        btnEliminarViaje = new javax.swing.JButton();</span>
+<span class="nc" id="L50">        btnEliminarEvento = new javax.swing.JButton();</span>
+<span class="nc" id="L51">        etqEvento = new javax.swing.JLabel();</span>
+<span class="nc" id="L52">        etqViaje = new javax.swing.JLabel();</span>
+<span class="nc" id="L53">        etqTipoEvento = new javax.swing.JLabel();</span>
+<span class="nc" id="L54">        etqNombreEvento = new javax.swing.JLabel();</span>
+<span class="nc" id="L55">        etqFechaEvento = new javax.swing.JLabel();</span>
+<span class="nc" id="L56">        etqLugarEvento = new javax.swing.JLabel();</span>
+<span class="nc" id="L57">        etqDescripcionEvento = new javax.swing.JLabel();</span>
+<span class="nc" id="L58">        etqError = new javax.swing.JLabel();</span>
+<span class="nc" id="L59">        panelTitulo2 = new javax.swing.JPanel();</span>
+<span class="nc" id="L60">        etqTitulo2 = new javax.swing.JLabel();</span>
+
+<span class="nc" id="L62">        jScrollPane1.setViewportView(jEditorPane1);</span>
+
+<span class="nc" id="L64">        setBackground(new java.awt.Color(245, 245, 245));</span>
+<span class="nc" id="L65">        setPreferredSize(new java.awt.Dimension(460, 679));</span>
+
+<span class="nc" id="L67">        panelPrincipal.setBackground(new java.awt.Color(245, 245, 245));</span>
+
+<span class="nc" id="L69">        PanelConsultaJugadores.setBackground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L70">        PanelConsultaJugadores.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(39, 39, 39), 1, true));</span>
+<span class="nc" id="L71">        PanelConsultaJugadores.setPreferredSize(new java.awt.Dimension(390, 203));</span>
+
+<span class="nc" id="L73">        btnVerViaje.setBackground(new java.awt.Color(242, 242, 242));</span>
+<span class="nc" id="L74">        btnVerViaje.setFont(new java.awt.Font(&quot;SansSerif&quot;, 1, 14)); // NOI18N</span>
+<span class="nc" id="L75">        btnVerViaje.setText(&quot;Ver viaje&quot;);</span>
+<span class="nc" id="L76">        btnVerViaje.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(221, 221, 221), 1, true));</span>
+<span class="nc" id="L77">        btnVerViaje.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</span>
+<span class="nc" id="L78">        btnVerViaje.setFocusPainted(false);</span>
+<span class="nc" id="L79">        btnVerViaje.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L81">                btnVerViajeActionPerformed(evt);</span>
+<span class="nc" id="L82">            }</span>
+        });
+
+<span class="nc" id="L85">        listaViajes.setFocusable(false);</span>
+<span class="nc" id="L86">        listaViajes.setSelectionBackground(new java.awt.Color(39, 39, 39));</span>
+<span class="nc" id="L87">        listaViajes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {</span>
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+<span class="nc" id="L89">                listaViajesValueChanged(evt);</span>
+<span class="nc" id="L90">            }</span>
+        });
+<span class="nc" id="L92">        scrollListaJugadores.setViewportView(listaViajes);</span>
+
+<span class="nc" id="L94">        etqNombreViaje.setFont(new java.awt.Font(&quot;SansSerif&quot;, 1, 14)); // NOI18N</span>
+
+<span class="nc" id="L96">        etqDestinoViaje.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 12)); // NOI18N</span>
+
+<span class="nc" id="L98">        etqFechas.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 12)); // NOI18N</span>
+
+<span class="nc" id="L100">        etqDescripcionViaje.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 12)); // NOI18N</span>
+
+<span class="nc" id="L102">        listaEventos.setFocusable(false);</span>
+<span class="nc" id="L103">        listaEventos.setSelectionBackground(new java.awt.Color(39, 39, 39));</span>
+<span class="nc" id="L104">        listaEventos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {</span>
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+<span class="nc" id="L106">                listaEventosValueChanged(evt);</span>
+<span class="nc" id="L107">            }</span>
+        });
+<span class="nc" id="L109">        scrollListaJugadores1.setViewportView(listaEventos);</span>
+
+<span class="nc" id="L111">        btnEliminarViaje.setBackground(new java.awt.Color(242, 242, 242));</span>
+<span class="nc" id="L112">        btnEliminarViaje.setFont(new java.awt.Font(&quot;SansSerif&quot;, 1, 14)); // NOI18N</span>
+<span class="nc" id="L113">        btnEliminarViaje.setText(&quot;Eliminar viaje&quot;);</span>
+<span class="nc" id="L114">        btnEliminarViaje.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(221, 221, 221), 1, true));</span>
+<span class="nc" id="L115">        btnEliminarViaje.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</span>
+<span class="nc" id="L116">        btnEliminarViaje.setFocusPainted(false);</span>
+<span class="nc" id="L117">        btnEliminarViaje.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L119">                btnEliminarViajeActionPerformed(evt);</span>
+<span class="nc" id="L120">            }</span>
+        });
+
+<span class="nc" id="L123">        btnEliminarEvento.setBackground(new java.awt.Color(242, 242, 242));</span>
+<span class="nc" id="L124">        btnEliminarEvento.setFont(new java.awt.Font(&quot;SansSerif&quot;, 1, 14)); // NOI18N</span>
+<span class="nc" id="L125">        btnEliminarEvento.setText(&quot;Eliminar Evento&quot;);</span>
+<span class="nc" id="L126">        btnEliminarEvento.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(221, 221, 221), 1, true));</span>
+<span class="nc" id="L127">        btnEliminarEvento.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</span>
+<span class="nc" id="L128">        btnEliminarEvento.setFocusPainted(false);</span>
+<span class="nc" id="L129">        btnEliminarEvento.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L131">                btnEliminarEventoActionPerformed(evt);</span>
+<span class="nc" id="L132">            }</span>
+        });
+
+<span class="nc" id="L135">        etqEvento.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 17)); // NOI18N</span>
+<span class="nc" id="L136">        etqEvento.setText(&quot;Eventos&quot;);</span>
+
+<span class="nc" id="L138">        etqViaje.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 17)); // NOI18N</span>
+<span class="nc" id="L139">        etqViaje.setText(&quot;Viajes&quot;);</span>
+
+<span class="nc" id="L141">        etqError.setFont(new java.awt.Font(&quot;Tahoma&quot;, 1, 11)); // NOI18N</span>
+<span class="nc" id="L142">        etqError.setForeground(new java.awt.Color(204, 0, 0));</span>
+
+<span class="nc" id="L144">        javax.swing.GroupLayout PanelConsultaJugadoresLayout = new javax.swing.GroupLayout(PanelConsultaJugadores);</span>
+<span class="nc" id="L145">        PanelConsultaJugadores.setLayout(PanelConsultaJugadoresLayout);</span>
+<span class="nc" id="L146">        PanelConsultaJugadoresLayout.setHorizontalGroup(</span>
+<span class="nc" id="L147">            PanelConsultaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L148">            .addGroup(PanelConsultaJugadoresLayout.createSequentialGroup()</span>
+<span class="nc" id="L149">                .addContainerGap()</span>
+<span class="nc" id="L150">                .addGroup(PanelConsultaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L151">                    .addGroup(PanelConsultaJugadoresLayout.createSequentialGroup()</span>
+<span class="nc" id="L152">                        .addComponent(etqViaje)</span>
+<span class="nc" id="L153">                        .addContainerGap(373, Short.MAX_VALUE))</span>
+<span class="nc" id="L154">                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConsultaJugadoresLayout.createSequentialGroup()</span>
+<span class="nc" id="L155">                        .addGroup(PanelConsultaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L156">                            .addComponent(scrollListaJugadores1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)</span>
+<span class="nc" id="L157">                            .addGroup(PanelConsultaJugadoresLayout.createSequentialGroup()</span>
+<span class="nc" id="L158">                                .addComponent(etqEvento)</span>
+<span class="nc" id="L159">                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L160">                            .addComponent(btnEliminarEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+<span class="nc" id="L161">                        .addGap(26, 26, 26)</span>
+<span class="nc" id="L162">                        .addGroup(PanelConsultaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L163">                            .addComponent(etqDescripcionEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L164">                            .addComponent(etqNombreEvento, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)</span>
+<span class="nc" id="L165">                            .addComponent(etqTipoEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L166">                            .addComponent(etqLugarEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L167">                            .addComponent(etqFechaEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+<span class="nc" id="L168">                        .addGap(0, 0, Short.MAX_VALUE))</span>
+<span class="nc" id="L169">                    .addGroup(PanelConsultaJugadoresLayout.createSequentialGroup()</span>
+<span class="nc" id="L170">                        .addGroup(PanelConsultaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)</span>
+<span class="nc" id="L171">                            .addComponent(btnEliminarViaje, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L172">                            .addComponent(scrollListaJugadores, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)</span>
+<span class="nc" id="L173">                            .addComponent(btnVerViaje, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))</span>
+<span class="nc" id="L174">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L175">                        .addGroup(PanelConsultaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L176">                            .addGroup(PanelConsultaJugadoresLayout.createSequentialGroup()</span>
+<span class="nc" id="L177">                                .addGroup(PanelConsultaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L178">                                    .addComponent(etqDestinoViaje, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)</span>
+<span class="nc" id="L179">                                    .addComponent(etqFechas, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)</span>
+<span class="nc" id="L180">                                    .addComponent(separadorJugadoresActivos, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)</span>
+<span class="nc" id="L181">                                    .addComponent(etqNombreViaje, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)</span>
+<span class="nc" id="L182">                                    .addComponent(etqDescripcionViaje, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))</span>
+<span class="nc" id="L183">                                .addGap(41, 41, 41))</span>
+<span class="nc" id="L184">                            .addGroup(PanelConsultaJugadoresLayout.createSequentialGroup()</span>
+<span class="nc" id="L185">                                .addGap(10, 10, 10)</span>
+<span class="nc" id="L186">                                .addComponent(etqError, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L187">                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))</span>
+        );
+<span class="nc" id="L189">        PanelConsultaJugadoresLayout.setVerticalGroup(</span>
+<span class="nc" id="L190">            PanelConsultaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L191">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConsultaJugadoresLayout.createSequentialGroup()</span>
+<span class="nc" id="L192">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L193">                .addComponent(etqViaje)</span>
+<span class="nc" id="L194">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L195">                .addGroup(PanelConsultaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L196">                    .addGroup(PanelConsultaJugadoresLayout.createSequentialGroup()</span>
+<span class="nc" id="L197">                        .addComponent(etqNombreViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L198">                        .addGap(18, 18, 18)</span>
+<span class="nc" id="L199">                        .addComponent(etqDestinoViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L200">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L201">                        .addComponent(etqFechas, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L202">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L203">                        .addComponent(separadorJugadoresActivos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L204">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L205">                        .addComponent(etqDescripcionViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L206">                        .addGap(80, 80, 80))</span>
+<span class="nc" id="L207">                    .addGroup(PanelConsultaJugadoresLayout.createSequentialGroup()</span>
+<span class="nc" id="L208">                        .addComponent(scrollListaJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L209">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L210">                        .addGroup(PanelConsultaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L211">                            .addComponent(btnVerViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L212">                            .addComponent(etqError, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L213">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L214">                        .addComponent(btnEliminarViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L215">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))</span>
+<span class="nc" id="L216">                .addComponent(etqEvento)</span>
+<span class="nc" id="L217">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L218">                .addGroup(PanelConsultaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L219">                    .addComponent(scrollListaJugadores1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L220">                    .addGroup(PanelConsultaJugadoresLayout.createSequentialGroup()</span>
+<span class="nc" id="L221">                        .addComponent(etqNombreEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L222">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L223">                        .addComponent(etqTipoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L224">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L225">                        .addComponent(etqFechaEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L226">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L227">                        .addComponent(etqLugarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L228">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L229">                        .addComponent(etqDescripcionEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L230">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L231">                .addComponent(btnEliminarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L232">                .addGap(85, 85, 85))</span>
+        );
+
+<span class="nc" id="L235">        panelTitulo2.setBackground(new java.awt.Color(39, 39, 39));</span>
+<span class="nc" id="L236">        panelTitulo2.setForeground(new java.awt.Color(255, 255, 255));</span>
+
+<span class="nc" id="L238">        etqTitulo2.setFont(new java.awt.Font(&quot;SansSerif&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L239">        etqTitulo2.setForeground(new java.awt.Color(255, 255, 255));</span>
+<span class="nc" id="L240">        etqTitulo2.setText(&quot;Mis viajes&quot;);</span>
+
+<span class="nc" id="L242">        javax.swing.GroupLayout panelTitulo2Layout = new javax.swing.GroupLayout(panelTitulo2);</span>
+<span class="nc" id="L243">        panelTitulo2.setLayout(panelTitulo2Layout);</span>
+<span class="nc" id="L244">        panelTitulo2Layout.setHorizontalGroup(</span>
+<span class="nc" id="L245">            panelTitulo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L246">            .addGroup(panelTitulo2Layout.createSequentialGroup()</span>
+<span class="nc" id="L247">                .addContainerGap()</span>
+<span class="nc" id="L248">                .addComponent(etqTitulo2)</span>
+<span class="nc" id="L249">                .addContainerGap(340, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L251">        panelTitulo2Layout.setVerticalGroup(</span>
+<span class="nc" id="L252">            panelTitulo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L253">            .addGroup(panelTitulo2Layout.createSequentialGroup()</span>
+<span class="nc" id="L254">                .addContainerGap()</span>
+<span class="nc" id="L255">                .addComponent(etqTitulo2)</span>
+<span class="nc" id="L256">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L259">        javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);</span>
+<span class="nc" id="L260">        panelPrincipal.setLayout(panelPrincipalLayout);</span>
+<span class="nc" id="L261">        panelPrincipalLayout.setHorizontalGroup(</span>
+<span class="nc" id="L262">            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L263">            .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L264">                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)</span>
+<span class="nc" id="L265">                    .addComponent(PanelConsultaJugadores, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)</span>
+<span class="nc" id="L266">                    .addComponent(panelTitulo2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+<span class="nc" id="L267">                .addContainerGap(18, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L269">        panelPrincipalLayout.setVerticalGroup(</span>
+<span class="nc" id="L270">            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L271">            .addGroup(panelPrincipalLayout.createSequentialGroup()</span>
+<span class="nc" id="L272">                .addComponent(panelTitulo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L273">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L274">                .addComponent(PanelConsultaJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L275">                .addContainerGap(52, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L278">        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);</span>
+<span class="nc" id="L279">        this.setLayout(layout);</span>
+<span class="nc" id="L280">        layout.setHorizontalGroup(</span>
+<span class="nc" id="L281">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L282">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L283">                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L284">                .addContainerGap(13, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L286">        layout.setVerticalGroup(</span>
+<span class="nc" id="L287">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L288">            .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+        );
+<span class="nc" id="L290">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
+
+    private void listaViajesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaViajesValueChanged
+<span class="nc bnc" id="L293" title="All 2 branches missed.">        if (!listaViajes.isSelectionEmpty()) {</span>
+<span class="nc" id="L294">            SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);</span>
+<span class="nc" id="L295">            Viaje viaje = ((Viaje) listaViajes.getSelectedValue());</span>
+
+<span class="nc" id="L297">            String ciudad = null;</span>
+<span class="nc bnc" id="L298" title="All 5 branches missed.">            switch (viaje.getDestino()) {</span>
+                case MADRID:
+<span class="nc" id="L300">                    ciudad = &quot;Madrid&quot;;</span>
+<span class="nc" id="L301">                    break;</span>
+                case PARIS:
+<span class="nc" id="L303">                    ciudad = &quot;París&quot;;</span>
+<span class="nc" id="L304">                    break;</span>
+                case MIAMI:
+<span class="nc" id="L306">                    ciudad = &quot;Miami&quot;;</span>
+<span class="nc" id="L307">                    break;</span>
+                case BSAS:
+<span class="nc" id="L309">                    ciudad = &quot;Buenos Aires&quot;;</span>
+                    break;
+            }
+
+<span class="nc" id="L313">            etqNombreViaje.setText(viaje.getNombre());</span>
+<span class="nc" id="L314">            etqFechas.setText((dateFormat.format(viaje.getFechaInicio())</span>
+<span class="nc" id="L315">                    + &quot; - &quot; + (dateFormat.format(viaje.getFechaFin()))));</span>
+
+<span class="nc" id="L317">            etqDestinoViaje.setText(ciudad);</span>
+<span class="nc" id="L318">            etqDescripcionViaje.setText(viaje.getDescripcion());</span>
+<span class="nc" id="L319">            refrescarListaEventos();</span>
+<span class="nc" id="L320">            btnEliminarViaje.setVisible(true);</span>
+<span class="nc" id="L321">        } else {</span>
+<span class="nc" id="L322">            btnEliminarViaje.setVisible(false);</span>
+<span class="nc" id="L323">            etqNombreViaje.setText(null);</span>
+<span class="nc" id="L324">            etqFechas.setText(null);</span>
+<span class="nc" id="L325">            etqDestinoViaje.setText(null);</span>
+<span class="nc" id="L326">            etqDescripcionViaje.setText(null);</span>
+        }
+<span class="nc" id="L328">    }//GEN-LAST:event_listaViajesValueChanged</span>
+
+    private void listaEventosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaEventosValueChanged
+<span class="nc bnc" id="L331" title="All 2 branches missed.">        if (!listaEventos.isSelectionEmpty()) {</span>
+<span class="nc" id="L332">            SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);</span>
+<span class="nc" id="L333">            Evento evento = ((Evento) listaEventos.getSelectedValue());</span>
+
+<span class="nc" id="L335">            String tipoEvento = null;</span>
+<span class="nc bnc" id="L336" title="All 7 branches missed.">            switch (evento.getTipoEvento()) {</span>
+                case CULTURAL:
+<span class="nc" id="L338">                    tipoEvento = &quot;Cultural&quot;;</span>
+<span class="nc" id="L339">                    break;</span>
+                case DEPORTIVO:
+<span class="nc" id="L341">                    tipoEvento = &quot;Deportivo&quot;;</span>
+<span class="nc" id="L342">                    break;</span>
+                case LABORAL:
+<span class="nc" id="L344">                    tipoEvento = &quot;Laboral&quot;;</span>
+<span class="nc" id="L345">                    break;</span>
+                case COMERCIAL:
+<span class="nc" id="L347">                    tipoEvento = &quot;Comercial&quot;;</span>
+<span class="nc" id="L348">                    break;</span>
+                case FAMILIAR:
+<span class="nc" id="L350">                    tipoEvento = &quot;Familiar&quot;;</span>
+<span class="nc" id="L351">                    break;</span>
+                case OTRO:
+<span class="nc" id="L353">                    tipoEvento = &quot;Otro&quot;;</span>
+                    break;
+            }
+
+<span class="nc" id="L357">            etqTipoEvento.setText(&quot;Tipo: &quot; + tipoEvento);</span>
+<span class="nc" id="L358">            etqNombreEvento.setText(evento.getNombre());</span>
+<span class="nc" id="L359">            etqFechaEvento.setText(dateFormat.format(evento.getFecha()));</span>
+
+<span class="nc" id="L361">            etqLugarEvento.setText(evento.getLugar());</span>
+<span class="nc" id="L362">            etqDescripcionEvento.setText(evento.getDescripcion());</span>
+<span class="nc" id="L363">            btnEliminarEvento.setVisible(true);</span>
+<span class="nc" id="L364">        } else {</span>
+<span class="nc" id="L365">            etqTipoEvento.setText(null);</span>
+<span class="nc" id="L366">            etqNombreEvento.setText(null);</span>
+<span class="nc" id="L367">            etqFechaEvento.setText(null);</span>
+
+<span class="nc" id="L369">            etqLugarEvento.setText(null);</span>
+<span class="nc" id="L370">            etqDescripcionEvento.setText(null);</span>
+<span class="nc" id="L371">            btnEliminarEvento.setVisible(false);</span>
+<span class="nc" id="L372">            this.refrescarListaEventos();</span>
+        }
+<span class="nc" id="L374">    }//GEN-LAST:event_listaEventosValueChanged</span>
+
+    private void btnEliminarViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarViajeActionPerformed
+<span class="nc bnc" id="L377" title="All 2 branches missed.">        if (listaViajes.getSelectedValue() != null) {</span>
+<span class="nc" id="L378">            sistema.getUsuarioIdentificado().bajaViaje(((Viaje) listaViajes.getSelectedValue()));</span>
+        }
+<span class="nc" id="L380">        this.refrescarListaViajes();</span>
+<span class="nc" id="L381">        this.refrescarListaEventos();</span>
+
+<span class="nc" id="L383">    }//GEN-LAST:event_btnEliminarViajeActionPerformed</span>
+
+    private void btnEliminarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEventoActionPerformed
+<span class="nc bnc" id="L386" title="All 2 branches missed.">        if (listaEventos.getSelectedValue() != null) {</span>
+<span class="nc" id="L387">            ((Viaje) listaViajes.getSelectedValue()).bajaEvento((Evento) listaEventos.getSelectedValue());</span>
+        }
+
+<span class="nc" id="L390">        String accion = &quot;&lt;html&gt;&lt;b&gt;&quot; + this.sistema.getUsuarioIdentificado().getNombre() + &quot; &quot;</span>
+<span class="nc" id="L391">                + this.sistema.getUsuarioIdentificado().getApellido() + &quot;&lt;/b&gt; eliminó el evento &lt;i&gt;&quot; + ((Evento) listaEventos.getSelectedValue()).getNombre() + &quot;&lt;/i&gt; del viaje.&quot;;</span>
+<span class="nc" id="L392">        SimpleDateFormat sdfDate = new SimpleDateFormat(&quot;dd/MM/yyyy - HH:mm&quot;);</span>
+<span class="nc" id="L393">        Date hoy = new Date();</span>
+<span class="nc" id="L394">        String strDia = sdfDate.format(hoy);</span>
+<span class="nc" id="L395">        ((Viaje) listaViajes.getSelectedValue()).agregarLogAViaje(accion, strDia);</span>
+
+<span class="nc" id="L397">        String mensaje = this.sistema.getUsuarioIdentificado().getNombre() + &quot; &quot; + this.sistema.getUsuarioIdentificado().getApellido() + &quot; elimino el evento &quot; + ((Evento) listaEventos.getSelectedValue()).getNombre() + &quot; del viaje &quot;</span>
+<span class="nc" id="L398">                + ((Viaje) listaViajes.getSelectedValue()).getNombre();</span>
+
+<span class="nc" id="L400">        String mensajeEmail = &quot;Le notificamos que el usuario &quot; + this.sistema.getUsuarioIdentificado().getNombre() + &quot; &quot; + this.sistema.getUsuarioIdentificado().getApellido() + &quot; eliminó el evento &quot; + ((Evento) listaEventos.getSelectedValue()).getNombre() + &quot; del viaje &quot;</span>
+<span class="nc" id="L401">                + ((Viaje) listaViajes.getSelectedValue()).getNombre() + &quot;\n\n Le recordamos que si no desea ser notificado mediante este medio puede darse&quot;</span>
+                + &quot;de baja seleccionando la opción en 'Mi Cuenta' \n\nGracias,\n\ntraveller.&quot;;
+<span class="nc" id="L403">        String titulo = this.sistema.getUsuarioIdentificado().getNombre() + &quot; &quot; + this.sistema.getUsuarioIdentificado().getApellido() + &quot; ha modificado un viaje.&quot;;</span>
+<span class="nc" id="L404">        this.sistema.notificarNovedad(mensaje, mensajeEmail, titulo, (Viaje) listaViajes.getSelectedValue());</span>
+
+<span class="nc" id="L406">        this.refrescarListaEventos();</span>
+<span class="nc" id="L407">    }//GEN-LAST:event_btnEliminarEventoActionPerformed</span>
+
+    private void btnVerViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerViajeActionPerformed
+<span class="nc bnc" id="L410" title="All 2 branches missed.">        if (listaViajes.getSelectedValue() != null) {</span>
+<span class="nc" id="L411">            this.ventana.verViaje((Viaje) listaViajes.getSelectedValue());</span>
+<span class="nc" id="L412">            this.etqError.setText(null);</span>
+        } else {
+<span class="nc" id="L414">            this.etqError.setText(&quot;Debes seleccionar un viaje.&quot;);</span>
+        }
+<span class="nc" id="L416">    }//GEN-LAST:event_btnVerViajeActionPerformed</span>
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PanelConsultaJugadores;
+    private javax.swing.JButton btnEliminarEvento;
+    private javax.swing.JButton btnEliminarViaje;
+    private javax.swing.JButton btnVerViaje;
+    private javax.swing.JLabel etqDescripcionEvento;
+    private javax.swing.JLabel etqDescripcionViaje;
+    private javax.swing.JLabel etqDestinoViaje;
+    private javax.swing.JLabel etqError;
+    private javax.swing.JLabel etqEvento;
+    private javax.swing.JLabel etqFechaEvento;
+    private javax.swing.JLabel etqFechas;
+    private javax.swing.JLabel etqLugarEvento;
+    private javax.swing.JLabel etqNombreEvento;
+    private javax.swing.JLabel etqNombreViaje;
+    private javax.swing.JLabel etqTipoEvento;
+    private javax.swing.JLabel etqTitulo2;
+    private javax.swing.JLabel etqViaje;
+    private javax.swing.JEditorPane jEditorPane1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList listaEventos;
+    private javax.swing.JList listaViajes;
+    private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JPanel panelTitulo2;
+    private javax.swing.JScrollPane scrollListaJugadores;
+    private javax.swing.JScrollPane scrollListaJugadores1;
+    private javax.swing.JSeparator separadorJugadoresActivos;
+    // End of variables declaration//GEN-END:variables
+    private ISistema sistema;
+    private VentanaMenu ventana;
+
+    /**
+     * Le carga a listaJugadores la lista de jugadores del dominio ordenada.
+     */
+    private void refrescarListaViajes() {
+<span class="nc" id="L452">        ArrayList&lt;Viaje&gt; aux = new ArrayList&lt;Viaje&gt;();</span>
+
+<span class="nc" id="L454">        Iterator&lt;Viaje&gt; it = sistema.getUsuarioIdentificado().getListaViajes().iterator();</span>
+<span class="nc bnc" id="L455" title="All 2 branches missed.">        while (it.hasNext()) {</span>
+<span class="nc" id="L456">            aux.add(it.next());</span>
+        }
+<span class="nc bnc" id="L458" title="All 2 branches missed.">        if (aux != null) {</span>
+<span class="nc" id="L459">            listaViajes.setListData(aux.toArray());</span>
+        }
+<span class="nc" id="L461">    }</span>
+
+    private void refrescarListaEventos() {
+        ArrayList&lt;Evento&gt; aux;
+<span class="nc bnc" id="L465" title="All 2 branches missed.">        if (!listaViajes.isSelectionEmpty()) {</span>
+<span class="nc" id="L466">            aux = ((Viaje) listaViajes.getSelectedValue()).getListaEventos();</span>
+        } else {
+<span class="nc" id="L468">            aux = new ArrayList&lt;Evento&gt;();</span>
+        }
+<span class="nc bnc" id="L470" title="All 2 branches missed.">        if (aux != null) {</span>
+<span class="nc" id="L471">            listaEventos.setListData(aux.toArray());</span>
+        }
+<span class="nc" id="L473">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

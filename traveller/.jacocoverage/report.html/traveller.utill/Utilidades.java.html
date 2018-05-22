@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Utilidades.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.utill</a> &gt; <span class="el_source">Utilidades.java</span></div><h1>Utilidades.java</h1><pre class="source lang-java linenums">package traveller.utill;
+
+import traveller.dominio.Email;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.*;
+import java.util.regex.Pattern;
+
+/**
+ * La clase Utilidades contiene métodos de utilidad para el sistema.
+ *
+* @author Universidad ORT Uruguay
+ */
+<span class="nc" id="L15">public class Utilidades {</span>
+
+<span class="fc" id="L17">    private static Scanner in = new Scanner(System.in);</span>
+
+    public static boolean esNumero(String texto) {
+	boolean retorno;
+
+	try {
+<span class="fc" id="L23">	    Integer.parseInt(texto);</span>
+<span class="fc" id="L24">	    retorno = true;</span>
+<span class="fc" id="L25">	} catch (NumberFormatException e) {</span>
+<span class="fc" id="L26">	    retorno = false;</span>
+<span class="fc" id="L27">	}</span>
+
+<span class="fc" id="L29">	return retorno;</span>
+    }
+
+    public static boolean esLetra(String texto) {
+<span class="nc bnc" id="L33" title="All 6 branches missed.">	return texto.length() == 1 &amp;&amp; texto.toUpperCase().charAt(0) &gt;= 65 &amp;&amp; texto.toUpperCase().charAt(0) &lt;= 90;</span>
+    }
+
+    /** 
+     * Genera un número al azar entre dos rangos (inclusive).
+     */
+    public static int rand(int min, int max) {
+<span class="nc" id="L40">	return min + (int) (Math.random() * ((max - min) + 1));</span>
+    }
+
+    public static String md5(String password) {
+<span class="fc" id="L44">	String hashword = null;</span>
+	try {
+<span class="fc" id="L46">	    MessageDigest md5 = MessageDigest.getInstance(&quot;MD5&quot;);</span>
+<span class="fc" id="L47">	    md5.update(password.getBytes());</span>
+<span class="fc" id="L48">	    BigInteger hash = new BigInteger(1, md5.digest());</span>
+<span class="fc" id="L49">	    hashword = hash.toString(16);</span>
+<span class="nc" id="L50">	} catch (NoSuchAlgorithmException nsae) {</span>
+	    // ignore
+<span class="fc" id="L52">	}</span>
+	
+<span class="fc" id="L54">	return hashword;</span>
+    }
+    
+    public static boolean largoValido(String cadena, int largoMinimo, int largoMaximo) {
+<span class="fc bfc" id="L58" title="All 4 branches covered.">        return cadena.length() &gt;= largoMinimo &amp;&amp; cadena.length() &lt;= largoMaximo;</span>
+    }
+
+    public static boolean emailValido(Email email) {
+<span class="fc" id="L62">        Pattern p = Pattern.compile(&quot;^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$&quot;);</span>
+<span class="fc" id="L63">        return p.matcher(email.getDireccion()).find();</span>
+    }
+
+    public static boolean esAlfanumerico(String cadena) {
+<span class="fc" id="L67">        Pattern p1 = Pattern.compile(&quot;.*[a-zA-Z]+.*&quot;);</span>
+<span class="fc" id="L68">        Pattern p2 = Pattern.compile(&quot;.*[0-9]+.*&quot;);</span>
+<span class="pc bpc" id="L69" title="2 of 4 branches missed.">        return p1.matcher(cadena).find() &amp;&amp; p2.matcher(cadena).find();</span>
+    }
+
+    public static boolean formatoFechaValido(String dia, String mes, String año) {
+<span class="fc" id="L73">        boolean retorno = false;</span>
+
+<span class="fc bfc" id="L75" title="All 6 branches covered.">        if (Utilidades.esNumero(dia) &amp;&amp; Utilidades.esNumero(mes) &amp;&amp; Utilidades.esNumero(año)) {</span>
+<span class="fc" id="L76">            int diaNumero = Integer.parseInt(dia);</span>
+<span class="fc" id="L77">            int mesNumero = Integer.parseInt(mes);</span>
+<span class="fc" id="L78">            int añoNumero = Integer.parseInt(año);</span>
+<span class="pc bpc" id="L79" title="4 of 12 branches missed.">            if (diaNumero &gt; 0 &amp;&amp; diaNumero &lt; 32 &amp;&amp; mesNumero &gt; 0 &amp;&amp; mesNumero &lt; 13</span>
+                    &amp;&amp; añoNumero &gt; 1900 &amp;&amp; añoNumero &lt; 2100) {
+<span class="fc" id="L81">                retorno = true;</span>
+            }
+        }
+<span class="fc" id="L84">        return retorno;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

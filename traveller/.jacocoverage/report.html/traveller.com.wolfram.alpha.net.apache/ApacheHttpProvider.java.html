@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ApacheHttpProvider.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.com.wolfram.alpha.net.apache</a> &gt; <span class="el_source">ApacheHttpProvider.java</span></div><h1>ApacheHttpProvider.java</h1><pre class="source lang-java linenums">/*
+ * Created on Dec 5, 2009
+ *
+ */
+package traveller.com.wolfram.alpha.net.apache;
+
+import com.wolfram.alpha.net.HttpProvider;
+import com.wolfram.alpha.net.ProxySettings;
+import traveller.com.wolfram.alpha.net.impl.HttpTransaction;
+import java.net.URL;
+import org.apache.http.HttpVersion;
+import org.apache.http.conn.params.ConnManagerParams;
+import org.apache.http.conn.params.ConnPerRoute;
+import org.apache.http.conn.routing.HttpRoute;
+import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpProtocolParams;
+import sun.net.www.http.HttpClient;
+
+
+
+<span class="nc" id="L28">public class ApacheHttpProvider implements HttpProvider {</span>
+
+    
+    private static DefaultHttpClient httpClient;
+    private static BasicHttpParams params;
+<span class="nc" id="L33">    private int socketTimeoutMillis = SOCKET_TIMEOUT_MILLIS;</span>
+
+    
+    // HttpClient configuration settings.
+    private static final String DEFAULT_USER_AGENT = &quot;Wolfram|Alpha Java Binding 1.1&quot;;
+    private static final int CONNECTION_TIMEOUT_MILLIS = 8000;
+    // This is how long to wait for data after the connection is made. Has to be long enough to
+    // accommodate query-type URLs that do work on the server before returning any data.
+    private static final int SOCKET_TIMEOUT_MILLIS = 20000;
+    // Default is 2.
+    private static final int MAX_CONNECTIONS_PER_ROUTE = 8;
+    private static final int MAX_RETRY_COUNT = 1;
+
+
+    // This static block initializes Apache HttpClient.
+    static {
+        // Set up Apache HttpClient library for multi-threaded access.
+<span class="nc" id="L50">        SchemeRegistry schemeRegistry = new SchemeRegistry();</span>
+<span class="nc" id="L51">        schemeRegistry.register(new Scheme(&quot;http&quot;, PlainSocketFactory.getSocketFactory(), 80));</span>
+<span class="nc" id="L52">        schemeRegistry.register(new Scheme(&quot;https&quot;, SSLSocketFactory.getSocketFactory(), 443));</span>
+<span class="nc" id="L53">        params = new BasicHttpParams();</span>
+<span class="nc" id="L54">        ConnManagerParams.setMaxConnectionsPerRoute(params, new ConnPerRoute() {</span>
+<span class="nc" id="L55">            public int getMaxForRoute(HttpRoute route) { return MAX_CONNECTIONS_PER_ROUTE; }</span>
+        });
+<span class="nc" id="L57">        HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);</span>
+<span class="nc" id="L58">        HttpProtocolParams.setUserAgent(params, DEFAULT_USER_AGENT);</span>
+<span class="nc" id="L59">        HttpConnectionParams.setConnectionTimeout(params, CONNECTION_TIMEOUT_MILLIS);</span>
+<span class="nc" id="L60">        HttpConnectionParams.setSoTimeout(params, SOCKET_TIMEOUT_MILLIS);</span>
+<span class="nc" id="L61">        ThreadSafeClientConnManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);</span>
+<span class="nc" id="L62">        httpClient = new DefaultHttpClient(cm, params);</span>
+        // Retry handler? See http://hc.apache.org/httpcomponents-client/tutorial/html/fundamentals.html#d4e37
+        
+        // Credentials ??
+        //httpClient.getParams().setParameter(CredentialsProvider.PROVIDER, ProxySettings.getInstance());
+<span class="nc" id="L67">    }</span>
+
+    
+    // TODO: Prove that this modifies the value for future requests.
+    public void setUserAgent(String agent) {
+<span class="nc" id="L72">        HttpProtocolParams.setUserAgent(params, agent);</span>
+<span class="nc" id="L73">    }</span>
+
+    public HttpTransaction createHttpTransaction(URL url, ProxySettings proxySettings) {
+<span class="nc" id="L76">        return new ApacheHttpTransaction(httpClient, url, proxySettings, MAX_RETRY_COUNT, socketTimeoutMillis);</span>
+    }
+
+    
+    public DefaultHttpClient getHttpClient() {
+<span class="nc" id="L81">        return httpClient;</span>
+    }
+
+    
+    ///////////////  Whither these ????  ////////////////////////
+    
+    private static ProxySettings proxySettings;
+
+    public void setProxyInfo(int useProxy, String httpProxyHost, int httpProxyPort,
+                                        String socksProxyHost, int socksProxyPort) {
+<span class="nc" id="L91">        proxySettings.setProxyInfo(useProxy, httpProxyHost, httpProxyPort);</span>
+<span class="nc" id="L92">    }</span>
+
+    public void setProxyCredentials(String username, String password) {
+<span class="nc" id="L95">        proxySettings.setProxyUsername(username);</span>
+<span class="nc" id="L96">        proxySettings.setProxyPassword(password);</span>
+<span class="nc" id="L97">    }</span>
+
+
+    public String[] getProxyHostAndPort(String url) {
+<span class="nc" id="L101">        return proxySettings.getProxyHostAndPort(url);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

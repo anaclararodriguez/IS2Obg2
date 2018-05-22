@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SubPanelLog.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;traveller&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">traveller.interfaz.panel</a> &gt; <span class="el_source">SubPanelLog.java</span></div><h1>SubPanelLog.java</h1><pre class="source lang-java linenums">package traveller.interfaz.panel;
+
+import traveller.dominio.Viaje;
+import traveller.dominio.ISistema;
+import traveller.dominio.ReporteLog;
+import java.util.Iterator;
+
+public final class SubPanelLog extends javax.swing.JPanel {
+
+<span class="nc" id="L10">    public SubPanelLog(ISistema sistema, Viaje viaje) {</span>
+<span class="nc" id="L11">        initComponents();</span>
+<span class="nc" id="L12">        this.sistema = sistema;</span>
+<span class="nc" id="L13">        this.viaje = viaje;</span>
+<span class="nc" id="L14">        int cont = 10;</span>
+<span class="nc" id="L15">        Iterator&lt;ReporteLog&gt; iteradorLog = this.viaje.obtenerLog().iterator();</span>
+<span class="nc bnc" id="L16" title="All 4 branches missed.">        while (iteradorLog.hasNext() &amp;&amp; cont &gt;= 2) {</span>
+<span class="nc" id="L17">            System.out.println(&quot;sii&quot;);</span>
+<span class="nc" id="L18">            ReporteLog reporte = iteradorLog.next();</span>
+<span class="nc" id="L19">            String contenido = reporte.getAccion();</span>
+<span class="nc" id="L20">            String fecha = reporte.getFecha();</span>
+<span class="nc bnc" id="L21" title="All 10 branches missed.">            switch (cont) {</span>
+                case 10:
+<span class="nc" id="L23">                    this.etqContenido10.setText(contenido);</span>
+<span class="nc" id="L24">                    this.etqFecha10.setText(fecha);</span>
+<span class="nc" id="L25">                    break;</span>
+                case 9:
+<span class="nc" id="L27">                    this.etqContenido9.setText(contenido);</span>
+<span class="nc" id="L28">                    this.etqFecha9.setText(fecha);</span>
+<span class="nc" id="L29">                    break;</span>
+                case 8:
+<span class="nc" id="L31">                    this.etqContenido8.setText(contenido);</span>
+<span class="nc" id="L32">                    this.etqFecha8.setText(fecha);</span>
+<span class="nc" id="L33">                    break;</span>
+                case 7:
+<span class="nc" id="L35">                    this.etqContenido7.setText(contenido);</span>
+<span class="nc" id="L36">                    this.etqFecha7.setText(fecha);</span>
+<span class="nc" id="L37">                    break;</span>
+                case 6:
+<span class="nc" id="L39">                    this.etqContenido6.setText(contenido);</span>
+<span class="nc" id="L40">                    this.etqFecha6.setText(fecha);</span>
+<span class="nc" id="L41">                    break;</span>
+                case 5:
+<span class="nc" id="L43">                    this.etqContenido5.setText(contenido);</span>
+<span class="nc" id="L44">                    this.etqFecha5.setText(fecha);</span>
+<span class="nc" id="L45">                    break;</span>
+                case 4:
+<span class="nc" id="L47">                    this.etqContenido4.setText(contenido);</span>
+<span class="nc" id="L48">                    this.etqFecha4.setText(fecha);</span>
+<span class="nc" id="L49">                    break;</span>
+                case 3:
+<span class="nc" id="L51">                    this.etqContenido3.setText(contenido);</span>
+<span class="nc" id="L52">                    this.etqFecha3.setText(fecha);</span>
+<span class="nc" id="L53">                    break;</span>
+                case 2:
+<span class="nc" id="L55">                    this.etqContenido2.setText(contenido);</span>
+<span class="nc" id="L56">                    this.etqFecha2.setText(fecha);</span>
+                    break;
+            }
+<span class="nc" id="L59">            cont--;</span>
+<span class="nc" id="L60">        }</span>
+<span class="nc" id="L61">    }</span>
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+<span class="nc" id="L67">        panelMuro = new javax.swing.JPanel();</span>
+<span class="nc" id="L68">        etqFecha2 = new javax.swing.JLabel();</span>
+<span class="nc" id="L69">        etqContenido2 = new javax.swing.JLabel();</span>
+<span class="nc" id="L70">        etqContenido3 = new javax.swing.JLabel();</span>
+<span class="nc" id="L71">        etqFecha3 = new javax.swing.JLabel();</span>
+<span class="nc" id="L72">        etqContenido4 = new javax.swing.JLabel();</span>
+<span class="nc" id="L73">        etqFecha4 = new javax.swing.JLabel();</span>
+<span class="nc" id="L74">        etqContenido5 = new javax.swing.JLabel();</span>
+<span class="nc" id="L75">        etqFecha5 = new javax.swing.JLabel();</span>
+<span class="nc" id="L76">        etqContenido6 = new javax.swing.JLabel();</span>
+<span class="nc" id="L77">        etqFecha6 = new javax.swing.JLabel();</span>
+<span class="nc" id="L78">        etqFecha7 = new javax.swing.JLabel();</span>
+<span class="nc" id="L79">        etqContenido7 = new javax.swing.JLabel();</span>
+<span class="nc" id="L80">        etqFecha8 = new javax.swing.JLabel();</span>
+<span class="nc" id="L81">        etqContenido8 = new javax.swing.JLabel();</span>
+<span class="nc" id="L82">        etqFecha9 = new javax.swing.JLabel();</span>
+<span class="nc" id="L83">        etqContenido9 = new javax.swing.JLabel();</span>
+<span class="nc" id="L84">        etqContenido10 = new javax.swing.JLabel();</span>
+<span class="nc" id="L85">        etqFecha10 = new javax.swing.JLabel();</span>
+
+<span class="nc" id="L87">        panelMuro.setBackground(new java.awt.Color(255, 255, 255));</span>
+
+<span class="nc" id="L89">        etqFecha2.setForeground(new java.awt.Color(153, 153, 153));</span>
+
+<span class="nc" id="L91">        etqContenido2.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L92">        etqContenido2.setVerticalAlignment(javax.swing.SwingConstants.TOP);</span>
+
+<span class="nc" id="L94">        etqContenido3.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L95">        etqContenido3.setVerticalAlignment(javax.swing.SwingConstants.TOP);</span>
+
+<span class="nc" id="L97">        etqFecha3.setForeground(new java.awt.Color(153, 153, 153));</span>
+
+<span class="nc" id="L99">        etqContenido4.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L100">        etqContenido4.setVerticalAlignment(javax.swing.SwingConstants.TOP);</span>
+
+<span class="nc" id="L102">        etqFecha4.setForeground(new java.awt.Color(153, 153, 153));</span>
+
+<span class="nc" id="L104">        etqContenido5.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L105">        etqContenido5.setVerticalAlignment(javax.swing.SwingConstants.TOP);</span>
+
+<span class="nc" id="L107">        etqFecha5.setForeground(new java.awt.Color(153, 153, 153));</span>
+
+<span class="nc" id="L109">        etqContenido6.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L110">        etqContenido6.setVerticalAlignment(javax.swing.SwingConstants.TOP);</span>
+
+<span class="nc" id="L112">        etqFecha6.setForeground(new java.awt.Color(153, 153, 153));</span>
+
+<span class="nc" id="L114">        etqFecha7.setForeground(new java.awt.Color(153, 153, 153));</span>
+
+<span class="nc" id="L116">        etqContenido7.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L117">        etqContenido7.setVerticalAlignment(javax.swing.SwingConstants.TOP);</span>
+
+<span class="nc" id="L119">        etqFecha8.setForeground(new java.awt.Color(153, 153, 153));</span>
+
+<span class="nc" id="L121">        etqContenido8.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L122">        etqContenido8.setVerticalAlignment(javax.swing.SwingConstants.TOP);</span>
+
+<span class="nc" id="L124">        etqFecha9.setForeground(new java.awt.Color(153, 153, 153));</span>
+
+<span class="nc" id="L126">        etqContenido9.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L127">        etqContenido9.setVerticalAlignment(javax.swing.SwingConstants.TOP);</span>
+
+<span class="nc" id="L129">        etqContenido10.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L130">        etqContenido10.setVerticalAlignment(javax.swing.SwingConstants.TOP);</span>
+
+<span class="nc" id="L132">        etqFecha10.setForeground(new java.awt.Color(153, 153, 153));</span>
+
+<span class="nc" id="L134">        javax.swing.GroupLayout panelMuroLayout = new javax.swing.GroupLayout(panelMuro);</span>
+<span class="nc" id="L135">        panelMuro.setLayout(panelMuroLayout);</span>
+<span class="nc" id="L136">        panelMuroLayout.setHorizontalGroup(</span>
+<span class="nc" id="L137">            panelMuroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L138">            .addGroup(panelMuroLayout.createSequentialGroup()</span>
+<span class="nc" id="L139">                .addContainerGap()</span>
+<span class="nc" id="L140">                .addGroup(panelMuroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L141">                    .addGroup(panelMuroLayout.createSequentialGroup()</span>
+<span class="nc" id="L142">                        .addComponent(etqContenido2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L143">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L144">                        .addComponent(etqFecha2))</span>
+<span class="nc" id="L145">                    .addGroup(panelMuroLayout.createSequentialGroup()</span>
+<span class="nc" id="L146">                        .addComponent(etqContenido3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L147">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L148">                        .addComponent(etqFecha3))</span>
+<span class="nc" id="L149">                    .addGroup(panelMuroLayout.createSequentialGroup()</span>
+<span class="nc" id="L150">                        .addComponent(etqContenido4, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L151">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L152">                        .addComponent(etqFecha4))</span>
+<span class="nc" id="L153">                    .addGroup(panelMuroLayout.createSequentialGroup()</span>
+<span class="nc" id="L154">                        .addComponent(etqContenido5, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L155">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L156">                        .addComponent(etqFecha5))</span>
+<span class="nc" id="L157">                    .addGroup(panelMuroLayout.createSequentialGroup()</span>
+<span class="nc" id="L158">                        .addComponent(etqContenido6, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L159">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L160">                        .addComponent(etqFecha6))</span>
+<span class="nc" id="L161">                    .addGroup(panelMuroLayout.createSequentialGroup()</span>
+<span class="nc" id="L162">                        .addComponent(etqContenido7, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L163">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L164">                        .addComponent(etqFecha7))</span>
+<span class="nc" id="L165">                    .addGroup(panelMuroLayout.createSequentialGroup()</span>
+<span class="nc" id="L166">                        .addComponent(etqContenido8, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L167">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L168">                        .addComponent(etqFecha8))</span>
+<span class="nc" id="L169">                    .addGroup(panelMuroLayout.createSequentialGroup()</span>
+<span class="nc" id="L170">                        .addComponent(etqContenido9, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L171">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L172">                        .addComponent(etqFecha9))</span>
+<span class="nc" id="L173">                    .addGroup(panelMuroLayout.createSequentialGroup()</span>
+<span class="nc" id="L174">                        .addComponent(etqContenido10, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L175">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L176">                        .addComponent(etqFecha10)))</span>
+<span class="nc" id="L177">                .addContainerGap(105, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L179">        panelMuroLayout.setVerticalGroup(</span>
+<span class="nc" id="L180">            panelMuroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)</span>
+<span class="nc" id="L181">            .addGroup(panelMuroLayout.createSequentialGroup()</span>
+<span class="nc" id="L182">                .addContainerGap(62, Short.MAX_VALUE)</span>
+<span class="nc" id="L183">                .addGroup(panelMuroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L184">                    .addComponent(etqContenido10, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L185">                    .addComponent(etqFecha10))</span>
+<span class="nc" id="L186">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L187">                .addGroup(panelMuroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L188">                    .addComponent(etqContenido9, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L189">                    .addComponent(etqFecha9))</span>
+<span class="nc" id="L190">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L191">                .addGroup(panelMuroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L192">                    .addComponent(etqContenido8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L193">                    .addComponent(etqFecha8))</span>
+<span class="nc" id="L194">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L195">                .addGroup(panelMuroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L196">                    .addComponent(etqContenido7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L197">                    .addComponent(etqFecha7))</span>
+<span class="nc" id="L198">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L199">                .addGroup(panelMuroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L200">                    .addComponent(etqContenido6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L201">                    .addComponent(etqFecha6))</span>
+<span class="nc" id="L202">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L203">                .addGroup(panelMuroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L204">                    .addComponent(etqContenido5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L205">                    .addComponent(etqFecha5))</span>
+<span class="nc" id="L206">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L207">                .addGroup(panelMuroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L208">                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMuroLayout.createSequentialGroup()</span>
+<span class="nc" id="L209">                        .addComponent(etqFecha4)</span>
+<span class="nc" id="L210">                        .addGap(38, 38, 38))</span>
+<span class="nc" id="L211">                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMuroLayout.createSequentialGroup()</span>
+<span class="nc" id="L212">                        .addComponent(etqContenido4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L213">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))</span>
+<span class="nc" id="L214">                .addGroup(panelMuroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L215">                    .addComponent(etqFecha3)</span>
+<span class="nc" id="L216">                    .addComponent(etqContenido3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L217">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L218">                .addGroup(panelMuroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L219">                    .addComponent(etqFecha2)</span>
+<span class="nc" id="L220">                    .addComponent(etqContenido2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L221">                .addContainerGap())</span>
+        );
+
+<span class="nc" id="L224">        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);</span>
+<span class="nc" id="L225">        this.setLayout(layout);</span>
+<span class="nc" id="L226">        layout.setHorizontalGroup(</span>
+<span class="nc" id="L227">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L228">            .addComponent(panelMuro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+        );
+<span class="nc" id="L230">        layout.setVerticalGroup(</span>
+<span class="nc" id="L231">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L232">            .addComponent(panelMuro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+        );
+<span class="nc" id="L234">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel etqContenido10;
+    private javax.swing.JLabel etqContenido2;
+    private javax.swing.JLabel etqContenido3;
+    private javax.swing.JLabel etqContenido4;
+    private javax.swing.JLabel etqContenido5;
+    private javax.swing.JLabel etqContenido6;
+    private javax.swing.JLabel etqContenido7;
+    private javax.swing.JLabel etqContenido8;
+    private javax.swing.JLabel etqContenido9;
+    private javax.swing.JLabel etqFecha10;
+    private javax.swing.JLabel etqFecha2;
+    private javax.swing.JLabel etqFecha3;
+    private javax.swing.JLabel etqFecha4;
+    private javax.swing.JLabel etqFecha5;
+    private javax.swing.JLabel etqFecha6;
+    private javax.swing.JLabel etqFecha7;
+    private javax.swing.JLabel etqFecha8;
+    private javax.swing.JLabel etqFecha9;
+    private javax.swing.JPanel panelMuro;
+    // End of variables declaration//GEN-END:variables
+    private ISistema sistema;
+    private Viaje viaje;
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
