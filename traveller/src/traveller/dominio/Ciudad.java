@@ -1,4 +1,4 @@
 package traveller.dominio;
 
-public enum Ciudad{MADRID, PARIS, BSAS, MIAMI;};
+public enum Ciudad{MADRID, PARIS, BSAS, MIAMI, MALDONADO;};
 
