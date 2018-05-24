@@ -66,24 +66,15 @@ public final class Viaje implements Serializable {
         return this.getListaEventos().contains(evento);
     }
 
-    public void altaEvento(String nombreEvento, String dia, String mes, String año, String lugar,
+    public void altaEvento(String nombreEvento, Date fecha, String lugar,
             String descripcion, TipoEvento tipoEvento) throws EventoException, FechaException {
 
         if (this.existeNombreEvento(nombreEvento)) {
             throw new EventoExistenteException();
         }
        /* Validaciones fecha */
-        if (dia.isEmpty() || mes.isEmpty() || año.isEmpty()) {
+        if (fecha.toString().isEmpty()) {
             throw new FechaVaciaException();
-        }
-        if (!Utilidades.formatoFechaValido(dia, mes, año)) {
-            throw new FormatoFechaInicioException();
-        }
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Date fecha = null;
-        try {
-            fecha = formatter.parse(Integer.parseInt(dia) + "/" + Integer.parseInt(mes) + "/" + Integer.parseInt(año));
-        } catch (ParseException ex) {
         }
         
         if (fecha.after(this.getFechaFin()) || fecha.before(this.getFechaInicio())) {

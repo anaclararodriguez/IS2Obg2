@@ -150,7 +150,7 @@ public class VentanaMenu extends javax.swing.JFrame {
         );
 
         btnMisViajes.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        btnMisViajes.setForeground(new java.awt.Color(255, 255, 51));
+        btnMisViajes.setForeground(new java.awt.Color(204, 204, 204));
         btnMisViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/traveller/interfaz/img/opcionMenu.png"))); // NOI18N
         btnMisViajes.setText("Mis viajes");
         btnMisViajes.setAlignmentY(0.0F);
@@ -180,7 +180,7 @@ public class VentanaMenu extends javax.swing.JFrame {
         });
 
         btnNuevoEvento.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        btnNuevoEvento.setForeground(new java.awt.Color(0, 51, 255));
+        btnNuevoEvento.setForeground(new java.awt.Color(204, 204, 204));
         btnNuevoEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/traveller/interfaz/img/opcionMenu.png"))); // NOI18N
         btnNuevoEvento.setText("Nuevo evento");
         btnNuevoEvento.setAlignmentY(0.0F);
@@ -210,7 +210,7 @@ public class VentanaMenu extends javax.swing.JFrame {
         });
 
         btnAmigos.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        btnAmigos.setForeground(new java.awt.Color(104, 104, 104));
+        btnAmigos.setForeground(new java.awt.Color(204, 204, 204));
         btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/traveller/interfaz/img/opcionMenu.png"))); // NOI18N
         btnAmigos.setText("Amigos");
         btnAmigos.setAlignmentY(0.0F);
@@ -240,7 +240,7 @@ public class VentanaMenu extends javax.swing.JFrame {
         });
 
         btnMiCuenta.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        btnMiCuenta.setForeground(new java.awt.Color(104, 104, 104));
+        btnMiCuenta.setForeground(new java.awt.Color(204, 204, 204));
         btnMiCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/traveller/interfaz/img/opcionMenu.png"))); // NOI18N
         btnMiCuenta.setText("Mi cuenta");
         btnMiCuenta.setAlignmentY(0.0F);
@@ -270,7 +270,7 @@ public class VentanaMenu extends javax.swing.JFrame {
         });
 
         btnSalir.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        btnSalir.setForeground(new java.awt.Color(255, 0, 0));
+        btnSalir.setForeground(new java.awt.Color(204, 204, 204));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/traveller/interfaz/img/opcionMenu.png"))); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.setAlignmentY(0.0F);
@@ -300,7 +300,7 @@ public class VentanaMenu extends javax.swing.JFrame {
         });
 
         btnAgendarViaje1.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        btnAgendarViaje1.setForeground(new java.awt.Color(104, 104, 104));
+        btnAgendarViaje1.setForeground(new java.awt.Color(204, 204, 204));
         btnAgendarViaje1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/traveller/interfaz/img/opcionMenu.png"))); // NOI18N
         btnAgendarViaje1.setText("Agendar Viaje");
         btnAgendarViaje1.setAlignmentY(0.0F);
@@ -377,23 +377,23 @@ public class VentanaMenu extends javax.swing.JFrame {
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMenuLayout.createSequentialGroup()
                 .addComponent(panelSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(100, 100, 100)
+                .addGap(57, 57, 57)
                 .addComponent(btnMisViajes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGap(18, 18, 18)
                 .addComponent(btnNuevoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGap(18, 18, 18)
                 .addComponent(btnAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnAgendarViaje1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnMiCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addGap(18, 18, 18)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(etqCambio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(comboCambio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                 .addComponent(etqModo))
         );
 
@@ -538,7 +538,7 @@ public class VentanaMenu extends javax.swing.JFrame {
                         .addGap(19, 19, 19)))
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addComponent(panelContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 603, Short.MAX_VALUE)
+                        .addComponent(panelContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())
                     .addComponent(panelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
@@ -617,7 +617,7 @@ public class VentanaMenu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 679, Short.MAX_VALUE)
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

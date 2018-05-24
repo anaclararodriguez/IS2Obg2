@@ -36,9 +36,6 @@ public class PanelNuevoEvento extends javax.swing.JPanel {
             this.txtNombre.requestFocusInWindow();
             this.txtNombre.setText("Paseo al museo");
             this.txtDescripcion.setText("Visita al Museo Thyssen-Bornemisza.");
-            this.txtDia.setText("28");
-            this.txtMes.setText("12");
-            this.txtAño.setText("2012");
             this.txtLugar.setText("Museo Thyssen-Bornemisza");
             this.listaViajes.setSelectedIndex(0);
         } else {
@@ -56,17 +53,12 @@ public class PanelNuevoEvento extends javax.swing.JPanel {
         panelTitulo = new javax.swing.JPanel();
         etqTitulo = new javax.swing.JLabel();
         panelCrearJugador = new javax.swing.JPanel();
-        txtMes = new javax.swing.JTextField();
         etqTipo = new javax.swing.JLabel();
         etqFecha = new javax.swing.JLabel();
         btnAceptar = new javax.swing.JButton();
         etqError = new javax.swing.JLabel();
         etqCorrecto = new javax.swing.JLabel();
         comboTipo = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
-        txtDia = new javax.swing.JTextField();
-        txtAño = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         etqDescripcion = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextPane();
@@ -79,6 +71,7 @@ public class PanelNuevoEvento extends javax.swing.JPanel {
         txtLugar = new javax.swing.JTextField();
         etqFechas = new javax.swing.JLabel();
         etqAclaracion = new javax.swing.JLabel();
+        dcFechaEvento = new com.toedter.calendar.JDateChooser();
 
         jScrollPane1.setViewportView(jEditorPane1);
 
@@ -101,7 +94,7 @@ public class PanelNuevoEvento extends javax.swing.JPanel {
             .addGroup(panelTituloLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(etqTitulo)
-                .addContainerGap(311, Short.MAX_VALUE))
+                .addContainerGap(315, Short.MAX_VALUE))
         );
         panelTituloLayout.setVerticalGroup(
             panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,42 +108,6 @@ public class PanelNuevoEvento extends javax.swing.JPanel {
         panelCrearJugador.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(39, 39, 39), 1, true));
         panelCrearJugador.setMaximumSize(new java.awt.Dimension(380, 290));
         panelCrearJugador.setPreferredSize(new java.awt.Dimension(380, 290));
-
-        txtMes.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txtMes.setText("MM");
-        txtMes.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));
-        txtMes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMesActionPerformed(evt);
-            }
-        });
-        txtMes.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtMesFocusGained(evt);
-            }
-        });
-        txtMes.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtMes.setBorder(new LineBorder(new Color(77,144,254)));
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtMes.setBorder(new LineBorder(new Color(217,217,217)));
-            }
-        });
-        txtMes.addMouseListener(new java.awt.event.MouseAdapter() {
-
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                if (!txtMes.isFocusOwner()) {
-                    txtMes.setBorder(new LineBorder(new Color(185, 185, 185)));
-                }
-            }
-
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                if (!txtMes.isFocusOwner()) {
-                    txtMes.setBorder(new LineBorder(new Color(217, 217, 217)));
-                }
-            }
-        });
 
         etqTipo.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         etqTipo.setText("Tipo:");
@@ -183,72 +140,6 @@ public class PanelNuevoEvento extends javax.swing.JPanel {
                 comboTipoActionPerformed(evt);
             }
         });
-
-        jLabel1.setText("/");
-
-        txtDia.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txtDia.setText("DD");
-        txtDia.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));
-        txtDia.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtDiaFocusGained(evt);
-            }
-        });
-        txtDia.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtDia.setBorder(new LineBorder(new Color(77,144,254)));
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtDia.setBorder(new LineBorder(new Color(217,217,217)));
-            }
-        });
-        txtDia.addMouseListener(new java.awt.event.MouseAdapter() {
-
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                if (!txtDia.isFocusOwner()) {
-                    txtDia.setBorder(new LineBorder(new Color(185, 185, 185)));
-                }
-            }
-
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                if (!txtDia.isFocusOwner()) {
-                    txtDia.setBorder(new LineBorder(new Color(217, 217, 217)));
-                }
-            }
-        });
-
-        txtAño.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txtAño.setText("AAAA");
-        txtAño.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 217, 217), 1, true));
-        txtAño.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtAñoFocusGained(evt);
-            }
-        });
-        txtAño.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtAño.setBorder(new LineBorder(new Color(77,144,254)));
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtAño.setBorder(new LineBorder(new Color(217,217,217)));
-            }
-        });
-        txtAño.addMouseListener(new java.awt.event.MouseAdapter() {
-
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                if (!txtAño.isFocusOwner()) {
-                    txtAño.setBorder(new LineBorder(new Color(185, 185, 185)));
-                }
-            }
-
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                if (!txtAño.isFocusOwner()) {
-                    txtAño.setBorder(new LineBorder(new Color(217, 217, 217)));
-                }
-            }
-        });
-
-        jLabel2.setText("/");
 
         etqDescripcion.setFont(new java.awt.Font("SansSerif", 0, 17)); // NOI18N
         etqDescripcion.setText("Descripción:");
@@ -380,10 +271,12 @@ public class PanelNuevoEvento extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearJugadorLayout.createSequentialGroup()
                                 .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(etqTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(etqFecha)
                                     .addComponent(etqDescripcion)
                                     .addComponent(etqLugar))
-                                .addGap(312, 312, 312))))
+                                .addGap(312, 312, 312))
+                            .addGroup(panelCrearJugadorLayout.createSequentialGroup()
+                                .addComponent(etqFecha)
+                                .addGap(170, 170, 170))))
                     .addGroup(panelCrearJugadorLayout.createSequentialGroup()
                         .addComponent(etqCorrecto, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 78, Short.MAX_VALUE))))
@@ -394,6 +287,7 @@ public class PanelNuevoEvento extends javax.swing.JPanel {
             .addGroup(panelCrearJugadorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(etqError, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelCrearJugadorLayout.createSequentialGroup()
                         .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelCrearJugadorLayout.createSequentialGroup()
@@ -404,22 +298,13 @@ public class PanelNuevoEvento extends javax.swing.JPanel {
                                 .addComponent(etqViaje)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(panelCrearJugadorLayout.createSequentialGroup()
-                                .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtAño, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtNombre)
-                            .addComponent(txtLugar)
-                            .addComponent(comboTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2)
-                            .addComponent(scrollListaViajes, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)))
-                    .addComponent(etqError, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dcFechaEvento, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                            .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtNombre)
+                                .addComponent(txtLugar)
+                                .addComponent(comboTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2)
+                                .addComponent(scrollListaViajes, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)))))
                 .addContainerGap(33, Short.MAX_VALUE))
             .addGroup(panelCrearJugadorLayout.createSequentialGroup()
                 .addContainerGap()
@@ -446,19 +331,15 @@ public class PanelNuevoEvento extends javax.swing.JPanel {
                 .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etqLugar)
                     .addComponent(txtLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etqTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(etqFecha)
-                    .addComponent(jLabel1)
-                    .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAño, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(25, 25, 25)
+                    .addComponent(dcFechaEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(etqDescripcion)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -478,7 +359,7 @@ public class PanelNuevoEvento extends javax.swing.JPanel {
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(panelTitulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelCrearJugador, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -505,39 +386,9 @@ public class PanelNuevoEvento extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMesActionPerformed
-
-    private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreKeyReleased
-
-    private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboTipoActionPerformed
-
     private void txtLugarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLugarKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLugarKeyReleased
-
-    private void txtDiaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiaFocusGained
-        if (txtDia.getText().equals("DD")) {
-            txtDia.setText("");
-        }
-    }//GEN-LAST:event_txtDiaFocusGained
-
-    private void txtMesFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMesFocusGained
-        if (txtMes.getText().equals("MM")) {
-            txtMes.setText("");
-        }
-    }//GEN-LAST:event_txtMesFocusGained
-
-    private void txtAñoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAñoFocusGained
-        if (txtAño.getText().equals("AAAA")) {
-            txtAño.setText("");
-        }
-    }//GEN-LAST:event_txtAñoFocusGained
 
     private void listaViajesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaViajesValueChanged
         if (!listaViajes.isSelectionEmpty()) {
@@ -549,6 +400,18 @@ public class PanelNuevoEvento extends javax.swing.JPanel {
             etqFechas.setText("");
         }
     }//GEN-LAST:event_listaViajesValueChanged
+
+    private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreKeyReleased
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboTipoActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         String tipo = (String) comboTipo.getSelectedItem();
@@ -569,17 +432,15 @@ public class PanelNuevoEvento extends javax.swing.JPanel {
         }
 
         String nombre = txtNombre.getText();
-        String dia = txtDia.getText();
-        String mes = txtMes.getText();
-        String año = txtAño.getText();
+        Date fecha = dcFechaEvento.getDate();
         String lugar = txtLugar.getText();
         if (!listaViajes.isSelectionEmpty()) {
             String descripcion = txtDescripcion.getText();
 
             try {
-                ((Viaje) listaViajes.getSelectedValue()).altaEvento(nombre, dia, mes, año, lugar, descripcion, tipoEvento);
+                ((Viaje) listaViajes.getSelectedValue()).altaEvento(nombre, fecha, lugar, descripcion, tipoEvento);
                 String accion = "<html><b>" + this.sistema.getUsuarioIdentificado().getNombre() + " "
-                        + this.sistema.getUsuarioIdentificado().getApellido() + "</b> agregó el evento <i>" + nombre + "</i> al viaje.";
+                + this.sistema.getUsuarioIdentificado().getApellido() + "</b> agregó el evento <i>" + nombre + "</i> al viaje.";
                 SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
                 Date hoy = new Date();
                 String strDia = sdfDate.format(hoy);
@@ -587,16 +448,16 @@ public class PanelNuevoEvento extends javax.swing.JPanel {
                 etqCorrecto.setText("Registro exitoso.");
                 etqError.setText(null);
                 inhabilitarCampos();
-		
-		String mensaje = this.sistema.getUsuarioIdentificado().getNombre() + " " + this.sistema.getUsuarioIdentificado().getApellido() + " agrego el evento " + nombre + " al viaje " + 
-			((Viaje) listaViajes.getSelectedValue()).getNombre();
-                
-                String mensajeEmail = "Le notificamos que el usuario "+this.sistema.getUsuarioIdentificado().getNombre() + " " + this.sistema.getUsuarioIdentificado().getApellido() + " agrego el evento " + nombre + " al viaje " + 
-			((Viaje) listaViajes.getSelectedValue()).getNombre() + "\n\n Le recordamos que si no desea ser notificado mediante este medio puede darse"
-                        + "de baja seleccionando la opción en 'Mi Cuenta' \n\nGracias,\n\nTraveller.";
+
+                String mensaje = this.sistema.getUsuarioIdentificado().getNombre() + " " + this.sistema.getUsuarioIdentificado().getApellido() + " agrego el evento " + nombre + " al viaje " +
+                ((Viaje) listaViajes.getSelectedValue()).getNombre();
+
+                String mensajeEmail = "Le notificamos que el usuario "+this.sistema.getUsuarioIdentificado().getNombre() + " " + this.sistema.getUsuarioIdentificado().getApellido() + " agrego el evento " + nombre + " al viaje " +
+                ((Viaje) listaViajes.getSelectedValue()).getNombre() + "\n\n Le recordamos que si no desea ser notificado mediante este medio puede darse"
+                + "de baja seleccionando la opción en 'Mi Cuenta' \n\nGracias,\n\nTraveller.";
                 String titulo = this.sistema.getUsuarioIdentificado().getNombre() + " "+this.sistema.getUsuarioIdentificado().getApellido() + " ha modificado un viaje.";
-		this.sistema.notificarNovedad(mensaje, mensajeEmail, titulo, (Viaje) listaViajes.getSelectedValue());
-                
+                this.sistema.notificarNovedad(mensaje, mensajeEmail, titulo, (Viaje) listaViajes.getSelectedValue());
+
             } catch (EventoException e) {
                 etqError.setText(e.toString());
             } catch (FechaException e) {
@@ -607,12 +468,10 @@ public class PanelNuevoEvento extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JComboBox comboTipo;
+    private com.toedter.calendar.JDateChooser dcFechaEvento;
     private javax.swing.JLabel etqAclaracion;
     private javax.swing.JLabel etqCorrecto;
     private javax.swing.JLabel etqDescripcion;
@@ -625,8 +484,6 @@ public class PanelNuevoEvento extends javax.swing.JPanel {
     private javax.swing.JLabel etqTitulo;
     private javax.swing.JLabel etqViaje;
     private javax.swing.JEditorPane jEditorPane1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList listaViajes;
@@ -634,11 +491,8 @@ public class PanelNuevoEvento extends javax.swing.JPanel {
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JPanel panelTitulo;
     private javax.swing.JScrollPane scrollListaViajes;
-    private javax.swing.JTextField txtAño;
     private javax.swing.JTextPane txtDescripcion;
-    private javax.swing.JTextField txtDia;
     private javax.swing.JTextField txtLugar;
-    private javax.swing.JTextField txtMes;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
     private ISistema sistema;
@@ -647,12 +501,6 @@ public class PanelNuevoEvento extends javax.swing.JPanel {
      * Inhabilita los campos de ingeso de datos.
      */
     private void inhabilitarCampos() {
-        txtDia.setEditable(false);
-        txtMes.setEditable(false);
-        txtAño.setEditable(false);
-        txtDia.setEditable(false);
-        txtMes.setEditable(false);
-        txtAño.setEditable(false);
         txtNombre.setEditable(false);
         txtLugar.setEditable(false);
         txtDescripcion.setEditable(false);

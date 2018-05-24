@@ -126,34 +126,21 @@ public final class Usuario implements Serializable {
         this.listaViajes.remove(viaje);
     }
 
-    public void altaViaje(String nombreViaje, Ciudad ciudad, String diaIni, String mesIni, String añoIni,
-            String diaFin, String mesFin, String añoFin, String descripcion)
+    public void altaViaje(String nombreViaje, Ciudad ciudad, Date inicio, Date fin, String descripcion)
             throws ViajeException, FechaException {
 
         if (existeNombreViaje(nombreViaje)) {
             throw new ViajeExistenteException();
         }
         /* Validaciones fechas */
-        if (diaIni.isEmpty() || diaFin.isEmpty() || mesIni.isEmpty()
-                || mesFin.isEmpty() || añoIni.isEmpty() || añoFin.isEmpty()) {
+        if (inicio.toString().isEmpty() || fin.toString().isEmpty()) {
             throw new FechaVaciaException();
-        }
-        if (!Utilidades.formatoFechaValido(diaIni, mesIni, añoIni)) {
-            throw new FormatoFechaInicioException();
-        }
-        if (!Utilidades.formatoFechaValido(diaFin, mesFin, añoFin)) {
-            throw new FormatoFechaFinException();
         }
 
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Date fechaInicio = null;
-        Date fechaFin = null;
-        try {
-            fechaInicio = formatter.parse(Integer.parseInt(diaIni) + "/" + Integer.parseInt(mesIni) + "/" + Integer.parseInt(añoIni));
-            fechaFin = formatter.parse(Integer.parseInt(diaFin) + "/" + Integer.parseInt(mesFin) + "/" + Integer.parseInt(añoFin));
-        } catch (ParseException ex) {
-        }
-
+        Date fechaInicio = inicio;
+        Date fechaFin = fin;
+        
         Date today = Calendar.getInstance().getTime();
 
         if (fechaInicio.before(today)) {
