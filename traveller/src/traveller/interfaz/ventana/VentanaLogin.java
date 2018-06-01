@@ -165,7 +165,7 @@ public class VentanaLogin extends javax.swing.JFrame {
 
         btnAceptar.setBackground(new java.awt.Color(255, 102, 51));
         btnAceptar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        btnAceptar.setForeground(new java.awt.Color(255, 255, 51));
+        btnAceptar.setForeground(new java.awt.Color(0, 0, 0));
         btnAceptar.setText("Acceder");
         btnAceptar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(221, 221, 221), 1, true));
         btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -550,7 +550,7 @@ public class VentanaLogin extends javax.swing.JFrame {
 
         imgLogo.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         imgLogo.setForeground(new java.awt.Color(204, 204, 204));
-        imgLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/traveller/interfaz/img/AvionInicio.png"))); // NOI18N
+        imgLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/traveller/interfaz/ventana/AvionInicio.png"))); // NOI18N
         imgLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
@@ -584,7 +584,7 @@ public class VentanaLogin extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addComponent(imgLogo)
+                        .addComponent(imgLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
