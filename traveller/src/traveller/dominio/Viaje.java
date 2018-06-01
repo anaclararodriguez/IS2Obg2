@@ -73,7 +73,7 @@ public final class Viaje implements Serializable {
             throw new EventoExistenteException();
         }
        /* Validaciones fecha */
-        if (fecha.toString().isEmpty()) {
+        if (fecha == null) {
             throw new FechaVaciaException();
         }
         

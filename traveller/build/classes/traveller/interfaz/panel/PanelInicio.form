@@ -27,7 +27,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panelPrincipal" min="-2" pref="456" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Component id="panelPrincipal" min="-2" pref="456" max="-2" attributes="0"/>
+              <EmptySpace pref="161" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -61,7 +64,7 @@
                       <Component id="jPanel1" max="32767" attributes="1"/>
                       <Component id="panelTitulo" max="32767" attributes="1"/>
                   </Group>
-                  <EmptySpace pref="77" max="32767" attributes="0"/>
+                  <EmptySpace pref="28" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -152,7 +155,7 @@
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="59" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

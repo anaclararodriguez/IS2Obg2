@@ -69,6 +69,7 @@ public class PanelMisViajes extends javax.swing.JPanel {
         PanelConsultaJugadores.setBackground(new java.awt.Color(255, 255, 255));
         PanelConsultaJugadores.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(39, 39, 39), 1, true));
         PanelConsultaJugadores.setPreferredSize(new java.awt.Dimension(390, 203));
+        PanelConsultaJugadores.setVerifyInputWhenFocusTarget(false);
 
         btnVerViaje.setBackground(new java.awt.Color(242, 242, 242));
         btnVerViaje.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
@@ -150,7 +151,7 @@ public class PanelMisViajes extends javax.swing.JPanel {
                 .addGroup(PanelConsultaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelConsultaJugadoresLayout.createSequentialGroup()
                         .addComponent(etqViaje)
-                        .addContainerGap(373, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConsultaJugadoresLayout.createSequentialGroup()
                         .addGroup(PanelConsultaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(scrollListaJugadores1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -168,19 +169,23 @@ public class PanelMisViajes extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(PanelConsultaJugadoresLayout.createSequentialGroup()
                         .addGroup(PanelConsultaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnEliminarViaje, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminarViaje, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                             .addComponent(scrollListaJugadores, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(btnVerViaje, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                            .addComponent(btnVerViaje, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PanelConsultaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanelConsultaJugadoresLayout.createSequentialGroup()
                                 .addGroup(PanelConsultaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(etqDestinoViaje, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
-                                    .addComponent(etqFechas, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
-                                    .addComponent(separadorJugadoresActivos, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
-                                    .addComponent(etqNombreViaje, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
-                                    .addComponent(etqDescripcionViaje, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
-                                .addGap(41, 41, 41))
+                                    .addComponent(separadorJugadoresActivos)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConsultaJugadoresLayout.createSequentialGroup()
+                                        .addGap(0, 45, Short.MAX_VALUE)
+                                        .addGroup(PanelConsultaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConsultaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(etqFechas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                                                .addComponent(etqDestinoViaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(etqNombreViaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(etqDescripcionViaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(17, 17, 17))
                             .addGroup(PanelConsultaJugadoresLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(etqError, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -246,7 +251,7 @@ public class PanelMisViajes extends javax.swing.JPanel {
             .addGroup(panelTitulo2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(etqTitulo2)
-                .addContainerGap(340, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelTitulo2Layout.setVerticalGroup(
             panelTitulo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,18 +266,18 @@ public class PanelMisViajes extends javax.swing.JPanel {
         panelPrincipalLayout.setHorizontalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(PanelConsultaJugadores, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
-                    .addComponent(panelTitulo2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelTitulo2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelConsultaJugadores, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addComponent(panelTitulo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PanelConsultaJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addComponent(PanelConsultaJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -289,43 +294,37 @@ public class PanelMisViajes extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void listaViajesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaViajesValueChanged
-        if (!listaViajes.isSelectionEmpty()) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            Viaje viaje = ((Viaje) listaViajes.getSelectedValue());
-
-            String ciudad = null;
-            switch (viaje.getDestino()) {
-                case MADRID:
-                    ciudad = "Madrid";
-                    break;
-                case PARIS:
-                    ciudad = "París";
-                    break;
-                case MIAMI:
-                    ciudad = "Miami";
-                    break;
-                case BSAS:
-                    ciudad = "Buenos Aires";
-                    break;
-            }
-
-            etqNombreViaje.setText(viaje.getNombre());
-            etqFechas.setText((dateFormat.format(viaje.getFechaInicio())
-                    + " - " + (dateFormat.format(viaje.getFechaFin()))));
-
-            etqDestinoViaje.setText(ciudad);
-            etqDescripcionViaje.setText(viaje.getDescripcion());
-            refrescarListaEventos();
-            btnEliminarViaje.setVisible(true);
-        } else {
-            btnEliminarViaje.setVisible(false);
-            etqNombreViaje.setText(null);
-            etqFechas.setText(null);
-            etqDestinoViaje.setText(null);
-            etqDescripcionViaje.setText(null);
+    private void btnEliminarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEventoActionPerformed
+        if (listaEventos.getSelectedValue() != null) {
+            ((Viaje) listaViajes.getSelectedValue()).bajaEvento((Evento) listaEventos.getSelectedValue());
         }
-    }//GEN-LAST:event_listaViajesValueChanged
+
+        String accion = "<html><b>" + this.sistema.getUsuarioIdentificado().getNombre() + " "
+        + this.sistema.getUsuarioIdentificado().getApellido() + "</b> eliminó el evento <i>" + ((Evento) listaEventos.getSelectedValue()).getNombre() + "</i> del viaje.";
+        SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
+        Date hoy = new Date();
+        String strDia = sdfDate.format(hoy);
+        ((Viaje) listaViajes.getSelectedValue()).agregarLogAViaje(accion, strDia);
+
+        String mensaje = this.sistema.getUsuarioIdentificado().getNombre() + " " + this.sistema.getUsuarioIdentificado().getApellido() + " elimino el evento " + ((Evento) listaEventos.getSelectedValue()).getNombre() + " del viaje "
+        + ((Viaje) listaViajes.getSelectedValue()).getNombre();
+
+        String mensajeEmail = "Le notificamos que el usuario " + this.sistema.getUsuarioIdentificado().getNombre() + " " + this.sistema.getUsuarioIdentificado().getApellido() + " eliminó el evento " + ((Evento) listaEventos.getSelectedValue()).getNombre() + " del viaje "
+        + ((Viaje) listaViajes.getSelectedValue()).getNombre() + "\n\n Le recordamos que si no desea ser notificado mediante este medio puede darse"
+        + "de baja seleccionando la opción en 'Mi Cuenta' \n\nGracias,\n\ntraveller.";
+        String titulo = this.sistema.getUsuarioIdentificado().getNombre() + " " + this.sistema.getUsuarioIdentificado().getApellido() + " ha modificado un viaje.";
+        this.sistema.notificarNovedad(mensaje, mensajeEmail, titulo, (Viaje) listaViajes.getSelectedValue());
+
+        this.refrescarListaEventos();
+    }//GEN-LAST:event_btnEliminarEventoActionPerformed
+
+    private void btnEliminarViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarViajeActionPerformed
+        if (listaViajes.getSelectedValue() != null) {
+            sistema.getUsuarioIdentificado().bajaViaje(((Viaje) listaViajes.getSelectedValue()));
+        }
+        this.refrescarListaViajes();
+        this.refrescarListaEventos();
+    }//GEN-LAST:event_btnEliminarViajeActionPerformed
 
     private void listaEventosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaEventosValueChanged
         if (!listaEventos.isSelectionEmpty()) {
@@ -335,23 +334,23 @@ public class PanelMisViajes extends javax.swing.JPanel {
             String tipoEvento = null;
             switch (evento.getTipoEvento()) {
                 case CULTURAL:
-                    tipoEvento = "Cultural";
-                    break;
+                tipoEvento = "Cultural";
+                break;
                 case DEPORTIVO:
-                    tipoEvento = "Deportivo";
-                    break;
+                tipoEvento = "Deportivo";
+                break;
                 case LABORAL:
-                    tipoEvento = "Laboral";
-                    break;
+                tipoEvento = "Laboral";
+                break;
                 case COMERCIAL:
-                    tipoEvento = "Comercial";
-                    break;
+                tipoEvento = "Comercial";
+                break;
                 case FAMILIAR:
-                    tipoEvento = "Familiar";
-                    break;
+                tipoEvento = "Familiar";
+                break;
                 case OTRO:
-                    tipoEvento = "Otro";
-                    break;
+                tipoEvento = "Otro";
+                break;
             }
 
             etqTipoEvento.setText("Tipo: " + tipoEvento);
@@ -373,38 +372,43 @@ public class PanelMisViajes extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_listaEventosValueChanged
 
-    private void btnEliminarViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarViajeActionPerformed
-        if (listaViajes.getSelectedValue() != null) {
-            sistema.getUsuarioIdentificado().bajaViaje(((Viaje) listaViajes.getSelectedValue()));
+    private void listaViajesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaViajesValueChanged
+        if (!listaViajes.isSelectionEmpty()) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Viaje viaje = ((Viaje) listaViajes.getSelectedValue());
+
+            String ciudad = null;
+            switch (viaje.getDestino()) {
+                case MADRID:
+                ciudad = "Madrid";
+                break;
+                case PARIS:
+                ciudad = "París";
+                break;
+                case MIAMI:
+                ciudad = "Miami";
+                break;
+                case BSAS:
+                ciudad = "Buenos Aires";
+                break;
+            }
+
+            etqNombreViaje.setText(viaje.getNombre());
+            etqFechas.setText((dateFormat.format(viaje.getFechaInicio())
+                + " - " + (dateFormat.format(viaje.getFechaFin()))));
+
+        etqDestinoViaje.setText(ciudad);
+        etqDescripcionViaje.setText(viaje.getDescripcion());
+        refrescarListaEventos();
+        btnEliminarViaje.setVisible(true);
+        } else {
+            btnEliminarViaje.setVisible(false);
+            etqNombreViaje.setText(null);
+            etqFechas.setText(null);
+            etqDestinoViaje.setText(null);
+            etqDescripcionViaje.setText(null);
         }
-        this.refrescarListaViajes();
-        this.refrescarListaEventos();
-
-    }//GEN-LAST:event_btnEliminarViajeActionPerformed
-
-    private void btnEliminarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEventoActionPerformed
-        if (listaEventos.getSelectedValue() != null) {
-            ((Viaje) listaViajes.getSelectedValue()).bajaEvento((Evento) listaEventos.getSelectedValue());
-        }
-
-        String accion = "<html><b>" + this.sistema.getUsuarioIdentificado().getNombre() + " "
-                + this.sistema.getUsuarioIdentificado().getApellido() + "</b> eliminó el evento <i>" + ((Evento) listaEventos.getSelectedValue()).getNombre() + "</i> del viaje.";
-        SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
-        Date hoy = new Date();
-        String strDia = sdfDate.format(hoy);
-        ((Viaje) listaViajes.getSelectedValue()).agregarLogAViaje(accion, strDia);
-
-        String mensaje = this.sistema.getUsuarioIdentificado().getNombre() + " " + this.sistema.getUsuarioIdentificado().getApellido() + " elimino el evento " + ((Evento) listaEventos.getSelectedValue()).getNombre() + " del viaje "
-                + ((Viaje) listaViajes.getSelectedValue()).getNombre();
-
-        String mensajeEmail = "Le notificamos que el usuario " + this.sistema.getUsuarioIdentificado().getNombre() + " " + this.sistema.getUsuarioIdentificado().getApellido() + " eliminó el evento " + ((Evento) listaEventos.getSelectedValue()).getNombre() + " del viaje "
-                + ((Viaje) listaViajes.getSelectedValue()).getNombre() + "\n\n Le recordamos que si no desea ser notificado mediante este medio puede darse"
-                + "de baja seleccionando la opción en 'Mi Cuenta' \n\nGracias,\n\ntraveller.";
-        String titulo = this.sistema.getUsuarioIdentificado().getNombre() + " " + this.sistema.getUsuarioIdentificado().getApellido() + " ha modificado un viaje.";
-        this.sistema.notificarNovedad(mensaje, mensajeEmail, titulo, (Viaje) listaViajes.getSelectedValue());
-
-        this.refrescarListaEventos();
-    }//GEN-LAST:event_btnEliminarEventoActionPerformed
+    }//GEN-LAST:event_listaViajesValueChanged
 
     private void btnVerViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerViajeActionPerformed
         if (listaViajes.getSelectedValue() != null) {
@@ -414,6 +418,7 @@ public class PanelMisViajes extends javax.swing.JPanel {
             this.etqError.setText("Debes seleccionar un viaje.");
         }
     }//GEN-LAST:event_btnVerViajeActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelConsultaJugadores;
     private javax.swing.JButton btnEliminarEvento;

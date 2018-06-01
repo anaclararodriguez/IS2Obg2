@@ -133,7 +133,7 @@ public final class Usuario implements Serializable {
             throw new ViajeExistenteException();
         }
         /* Validaciones fechas */
-        if (inicio.toString().isEmpty() || fin.toString().isEmpty()) {
+        if (inicio == null || fin == null) {
             throw new FechaVaciaException();
         }
 

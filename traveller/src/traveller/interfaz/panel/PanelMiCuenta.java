@@ -333,8 +333,8 @@ public class PanelMiCuenta extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(etqCelular)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         panelCelularLayout.setVerticalGroup(
             panelCelularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,7 +343,7 @@ public class PanelMiCuenta extends javax.swing.JPanel {
                 .addGroup(panelCelularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etqCelular)
                     .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         etqCorrecto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -358,42 +358,42 @@ public class PanelMiCuenta extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelCrearJugadorLayout.createSequentialGroup()
-                        .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelCrearJugadorLayout.createSequentialGroup()
-                                .addComponent(etqNombre)
-                                .addGap(67, 67, 67)
-                                .addComponent(txtNombre))
+                        .addGap(105, 105, 105)
+                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(etqCorrecto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(etqError, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelCrearJugadorLayout.createSequentialGroup()
+                        .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(panelCelular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(checkEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(panelCrearJugadorLayout.createSequentialGroup()
                                 .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(etqApellido)
                                     .addComponent(etqEmail))
-                                .addGap(67, 67, 67)
+                                .addGap(49, 49, 49)
                                 .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtEmail)
-                                    .addComponent(txtApellido)))
-                            .addComponent(etqAclaracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(etqCorrecto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(checkCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelCrearJugadorLayout.createSequentialGroup()
-                                .addComponent(etqUsuario)
-                                .addGap(69, 69, 69)
-                                .addComponent(txtUsuario))
-                            .addComponent(etqError, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearJugadorLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(101, 101, 101))
-                    .addGroup(panelCrearJugadorLayout.createSequentialGroup()
-                        .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(checkCelular)
-                            .addComponent(checkEmail))
-                        .addContainerGap(10, Short.MAX_VALUE))))
+                                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(etqUsuario)
+                                    .addComponent(etqNombre))
+                                .addGap(50, 50, 50)
+                                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(panelCrearJugadorLayout.createSequentialGroup()
+                .addComponent(etqAclaracion, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 70, Short.MAX_VALUE))
         );
         panelCrearJugadorLayout.setVerticalGroup(
             panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCrearJugadorLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(etqError, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17)
                 .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -412,19 +412,23 @@ public class PanelMiCuenta extends javax.swing.JPanel {
                     .addComponent(etqEmail)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
-                .addComponent(checkEmail)
+                .addComponent(checkEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(checkCelular)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(etqCorrecto)
-                .addGap(40, 40, 40)
-                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(etqAclaracion, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(panelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelCrearJugadorLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(etqCorrecto))
+                    .addGroup(panelCrearJugadorLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(etqAclaracion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        checkEmail.getAccessibleContext().setAccessibleName(" Deseo ser notificado por E-mail cuando alguien\n agregue un evento a mis viajes.*");
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
@@ -432,17 +436,17 @@ public class PanelMiCuenta extends javax.swing.JPanel {
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelCrearJugador, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
+                    .addComponent(panelCrearJugador, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
                     .addComponent(panelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelCrearJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(panelCrearJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -455,78 +459,78 @@ public class PanelMiCuenta extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-       try{
-	   this.sistema.getUsuarioIdentificado().setApellido(txtApellido.getText());
-	   this.sistema.getUsuarioIdentificado().setNombre(txtNombre.getText());
-	   Email email = new Email(txtEmail.getText());
-	   this.sistema.getUsuarioIdentificado().setEmail(email);
-	   this.sistema.getUsuarioIdentificado().setNotificarCelular(checkCelular.isSelected());
-	   this.sistema.getUsuarioIdentificado().setNotificarEmail(checkEmail.isSelected());
-	   this.sistema.getUsuarioIdentificado().setCelular(txtCelular.getText());
-	   this.etqCorrecto.setText("Información actualizada.");
-	   this.inhabilitarCampos();
-       }catch(UsuarioException e){
-	   this.etqError.setText(e.toString());
-       }
-}//GEN-LAST:event_btnAceptarActionPerformed
+    private void txtCelularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelularKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCelularKeyReleased
+
+    private void txtCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCelularActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCelularActionPerformed
+
+    private void checkCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkCelularActionPerformed
+        if(this.checkCelular.isSelected()){
+            this.panelCelular.setVisible(true);
+            this.txtCelular.setText(this.sistema.getUsuarioIdentificado().getCelular());
+        }else{
+            this.panelCelular.setVisible(false);
+        }
+    }//GEN-LAST:event_checkCelularActionPerformed
+
+    private void checkEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkEmailActionPerformed
+
+    private void txtUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioKeyReleased
+
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailKeyReleased
+
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void txtApellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtApellidoKeyReleased
+
+    private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtApellidoActionPerformed
 
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreKeyReleased
 
-    private void txtApellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyReleased
-	// TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidoKeyReleased
-
-    private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased
-	// TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailKeyReleased
-
-    private void txtUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyReleased
-	// TODO add your handling code here:
-    }//GEN-LAST:event_txtUsuarioKeyReleased
-
-    private void checkCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkCelularActionPerformed
-	if(this.checkCelular.isSelected()){
-	    this.panelCelular.setVisible(true);
-	    this.txtCelular.setText(this.sistema.getUsuarioIdentificado().getCelular());
-	}else{
-	    this.panelCelular.setVisible(false);
-	}
-    }//GEN-LAST:event_checkCelularActionPerformed
-
-    private void txtCelularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelularKeyReleased
-	// TODO add your handling code here:
-    }//GEN-LAST:event_txtCelularKeyReleased
-
-    private void txtCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCelularActionPerformed
-	// TODO add your handling code here:
-    }//GEN-LAST:event_txtCelularActionPerformed
-
-    private void checkEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkEmailActionPerformed
-	// TODO add your handling code here:
-    }//GEN-LAST:event_checkEmailActionPerformed
-
-    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
-	// TODO add your handling code here:
-    }//GEN-LAST:event_txtUsuarioActionPerformed
-
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-	// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
 
-    private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
-	// TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidoActionPerformed
-
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-	// TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        try{
+            this.sistema.getUsuarioIdentificado().setApellido(txtApellido.getText());
+            this.sistema.getUsuarioIdentificado().setNombre(txtNombre.getText());
+            Email email = new Email(txtEmail.getText());
+            this.sistema.getUsuarioIdentificado().setEmail(email);
+            this.sistema.getUsuarioIdentificado().setNotificarCelular(checkCelular.isSelected());
+            this.sistema.getUsuarioIdentificado().setNotificarEmail(checkEmail.isSelected());
+            this.sistema.getUsuarioIdentificado().setCelular(txtCelular.getText());
+            this.etqCorrecto.setText("Información actualizada.");
+            this.inhabilitarCampos();
+        }catch(UsuarioException e){
+            this.etqError.setText(e.toString());
+        }
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;

@@ -6,7 +6,7 @@ import traveller.excepciones.fecha.FechaException;
 import traveller.excepciones.viaje.ViajeException;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
-
+import java.util.*;
 /**
  *
  */
@@ -20,6 +20,7 @@ public class PanelAgendarViaje extends javax.swing.JPanel {
             this.txtNombre.requestFocusInWindow();
             this.txtNombre.setText("Vacaciones");
             this.txtDescripcion.setText("Nos vamos de vacaciones con la familia.");
+            this.jDateChooser1.setDate(null);
         } else {
             this.txtNombre.requestFocusInWindow();
         }
@@ -58,9 +59,11 @@ public class PanelAgendarViaje extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jEditorPane1);
 
         setBackground(new java.awt.Color(245, 245, 245));
-        setPreferredSize(new java.awt.Dimension(460, 679));
+        setPreferredSize(new java.awt.Dimension(455, 606));
 
         panelPrincipal.setBackground(new java.awt.Color(245, 245, 245));
+        panelPrincipal.setName(""); // NOI18N
+        panelPrincipal.setPreferredSize(new java.awt.Dimension(390, 203));
 
         panelTitulo.setBackground(new java.awt.Color(39, 39, 39));
         panelTitulo.setForeground(new java.awt.Color(255, 255, 255));
@@ -76,7 +79,7 @@ public class PanelAgendarViaje extends javax.swing.JPanel {
             .addGroup(panelTituloLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(etqTitulo)
-                .addContainerGap(312, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelTituloLayout.setVerticalGroup(
             panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,7 +91,6 @@ public class PanelAgendarViaje extends javax.swing.JPanel {
 
         panelCrearJugador.setBackground(new java.awt.Color(255, 255, 255));
         panelCrearJugador.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(39, 39, 39), 1, true));
-        panelCrearJugador.setMaximumSize(new java.awt.Dimension(380, 290));
         panelCrearJugador.setPreferredSize(new java.awt.Dimension(380, 290));
 
         etqDestino.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
@@ -192,51 +194,36 @@ public class PanelAgendarViaje extends javax.swing.JPanel {
         panelCrearJugadorLayout.setHorizontalGroup(
             panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCrearJugadorLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCrearJugadorLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelCrearJugadorLayout.createSequentialGroup()
-                                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(etqDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(etqFechaIni)
-                                    .addComponent(etqFechaFin)
-                                    .addComponent(etqDescripcion)
-                                    .addComponent(etqNombre))
-                                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelCrearJugadorLayout.createSequentialGroup()
-                                        .addGap(38, 38, 38)
-                                        .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(comboDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtNombre)
-                                            .addGroup(panelCrearJugadorLayout.createSequentialGroup()
-                                                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(dcFechaFin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                                                    .addComponent(dcFechaInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                .addGap(64, 64, 64)
-                                                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(panelCrearJugadorLayout.createSequentialGroup()
-                                                        .addComponent(jLabel3)
-                                                        .addGap(43, 43, 43)
-                                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(130, 130, 130)
-                                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE))))
-                                    .addGroup(panelCrearJugadorLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane2))))
-                            .addComponent(etqCorrecto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(etqError, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(etqCorrecto, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelCrearJugadorLayout.createSequentialGroup()
                         .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(etqDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(etqFechaIni)
+                            .addComponent(etqFechaFin)
+                            .addComponent(etqDescripcion)
+                            .addComponent(etqNombre))
+                        .addGap(38, 38, 38)
+                        .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelCrearJugadorLayout.createSequentialGroup()
-                                .addGap(84, 84, 84)
-                                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelCrearJugadorLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(etqError, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtNombre)
+                                    .addComponent(comboDestino, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(dcFechaFin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                                    .addComponent(dcFechaInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(64, 64, 64)
+                                .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelCrearJugadorLayout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(43, 43, 43)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(130, 130, 130)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         panelCrearJugadorLayout.setVerticalGroup(
             panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,11 +262,11 @@ public class PanelAgendarViaje extends javax.swing.JPanel {
                 .addGroup(panelCrearJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(etqDescripcion)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
-                .addComponent(etqCorrecto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addGap(86, 86, 86)
+                .addComponent(etqCorrecto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
@@ -287,29 +274,33 @@ public class PanelAgendarViaje extends javax.swing.JPanel {
         panelPrincipalLayout.setHorizontalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panelCrearJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(panelCrearJugador, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 428, Short.MAX_VALUE)
+                    .addComponent(panelTitulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelCrearJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(panelCrearJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(103, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -321,10 +312,6 @@ public class PanelAgendarViaje extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboDestinoActionPerformed
 
-    
-
-    
-    
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         String destino = (String) comboDestino.getSelectedItem();
 
@@ -340,13 +327,13 @@ public class PanelAgendarViaje extends javax.swing.JPanel {
         }
 
         String nombre = txtNombre.getText();
-        
-//        String diaIni = txtDiaIni.getText();
-//        String mesIni = txtMesIni.getText();
-//        String añoIni = txtAñoIni.getTferSlamovitzext();
-//        String diaFin = txtDiaFin.getText();
-//        String mesFin = txtMesFin.getText();
-//        String añoFin = txtAñoFin.getText();
+
+        //        String diaIni = txtDiaIni.getText();
+        //        String mesIni = txtMesIni.getText();
+        //        String añoIni = txtAñoIni.getTferSlamovitzext();
+        //        String diaFin = txtDiaFin.getText();
+        //        String mesFin = txtMesFin.getText();
+        //        String añoFin = txtAñoFin.getText();
 
         String descripcion = txtDescripcion.getText();
 
@@ -362,6 +349,10 @@ public class PanelAgendarViaje extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    
+
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JComboBox comboDestino;
