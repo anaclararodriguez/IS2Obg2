@@ -14,7 +14,6 @@ public final class SubPanelLog extends javax.swing.JPanel {
         int cont = 10;
         Iterator<ReporteLog> iteradorLog = this.viaje.obtenerLog().iterator();
         while (iteradorLog.hasNext() && cont >= 2) {
-            System.out.println("sii");
             ReporteLog reporte = iteradorLog.next();
             String contenido = reporte.getAccion();
             String fecha = reporte.getFecha();

@@ -4,6 +4,7 @@ import traveller.excepciones.usuario.UsuarioException;
 import traveller.excepciones.usuario.IdentificacionInvalidaException;
 import traveller.excepciones.usuario.UsuarioExistenteException;
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import traveller.noticiaciones.email.EnvioMail;
@@ -11,6 +12,8 @@ import traveller.notificaciones.movil.EnvioMensajeTexto;
 
 public class SistemaImp implements ISistema, Serializable {
 
+    private ArrayList<Ciudad> listaCiudades;
+    private ArrayList<TipoEvento> listaEventos;
     private ArrayList<Usuario> listaUsuarios;
     private Usuario usuarioIdentificado; //Guarda el usuario actualmente identifiacdo en el sistema.
     private boolean modoDesarrollador;
@@ -19,14 +22,61 @@ public class SistemaImp implements ISistema, Serializable {
     private int puerto;
 
     public SistemaImp() {
+        this.listaCiudades = new ArrayList<Ciudad>();
+        this.listaEventos = new ArrayList<TipoEvento>();
 	this.listaUsuarios = new ArrayList<Usuario>();
 	this.usuarioIdentificado = null;
 	this.modoDesarrollador = false;
 	this.mostrarCartelInicio = true;
         this.proxy = "";
         this.puerto = 0;
+        
+        this.listaEventos.add(new TipoEvento("Cultural"));
+        this.listaEventos.add(new TipoEvento("Comercial"));
+        this.listaEventos.add(new TipoEvento("Deportivo"));
+        this.listaEventos.add(new TipoEvento("Familiar"));
+        this.listaEventos.add(new TipoEvento("Laboral"));
+        this.listaEventos.add(new TipoEvento("Otro"));
+        
+        this.listaCiudades.add(new Ciudad("Buenos Aires"));
+        this.listaCiudades.add(new Ciudad("Madrid"));
+        this.listaCiudades.add(new Ciudad("Miami"));
+        this.listaCiudades.add(new Ciudad("Paris"));
+        this.listaCiudades.add(new Ciudad("Otro"));
     }
 
+    @Override
+    public ArrayList<Ciudad> getListaCiudades(){
+        return this.listaCiudades;
+    }
+    
+    @Override
+    public ArrayList<TipoEvento> getListaEventos(){
+        return this.listaEventos;
+    }
+    
+    @Override
+    public boolean agregarCiudad(Ciudad ciudad){
+        if(!listaCiudades.contains(ciudad)){
+            listaCiudades.remove(listaCiudades.size()-1);
+            listaCiudades.add(ciudad);
+            listaCiudades.add(new Ciudad("Otro"));
+            return true;
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean agregarTipoEvento(TipoEvento tipoEvento){
+        if(!listaEventos.contains(tipoEvento)){
+            listaEventos.remove(listaEventos.size()-1);
+            listaEventos.add(tipoEvento);
+            listaEventos.add(new TipoEvento("Otro"));
+            return true;
+        }
+        return false;
+    }
+    
     @Override
     public void altaUsuario(String nombreUsuario, String clave, Email email, String nombre, String apellido) throws UsuarioException {
 	/* ¿Ya existe nombre usuario? */

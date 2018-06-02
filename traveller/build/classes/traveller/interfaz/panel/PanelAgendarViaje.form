@@ -84,7 +84,7 @@
                   <Component id="panelTitulo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="panelCrearJugador" min="-2" pref="454" max="-2" attributes="0"/>
-                  <EmptySpace pref="25" max="32767" attributes="0"/>
+                  <EmptySpace pref="15" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -166,6 +166,7 @@
                                   <Component id="etqFechaFin" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="etqDescripcion" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="etqNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="etqOtroCiudad" alignment="0" min="-2" pref="77" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -175,6 +176,7 @@
                                           <Component id="comboDestino" alignment="0" max="32767" attributes="1"/>
                                           <Component id="dcFechaFin" alignment="0" pref="182" max="32767" attributes="0"/>
                                           <Component id="dcFechaInicio" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txtOtroCiudad" alignment="0" max="32767" attributes="1"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -211,34 +213,44 @@
                           <Component id="etqDestino" min="-2" pref="21" max="-2" attributes="0"/>
                           <Component id="comboDestino" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="txtOtroCiudad" min="-2" pref="30" max="-2" attributes="1"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                              <Component id="dcFechaInicio" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="etqOtroCiudad" min="-2" pref="21" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="etqFechaIni" min="-2" max="-2" attributes="1"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="dcFechaInicio" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="etqFechaFin" min="-2" max="-2" attributes="1"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Component id="dcFechaFin" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="etqFechaFin" min="-2" max="-2" attributes="1"/>
-                          <Component id="dcFechaFin" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="etqDescripcion" min="-2" max="-2" attributes="1"/>
                           <Component id="jScrollPane2" min="-2" pref="129" max="-2" attributes="0"/>
@@ -318,15 +330,11 @@
             <Component class="javax.swing.JComboBox" name="comboDestino">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Buenos Aires"/>
-                    <StringItem index="1" value="Madrid"/>
-                    <StringItem index="2" value="Miami"/>
-                    <StringItem index="3" value="Par&#xed;s"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
               <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboDestinoItemStateChanged"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboDestinoActionPerformed"/>
               </Events>
             </Component>
@@ -402,6 +410,34 @@
             <Component class="com.toedter.calendar.JDateChooser" name="dcFechaInicio">
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="dcFechaFin">
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtOtroCiudad">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="SansSerif" size="14" style="0"/>
+                </Property>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder roundedCorners="true">
+                      <Color PropertyName="color" blue="d9" green="d9" red="d9" type="rgb"/>
+                    </LineBorder>
+                  </Border>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtOtroCiudadKeyReleased"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {&#xa;    public void focusGained(java.awt.event.FocusEvent evt) {&#xa;        txtNombre.setBorder(new LineBorder(new Color(77,144,254)));&#xa;    }&#xa;    public void focusLost(java.awt.event.FocusEvent evt) {&#xa;        txtNombre.setBorder(new LineBorder(new Color(217,217,217)));&#xa;    }&#xa;});&#xa;txtNombre.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;&#xa;&#x9;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;&#x9;&#x9;if (!txtNombre.isFocusOwner()) {&#xa;&#x9;&#x9;    txtNombre.setBorder(new LineBorder(new Color(185, 185, 185)));&#xa;&#x9;&#x9;}&#xa;&#x9;    }&#xa;&#xa;&#x9;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;&#x9;&#x9;if (!txtNombre.isFocusOwner()) {&#xa;&#x9;&#x9;    txtNombre.setBorder(new LineBorder(new Color(217, 217, 217)));&#xa;&#x9;&#x9;}&#xa;&#x9;    }&#xa;&#x9;});"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="etqOtroCiudad">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="SansSerif" size="16" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Otro:"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

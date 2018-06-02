@@ -12,6 +12,14 @@ import java.util.Iterator;
  */
 public interface ISistema {
 
+    public ArrayList<Ciudad> getListaCiudades();
+            
+    public ArrayList<TipoEvento> getListaEventos();
+            
+    public boolean agregarCiudad(Ciudad ciudad);
+            
+    public boolean agregarTipoEvento(TipoEvento tipoEvento);
+    
     public void altaUsuario(String nombreUsuario, String clave, Email email, String nombre, String apellido)
             throws UsuarioException;
 

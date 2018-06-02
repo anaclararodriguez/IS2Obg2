@@ -86,7 +86,7 @@ public class VentanaMenu extends javax.swing.JFrame {
         subOpcionAcerca = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Traveller");
+        setTitle("Traveller 1.0");
         setBackground(new java.awt.Color(245, 245, 245));
         setLocationByPlatform(true);
         setResizable(false);
@@ -908,12 +908,12 @@ public class VentanaMenu extends javax.swing.JFrame {
     private void subMiCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMiCuentaActionPerformed
         PanelMiCuenta miCuenta = new PanelMiCuenta(sistema);
 
-        opcionMenu = 6;
+        opcionMenu = 3;
         btnNuevoEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/traveller/interfaz/img/opcionMenu.png")));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/traveller/interfaz/img/opcionMenu.png")));
         btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/traveller/interfaz/img/opcionMenu.png")));
         btnMisViajes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/traveller/interfaz/img/opcionMenu.png")));
-        btnMiCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vinterfaz/img/opcionMenuSeleccionada.png")));
+        btnMiCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/traveller/interfaz/img/opcionMenuSeleccionada.png")));
         btnAgendarViaje1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/traveller/interfaz/img/opcionMenu.png")));
         /*
          * Limpiar el panel actual y agregar el nuevo.

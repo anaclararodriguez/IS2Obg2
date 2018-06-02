@@ -87,7 +87,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         imgLogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Viajenda");
+        setTitle("Traveller 1.0");
         setLocationByPlatform(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -165,7 +165,6 @@ public class VentanaLogin extends javax.swing.JFrame {
 
         btnAceptar.setBackground(new java.awt.Color(255, 102, 51));
         btnAceptar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        btnAceptar.setForeground(new java.awt.Color(0, 0, 0));
         btnAceptar.setText("Acceder");
         btnAceptar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(221, 221, 221), 1, true));
         btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));

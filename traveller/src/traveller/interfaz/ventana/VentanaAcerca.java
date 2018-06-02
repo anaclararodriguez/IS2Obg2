@@ -38,7 +38,7 @@ public class VentanaAcerca extends javax.swing.JFrame {
         btnAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Acerca de Rey del Tablero");
+        setTitle("Acerca de Traveller 1.0");
         setAlwaysOnTop(true);
         setLocationByPlatform(true);
         setResizable(false);
@@ -52,7 +52,7 @@ public class VentanaAcerca extends javax.swing.JFrame {
 
         etqVersion.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         etqVersion.setForeground(new java.awt.Color(153, 153, 153));
-        etqVersion.setText(" Versión 2.0");
+        etqVersion.setText(" Versión 1.0");
 
         javax.swing.GroupLayout panelSuperiorLayout = new javax.swing.GroupLayout(panelSuperior);
         panelSuperior.setLayout(panelSuperiorLayout);

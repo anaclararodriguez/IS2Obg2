@@ -331,27 +331,7 @@ public class PanelMisViajes extends javax.swing.JPanel {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Evento evento = ((Evento) listaEventos.getSelectedValue());
 
-            String tipoEvento = null;
-            switch (evento.getTipoEvento()) {
-                case CULTURAL:
-                tipoEvento = "Cultural";
-                break;
-                case DEPORTIVO:
-                tipoEvento = "Deportivo";
-                break;
-                case LABORAL:
-                tipoEvento = "Laboral";
-                break;
-                case COMERCIAL:
-                tipoEvento = "Comercial";
-                break;
-                case FAMILIAR:
-                tipoEvento = "Familiar";
-                break;
-                case OTRO:
-                tipoEvento = "Otro";
-                break;
-            }
+            String tipoEvento = evento.getTipoEvento().getNombre();
 
             etqTipoEvento.setText("Tipo: " + tipoEvento);
             etqNombreEvento.setText(evento.getNombre());
@@ -377,21 +357,7 @@ public class PanelMisViajes extends javax.swing.JPanel {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Viaje viaje = ((Viaje) listaViajes.getSelectedValue());
 
-            String ciudad = null;
-            switch (viaje.getDestino()) {
-                case MADRID:
-                ciudad = "Madrid";
-                break;
-                case PARIS:
-                ciudad = "París";
-                break;
-                case MIAMI:
-                ciudad = "Miami";
-                break;
-                case BSAS:
-                ciudad = "Buenos Aires";
-                break;
-            }
+            String ciudad = viaje.getDestino().getNombre();
 
             etqNombreViaje.setText(viaje.getNombre());
             etqFechas.setText((dateFormat.format(viaje.getFechaInicio())

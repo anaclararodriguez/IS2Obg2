@@ -64,7 +64,7 @@
                       <Component id="jPanel1" max="32767" attributes="1"/>
                       <Component id="panelTitulo" max="32767" attributes="1"/>
                   </Group>
-                  <EmptySpace pref="28" max="32767" attributes="0"/>
+                  <EmptySpace pref="29" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -187,7 +187,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="68" green="68" red="68" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Bienvenido a traveller. Su agenda interactica de viajes."/>
+                <Property name="text" type="java.lang.String" value="Bienvenido a traveller. Su agenda interactiva de viajes."/>
               </Properties>
             </Component>
           </SubComponents>
