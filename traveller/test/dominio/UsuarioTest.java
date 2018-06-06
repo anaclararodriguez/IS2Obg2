@@ -25,6 +25,7 @@ import traveller.excepciones.usuario.UsuarioException;
 import traveller.excepciones.viaje.ViajeException;
 import traveller.excepciones.viaje.ViajeExistenteException;
 import java.util.ArrayList;
+import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -38,650 +39,307 @@ import static org.junit.Assert.*;
  */
 public class UsuarioTest {
 
-    private Usuario instance;
-
-    public UsuarioTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
+    private Usuario unUsuario;
+    private Ciudad ciudad;
+    private Date fechaI;
+    private Date fechaF;
+   
     @Before
     public void setUp() throws UsuarioException {
-        instance = new Usuario("Juancho", "qwer1234", "Juan", "Perez", new Email("jp@gmail.com"));
+        Email mail =  new Email("jp@gmail.com");
+        unUsuario = new Usuario("Juancho", "qwer1234", "Juan", "Perez",mail);
+        ciudad = new Ciudad("MADRID");
+        fechaI= new Date(2018,11,01);
+        fechaF=new Date(2018,12,22);
     }
 
-    @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of existeNombreViaje method, of class Usuario.
-     */
     @Test
-    public void testExisteNombreViajeTrue() throws ViajeException, FechaException {
-        boolean expResult = true;
-        instance.altaViaje("Vacaciones", Ciudad.MADRID, "01", "11", "2013",
-                "23", "12", "2014", "descripcion");
-        boolean result = instance.existeNombreViaje("Vacaciones");
-        assertEquals(expResult, result);
-    }
+    public void testExisteNombreViajeTrue() throws ViajeException,FechaException,ViajeExistenteException{
+        unUsuario.altaViaje("Vacaciones", ciudad, fechaI,fechaF, "descripcion");
+        boolean viajeRepetido=false;
+        try {
+             unUsuario.altaViaje("Vacaciones", ciudad, fechaI,fechaF, "descripciond");
+        }catch(ViajeExistenteException e){
+            viajeRepetido=true;
+        }
 
-    /**
-     * Test of existeNombreViaje method, of class Usuario.
-     */
+        assertTrue(viajeRepetido);
+    }
+    
     @Test
     public void testExisteNombreViajeFalse() throws ViajeException, FechaException {
-        boolean expResult = false;
-        instance.altaViaje("Vacaciones", Ciudad.MADRID, "01", "11", "2013",
-                "23", "12", "2014", "descripcion");
-        boolean result = instance.existeNombreViaje("Vacaciones ");
-        assertEquals(expResult, result);
+        int cantInicial = unUsuario.getListaViajes().size();
+        unUsuario.altaViaje("Vacaciones", ciudad, fechaI,fechaF, "descripcion");
+        int cantFinal = unUsuario.getListaViajes().size();
+        assertEquals(cantInicial+1, cantFinal);  
     }
 
-    /**
-     * Test of bajaViaje method, of class Usuario.
-     */
     @Test
     public void testBajaViaje() throws ViajeException, FechaException {
-        instance.altaViaje("Vacaciones", Ciudad.MADRID, "01", "11", "2013",
-                "23", "12", "2014", "descripcion");
-        instance.bajaViaje(new Viaje("Vacaciones"));
-        assert (!instance.getListaViajes().contains(new Viaje("Vacaciones")));
+        Viaje viaje = new Viaje("Vacaciones");
+        unUsuario.altaViaje("Vacaciones", ciudad, fechaI,fechaF, "descripcion");
+        unUsuario.bajaViaje(viaje);
+        assertFalse(unUsuario.getListaViajes().contains(viaje));
     }
 
-    /**
-     * Test of altaViaje method, of class Usuario.
-     */
     @Test
-    public void testAltaViajeOK1() throws Exception {
-        instance.altaViaje("Vaca", Ciudad.MADRID, "01", "11", "2013",
-                "23", "12", "2014", "");
-        assert (instance.existeNombreViaje("Vaca"));
+    public void testAltaViaje() throws Exception {
+        int cantInicial = unUsuario.getListaViajes().size();
+        unUsuario.altaViaje("Vacaciones de verano", ciudad, fechaI,fechaF, "descripcion");
+        int cantFinal = unUsuario.getListaViajes().size();
+        assertEquals(cantInicial+1, cantFinal);  
     }
 
-    /**
-     * Test of altaViaje method, of class Usuario.
-     */
-    @Test
-    public void testAltaViajeOK2() throws Exception {
-        instance.altaViaje("Vacaciones", Ciudad.MADRID, "01", "11", "2013",
-                "01", "11", "2013", "");
-        assert (instance.existeNombreViaje("Vacaciones"));
-    }
-
-    /**
-     * Test of altaViaje method, of class Usuario.
-     */
-    @Test
-    public void testAltaViajeOK3() throws Exception {
-        instance.altaViaje("Vacaciones", Ciudad.MADRID, "01", "11", "2013",
-                "23", "12", "2016", ".    ");
-        instance.altaViaje("Vacacion", Ciudad.MADRID, "01", "11", "2013",
-                "23", "12", "2016", ".    ");
-        assert (instance.existeNombreViaje("Vacaciones")
-                && instance.existeNombreViaje("Vacacion"));
-    }
-
-    /**
-     * Test of altaViaje method, of class Usuario.
-     */
-    @Test
     public void testAltaViajeErrorNombreExistente() throws Exception {
+        boolean existeNombre=false;
+        Date desde = new Date(01,11,2013);
+        Date hasta = new Date(23,12,2013);
+        Ciudad ciud = new Ciudad("MADRID");
+        unUsuario.altaViaje("Vacaciones", ciud, desde,hasta, "descripcion");
         try {
-            instance.altaViaje("Vacaciones", Ciudad.MADRID, "01", "11", "2013",
-                    "23", "12", "2014", "descripcion");
-            instance.altaViaje("Vacaciones", Ciudad.MADRID, "01", "11", "2013",
-                    "23", "12", "2014", "descripcion");
-            assert (false);
+            unUsuario.altaViaje("Vacaciones", ciud, desde,
+                    hasta, "descripcion");
         } catch (ViajeExistenteException e) {
-            assert (true);
+            existeNombre=true;
         }
+        assertTrue(existeNombre);
     }
 
-    /**
-     * Test of altaViaje method, of class Usuario.
-     */
     @Test
-    public void testAltaViajeErrorDiaIniVacio() throws Exception {
+    public void testAltaViajeErrorFechaIniVacio() throws Exception {
+        boolean fechaCorrecta=true;
         try {
-            instance.altaViaje("Vacaciones", Ciudad.MADRID, "", "11", "2013",
-                    "23", "12", "2014", "descripcion");
-            assert (false);
+            unUsuario.altaViaje("Vacaciones", ciudad,null,fechaF, "descripcion");
         } catch (FechaVaciaException e) {
-            assert (true);
+            fechaCorrecta=false;
         }
+        assertFalse(fechaCorrecta);
     }
 
-    /**
-     * Test of altaViaje method, of class Usuario.
-     */
     @Test
-    public void testAltaViajeErrorMesIniVacio() throws Exception {
+    public void testAltaViajeErrorFechaFinVacio() throws Exception {
+        boolean fechaCorrecta=true;
         try {
-            instance.altaViaje("Vacaciones", Ciudad.MADRID, "01", "", "2013",
-                    "23", "12", "2014", "descripcion");
-            assert (false);
+            unUsuario.altaViaje("Vacaciones", ciudad,fechaI,null, "descripcion");
         } catch (FechaVaciaException e) {
-            assert (true);
+            fechaCorrecta=false;
         }
+        
+        assertFalse(fechaCorrecta);
     }
 
-    /**
-     * Test of altaViaje method, of class Usuario.
-     */
-    @Test
-    public void testAltaViajeErrorAñoIniVacio() throws Exception {
-        try {
-            instance.altaViaje("Vacaciones", Ciudad.MADRID, "01", "11", "",
-                    "23", "12", "2014", "descripcion");
-            assert (false);
-        } catch (FechaVaciaException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of altaViaje method, of class Usuario.
-     */
-    @Test
-    public void testAltaViajeErrorDiaFinVacio() throws Exception {
-        try {
-            instance.altaViaje("Vacaciones", Ciudad.MADRID, "01", "11", "2013",
-                    "", "12", "2014", "descripcion");
-            assert (false);
-        } catch (FechaVaciaException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of altaViaje method, of class Usuario.
-     */
-    @Test
-    public void testAltaViajeErrorMesFinVacio() throws Exception {
-        try {
-            instance.altaViaje("Vacaciones", Ciudad.MADRID, "01", "11", "2013",
-                    "23", "", "2014", "descripcion");
-            assert (false);
-        } catch (FechaVaciaException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of altaViaje method, of class Usuario.
-     */
-    @Test
-    public void testAltaViajeErrorAñoFinVacio() throws Exception {
-        try {
-            instance.altaViaje("Vacaciones", Ciudad.MADRID, "01", "11", "2013",
-                    "23", "12", "", "descripcion");
-            assert (false);
-        } catch (FechaVaciaException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of altaViaje method, of class Usuario.
-     */
-    @Test
-    public void testAltaViajeErrorFormatoDiaIni() throws Exception {
-        try {
-            instance.altaViaje("Vacaciones", Ciudad.MADRID, "DD", "11", "2013",
-                    "23", "12", "2014", "descripcion");
-            assert (false);
-        } catch (FormatoFechaInicioException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of altaViaje method, of class Usuario.
-     */
-    @Test
-    public void testAltaViajeErrorFormatoMesIni() throws Exception {
-        try {
-            instance.altaViaje("Vacaciones", Ciudad.MADRID, "01", "13", "2013",
-                    "23", "12", "2014", "descripcion");
-            assert (false);
-        } catch (FormatoFechaInicioException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of altaViaje method, of class Usuario.
-     */
-    @Test
-    public void testAltaViajeErrorFormatoAñoIni() throws Exception {
-        try {
-            instance.altaViaje("Vacaciones", Ciudad.MADRID, "01", "11", "1900",
-                    "23", "12", "2014", "descripcion");
-            assert (false);
-        } catch (FormatoFechaInicioException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of altaViaje method, of class Usuario.
-     */
-    @Test
-    public void testAltaViajeErrorFormatoDiaFin() throws Exception {
-        try {
-            instance.altaViaje("Vacaciones", Ciudad.MADRID, "01", "11", "2013",
-                    ".", "12", "2014", "descripcion");
-            assert (false);
-        } catch (FormatoFechaFinException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of altaViaje method, of class Usuario.
-     */
-    @Test
-    public void testAltaViajeErrorFormatoMesFin() throws Exception {
-        try {
-            instance.altaViaje("Vacaciones", Ciudad.MADRID, "01", "11", "2013",
-                    "23", "MM", "2014", "descripcion");
-            assert (false);
-        } catch (FormatoFechaFinException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of altaViaje method, of class Usuario.
-     */
-    @Test
-    public void testAltaViajeErrorFormatoAñoFin() throws Exception {
-        try {
-            instance.altaViaje("Vacaciones", Ciudad.MADRID, "01", "11", "2013",
-                    "23", "12", "yyyy", "descripcion");
-            assert (false);
-        } catch (FormatoFechaFinException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of altaViaje method, of class Usuario.
-     */
-    @Test
-    public void testAltaViajeErrorFechaIni() throws Exception {
-        try {
-            instance.altaViaje("Vacaciones", Ciudad.MADRID, "23", "11", "2012",
-                    "23", "12", "2014", "descripcion");
-            assert (false);
-        } catch (FechaInicioAnteriorException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of altaViaje method, of class Usuario.
-     */
-    @Test
-    public void testAltaViajeErrorFechaFin() throws Exception {
-        try {
-            instance.altaViaje("Vacaciones", Ciudad.MADRID, "24", "12", "2014",
-                    "23", "12", "2014", "descripcion");
-            assert (false);
-        } catch (FechaFinAnteriorInicioException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of agregarViajes method, of class Usuario.
-     */
-    @Test
-    public void testAgregarViajes() {
-        Viaje v1 = new Viaje("viaje1");
-        Viaje v2 = new Viaje("viaje2");
-        Viaje v3 = new Viaje("viaje3");
-
-        ArrayList<Viaje> expResult = new ArrayList<Viaje>();
-        expResult.add(v1);
-        expResult.add(v2);
-        expResult.add(v3);
-
-        instance.agregarViajes(v1);
-        instance.agregarViajes(v2);
-        instance.agregarViajes(v3);
-
-        ArrayList result = instance.getListaViajes();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of agregarAmigo method, of class Usuario.
-     */
     @Test
     public void testAgregarAmigo() {
         Usuario a1 = new Usuario("Usuario1");
-        Usuario a2 = new Usuario("Usuario2");
-        Usuario a3 = new Usuario("Usuario3");
+        int largoActual = unUsuario.getListaAmigos().size();
+        unUsuario.agregarAmigo(a1);
+        int largoEsperado = unUsuario.getListaAmigos().size();
 
-        ArrayList<Usuario> expResult = new ArrayList<Usuario>();
-        expResult.add(a1);
-        expResult.add(a2);
-        expResult.add(a3);
-
-        instance.agregarAmigo(a1);
-        instance.agregarAmigo(a2);
-        instance.agregarAmigo(a3);
-
-        ArrayList result = instance.getListaAmigos();
-        assertEquals(expResult, result);
+        assertEquals(largoActual+1, largoEsperado);
     }
 
-    /**
-     * Test of getApellido method, of class Usuario.
-     */
     @Test
     public void testGetApellido() {
         String expResult = "Perez";
-        String result = instance.getApellido();
+        String result = unUsuario.getApellido();
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of setApellido method, of class Usuario.
-     */
     @Test
     public void testSetApellido() throws Exception {
         String apellido = "Pereira";
-        instance.setApellido(apellido);
-        assertEquals(apellido, instance.getApellido());
+        unUsuario.setApellido(apellido);
+        assertEquals(apellido, unUsuario.getApellido());
     }
 
-    /**
-     * Test of setApellido method, of class Usuario.
-     */
     @Test
     public void testSetApellidoErrorVacio() throws Exception {
+        boolean apellidoVacio=false;
         try {
-            instance.setApellido("");
-            assert (false);
+            unUsuario.setApellido("");
         } catch (ApellidoVacioException e) {
-            assert (true);
+            apellidoVacio=true;
         }
+        
+        assertTrue(apellidoVacio);
     }
 
-    /**
-     * Test of setApellido method, of class Usuario.
-     */
     @Test
     public void testSetApellidoErrorMuyCorto() throws Exception {
+        boolean apellidoCorto=false;
         try {
-            instance.setApellido("a");
-            assert (false);
+            unUsuario.setApellido("a");
         } catch (LargoApellidoInvalidoException e) {
-            assert (true);
+            apellidoCorto=true;
         }
+        
+        assertTrue(apellidoCorto);
     }
 
-    /**
-     * Test of setApellido method, of class Usuario.
-     */
     @Test
     public void testSetApellidoErrorMuyLargo1() throws Exception {
+        boolean apellidoLargo=false;
         try {
-            instance.setApellido("Apellido demasiado largo para validarlo.");
-            assert (false);
+            unUsuario.setApellido("Apellido demasiado largo para validarlo.");
         } catch (LargoApellidoInvalidoException e) {
-            assert (true);
+            apellidoLargo=true;
         }
+                
+        assertTrue(apellidoLargo);        
     }
 
-    /**
-     * Test of setApellido method, of class Usuario.
-     */
-    @Test
-    public void testSetApellidoErrorMuyLargo2() throws Exception {
-        try {
-            instance.setApellido("apellido de 21 caract");
-            assert (false);
-        } catch (LargoApellidoInvalidoException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of getEmail method, of class Usuario.
-     */
     @Test
     public void testGetEmail() {
         Email expResult = new Email("jp@gmail.com");
-        Email result = instance.getEmail();
+        Email result = unUsuario.getEmail();
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of setEmail method, of class Usuario.
-     */
     @Test
     public void testSetEmail() throws Exception {
         Email email = new Email("jp@gmail.com");
-        instance.setEmail(email);
-        assertEquals(email, instance.getEmail());
+        unUsuario.setEmail(email);
+        assertEquals(email, unUsuario.getEmail());
     }
 
-    /**
-     * Test of setEmail method, of class Usuario.
-     */
     @Test
     public void testSetEmailErrorVacio() throws Exception {
+        boolean mailVacio=false;
         try {
             Email email = new Email("");
-            instance.setEmail(email);
-            assert (false);
+            unUsuario.setEmail(email);
         } catch (EmailInvalidoException e) {
-            assert (true);
+            mailVacio=true;
         }
+         assertTrue(mailVacio);
     }
 
-    /**
-     * Test of getNombre method, of class Usuario.
-     */
     @Test
     public void testGetNombre() {
         String expResult = "Juan";
-        String result = instance.getNombre();
+        String result = unUsuario.getNombre();
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of setNombre method, of class Usuario.
-     */
     @Test
     public void testSetNombre() throws Exception {
         String nombre = "Carlos";
-        instance.setNombre(nombre);
-        assertEquals(nombre, instance.getNombre());
+        unUsuario.setNombre(nombre);
+        assertEquals(nombre, unUsuario.getNombre());
     }
 
-    /**
-     * Test of setNombre method, of class Usuario.
-     */
     @Test
     public void testSetNombreErrorVacio() throws Exception {
+        boolean nombreVacio=false;
         try {
             String nombre = "";
-            instance.setNombre(nombre);
-            assert(false);
+            unUsuario.setNombre(nombre);
         } catch (NombreVacioException e) {
-            assert(true);
+            nombreVacio=true;
         }
+        
+        assertTrue(nombreVacio);
     }
     
-    /**
-     * Test of setNombre method, of class Usuario.
-     */
     @Test
     public void testSetNombreErrorMuyCorto() throws Exception {
+        boolean nombreCorto=false;
         try {
             String nombre = "C";
-            instance.setNombre(nombre);
-            assert(false);
+            unUsuario.setNombre(nombre);
         } catch (LargoNombreInvalidoException e) {
-            assert(true);
+            nombreCorto=true;
         }
+        
+        assertTrue(nombreCorto);
     }
     
-    /**
-     * Test of setNombre method, of class Usuario.
-     */
     @Test
-    public void testSetNombreErrorMuyLargo1() throws Exception {
+    public void testSetNombreErrorMuyLargo() throws Exception {
+        boolean nombreLargo = false;
         try {
             String nombre = "Carlos Perez de la Cuenca German";
-            instance.setNombre(nombre);
-            assert(false);
+            unUsuario.setNombre(nombre);
         } catch (LargoNombreInvalidoException e) {
-            assert(true);
+           nombreLargo=true;
         }
+        
+        assertTrue(nombreLargo);
     }
-    
-    /**
-     * Test of setNombre method, of class Usuario.
-     */
-    @Test
-    public void testSetNombreErrorMuyLargo2() throws Exception {
-        try {
-            String nombre = "Nombre de 21 cararact";
-            instance.setNombre(nombre);
-            assert(false);
-        } catch (LargoNombreInvalidoException e) {
-            assert(true);
-        }
-    }
-
-    /**
-     * Test of getNombreUsuario method, of class Usuario.
-     */
+   
     @Test
     public void testGetNombreUsuario() {
         String expResult = "Juancho";
-        String result = instance.getNombreUsuario();
+        String result = unUsuario.getNombreUsuario();
         assertEquals(expResult, result);
     }
-
-    /**
-     * Test of setNombreUsuario method, of class Usuario.
-     */
+    
     @Test
     public void testSetNombreUsuario() throws Exception {
         String nombre = "CaRlOs";
-        instance.setNombreUsuario(nombre);
-        assertEquals(nombre, instance.getNombreUsuario());
+        unUsuario.setNombreUsuario(nombre);
+        assertEquals(nombre, unUsuario.getNombreUsuario());
     }
     
-    /**
-     * Test of setNombre method, of class Usuario.
-     */
     @Test
     public void testSetNombreUsuarioErrorVacio() throws Exception {
+        boolean nombreVacio = false;
         try {
             String nombre = "";
-            instance.setNombreUsuario(nombre);
-            assert(false);
+            unUsuario.setNombreUsuario(nombre);
         } catch (NombreUsuarioVacioException e) {
-            assert(true);
+            nombreVacio=true;
         }
-    }
-    
-    /**
-     * Test of setNombre method, of class Usuario.
-     */
-    @Test
-    public void testSetNombreUsuarioErrorMuyCorto() throws Exception {
-        try {
-            String nombre = "C";
-            instance.setNombreUsuario(nombre);
-            assert(false);
-        } catch (LargoNombreUsuarioInvalidoException e) {
-            assert(true);
-        }
-    }
-    
-    /**
-     * Test of setNombre method, of class Usuario.
-     */
-    @Test
-    public void testSetNombreUsuarioErrorMuyLargo1() throws Exception {
-        try {
-            String nombre = "Carlos Perez de la Cuenca German";
-            instance.setNombreUsuario(nombre);
-            assert(false);
-        } catch (LargoNombreUsuarioInvalidoException e) {
-            assert(true);
-        }
-    }
-    
-    /**
-     * Test of setNombre method, of class Usuario.
-     */
-    @Test
-    public void testSetNombreUsuarioErrorMuyLargo2() throws Exception {
-        try {
-            String nombre = "Nombre de 21 cararact";
-            instance.setNombreUsuario(nombre);
-            assert(false);
-        } catch (LargoNombreUsuarioInvalidoException e) {
-            assert(true);
-        }
+        
+        assertTrue(nombreVacio);
     }
 
-    /**
-     * Test of equals method, of class Usuario.
-     */
+    @Test
+    public void testSetNombreUsuarioErrorMuyCorto() throws Exception {
+        boolean nombreCorto=false;
+        try {
+            String nombre = "C";
+            unUsuario.setNombreUsuario(nombre);
+        } catch (LargoNombreUsuarioInvalidoException e) {
+            nombreCorto=true;
+        }
+        
+        assertTrue(nombreCorto);
+    }
+    
+    @Test
+    public void testSetNombreUsuarioErrorMuyLargo() throws Exception {
+        boolean nombreLargo=false;
+        try {
+            String nombre = "Carlos Perez de la Cuenca German";
+            unUsuario.setNombreUsuario(nombre);
+        } catch (LargoNombreUsuarioInvalidoException e) {
+            nombreLargo=true;
+        }
+        
+        assertTrue(nombreLargo);
+    }
+    
     @Test
     public void testEqualsOK() throws UsuarioException {
         Object obj = new Usuario("Juancho", "qwer1234", "Juan", "Perez", new Email("jp@gmail.com"));
         boolean expResult = true;
-        boolean result = instance.equals(obj);
+        boolean result = unUsuario.equals(obj);
         assertEquals(expResult, result);
     }
     
-    /**
-     * Test of equals method, of class Usuario.
-     */
     @Test
     public void testEqualsError1() throws UsuarioException {
         Object obj = new Usuario("JuAnChO", "qwer1234", "Juan", "Perez", new Email("jp@gmail.com"));
         boolean expResult = false;
-        boolean result = instance.equals(obj);
+        boolean result = unUsuario.equals(obj);
         assertEquals(expResult, result);
     }
     
-    /**
-     * Test of equals method, of class Usuario.
-     */
-    @Test
-    public void testEqualsError2() throws UsuarioException {
-        Object obj = new Usuario("Juancho ", "qwer1234", "Juan", "Perez", new Email("jp@gmail.com"));
-        boolean expResult = false;
-        boolean result = instance.equals(obj);
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of toString method, of class Usuario.
-     */
     @Test
     public void testToString() {
         String expResult = "Juan Perez";
-        String result = instance.toString();
+        String result = unUsuario.toString();
         assertEquals(expResult, result);
     }
 }

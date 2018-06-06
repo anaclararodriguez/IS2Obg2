@@ -52,13 +52,8 @@ public class ViajeTest {
 
     @Before
     public void setUp() throws ViajeException {
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Date fechaFin = null;
-        try {
-            fechaFin = formatter.parse(Integer.parseInt("23") + "/"
-                    + Integer.parseInt("11") + "/" + Integer.parseInt("2014"));
-        } catch (ParseException ex) {
-        }
+        Date fechaFin = new Date(23,11,204);
+    
         instance = new Viaje("Vacaciones", Ciudad.MADRID,
                 Calendar.getInstance().getTime(), fechaFin, "Descripcion");
     }

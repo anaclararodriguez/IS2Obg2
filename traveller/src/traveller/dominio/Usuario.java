@@ -132,12 +132,10 @@ public final class Usuario implements Serializable {
         if (existeNombreViaje(nombreViaje)) {
             throw new ViajeExistenteException();
         }
-        /* Validaciones fechas */
         if (inicio == null || fin == null) {
             throw new FechaVaciaException();
         }
-
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+       
         Date fechaInicio = inicio;
         Date fechaFin = fin;
         
