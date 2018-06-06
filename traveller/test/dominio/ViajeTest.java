@@ -37,256 +37,124 @@ import static org.junit.Assert.*;
  */
 public class ViajeTest {
 
-    private Viaje instance;
-
-    public ViajeTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    private Viaje unViaje;
+    private Ciudad ciudad;
+    private TipoEvento tipoEvento;
+    private Date fechaEvento;
+    
 
     @Before
     public void setUp() throws ViajeException {
+        Date fechaInicio = Calendar.getInstance().getTime();
         Date fechaFin = new Date(23,11,204);
-    
-        instance = new Viaje("Vacaciones", Ciudad.MADRID,
-                Calendar.getInstance().getTime(), fechaFin, "Descripcion");
+        unViaje = new Viaje("Vacaciones", ciudad, fechaInicio, fechaFin, "Descripcion");
+        tipoEvento = new TipoEvento("Familiar");
+        fechaEvento = new Date(2018,07,07);
     }
 
-    @After
-    public void tearDown() {
-    }
 
-    /**
-     * Test of agregarComentario method, of class Viaje.
-     */
     @Test
     public void testAgregarComentarioError() throws Exception {
+        boolean comentarioVacio=false;
         try {
-            instance.agregarComentario("fecha1", "autor", "");
-            assert (false);
+            unViaje.agregarComentario("fecha1", "autor", "");
         } catch (ContenidoVacioException e) {
-            assert (true);
+            comentarioVacio=true;
         }
+        
+        assertTrue(comentarioVacio);
     }
 
-    /**
-     * Test of existeEvento method, of class Viaje.
-     */
     @Test
     public void testExisteEventoTrue() {
         boolean expResult = true;
-
-        instance.agregarEventos(new Evento("Evento1"));
-        instance.agregarEventos(new Evento("Evento2"));
-        instance.agregarEventos(new Evento("Evento3"));
-
-        boolean result = instance.existeEvento(new Evento("Evento2"));
+        Evento evento1 = new Evento("Evento1");
+        unViaje.agregarEventos(evento1);
+        boolean result = unViaje.existeEvento(evento1);
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of existeEvento method, of class Viaje.
-     */
     @Test
     public void testExisteEventoFalse() {
-        boolean expResult = false;
-
-        instance.agregarEventos(new Evento("Evento1"));
-        instance.agregarEventos(new Evento("Evento3"));
-
-        boolean result = instance.existeEvento(new Evento("Evento2"));
-        assertEquals(expResult, result);
+        Evento evento1 = new Evento("Evento1");
+        Evento evento2 = new Evento("Evento1");
+        unViaje.agregarEventos(evento1);
+        boolean result = unViaje.getListaEventos().contains(evento2);
+        
+        assertFalse(result);
     }
 
-    /**
-     * Test of altaEvento method, of class Viaje.
-     */
     @Test
-    public void testAltaEventoOK1() throws Exception {
-        instance.altaEvento("Visita al parque", "12", "12", "2012", "Parque",
-                "descripcion", TipoEvento.FAMILIAR);
-        assert (instance.existeEvento(new Evento("Visita al parque")));
+    public void testAltaEventoOK() throws Exception {
+        Evento evento1 = new Evento("Visita al parque");
+        unViaje.altaEvento("Visita al parque", fechaEvento, "Parque","descripcion", tipoEvento);
+        assert (unViaje.existeEvento(evento1));
     }
 
-    /**
-     * Test of altaEvento method, of class Viaje.
-     */
     @Test
-    public void testAltaEventoOK2() throws Exception {
-        instance.altaEvento("Visita al parque", "12", "12", "2012", "Parque",
-                "descripcion", TipoEvento.FAMILIAR);
-        instance.altaEvento("Visita al parque2", "12", "12", "2012", "Parque",
-                "descripcion", TipoEvento.FAMILIAR);
-        assert (instance.existeEvento(new Evento("Visita al parque")) && 
-                instance.existeEvento(new Evento("Visita al parque2")));
-    }
-
-    /**
-     * Test of altaEvento method, of class Viaje.
-     */
-    @Test
-    public void testAltaEventoOK3Bordes() throws Exception {
-        instance.altaEvento("Park", "23", "11", "2014", "Parque",
-                "descripcion", TipoEvento.FAMILIAR);
-        assert (instance.existeEvento(new Evento("Park")));
-    }
-
-    /**
-     * Test of altaEvento method, of class Viaje.
-     */
-    @Test
-    public void testAltaEventoErrorNombreExistente() throws Exception {
+    public void testAltaEventoErrorNombreNoExistente() throws Exception{
+        boolean nomobreExistente=false;
+        unViaje.altaEvento("Parque Acuaticoo", fechaEvento, "Aquopolis","Descripcion", tipoEvento);
         try {
-            instance.altaEvento("Parque Acuatico", "01", "01", "2014", "Aquopolis",
-                    "Descripcion", TipoEvento.FAMILIAR);
-            instance.altaEvento("Parque Acuatico", "02", "02", "2013", "Aquopolis",
-                    "Descripcion", TipoEvento.FAMILIAR);
-            assert (false);
+            unViaje.altaEvento("Parque Acuatico", fechaEvento, "Aquopolis","Descripcion", tipoEvento);
         } catch (EventoExistenteException e) {
-            assert (true);
+            nomobreExistente=true;
         }
+        
+        assertFalse(nomobreExistente);
     }
 
-    /**
-     * Test of altaEvento method, of class Viaje.
-     */
     @Test
-    public void testAltaEventoErrorDiaVacio() throws Exception {
+    public void testAltaEventoErrorNombreExistente() throws Exception{
+        boolean nomobreExistente=false;
+        unViaje.altaEvento("Parque Acuatico", fechaEvento, "Aquopolis","Descripcion", tipoEvento);
         try {
-            instance.altaEvento("Parque Acuatico", "", "01", "2014", "Aquopolis",
-                    "Descripcion", TipoEvento.FAMILIAR);
-            assert (false);
+            unViaje.altaEvento("Parque Acuatico", fechaEvento, "Aquopolis","Descripcion", tipoEvento);
+        } catch (EventoExistenteException e) {
+            nomobreExistente=true;
+        }
+        
+        assertTrue(nomobreExistente);
+    }
+
+    @Test
+    public void testAltaEventoErrorFechaVacia() throws Exception {
+        boolean fechaCorrecto=false;
+        try {
+            unViaje.altaEvento("Parque Acuatico", null, "Aquopolis", "Descripcion", tipoEvento);
         } catch (FechaVaciaException e) {
-            assert (true);
+            fechaCorrecto=true;
         }
+        
+        assertTrue(fechaCorrecto);
     }
 
-    /**
-     * Test of altaEvento method, of class Viaje.
-     */
+
     @Test
-    public void testAltaEventoErrorMesVacio() throws Exception {
+    public void testAltaEventoErrorFechaAnterior() throws Exception {
+        Date nuevafecha = new Date(2011,06,06);
+        boolean fechaCorrecta=true;
         try {
-            instance.altaEvento("Parque Acuatico", "02", "", "2013", "Aquopolis",
-                    "Descripcion", TipoEvento.FAMILIAR);
-            assert (false);
-        } catch (FechaVaciaException e) {
-            assert (true);
+            unViaje.altaEvento("Parque Acuatico",nuevafecha, "Aquopolis","Descripcion", tipoEvento);
+        } catch (FechaEventoFueraViajeException e) {
+            fechaCorrecta=false;
         }
+        
+        assertFalse(fechaCorrecta);
     }
 
-    /**
-     * Test of altaEvento method, of class Viaje.
-     */
     @Test
-    public void testAltaEventoErrorAñoVacio() throws Exception {
+    public void testAltaEventoErrorFechaPosterior() throws Exception {
+        Date nuevafecha = new Date(2019,06,06);
+        boolean fechaCorrecta=true;
         try {
-            instance.altaEvento("Parque Acuatico", "02", "02", "", "Aquopolis",
-                    "Descripcion", TipoEvento.FAMILIAR);
-            assert (false);
-        } catch (FechaVaciaException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of altaEvento method, of class Viaje.
-     */
-    @Test
-    public void testAltaEventoErrorFormatoFecha1() throws Exception {
-        try {
-            instance.altaEvento("Parque Acuatico", "02A", "02", "2013", "Aquopolis",
-                    "Descripcion", TipoEvento.FAMILIAR);
-            assert (false);
-        } catch (FormatoFechaInicioException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of altaEvento method, of class Viaje.
-     */
-    @Test
-    public void testAltaEventoErrorFormatoFecha2() throws Exception {
-        try {
-            instance.altaEvento("Parque Acuatico", "02d", "13", "2013", "Aquopolis",
-                    "Descripcion", TipoEvento.FAMILIAR);
-            assert (false);
-        } catch (FormatoFechaInicioException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of altaEvento method, of class Viaje.
-     */
-    @Test
-    public void testAltaEventoErrorFormatoFecha3() throws Exception {
-        try {
-            instance.altaEvento("Parque Acuatico", "DD", "MM", "AAAA", "Aquopolis",
-                    "Descripcion", TipoEvento.FAMILIAR);
-            assert (false);
-        } catch (FormatoFechaInicioException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of altaEvento method, of class Viaje.
-     */
-    @Test
-    public void testAltaEventoErrorFueraDeFecha1() throws Exception {
-        try {
-            instance.altaEvento("Parque Acuatico", "02", "02", "2011", "Aquopolis",
-                    "Descripcion", TipoEvento.FAMILIAR);
+            unViaje.altaEvento("Parque Acuatico", nuevafecha, "Aquopolis", "Descripcion", tipoEvento);
             assert (false);
         } catch (FechaEventoFueraViajeException e) {
-            assert (true);
+            fechaCorrecta=false;
         }
-    }
-
-    /**
-     * Test of altaEvento method, of class Viaje.
-     */
-    @Test
-    public void testAltaEventoErrorFueraDeFecha2() throws Exception {
-        try {
-            instance.altaEvento("Parque Acuatico", "24", "11", "2014", "Aquopolis",
-                    "Descripcion", TipoEvento.FAMILIAR);
-            assert (false);
-        } catch (FechaEventoFueraViajeException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of existeNombreEvento method, of class Viaje.
-     */
-    @Test
-    public void testExisteNombreEventoTrue() throws EventoException, FechaException {
-        boolean expResult = true;
-        instance.altaEvento("Park", "23", "11", "2014", "Parque",
-                "descripcion", TipoEvento.FAMILIAR);
-        boolean result = instance.existeNombreEvento("Park");
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of existeNombreEvento method, of class Viaje.
-     */
-    @Test
-    public void testExisteNombreEventoFalse() throws EventoException, FechaException {
-        boolean expResult = false;
-        instance.altaEvento("Park", "23", "11", "2014", "Parque",
-                "descripcion", TipoEvento.FAMILIAR);
-        boolean result = instance.existeNombreEvento("Park ");
-        assertEquals(expResult, result);
+        
+        assertFalse(fechaCorrecta);
     }
 
     /**
@@ -295,113 +163,62 @@ public class ViajeTest {
     @Test
     public void testBajaEvento() throws EventoException, FechaException {
         Evento aux = new Evento("Evento");
-        instance.agregarEventos(aux);
-        instance.bajaEvento(aux);
-        assert (!instance.getListaEventos().contains(aux));
+        unViaje.agregarEventos(aux);
+        unViaje.bajaEvento(aux);
+        assertFalse(unViaje.getListaEventos().contains(aux));
     }
 
-    /**
-     * Test of agregarEventos method, of class Viaje.
-     */
-    @Test
-    public void testAgregarEventos() {
-        Evento evento1 = new Evento("Evento1");
-        Evento evento2 = new Evento("Evento2");
-        Evento evento3 = new Evento("Evento3");
 
-        ArrayList<Evento> expResult = new ArrayList<Evento>();
-        expResult.add(evento1);
-        expResult.add(evento2);
-        expResult.add(evento3);
-
-        instance.agregarEventos(evento1);
-        instance.agregarEventos(evento2);
-        instance.agregarEventos(evento3);
-
-        ArrayList result = instance.getListaEventos();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of getDescripcion method, of class Viaje.
-     */
     @Test
     public void testGetDescripcion() {
         String expResult = "Descripcion";
-        String result = instance.getDescripcion();
+        String result = unViaje.getDescripcion();
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of setDescripcion method, of class Viaje.
-     */
     @Test
     public void testSetDescripcion() {
         String descripcion = "Nueva descripcion";
-        instance.setDescripcion(descripcion);
-        assertEquals(descripcion, instance.getDescripcion());
+        unViaje.setDescripcion(descripcion);
+        assertEquals(descripcion, unViaje.getDescripcion());
     }
 
-    /**
-     * Test of getDestino method, of class Viaje.
-     */
     @Test
     public void testGetDestino() {
-        Ciudad expResult = Ciudad.MADRID;
-        Ciudad result = instance.getDestino();
+        Ciudad expResult = ciudad;
+        Ciudad result = unViaje.getDestino();
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of setDestino method, of class Viaje.
-     */
     @Test
     public void testSetDestino() {
-        Ciudad destino = Ciudad.MIAMI;
-        instance.setDestino(destino);
-        assertEquals(destino, instance.getDestino());
+        Ciudad destino = ciudad;
+        unViaje.setDestino(destino);
+        assertEquals(destino, unViaje.getDestino());
     }
 
-    /**
-     * Test of getFechaFin method, of class Viaje.
-     */
     @Test
     public void testGetFechaFin() {
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Date expResult = null;
-        try {
-            expResult = formatter.parse(Integer.parseInt("23") + "/" + Integer.parseInt("11")
-                    + "/" + Integer.parseInt("2014"));
-        } catch (ParseException ex) {
-        }
-
-        Date result = instance.getFechaFin();
-        assertEquals(expResult, result);
+        Date fin =  new Date(23,11,204);
+        Date result = unViaje.getFechaFin();
+        assertEquals(fin, result);
     }
 
-    /**
-     * Test of setFechaFin method, of class Viaje.
-     */
     @Test
     public void testSetFechaFin() {
         Date fechaFin = Calendar.getInstance().getTime();
-        instance.setFechaFin(fechaFin);
-        assertEquals(fechaFin, instance.getFechaFin());
+        unViaje.setFechaFin(fechaFin);
+        assertEquals(fechaFin, unViaje.getFechaFin());
     }
 
-    /**
-     * Test of getFechaInicio method, of class Viaje.
-     */
+
     @Test
     public void testGetFechaInicio() {
         Date expResult = Calendar.getInstance().getTime();
-        Date result = instance.getFechaInicio();
+        Date result = unViaje.getFechaInicio();
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of setFechaInicio method, of class Viaje.
-     */
     @Test
     public void testSetFechaInicio() {
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -411,137 +228,88 @@ public class ViajeTest {
                     + "/" + Integer.parseInt("2014"));
         } catch (ParseException ex) {
         }
-        instance.setFechaInicio(fechaInicio);
-        assertEquals(fechaInicio, instance.getFechaInicio());
+        unViaje.setFechaInicio(fechaInicio);
+        assertEquals(fechaInicio, unViaje.getFechaInicio());
     }
 
-    /**
-     * Test of getNombre method, of class Viaje.
-     */
     @Test
     public void testGetNombre() {
         String expResult = "Vacaciones";
-        String result = instance.getNombre();
+        String result = unViaje.getNombre();
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of setNombre method, of class Viaje.
-     */
     @Test
     public void testSetNombre() throws Exception {
         String nombre = "Negocio";
-        instance.setNombre(nombre);
-        assertEquals(nombre, instance.getNombre());
+        unViaje.setNombre(nombre);
+        assertEquals(nombre, unViaje.getNombre());
     }
 
-    /**
-     * Test of setNombre method, of class Viaje.
-     */
     @Test
     public void testSetNombreErrorVacio() throws Exception {
         try {
             String nombre = "";
-            instance.setNombre(nombre);
+            unViaje.setNombre(nombre);
             assert (false);
         } catch (NombreViajeVacioException e) {
             assert (true);
         }
     }
 
-    /**
-     * Test of setNombre method, of class Viaje.
-     */
     @Test
-    public void testSetNombreErrorMuyCorto1() throws Exception {
+    public void testSetNombreErrorMuyCorto() throws Exception {
         try {
             String nombre = "V";
-            instance.setNombre(nombre);
+            unViaje.setNombre(nombre);
             assert (false);
         } catch (LargoNombreViajeInvalidoException e) {
             assert (true);
         }
     }
 
-    /**
-     * Test of setNombre method, of class Viaje.
-     */
     @Test
-    public void testSetNombreErrorMuyCorto2() throws Exception {
-        try {
-            String nombre = "vje";
-            instance.setNombre(nombre);
-            assert (false);
-        } catch (LargoNombreViajeInvalidoException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of setNombre method, of class Viaje.
-     */
-    @Test
-    public void testSetNombreErrorMuyLargo1() throws Exception {
+    public void testSetNombreErrorMuyLargo() throws Exception {
         try {
             String nombre = "Nombre de viaje muy largo para validar";
-            instance.setNombre(nombre);
+            unViaje.setNombre(nombre);
             assert (false);
         } catch (LargoNombreViajeInvalidoException e) {
             assert (true);
         }
     }
 
-    /**
-     * Test of setNombre method, of class Viaje.
-     */
-    @Test
-    public void testSetNombreErrorMuyLargo2() throws Exception {
-        try {
-            String nombre = "Nombre de 21 caracter";
-            instance.setNombre(nombre);
-            assert (false);
-        } catch (LargoNombreViajeInvalidoException e) {
-            assert (true);
-        }
-    }
-
-    /**
-     * Test of equals method, of class Viaje.
-     */
     @Test
     public void testEqualsOK() throws ViajeException {
-        Object obj = new Viaje("Vacaciones", Ciudad.MADRID, Calendar.getInstance().getTime(),
+        Object obj = new Viaje("Vacaciones", ciudad, Calendar.getInstance().getTime(),
                 Calendar.getInstance().getTime(), "Descripcion");
         boolean expResult = true;
-        boolean result = instance.equals(obj);
+        boolean result = unViaje.equals(obj);
         assertEquals(expResult, result);
     }
 
     @Test
     public void testEqualsError1() throws ViajeException {
-        Object obj = new Viaje("VACACIONES", Ciudad.MADRID, Calendar.getInstance().getTime(),
+        Object obj = new Viaje("VACACIONES", ciudad, Calendar.getInstance().getTime(),
                 Calendar.getInstance().getTime(), "Descripcion");
         boolean expResult = false;
-        boolean result = instance.equals(obj);
+        boolean result = unViaje.equals(obj);
         assertEquals(expResult, result);
     }
 
     @Test
     public void testEqualsError2() throws ViajeException {
-        Object obj = new Viaje("Negocio", Ciudad.BSAS, Calendar.getInstance().getTime(),
+        Object obj = new Viaje("Negocio", ciudad, Calendar.getInstance().getTime(),
                 Calendar.getInstance().getTime(), "Descripcion");
         boolean expResult = false;
-        boolean result = instance.equals(obj);
+        boolean result = unViaje.equals(obj);
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of toString method, of class Viaje.
-     */
     @Test
     public void testToStringError() {
         String expResult = "Vacaciones";
-        String result = instance.toString();
+        String result = unViaje.toString();
         assertEquals(expResult, result);
     }
 }
