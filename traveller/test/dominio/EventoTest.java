@@ -39,7 +39,7 @@ public class EventoTest {
 
     @Before
     public void setUp() throws EventoException {
-        instance = new Evento("Parque de agua", TipoEvento.FAMILIAR,
+        instance = new Evento("Parque de agua", (new TipoEvento("Familiar")),
                 Calendar.getInstance().getTime(), "Acuamania", "De vacaciones");
     }
 
@@ -115,9 +115,9 @@ public class EventoTest {
         try {
             String nombre = "";
             instance.setNombre(nombre);
-            assert(false);
+            assertFalse(false);
         } catch (NombreEventoVacioException e) {
-            assert(true);
+            assertTrue(true);
         }
     }
     
@@ -129,9 +129,9 @@ public class EventoTest {
         try {
             String nombre = "E";
             instance.setNombre(nombre);
-            assert(false);
+            assertFalse(false);
         } catch (LargoNombreEventoInvalidoException e) {
-            assert(true);
+            assertTrue(true);
         }
     }  
     
@@ -143,9 +143,9 @@ public class EventoTest {
         try {
             String nombre = "Evn";
             instance.setNombre(nombre);
-            assert(false);
+            assertFalse(false);
         } catch (LargoNombreEventoInvalidoException e) {
-            assert(true);
+            assertTrue(true);
         }
     }    
 
@@ -157,9 +157,9 @@ public class EventoTest {
         try {
             String nombre = "Evento con un nombre de evento muy largo";
             instance.setNombre(nombre);
-            assert(false);
+            assertFalse(false);
         } catch (LargoNombreEventoInvalidoException e) {
-            assert(true);
+            assertTrue(true);
         }
     }   
     
@@ -171,9 +171,9 @@ public class EventoTest {
         try {
             String nombre = "Evento con 21 caracte";
             instance.setNombre(nombre);
-            assert(false);
+            assertFalse(false);
         } catch (LargoNombreEventoInvalidoException e) {
-            assert(true);
+            assertTrue(true);
         }
     }    
 
@@ -182,7 +182,7 @@ public class EventoTest {
      */
     @Test
     public void testGetTipoEvento() {
-        TipoEvento expResult = TipoEvento.FAMILIAR;
+        TipoEvento expResult = new TipoEvento("Familiar");
         TipoEvento result = instance.getTipoEvento();
         assertEquals(expResult, result);
     }
@@ -192,7 +192,7 @@ public class EventoTest {
      */
     @Test
     public void testSetTipoEvento() {
-        TipoEvento tipoEvento = TipoEvento.LABORAL;
+        TipoEvento tipoEvento = new TipoEvento("Laboral");
         instance.setTipoEvento(tipoEvento);
         assertEquals(tipoEvento, instance.getTipoEvento());
     }
@@ -222,11 +222,10 @@ public class EventoTest {
      */
     @Test
     public void testEquals() throws EventoException {
-        Object obj = new Evento("Parque de agua", TipoEvento.FAMILIAR,
+        Object obj = new Evento("Parque de agua", new TipoEvento("Familiar"),
                 Calendar.getInstance().getTime(), "Acuamania", "De vacaciones");
-        boolean expResult = true;
         boolean result = instance.equals(obj);
-        assertEquals(expResult, result);
+        assertTrue(result);
     }
 
     /**
@@ -234,19 +233,17 @@ public class EventoTest {
      */
     @Test
     public void testEqualsError1() throws EventoException {
-        Object obj = new Evento("Parque de agua.", TipoEvento.FAMILIAR,
+        Object obj = new Evento("Parque de agua.", new TipoEvento("Familiar"),
                 Calendar.getInstance().getTime(), "Acuamania", "De vacaciones");
-        boolean expResult = false;
         boolean result = instance.equals(obj);
-        assertEquals(expResult, result);
+        assertFalse(result);
     }
 
     public void testEqualsError2() throws EventoException {
-        Object obj = new Evento("Parque acuático", TipoEvento.FAMILIAR,
+        Object obj = new Evento("Parque acuático", new TipoEvento("Familiar"),
                 Calendar.getInstance().getTime(), "Acuamania", "De vacaciones");
-        boolean expResult = false;
         boolean result = instance.equals(obj);
-        assertEquals(expResult, result);
+        assertFalse(result);
     }
 
     /**
